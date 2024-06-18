@@ -417,8 +417,6 @@ jobs:
         run: |
           set -eux
           cd ${{ github.workspace }}/${{ env.project_name }}
-          INSTALL_PATH=$(python -c "import site; print(site.getsitepackages()[0])")/artkit
-          echo $INSTALL_PATH
           pip install flit
           flit install
           flit publish
