@@ -1,0 +1,580 @@
+name: ARTKIT Release Pipeline
+
+on:
+  push:
+    branches:
+      - 1.0.x
+      - release/*
+  pull_request:
+    branches:
+      - 1.0.x
+      - release/*
+  schedule:  # runs on default branch
+    - cron: "0 2 * * 1-5" # Every weekday at 2 AM
+
+env:
+  project_name: artkit
+  package_name: artkit
+
+jobs:
+  code_quality_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Run isort
+        run: |
+          python -m pip install isort~=5.12
+          python -m isort --check --diff .
+
+      - name: Run black
+        run: |
+          python -m pip install black~=24.4.2
+          python -m black --check .
+
+      - name: Run flake8
+        run: |
+          python -m pip install flake8~=5.0 flake8-comprehensions~=3.10
+          python -m flake8 --config tox.ini -v .
+
+      - name: Run mypy
+        run: |
+          python -m pip install mypy
+          # add package dependencies for mypy
+          dependencies=(
+            fluxus==1.0rc4
+            gamma-pytools~=3.0
+            openai
+            pandas-stubs
+            pytest
+            types-PyYAML
+            aiohttp
+          )
+          pip install "${dependencies[@]}"
+          python -m mypy src --config-file pyproject.toml
+
+  detect_build_config_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      conda_build_config_changed: ${{ steps.diff.outputs.conda_build_config_changed }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changes in build configuration
+        id: diff
+        run: |
+          set -eux
+          files_changed=$(git diff HEAD^ --name-only)
+          echo "Files changed since last commit: ${files_changed}"
+          n_files_changed=$(echo "${files_changed}" | grep -i -E 'meta\.yaml|pyproject\.toml|release-pipeline\.yml|tox\.ini|make\.py' | wc -l | xargs || true)
+          if [ ${n_files_changed} -gt 0 ]; then
+            build_changed=1
+            echo "build config has been changed"
+          else
+            build_changed=0
+            echo "build config is unchanged"
+          fi
+          echo "::set-output name=conda_build_config_changed::$build_changed"
+
+  unit_tests:
+    runs-on: ubuntu-latest
+    needs: detect_build_config_changes
+    if: ${{ needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Display directory contents
+        run: ls ${{ github.workspace }}
+
+      - name: Activate micromamba environment with pytest
+        run: |
+          set -eux
+
+          # install micromamba
+          curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+          export MAMBA_ROOT_PREFIX=~/micromamba
+          eval "$(./bin/micromamba shell hook -s posix)"
+
+          # install the develop environment
+          micromamba env create --yes --file environment.yml
+          micromamba activate ${{ env.project_name }}
+
+          export PYTHONPATH=${{ github.workspace }}/src/
+          export RUN_PACKAGE_VERSION_TEST=${{ env.project_name }}
+
+          pytest \
+            --cov ${{ env.project_name }} \
+            --cov-config "tox.ini" \
+            --cov-report=xml:coverage.xml --cov-report=html:htmlcov \
+            --junitxml pytest.xml \
+            . -s
+
+      - name: Publish test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-results
+          path: pytest.xml
+
+      - name: Publish code coverage results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-results
+          path: coverage.xml
+
+  conda_tox_essential:
+    runs-on: ubuntu-latest
+    needs: [detect_build_config_changes, code_quality_checks]
+    if: ${{ needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' && github.event_name != 'schedule' && !startsWith(github.head_ref, 'dev/') && !startsWith(github.ref, 'refs/heads/release/') }}
+    strategy:
+      matrix:
+        python-version: [3.11]
+        build-system: [conda, tox]
+        pkg-dependencies: [max, min]
+        exclude:
+          - python-version: 3.11
+            build-system: conda
+            pkg-dependencies: min
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Display directory contents
+        run: ls ${{ github.workspace }}
+
+      - name: Install and configure micromamba
+        if: matrix.build-system == 'conda'
+        run: |
+          curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+          export MAMBA_ROOT_PREFIX=~/micromamba
+          eval "$(./bin/micromamba shell hook -s posix)"
+          micromamba create -n build -y
+          micromamba activate build
+          micromamba install -y -c conda-forge boa~=0.14 toml~=0.10 flit~=3.6 packaging~=20.9
+
+      - name: Install dependencies using tox
+        if: matrix.build-system == 'tox'
+        run: |
+          python -m pip install "toml~=0.10"
+          python -m pip install "flit~=3.7"
+          python -m pip install "tox~=3.25"
+
+      - name: Build and test
+        run: |
+          set -eux
+          if [ "${{ matrix.build-system }}" = "conda" ]; then
+            export MAMBA_ROOT_PREFIX=~/micromamba
+            eval "$(./bin/micromamba shell hook -s posix)"
+            micromamba activate build
+          fi
+
+          echo "DIRNAME_WORKSPACE=$(dirname "${{ github.workspace }}")" >> $GITHUB_ENV
+
+          export RUN_PACKAGE_VERSION_TEST=${{ env.project_name }}
+          cd ${{ github.workspace }}
+          ./make.py ${{ env.project_name }} ${{ matrix.build-system }} ${{ matrix.pkg-dependencies }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.build-system }}_${{ matrix.pkg-dependencies }}
+          path: ${{ env.DIRNAME_WORKSPACE }}/dist
+
+  conda_tox_matrix:
+    runs-on: ubuntu-latest
+    needs: [detect_build_config_changes, code_quality_checks]
+    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
+    strategy:
+      matrix:
+        python-version: [3.11]
+        build-system: [conda, tox]
+        pkg-dependencies: [default, min, max]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Display directory contents
+        run: ls ${{ github.workspace }}
+
+      - name: Install and configure micromamba
+        if: matrix.build-system == 'conda'
+        run: |
+          set -eux
+
+          # install micromamba
+          curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+          export MAMBA_ROOT_PREFIX=~/micromamba
+          eval "$(./bin/micromamba shell hook -s posix)"
+          micromamba create -n build -y
+          micromamba activate build
+          micromamba install -y -c conda-forge boa~=0.14 toml~=0.10 flit~=3.6 packaging~=20.9
+
+      - name: Install dependencies using tox
+        if: matrix.build-system == 'tox'
+        run: |
+          python -m pip install "toml~=0.10"
+          python -m pip install "flit~=3.7"
+          python -m pip install "tox~=3.25"
+
+      - name: Build and test
+        run: |
+          set -eux
+          if [ "${{ matrix.build-system }}" = "conda" ]; then
+            export MAMBA_ROOT_PREFIX=~/micromamba
+            eval "$(./bin/micromamba shell hook -s posix)"
+            micromamba activate build
+          fi
+
+          echo "DIRNAME_WORKSPACE=$(dirname "${{ github.workspace }}")" >> $GITHUB_ENV
+
+          export RUN_PACKAGE_VERSION_TEST=${{ env.project_name }}
+          cd ${{ github.workspace }}
+          ./make.py ${{ env.project_name }} ${{ matrix.build-system }} ${{ matrix.pkg-dependencies }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.build-system }}_${{ matrix.pkg-dependencies }}
+          path: ${{ env.DIRNAME_WORKSPACE }}/dist
+
+  veracode_check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Prepare archive for Veracode
+        shell: bash
+        run: |
+          set -eux
+          eval "$(conda shell.bash hook)"
+          cd ${{ github.workspace }}
+          mkdir static_scan
+          git archive --format=zip --output static_scan/archive.zip HEAD
+
+      - name: Run Veracode Scan
+        id: upload_and_scan
+        uses: veracode/veracode-uploadandscan-action@master
+        with:
+          appname: 'artkit'
+          version: '${{ github.run_number }}'
+          filepath: 'static_scan/archive.zip'
+          vid: '${{ secrets.VERACODE_API_ID }}'
+          vkey: '${{ secrets.VERACODE_API_KEY }}'
+          createprofile: false
+          scanpollinginterval: '60'
+
+  check_release:
+    runs-on: ubuntu-latest
+    needs: conda_tox_matrix
+    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Checkout artkit
+        uses: actions/checkout@v4
+        with:
+          path: artkit
+
+      - name: Set env vars
+        run: |
+          pip install packaging~=20.9
+          export PYTHONPATH=${{ github.workspace }}/artkit/sphinx/make
+          package_path=${{ github.workspace }}/${{ env.project_name }}/src/${{ env.project_name }}
+          version=$(python -c "import make_util; print(make_util.get_package_version(package_path='$package_path'))")
+          echo "current_version=$version" >> $GITHUB_ENV
+          if [ ${{ github.event_name }} == 'pull_request' ]; then
+            echo "BRANCH_NAME=${{ github.head_ref }}" >> $GITHUB_ENV
+          else
+            ref=${{ github.ref }}
+            branch_name=${ref/refs\/heads\//}
+            echo "BRANCH_NAME=$branch_name" >> $GITHUB_ENV
+          fi    
+
+      - name: Check version consistency
+        run: |
+          set -eux
+          python -m pip install toml~=0.10.2 packaging~=20.9
+          cd ${{ github.workspace }}/artkit
+          python <<EOF
+          from os import environ
+          from make import ToxBuilder
+
+          branch = "${{ env.BRANCH_NAME }}"
+          print(f"Checking package version consistency with branch: {branch}")
+
+          assert (branch.startswith("release/") or branch.startswith("dev/") or branch=="1.0.x"
+          ), "This check should only run on versioned branches – check pipeline."
+
+          if branch=="1.0.x":
+            branch_version = branch[:-2]
+            package_version = ToxBuilder("${{ env.project_name }}", "default").package_version
+            assert package_version.startswith(branch_version), f"Package version '{package_version}' does not match '{branch_version}' from branch."
+          else:
+            branch_version = branch.split("/", maxsplit=1)[1]
+            package_version = ToxBuilder("${{ env.project_name }}", "default").package_version
+            assert (
+                package_version == branch_version
+            ), f"Package version '{package_version}' does not match '{branch_version}' from branch."
+
+          print("Check passed.")
+          EOF
+
+  release:
+    runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
+    needs: check_release
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Checkout artkit
+        uses: actions/checkout@v4
+        with:
+          path: artkit
+
+      - name: Get package version
+        run: |
+          set -eux
+          echo "Getting version"
+          pip install packaging~=20.9
+          export PYTHONPATH=${{ github.workspace }}/artkit/sphinx/make
+          package_path=${{ github.workspace }}/${{ env.project_name }}/src/${{ env.project_name }}
+          version=$(python -c "import make_util; print(make_util.get_package_version(package_path='$package_path'))")
+          echo "current_version=$version" >> $GITHUB_ENV
+          echo "Detecting pre-release ('dev' or 'rc' in version)"
+          prerelease=False
+          [[ $version == *dev* ]] && prerelease=True && echo "Development release identified"
+          [[ $version == *rc* ]] && prerelease=True && echo "Pre-release identified"
+          echo "is_prerelease=$prerelease" >> $GITHUB_ENV
+
+          echo "DIRNAME_WORKSPACE=$(dirname "${{ github.workspace }}")" >> $GITHUB_ENV
+
+      - name: Download Tox Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: tox_default
+          path: ${{ env.DIRNAME_WORKSPACE }}/dist
+
+      - name: Download Conda Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: conda_default
+          path: ${{ env.DIRNAME_WORKSPACE }}/dist
+
+      - name: Publish to PyPi (Tox)
+        if: startsWith(github.ref, 'refs/heads/release/')
+        env:
+          FLIT_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          FLIT_USERNAME: __token__
+        run: |
+          set -eux
+          cd ${{ github.workspace }}/${{ env.project_name }}
+          INSTALL_PATH=$(python -c "import site; print(site.getsitepackages()[0])")/artkit
+          echo $INSTALL_PATH
+          pip install flit
+          flit install
+          flit publish
+          echo "pypi_published=True" >> $GITHUB_ENV
+
+      - name: Publish to Anaconda (Conda)
+        if: startsWith(github.ref, 'refs/heads/release/')
+        env:
+          CONDA_TOKEN: ${{ secrets.CONDA_TOKEN }}
+        run: |
+          set -eux
+          cd ${{ env.DIRNAME_WORKSPACE }}
+          eval "$(conda shell.bash hook)"
+          conda install -y anaconda-client
+          anaconda -t ${CONDA_TOKEN} upload --user bcgx --force ${{ env.DIRNAME_WORKSPACE }}/dist/conda/noarch/${{ env.package_name }}-*.tar.bz2
+          anaconda logout
+          echo "conda_published=True" >> $GITHUB_ENV
+
+      - name: GitHub Release
+        if: startsWith(github.ref, 'refs/heads/release/')
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.current_version }}
+          files: |
+            ${{ github.workspace }}/tox_default/tox/${{ env.package_name }}-*.tar.gz
+            ${{ env.DIRNAME_WORKSPACE }}/dist/conda/noarch/${{ env.package_name }}-*.tar.bz2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          release_name: ${{ env.project_name }} ${{ env.current_version }}
+          body: |
+            This is the ${{ env.current_version }} release of ${{ env.package_name }}.
+
+            You can upgrade your current pip installation via
+
+                pip install --upgrade ${{ env.package_name }}
+
+            Your conda package can be upgraded by running
+
+                conda install -c conda-forge -c bcgx ${{ env.package_name }}
+          draft: true
+          prerelease: ${{ env.is_prerelease }}
+
+  docs:
+    runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Retrieve current documentation versions from github-pages
+        run: |
+          set -eux
+          if git show-ref --verify --quiet refs/heads/github-pages; then
+            echo "Checking out github-pages"
+            git fetch origin github-pages --depth=1
+            git checkout --track origin/github-pages
+          else
+            echo "Branch github-pages does not exist. Creating and checking out..."
+            git checkout -b github-pages
+          fi
+
+          # make sure we have a docs directory
+          mkdir -p docs/docs-version
+
+          echo "Current documentation contents:"
+          ls docs/docs-version
+          
+          # create staging area
+          mkdir -p ${{ github.workspace }}/staging
+
+          # copy the current documentation versions to the staging area
+          cp -r docs/docs-version ${{ github.workspace }}/staging/docs-version.bak
+
+      - name: Build latest documentation
+        run: |
+          set -eux
+          if [ "${{ github.event_name }}" == 'pull_request' ]; then
+            BRANCH_NAME=${{ github.head_ref }}
+          else
+            BRANCH_NAME=${{ github.ref_name }}
+          fi
+          echo "Checking out $BRANCH_NAME"
+          git fetch origin $BRANCH_NAME --depth=1
+          git checkout $BRANCH_NAME  
+
+          # install micromamba
+          curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+          export MAMBA_ROOT_PREFIX=~/micromamba
+          eval "$(./bin/micromamba shell hook -s posix)"
+          # install the docs environment
+          micromamba env create -n docs --yes --file environment.yml
+          micromamba activate docs
+
+          export PYTHONPATH=${{ github.workspace }}/src/
+
+          python sphinx/make.py html
+
+      - name: Merge previous and latest docs
+        run: |
+          set -eux
+          export MAMBA_ROOT_PREFIX=~/micromamba
+          eval "$(./bin/micromamba shell hook -s posix)"
+
+          # install the tree utility
+          sudo apt-get install -y tree
+
+          echo "Restoring previous documentation to the docs directory"
+          pwd  # /home/runner/work/artkit/artkit
+          mkdir -p docs
+          mv ${{ github.workspace }}/staging/docs-version.bak docs/docs-version
+          ls docs/docs-version
+
+          mkdir -p ${{ github.workspace }}/sphinx/build/
+          micromamba activate docs
+          python sphinx/make.py prepare_docs_deployment
+
+          echo "Current docs contents:"
+          tree docs
+          mv ${{ github.workspace }}/docs staging/docs
+
+      - name: Archive docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.project_name }}_docs
+          path: ${{ github.workspace }}/staging/docs
+
+      - name: Publish docs to branch github-pages
+        if: startsWith(github.ref, 'refs/heads/release/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          current_version: ${{ env.current_version}}
+        run: |
+          set -eux
+          echo "Adjusting git credentials"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout github-pages
+
+          echo "Exporting version as env var"
+          pip install packaging~=20.9
+          export PYTHONPATH=${{ github.workspace }}/sphinx/make
+          package_path="${{ github.workspace }}/src/${{ env.project_name }}"
+          version=$(python -c "import make_util; print(make_util.get_package_version(package_path='$package_path'))")
+
+          rm -rf docs
+          mv staging/docs .
+          git add docs
+          
+          git status
+          git commit -m "Publish GitHub Pages [skip ci]"
+
+          git tag -a -m "Release version $version" $version
+          git push -f --set-upstream origin github-pages

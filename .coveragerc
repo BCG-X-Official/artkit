@@ -1,0 +1,10 @@
+[run]
+source_pkgs = artkit
+omit = */test/*
+
+[report]
+ignore_errors = False
+show_missing = True
+skip_covered = True
+skip_empty = True
+omit = */test/*

@@ -1,0 +1,72 @@
+name: Python Linting and Auto-formatting
+
+on:
+  # Run linting and auto-formatting on every push to the main branch and every push to a
+  # pull request
+  push:
+    branches:
+      - main
+      - '**'
+
+jobs:
+  format-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+    # Check out the code
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
+
+    # Set up Python 3.11
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    # Install dependencies for linting and auto-formatting
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install isort black==24.4.2 mypy flake8
+
+    # Sort imports
+    - name: Run isort
+      run: isort .
+
+    # Format code
+    - name: Run black
+      run: black .
+
+    # Check type hints
+    - name: Run mypy
+      run: |
+        # add package dependencies for mypy
+        dependencies=(
+          types-aiofiles  
+          aiohttp
+          fluxus==1.0rc4
+          gamma-pytools~=3.0
+          openai
+          pandas-stubs
+          pytest 
+          types-PyYAML
+        )
+        pip install "${dependencies[@]}"
+
+        # run mypy, excluding the legacy llmcheck module
+        mypy src test --config-file pyproject.toml
+
+    # Check code style
+    - name: Run flake8
+      # read configuration from pyproject.toml
+      run: flake8 --config tox.ini .
+
+    # Commit changes
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add -A
+        git commit -m "Apply isort and black formatting" -a || true
+        git push

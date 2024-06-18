@@ -1,0 +1,57 @@
+name: Unit Tests
+
+on:
+  # Run the tests on every push to the main branch and every push to a pull request
+  push:
+    branches:
+      - main
+      - '**'
+
+jobs:
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+    # Check out the code
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
+
+    # Set up Python 3.11
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    # Install micromamba, create the environment, and run pytest
+    - name: Run pytest
+      run: |
+        # install micromamba
+        curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        export MAMBA_ROOT_PREFIX=~/micromamba
+        eval "$(./bin/micromamba shell hook -s posix)"
+        
+        # install the develop environment
+        micromamba env create --yes --file environment.yml
+        micromamba activate artkit
+
+        # install optional LLMs
+        pip install openai anthropic groq huggingface_hub google-generativeai
+
+        # add our sources to the PYTHONPATH
+        export PYTHONPATH=${PYTHONPATH}:src/
+        
+        # set a mock OpenAI API key (unused in tests)
+        export OPENAI_API_KEY=mock-key
+        
+        # options for pytest
+        pytest_options="""
+            --cov=artkit
+            --cov-report=term-missing
+            --cov-fail-under=90
+            --cov-branch
+            --cov-report=html
+        """
+        
+        # run pytest
+        pytest $pytest_options
