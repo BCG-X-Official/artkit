@@ -50,7 +50,7 @@ repos:
         language_version: python311
         pass_filenames: false
         additional_dependencies:
-          - fluxus==1.0rc4
+          - fluxus~=1.0
           - gamma-pytools~=3.0
           - openai
           - pandas-stubs

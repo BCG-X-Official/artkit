@@ -8,7 +8,7 @@ dependencies:
   - python                   ~= 3.11.9
 
   # Additional libraries
-  - fluxus                   ~= 1.0rc4
+  - fluxus                   ~= 1.0
   - gamma-pytools            ~= 3.0
   - pandas                   ~= 2.2
   - python-dotenv            ~= 1.0
