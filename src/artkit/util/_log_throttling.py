@@ -44,12 +44,10 @@ class LogThrottlingHandler(logging.Handler):
         self, handler: logging.Handler, interval: float, max_messages: int
     ) -> None:
         """
-        Initializes log throttling handler.
-
-        :param handler: the handler to wrap.
+        :param handler: the handler to wrap
         :param interval: the minimum interval in seconds between log messages
-            with the same message.
-        :param max_messages: the maximum number of messages to log within the interval.
+          with the same message
+        :param max_messages: the maximum number of messages to log within the interval
         """
         super().__init__()
         self.handler = handler
@@ -63,9 +61,9 @@ class LogThrottlingHandler(logging.Handler):
         """
         Filter a log record based on the throttling settings.
 
-        :param record: the log record to filter.
+        :param record: the log record to filter
         :return: ``True`` if the max messages are not exceeded
-            within the time interval, otherwise ``False``.
+          within the time interval, otherwise ``False``
         """
 
         # if any other filter was registered and returns False, return False
@@ -90,7 +88,7 @@ class LogThrottlingHandler(logging.Handler):
         """
         Emit a record if the max messages are not exceeded within the time interval.
 
-        :param record: the log record to emit.
+        :param record: the log record to emit
         """
         count, last_log_time, buffer = self.log_counts[record.msg]
 
@@ -110,8 +108,8 @@ class LogThrottlingHandler(logging.Handler):
         """
         Create a log record with a custom message to indicate throttling.
 
-        :param record: the original log record.
-        :return: a new log record with the custom message message.
+        :param record: the original log record
+        :return: a new log record with the custom message message
         """
         return logging.LogRecord(
             name=record.name,
