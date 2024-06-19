@@ -47,6 +47,8 @@ def set_config(
         get_package_version(package_path=os.path.join(_dir_src, project))
     )
 
+    globals_["html_show_sourcelink"] = False
+
     if html_logo:
         globals_["html_logo"] = html_logo
         globals_["latex_logo"] = html_logo
