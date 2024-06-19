@@ -23,7 +23,6 @@ from .base import (
 try:  # pragma: no cover
     from aiohttp import ClientResponseError, ClientSession
     from huggingface_hub import AsyncInferenceClient
-    from transformers import AutoTokenizer
 except ImportError:
 
     class AsyncInferenceClient(  # type: ignore
@@ -36,9 +35,6 @@ except ImportError:
 
     class ClientSession(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
         """Placeholder class for missing ``ClientSession`` class."""
-
-    class AutoTokenizer(metaclass=MissingClassMeta, module="transformers"):  # type: ignore
-        """Placeholder class for missing ``AutoTokenizer`` class."""
 
 
 log = logging.getLogger(__name__)
