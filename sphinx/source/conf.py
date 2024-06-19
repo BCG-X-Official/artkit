@@ -19,5 +19,3 @@ set_config(
     project="artkit",
     html_logo=os.path.join("_images", "ARTKIT_Logo_Light_RGB-small.png"),
 )
-
-html_show_sourcelink = False
