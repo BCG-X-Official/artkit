@@ -12,7 +12,7 @@ testing and evaluation of Gen AI applications.
 Getting started
 ---------------
 
-- See the `ARTKIT Documentation <https://bcg-x-official.github.io/artkit/home.html>`_ for our User Guide, Examples, API reference, and more.
+- See the `ARTKIT Documentation <https://bcg-x-official.github.io/artkit/_generated/home.html>`_ for our User Guide, Examples, API reference, and more.
 - See `Contributing <https://github.com/BCG-X-Official/artkit/blob/HEAD/CONTRIBUTING.md>`_ or visit our `Contributor Guide <https://bcg-x-official.github.io/artkit/contributor_guide/index.html>`_ for information on contributing.
 - We have an `FAQ <https://bcg-x-official.github.io/artkit/faq.html>`_ for common questions. For anything else, please reach out to ARTKIT@bcg.com.
 
