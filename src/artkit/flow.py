@@ -81,7 +81,7 @@ The following functions and classes are provided by this module:
 """
 
 
-def __mirror_fluxus() -> None:
+def __mirror_fluxus() -> None:  # pragma: no cover
     import os
     from typing import Any
 

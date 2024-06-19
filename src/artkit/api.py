@@ -37,7 +37,7 @@ from .model.vision.openai import *
 from .util import *
 
 
-def __adjust_namespace_for_sphinx() -> None:
+def __adjust_namespace_for_sphinx() -> None:  # pragma: no cover
     import os
     from collections import defaultdict
 
