@@ -119,16 +119,11 @@ nbsphinx_allow_errors = True
 
 # add intersphinx mapping
 intersphinx_mapping: dict[str, tuple[str, str | None]] = {
-    "joblib": ("https://joblib.readthedocs.io/en/latest", None),
+    "fluxus": ("https://bcg-x-official.github.io/fluxus", None),
     "matplotlib": ("https://matplotlib.org/stable", None),
-    "mypy": ("https://mypy.readthedocs.io/en/latest/", None),
-    "np": ("https://numpy.org/doc/stable", None),
-    "numpy": ("https://numpy.org/doc/stable", None),
     "pandas": ("https://pandas.pydata.org/pandas-docs/stable", None),
     "pd": ("https://pandas.pydata.org/pandas-docs/stable", None),
     "python": ("https://docs.python.org/3.7", None),
-    "scipy": ("https://docs.scipy.org/doc/scipy", None),
-    "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
 
 intersphinx_collapsible_submodules = {
