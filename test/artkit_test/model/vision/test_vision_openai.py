@@ -2,7 +2,7 @@ import os
 import shutil
 from collections.abc import Iterator
 from pathlib import Path
-from unittest.mock import AsyncMock, patch
+from unittest.mock import Mock, patch
 
 import pytest
 from openai import RateLimitError
@@ -40,14 +40,14 @@ async def test_openai_retry(image: Image, caplog: pytest.LogCaptureFixture) -> N
         )
 
         # Response mock
-        response = AsyncMock()
+        response = Mock()
         response.status_code = 429
 
         MockClientSession.return_value.chat.completions.create.side_effect = (
             RateLimitError(
                 message="Rate Limit exceeded",
                 response=response,
-                body=AsyncMock(),
+                body=Mock(),
             )
         )
 

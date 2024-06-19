@@ -119,8 +119,8 @@ async def test_huggingface_chat_async(
     with patch("aiohttp.ClientSession") as MockClientSession:
 
         # Mock the response object
-        mock_post = AsyncMock()
-        mock_post.read.return_value = b'[{"generated_text": "blue"}]'
+        mock_post = Mock()
+        mock_post.read = AsyncMock(return_value=b'[{"generated_text": "blue"}]')
         mock_post.return_value.status = 200
 
         # Set up the mock connection object
@@ -149,10 +149,13 @@ async def test_huggingface_chat_aiohttp(
     ) as MockClientSession:
 
         # Mock the response object
-        mock_post = AsyncMock()
-        mock_post.json.return_value = {
-            "choices": [{"message": {"role": "assistant", "content": "blue"}}]
-        }
+        mock_post = Mock()
+        mock_post.json = AsyncMock(
+            return_value={
+                "choices": [{"message": {"role": "assistant", "content": "blue"}}]
+            }
+        )
+        mock_post.text = AsyncMock()
         mock_post.return_value.status = 200
 
         # Set up the mock connection object

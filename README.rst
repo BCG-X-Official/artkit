@@ -13,7 +13,7 @@ Getting started
 ---------------
 
 - See the `ARTKIT Documentation <https://bcg-x-official.github.io/artkit/home.html>`_ for our User Guide, Examples, API reference, and more.
-- See `Contributing <CONTRIBUTING.md>`_ or visit our `Contributor Guide <https://bcg-x-official.github.io/artkit/contributor_guide/index.html>`_ for information on contributing.
+- See `Contributing <https://github.com/BCG-X-Official/artkit/blob/HEAD/CONTRIBUTING.md>`_ or visit our `Contributor Guide <https://bcg-x-official.github.io/artkit/contributor_guide/index.html>`_ for information on contributing.
 - We have an `FAQ <https://bcg-x-official.github.io/artkit/faq.html>`_ for common questions. For anything else, please reach out to ARTKIT@bcg.com.
 
 .. _Introduction:
@@ -326,7 +326,7 @@ and `Examples <https://bcg-x-official.github.io/artkit/examples/index.html>`_.
 Contributing
 ------------
 
-Contributions to ARTKIT are welcome and appreciated! Please see the `Contributing <https://bcg-x-official.github.io/artkit/contributor_guide/index.html>`_ section for information.
+Contributions to ARTKIT are welcome and appreciated! Please see the `Contributor Guide <https://bcg-x-official.github.io/artkit/contributor_guide/index.html>`_ section for information.
 
 
 License

@@ -8,9 +8,13 @@ from collections.abc import Iterator, Mapping
 from contextlib import AsyncExitStack
 from typing import Any, Generic, TypeVar, final
 
-import torch
-
-from pytools.api import MissingClassMeta, appenddoc, inheritdoc, subsdoc
+from pytools.api import (
+    MissingClassMeta,
+    appenddoc,
+    inheritdoc,
+    missing_function,
+    subsdoc,
+)
 
 from ....base import ConnectorMixin
 from ...base import ChatModelConnector, CompletionModelConnector
@@ -29,19 +33,25 @@ __all__ = [
 try:
     # noinspection PyUnresolvedReferences
     from huggingface_hub import AsyncInferenceClient
+    from torch.cuda import is_available
 
     # noinspection PyUnresolvedReferences
     from transformers import AutoModelForCausalLM, AutoTokenizer
 except ImportError:  # pragma: no cover
+
+    is_available = missing_function(name="is_available", module="torch.cuda")
 
     class AsyncInferenceClient(  # type: ignore
         metaclass=MissingClassMeta, module="huggingface_hub"
     ):
         """Placeholder class for missing ``AsyncInferenceClient`` class."""
 
-    class AutoTokenizer(  # type: ignore
+    class AutoModelForCausalLM(  # type: ignore
         metaclass=MissingClassMeta, module="transformers"
     ):
+        """Placeholder class for missing ``AutoModelForCausalLM`` class."""
+
+    class AutoTokenizer(metaclass=MissingClassMeta, module="transformers"):  # type: ignore
         """Placeholder class for missing ``AutoTokenizer`` class."""
 
     class PreTrainedTokenizerBase(metaclass=MissingClassMeta, module="transformers"):
@@ -130,7 +140,8 @@ class HuggingfaceLocalConnectorMixin(HuggingfaceConnectorMixin[AutoModelForCausa
             model_params=model_params,
         )
 
-        if use_cuda and not torch.cuda.is_available():  # pragma: no cover
+        # test if cuda is available
+        if use_cuda and not is_available():  # pragma: no cover
             raise RuntimeError("CUDA requested but not available.")
 
         self.use_cuda = use_cuda
