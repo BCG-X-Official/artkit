@@ -49,7 +49,7 @@ def __adjust_namespace_for_sphinx() -> None:  # pragma: no cover
             del globals()[name]
 
     # Check if we are building the Sphinx documentation
-    if not "SPHINX_BUILD" in os.environ:
+    if "SPHINX_BUILD" not in os.environ:
         # we are not building the documentation - no adjustments needed
         return
 
@@ -59,11 +59,11 @@ def __adjust_namespace_for_sphinx() -> None:  # pragma: no cover
     globals_ = globals()
 
     # Identify all imported symbols
-    imported_symbols = set(globals_.keys()) - __globals_original
+    imported_symbols = set(globals_.keys()) - __globals_original  # noqa: F405
 
     # Remove our internal symbols from items to be documented
     imported_symbols.remove("__globals_original")
-    imported_symbols.remove(__adjust_namespace_for_sphinx.__name__)
+    imported_symbols.remove(__adjust_namespace_for_sphinx.__name__)  # noqa: F405
 
     # Add all imported symbols to the module docstring
     imported_objects = [globals_[symbol] for symbol in imported_symbols]
