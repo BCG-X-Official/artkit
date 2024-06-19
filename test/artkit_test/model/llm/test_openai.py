@@ -38,7 +38,7 @@ async def test_openai_retry(
     # Mock openai Client
     with patch("artkit.model.llm.openai._openai.AsyncOpenAI") as mock_get_client:
         # Set mock response as return value
-        response = AsyncMock()
+        response = MagicMock()
         response.status_code = 429
 
         # Mock exception on method call
@@ -46,7 +46,7 @@ async def test_openai_retry(
             RateLimitError(
                 message="Rate Limit exceeded",
                 response=response,
-                body=AsyncMock(),
+                body=MagicMock(),
             )
         )
 
