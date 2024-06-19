@@ -18,9 +18,8 @@ Example:
 
 __globals_original = set(globals().keys())
 
-from fluxus import *
-from fluxus.functional import *
 
+from .flow import *
 from .model.diffusion import *
 from .model.diffusion.base import *
 from .model.diffusion.openai import *
