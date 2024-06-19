@@ -6,6 +6,8 @@ env/
 venv/
 /artkit
 /artkit-env
+/tmp
+/.run
 
 # environment variables
 .env
