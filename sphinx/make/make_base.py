@@ -45,7 +45,6 @@ PACKAGE_NAMES = [
 ]
 assert len(PACKAGE_NAMES) == 1, "only one package per Sphinx build is supported"
 PROJECT_NAME = PACKAGE_NAMES[0]
-EXCLUDE_MODULES = []
 DIR_DOCS = os.path.join(DIR_REPO_ROOT, "docs")
 DIR_DOCS_VERSION = os.path.join(DIR_DOCS, "docs-version")
 DIR_SPHINX_SOURCE = os.path.join(DIR_SPHINX_ROOT, "source")
@@ -211,15 +210,6 @@ class ApiDoc(Command):
             shell=True,
             check=True,
         )
-
-        # remove rst file and directory for excluded modules
-        for module in EXCLUDE_MODULES:
-            rst_path = os.path.join(
-                DIR_SPHINX_API_GENERATED, PROJECT_NAME, f"{PROJECT_NAME}.{module}.rst"
-            )
-            module_path = os.path.join(DIR_SPHINX_API_GENERATED, PROJECT_NAME, module)
-            os.remove(rst_path)
-            shutil.rmtree(module_path)
 
         # Adjust the path and filename as per your project's structure
         api_doc_filename = os.path.join(DIR_SPHINX_API_GENERATED, f"{packages[0]}.rst")
