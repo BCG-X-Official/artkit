@@ -45,7 +45,7 @@ PACKAGE_NAMES = [
 ]
 assert len(PACKAGE_NAMES) == 1, "only one package per Sphinx build is supported"
 PROJECT_NAME = PACKAGE_NAMES[0]
-EXCLUDE_MODULES = []
+EXCLUDE_MODULES = ["api"]
 DIR_DOCS = os.path.join(DIR_REPO_ROOT, "docs")
 DIR_DOCS_VERSION = os.path.join(DIR_DOCS, "docs-version")
 DIR_SPHINX_SOURCE = os.path.join(DIR_SPHINX_ROOT, "source")
