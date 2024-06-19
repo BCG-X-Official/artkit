@@ -19,9 +19,9 @@ class LogThrottlingHandler(logging.Handler):
     the maximum number of messages sent during a given time interval.
     This is useful for preventing log spamming in high-throughput applications.
 
-    To follow the native logging flow (https://docs.python.org/3/howto/logging\
-    .html#logging-flow), functionality is implemented across
-    the :meth:`.filter` and :meth:`.emit` methods.
+    To follow the native logging flow
+    (https://docs.python.org/3/howto/logging.html#logging-flow),
+    functionality is implemented across the :meth:`.filter` and :meth:`.emit` methods.
 
     Example:
 
