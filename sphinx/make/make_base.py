@@ -66,7 +66,7 @@ FILE_JS_VERSIONS = os.path.join(DIR_SPHINX_BASE, FILE_JS_VERSIONS_RELATIVE)
 # Environment variables
 # noinspection SpellCheckingInspection
 ENV_PYTHON_PATH = "PYTHONPATH"
-
+ENV_SPHINX_BUILD = "SPHINX_BUILD"
 
 # Version of the package being built
 PACKAGE_VERSION = get_package_version(package_path=DIR_PACKAGE_ROOT)
@@ -195,6 +195,7 @@ class ApiDoc(Command):
         os.makedirs(os.path.dirname(FILE_AUTOSUMMARY_TEMPLATE), exist_ok=True)
         with open(FILE_AUTOSUMMARY_TEMPLATE, "w") as f:
             f.writelines(autosummary_rst)
+
         autogen_options = " ".join(
             [
                 "-t",  # template path
@@ -539,6 +540,7 @@ def make() -> None:
     if ENV_PYTHON_PATH in os.environ:
         module_paths.append(os.environ[ENV_PYTHON_PATH])
     os.environ[ENV_PYTHON_PATH] = os.pathsep.join(module_paths)
+    os.environ[ENV_SPHINX_BUILD] = "True"
 
     # run all given commands:
     executed_commands: set[Command] = set()
