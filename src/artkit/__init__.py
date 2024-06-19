@@ -10,4 +10,4 @@ This documentation is automatically generated using Sphinx, ensuring it
 remains synchronized with the latest codebase updates.
 """
 
-__version__ = "1.0rc1"
+__version__ = "1.0rc2"
