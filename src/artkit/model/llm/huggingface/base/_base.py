@@ -39,7 +39,9 @@ except ImportError:  # pragma: no cover
     ):
         """Placeholder class for missing ``AsyncInferenceClient`` class."""
 
-    class AutoTokenizer(metaclass=MissingClassMeta, module="transformers"):  # type: ignore
+    class AutoTokenizer(  # type: ignore
+        metaclass=MissingClassMeta, module="transformers"
+    ):
         """Placeholder class for missing ``AutoTokenizer`` class."""
 
     class PreTrainedTokenizerBase(metaclass=MissingClassMeta, module="transformers"):
