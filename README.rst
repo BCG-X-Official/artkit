@@ -29,7 +29,7 @@ readily adapted to meet the testing and evaluation needs of a wide variety of Ge
 .. image:: sphinx/source/_images/artkit_pipeline_schematic.png
    :alt: ARTKIT pipeline schematic
 
-ARTKIT also supports automated `multi-turn conversations <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/multi_turn_conversations.ipynb>`_
+ARTKIT also supports automated :doc:`multi-turn conversations </user_guide/advanced_tutorials/multi_turn_conversations>`
 between a challenger bot and a target system. Issues and vulnerabilities are more likely to arise after extended
 interactions with Gen AI systems, so multi-turn testing is critical for interactive applications. 
 
