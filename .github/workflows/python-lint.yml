@@ -45,7 +45,7 @@ jobs:
         dependencies=(
           types-aiofiles  
           aiohttp
-          fluxus==1.0rc4
+          fluxus~=1.0
           gamma-pytools~=3.0
           openai
           pandas-stubs

@@ -18,7 +18,7 @@ requires = [
     "matplotlib        >=3.0",
     "pandas            >=2.1",
     "gamma-pytools     ==3.0",
-    "fluxus            ==1.0rc4",
+    "fluxus            ~=1.0",
     "typing_inspect    >=0.7",
 ]
 
@@ -100,7 +100,7 @@ matplotlib        = "==3.7.1"
 pandas            = "~=2.1"
 python            = "==3.11"
 gamma-pytools     = "==3.0"
-fluxus            = "==1.0rc4"
+fluxus            = "~=1.0.0"
 typing_inspect    = "==0.7.1"
 
 [build.matrix.max]
@@ -109,7 +109,7 @@ matplotlib        = ">=3.8,<4a"
 pandas            = ">=2.2,<3a"
 python            = ">=3.12,<4a"
 gamma-pytools     = "==3.0"
-fluxus            = ">=1.0rc4"
+fluxus            = "~=1.0"
 typing_inspect    = ">=0.9,<1a"
 
 [tool.black]
