@@ -191,5 +191,5 @@ patterns, trends, and outliers in the target system's performance. For example, 
 
 By designing pipelines with the final report in mind, you can ensure the results are meaningful, actionable, and insightful.
 
-Future versions of ARTKIT may support automated reporting, but for now, users are encouraged to visit the `Examples <../examples/index.html>`_ section for realistic 
+Future versions of ARTKIT may support automated reporting, but for now, users are encouraged to visit the `Examples <../../examples/index.html>`_ section for realistic 
 examples of how to use ARTKIT to design and implement insightful testing and evaluation pipelines.

@@ -29,7 +29,7 @@ readily adapted to meet the testing and evaluation needs of a wide variety of Ge
 .. image:: sphinx/source/_images/artkit_pipeline_schematic.png
    :alt: ARTKIT pipeline schematic
 
-ARTKIT also supports automated `multi-turn conversations <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/multi_turn_conversations.ipynb>`_
+ARTKIT also supports automated `multi-turn conversations <https://bcg-x-official.github.io/artkit/user_guide/generating_challenges/multi_turn_personas.html>`_
 between a challenger bot and a target system. Issues and vulnerabilities are more likely to arise after extended
 interactions with Gen AI systems, so multi-turn testing is critical for interactive applications. 
 
@@ -90,12 +90,12 @@ Supported Model Providers
 ARTKIT provides out-of-the-box support for the following model providers:
 
 - `Anthropic <https://www.anthropic.com/>`_
-- `Google Vertex AI <https://gemini.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2024enUS_gemfeb&gad_source=1&gclid=Cj0KCQjwpNuyBhCuARIsANJqL9MyZ6ryxPne5jK3hH8f8rRi9ACTUcbroOcdrJB2OaiLR6yTGMMfozwaArcyEALw_wcB>`_
+- `Google's Gemini <https://gemini.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2024enUS_gemfeb&gad_source=1&gclid=Cj0KCQjwpNuyBhCuARIsANJqL9MyZ6ryxPne5jK3hH8f8rRi9ACTUcbroOcdrJB2OaiLR6yTGMMfozwaArcyEALw_wcB>`_
 - `Grok <https://groq.com/>`_
 - `Hugging Face <https://huggingface.co/>`_
 - `OpenAI <https://openai.com/>`_
 
-To connect to other services, users can develop `custom model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_custom_model_classes.ipynb>`_.
+To connect to other services, users can develop `custom model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_custom_model_classes.html>`_.
 
 Installation
 -------------
@@ -333,7 +333,7 @@ License
 -------
 
 This project is licensed under Apache 2.0, allowing free use, modification, and distribution with added protections against patent litigation. 
-See the `LICENSE <https://bcg-x-official.github.io/artkit/blob/main/LICENSE>`_ file for more details or visit `Apache 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.
+See the `LICENSE <https://github.com/BCG-X-Official/artkit/blob/HEAD/LICENSE>`_ file for more details or visit `Apache 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.
 
 
 BCG X
