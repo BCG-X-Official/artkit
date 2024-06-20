@@ -36,7 +36,6 @@ test:
     - "pyyaml ~=6.0.1"
     - "transformers ~=4.41.2"
     - "pytorch ~=2.3.0"
-    # Optional LLM libraries for testing
     - "openai" { { environ.get('ARTKIT_V_OPENAI', '[False]') } }
     - "anthropic" { { environ.get('ARTKIT_V_ANTHROPIC', '[False]') } }
     - "groq" { { environ.get('ARTKIT_V_GROQ', '[False]') } }
