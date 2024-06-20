@@ -1,0 +1,31 @@
+*.egg-info
+__pycache__
+build
+env/
+.venv/
+venv/
+/artkit
+/artkit-env
+/tmp
+/.run
+
+# environment variables
+.env
+
+# pytest coverage
+.coverage
+.coverage.*
+coverage.xml
+
+# notebooks
+.ipynb_checkpoints/
+
+# IntelliJ project
+/.idea
+
+# macos
+.DS_Store
+
+# vscode
+.vscode
+artkit2

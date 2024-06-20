@@ -1,0 +1,81 @@
+label,topic,question,answer
+golden,Next-Day Guarantee,Are all domestic shipments guaranteed to be delivered by the next business day?,"Yes, all domestic shipments are guaranteed to be delivered by the next business day."
+incomplete,Next-Day Guarantee,Are all domestic shipments guaranteed to be delivered by the next business day?,"Yes, all domestic shipments are guaranteed to be delivered by the next."
+irrelevant,Next-Day Guarantee,Are all domestic shipments guaranteed to be delivered by the next business day?,Our customer service team is available 24/7 to assist with any inquiries you may have.
+unfaithful,Next-Day Guarantee,Are all domestic shipments guaranteed to be delivered by the next business day?,"Yes, all domestic shipments are guaranteed to be delivered within three business days."
+golden,General Information,Does SwiftPost Express Delivery Service offer international shipping?,"No, SwiftPost Express Delivery Service does not offer international shipping."
+incomplete,General Information,Does SwiftPost Express Delivery Service offer international shipping?,"No, SwiftPost Express Delivery Service does not offer."
+irrelevant,General Information,Does SwiftPost Express Delivery Service offer international shipping?,SwiftPost Express Delivery Service provides same-day delivery options.
+unfaithful,General Information,Does SwiftPost Express Delivery Service offer international shipping?,"Yes, SwiftPost Express Delivery Service offers international shipping."
+golden,Advanced Tracking System,How can customers receive real-time updates on their packages?,"Customers can receive real-time updates on their packages via the SwiftPost website, mobile app, or SMS."
+incomplete,Advanced Tracking System,How can customers receive real-time updates on their packages?,Customers can receive real-time updates on their packages via the SwiftPost website or mobile app.
+irrelevant,Advanced Tracking System,How can customers receive real-time updates on their packages?,Customers can track their packages by visiting the nearest SwiftPost office or calling customer service.
+unfaithful,Advanced Tracking System,How can customers receive real-time updates on their packages?,Customers can receive real-time updates on their packages only via the SwiftPost website.
+golden,Add-ons,How is the insurance fee calculated for SwiftPost Express Delivery Service?,The insurance fee is calculated as 1% of the value of the goods.
+incomplete,Add-ons,How is the insurance fee calculated for SwiftPost Express Delivery Service?,The insurance fee is calculated as 1% of the value.
+irrelevant,Add-ons,How is the insurance fee calculated for SwiftPost Express Delivery Service?,The delivery fee is based on the distance and weight of the package.
+unfaithful,Add-ons,How is the insurance fee calculated for SwiftPost Express Delivery Service?,The insurance fee is calculated as 5% of the value of the goods.
+golden,Pricing,How much does it cost to ship a package that weighs 0.5 kg?,It costs $5 to ship a package that weighs 0.5 kg.
+incomplete,Pricing,How much does it cost to ship a package that weighs 0.5 kg?,It costs $5 to ship a package that weighs 0.5.
+irrelevant,Pricing,How much does it cost to ship a package that weighs 0.5 kg?,Shipping times vary depending on the destination.
+unfaithful,Pricing,How much does it cost to ship a package that weighs 0.5 kg?,It costs $10 to ship a package that weighs 0.5 kg.
+golden,Pricing,How much does it cost to ship a package that weighs 3 kg?,It costs $15 to ship a package that weighs 3 kg.
+incomplete,Pricing,How much does it cost to ship a package that weighs 3 kg?,It costs $15 to ship a package that weighs 3.
+irrelevant,Pricing,How much does it cost to ship a package that weighs 3 kg?,Shipping times vary depending on the destination.
+unfaithful,Pricing,How much does it cost to ship a package that weighs 3 kg?,It costs $25 to ship a package that weighs 3 kg.
+golden,Advanced Tracking System,Is the advanced tracking system free for all Express Delivery customers?,"Yes, the advanced tracking system is free for all Express Delivery customers."
+incomplete,Advanced Tracking System,Is the advanced tracking system free for all Express Delivery customers?,"Yes, the advanced tracking system is free for all Express Delivery."
+irrelevant,Advanced Tracking System,Is the advanced tracking system free for all Express Delivery customers?,The advanced tracking system provides real-time updates on your package's location.
+unfaithful,Advanced Tracking System,Is the advanced tracking system free for all Express Delivery customers?,The advanced tracking system is available for an additional fee for all Express Delivery customers.
+golden,Packing Guidelines,What internal cushioning materials are recommended by SwiftPost Express Delivery Service?,SwiftPost Express Delivery Service recommends using bubble wrap or foam peanuts for internal cushioning.
+incomplete,Packing Guidelines,What internal cushioning materials are recommended by SwiftPost Express Delivery Service?,SwiftPost Express Delivery Service recommends using bubble wrap or foam for internal cushioning.
+irrelevant,Packing Guidelines,What internal cushioning materials are recommended by SwiftPost Express Delivery Service?,SwiftPost Express Delivery Service offers a variety of shipping options to meet your needs.
+unfaithful,Packing Guidelines,What internal cushioning materials are recommended by SwiftPost Express Delivery Service?,SwiftPost Express Delivery Service recommends using newspaper or cloth for internal cushioning.
+golden,Packing Guidelines,What is the charge for non-compliance with packing guidelines that necessitates repacking?,The charge for non-compliance with packing guidelines that necessitates repacking is $10.
+incomplete,Packing Guidelines,What is the charge for non-compliance with packing guidelines that necessitates repacking?,The charge for non-compliance with packing guidelines that necessitates repacking is $10.
+irrelevant,Packing Guidelines,What is the charge for non-compliance with packing guidelines that necessitates repacking?,The fee for expedited shipping is $15.
+unfaithful,Packing Guidelines,What is the charge for non-compliance with packing guidelines that necessitates repacking?,The charge for non-compliance with packing guidelines that necessitates repacking is $20.
+golden,Customer Service,What is the email address for SwiftPost Express Delivery Service customer support?,The email address for SwiftPost Express Delivery Service customer support is CustomerSupport@SwiftPost.com.
+incomplete,Customer Service,What is the email address for SwiftPost Express Delivery Service customer support?,The email address for SwiftPost Express Delivery Service customer support is CustomerSupport@SwiftPost.
+irrelevant,Customer Service,What is the email address for SwiftPost Express Delivery Service customer support?,You can contact SwiftPost Express Delivery Service through their phone number or visit their website for more information.
+unfaithful,Customer Service,What is the email address for SwiftPost Express Delivery Service customer support?,The email address for SwiftPost Express Delivery Service customer support is Support@SwiftPost.com.
+golden,Add-ons,What is the fee for signature confirmation?,The fee for signature confirmation is $5.
+incomplete,Add-ons,What is the fee for signature confirmation?,The fee for signature confirmation is $5.
+irrelevant,Add-ons,What is the fee for signature confirmation?,The fee for expedited shipping is $10.
+unfaithful,Add-ons,What is the fee for signature confirmation?,The fee for signature confirmation is $10.
+golden,General Information,What is the main benefit of using SwiftPost Express Delivery Service?,The main benefit of using SwiftPost Express Delivery Service is that it ensures faster delivery of packages.
+incomplete,General Information,What is the main benefit of using SwiftPost Express Delivery Service?,The main benefit of using SwiftPost Express Delivery Service is that it ensures faster delivery.
+irrelevant,General Information,What is the main benefit of using SwiftPost Express Delivery Service?,The main benefit of using SwiftPost Express Delivery Service is that it offers competitive pricing for bulk shipments.
+unfaithful,General Information,What is the main benefit of using SwiftPost Express Delivery Service?,The main benefit of using SwiftPost Express Delivery Service is that it ensures cheaper delivery of packages.
+golden,Weight and Size Restrictions,What is the maximum combined length and width allowed for a package?,The maximum combined length and width allowed for a package is 150 cm.
+incomplete,Weight and Size Restrictions,What is the maximum combined length and width allowed for a package?,The maximum combined length and width allowed for a package is 150.
+irrelevant,Weight and Size Restrictions,What is the maximum combined length and width allowed for a package?,The maximum weight allowed for a package is 20 kg.
+unfaithful,Weight and Size Restrictions,What is the maximum combined length and width allowed for a package?,The maximum combined length and width allowed for a package is 180 cm.
+golden,Weight and Size Restrictions,What is the maximum weight allowed for a package with SwiftPost Express Delivery Service?,The maximum weight allowed for a package with SwiftPost Express Delivery Service is 30 kg.
+incomplete,Weight and Size Restrictions,What is the maximum weight allowed for a package with SwiftPost Express Delivery Service?,The maximum weight allowed for a package with SwiftPost Express Delivery Service is 30.
+irrelevant,Weight and Size Restrictions,What is the maximum weight allowed for a package with SwiftPost Express Delivery Service?,The maximum dimensions for a package with SwiftPost Express Delivery Service are 100 cm x 50 cm x 50 cm.
+unfaithful,Weight and Size Restrictions,What is the maximum weight allowed for a package with SwiftPost Express Delivery Service?,The maximum weight allowed for a package with SwiftPost Express Delivery Service is 50 kg.
+golden,Customer Service,What is the phone number for SwiftPost Express Delivery Service customer support?,The phone number for SwiftPost Express Delivery Service customer support is 1-800-123-4567.
+incomplete,Customer Service,What is the phone number for SwiftPost Express Delivery Service customer support?,The phone number for SwiftPost Express Delivery Service customer support is 1-800-123.
+irrelevant,Customer Service,What is the phone number for SwiftPost Express Delivery Service customer support?,SwiftPost Express Delivery Service offers a variety of shipping options to meet your needs.
+unfaithful,Customer Service,What is the phone number for SwiftPost Express Delivery Service customer support?,The phone number for SwiftPost Express Delivery Service customer support is 1-800-987-6543.
+golden,Pricing,What is the shipping price for a package that weighs 6 kg?,The shipping price for a package that weighs 6 kg is $25.
+incomplete,Pricing,What is the shipping price for a package that weighs 6 kg?,The shipping price for a package that weighs 6 kg is $25.
+irrelevant,Pricing,What is the shipping price for a package that weighs 6 kg?,The delivery time for a package that weighs 6 kg is typically 3-5 business days.
+unfaithful,Pricing,What is the shipping price for a package that weighs 6 kg?,The shipping price for a package that weighs 6 kg is $15.
+golden,General Information,What is the weight range for packages that cost $15 to ship?,The weight range for packages that cost $15 to ship is within 1-5 kg.
+incomplete,General Information,What is the weight range for packages that cost $15 to ship?,The weight range for packages that cost $15 to ship is within 1-5.
+irrelevant,General Information,What is the weight range for packages that cost $15 to ship?,Packages that cost $15 to ship are typically delivered within 3-5 business days.
+unfaithful,General Information,What is the weight range for packages that cost $15 to ship?,The weight range for packages that cost $15 to ship is within 6-10 kg.
+golden,Next-Day Guarantee,What should a customer do if their package is delivered late?,"If a package is delivered late, the customer should contact customer support to request a refund."
+incomplete,Next-Day Guarantee,What should a customer do if their package is delivered late?,"If a package is delivered late, the customer should contact customer support."
+irrelevant,Next-Day Guarantee,What should a customer do if their package is delivered late?,"If a package is delivered late, the customer should check the tracking information for updates."
+unfaithful,Next-Day Guarantee,What should a customer do if their package is delivered late?,"If a package is delivered late, the customer should wait patiently as refunds are not available."
+golden,Packing Guidelines,What type of box should be used for packing with SwiftPost Express Delivery Service?,"A sturdy, corrugated box secured with strong packing tape should be used for packing with SwiftPost Express Delivery Service."
+incomplete,Packing Guidelines,What type of box should be used for packing with SwiftPost Express Delivery Service?,"A sturdy, corrugated box secured with strong packing tape should be used for packing with SwiftPost."
+irrelevant,Packing Guidelines,What type of box should be used for packing with SwiftPost Express Delivery Service?,You should ensure that the contents are well-protected with bubble wrap or packing peanuts.
+unfaithful,Packing Guidelines,What type of box should be used for packing with SwiftPost Express Delivery Service?,"A lightweight, flimsy box secured with weak packing tape should be used for packing with SwiftPost Express Delivery Service."
+golden,General Information,Which states are excluded from SwiftPost Express Delivery Service's domestic shipping?,SwiftPost Express Delivery Service's domestic shipping excludes Hawaii and Alaska.
+incomplete,General Information,Which states are excluded from SwiftPost Express Delivery Service's domestic shipping?,SwiftPost Express Delivery Service's domestic shipping excludes Hawaii.
+irrelevant,General Information,Which states are excluded from SwiftPost Express Delivery Service's domestic shipping?,SwiftPost Express Delivery Service offers international shipping options.
+unfaithful,General Information,Which states are excluded from SwiftPost Express Delivery Service's domestic shipping?,SwiftPost Express Delivery Service's domestic shipping includes Hawaii and Alaska.
