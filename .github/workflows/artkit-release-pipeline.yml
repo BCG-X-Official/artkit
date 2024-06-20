@@ -7,6 +7,9 @@ on:
     # - A pull request is merged into the 1.0.x branch or any release/* branch.
     # - Changes are pushed to the 1.0.x or release/* branches through re-bases or
     #   fast-forwards.
+    #
+    # The GitHub actions variable for the branch being pushed to is `github.ref`.
+    # values formatted as `refs/heads/<branch-name>`
     branches:
       - 1.0.x
       - release/*
@@ -17,6 +20,12 @@ on:
     # - Commits are pushed to the source branch of an open pull request targeting these
     #   branches.
     # - An existing pull request targeting these branches is reopened or synchronized.
+    #
+    # The GitHub actions variable for the branch from which the pull request originates
+    # is `github.head_ref`.
+    # The GitHub actions variable for the branch being targeted by the pull request is
+    # `github.base_ref`.
+    # The values of these variables are the branch names without any prefixes.
     branches:
       - 1.0.x
       - release/*
