@@ -90,7 +90,7 @@ Supported Model Providers
 ARTKIT provides out-of-the-box support for the following model providers:
 
 - `Anthropic <https://www.anthropic.com/>`_
-- `Google Vertex AI <https://gemini.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2024enUS_gemfeb&gad_source=1&gclid=Cj0KCQjwpNuyBhCuARIsANJqL9MyZ6ryxPne5jK3hH8f8rRi9ACTUcbroOcdrJB2OaiLR6yTGMMfozwaArcyEALw_wcB>`_
+- `Google's Gemini <https://gemini.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2024enUS_gemfeb&gad_source=1&gclid=Cj0KCQjwpNuyBhCuARIsANJqL9MyZ6ryxPne5jK3hH8f8rRi9ACTUcbroOcdrJB2OaiLR6yTGMMfozwaArcyEALw_wcB>`_
 - `Grok <https://groq.com/>`_
 - `Hugging Face <https://huggingface.co/>`_
 - `OpenAI <https://openai.com/>`_
