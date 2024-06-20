@@ -333,7 +333,7 @@ License
 -------
 
 This project is licensed under Apache 2.0, allowing free use, modification, and distribution with added protections against patent litigation. 
-See the `LICENSE <https://bcg-x-official.github.io/artkit/blob/main/LICENSE>`_ file for more details or visit `Apache 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.
+See the `LICENSE <https://github.com/BCG-X-Official/artkit/blob/HEAD/LICENSE>`_ file for more details or visit `Apache 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.
 
 
 BCG X
