@@ -2,14 +2,25 @@ name: ARTKIT Release Pipeline
 
 on:
   push:
+    # The push trigger will cause the workflow to run when:
+    # - Commits are pushed directly to the 1.0.x branch or any release/* branch.
+    # - A pull request is merged into the 1.0.x branch or any release/* branch.
+    # - Changes are pushed to the 1.0.x or release/* branches through re-bases or
+    #   fast-forwards.
     branches:
       - 1.0.x
       - release/*
   pull_request:
+    # The workflow will run when:
+    # - A pull request targeting the 1.0.x branch or any branch matching release/* is
+    #   created.
+    # - Commits are pushed to the source branch of an open pull request targeting these
+    #   branches.
+    # - An existing pull request targeting these branches is reopened or synchronized.
     branches:
       - 1.0.x
       - release/*
-  schedule:  # runs on default branch
+  schedule: # runs on default branch
     - cron: "0 2 * * 1-5" # Every weekday at 2 AM
 
 env:
@@ -145,13 +156,13 @@ jobs:
 
   conda_tox_essential:
     runs-on: ubuntu-latest
-    needs: [detect_build_config_changes, code_quality_checks]
+    needs: [ detect_build_config_changes, code_quality_checks ]
     if: ${{ needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' && github.event_name != 'schedule' && !startsWith(github.head_ref, 'dev/') && !startsWith(github.ref, 'refs/heads/release/') }}
     strategy:
       matrix:
-        python-version: [3.11]
-        build-system: [conda, tox]
-        pkg-dependencies: [max, min]
+        python-version: [ 3.11 ]
+        build-system: [ conda, tox ]
+        pkg-dependencies: [ max, min ]
         exclude:
           - python-version: 3.11
             build-system: conda
@@ -209,13 +220,13 @@ jobs:
 
   conda_tox_matrix:
     runs-on: ubuntu-latest
-    needs: [detect_build_config_changes, code_quality_checks]
+    needs: [ detect_build_config_changes, code_quality_checks ]
     if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
     strategy:
       matrix:
-        python-version: [3.11]
-        build-system: [conda, tox]
-        pkg-dependencies: [default, min, max]
+        python-version: [ 3.11 ]
+        build-system: [ conda, tox ]
+        pkg-dependencies: [ default, min, max ]
 
     steps:
       - name: Checkout code
