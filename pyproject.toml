@@ -64,7 +64,7 @@ dev = [
     "notebook                 ~= 7.2",
 
     # DevOps
-    "pytest                   ~= 9.0",
+    "pytest                   ~= 8.2",
     "pytest-asyncio           ~= 0.23",
     "pytest-cov               ~= 5.0",
     "pre-commit               ~= 3.7",
