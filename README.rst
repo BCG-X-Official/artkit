@@ -95,7 +95,7 @@ ARTKIT provides out-of-the-box support for the following model providers:
 - `Hugging Face <https://huggingface.co/>`_
 - `OpenAI <https://openai.com/>`_
 
-To connect to other services, users can develop `custom model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_custom_model_classes.ipynb>`_.
+To connect to other services, users can develop `custom model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_custom_model_classes.html>`_.
 
 Installation
 -------------
