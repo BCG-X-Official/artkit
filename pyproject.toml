@@ -14,14 +14,14 @@ dist-name = "artkit"
 license = "Apache Software License v2.0"
 
 requires = [
-    "matplotlib        >=3.0",
-    "pandas            >=2.1",
+    "matplotlib        ~=3.6",
+    "pandas            ~=2.1",
     "gamma-pytools     ~=3.0",
     "fluxus            ~=1.0",
-    "typing_inspect    >=0.7",
+    "typing_inspect    ~=0.7",
 ]
 
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11,<4a"
 
 [tool.flit.metadata.requires-extra]
 openai = [
@@ -64,7 +64,7 @@ dev = [
     "notebook                 ~= 7.2",
 
     # DevOps
-    "pytest                   ~= 8.2",
+    "pytest                   ~= 9.0",
     "pytest-asyncio           ~= 0.23",
     "pytest-cov               ~= 5.0",
     "pre-commit               ~= 3.7",
@@ -94,7 +94,7 @@ Repository = "https://github.com/BCG-X-Official/artkit"
 no-binary.min = ["matplotlib"]
 
 [build.matrix.min]
-matplotlib        = "==3.7.1"
+matplotlib        = "~=3.6.3"
 pandas            = "~=2.1"
 python            = "==3.11"
 gamma-pytools     = "~=3.0.0"
@@ -142,16 +142,11 @@ untyped_calls_exclude = [
 module = [
     "anthropic.*",
     "google.*",
-    "graphviz.*",
     "groq.*",
     "huggingface_hub.*",
     "IPython.*",
-    "setuptools.*",
-    "sphinx.*",
-    "toml.*",
     "torch.*",
     "transformers.*",
     "typing_inspect.*",
-    "fluxus.*",
 ]
 ignore_missing_imports = true
