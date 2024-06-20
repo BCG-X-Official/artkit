@@ -14,7 +14,6 @@ dist-name = "artkit"
 license = "Apache Software License v2.0"
 
 requires = [
-    "aiolimiter        ==1.1.0",
     "matplotlib        >=3.0",
     "pandas            >=2.1",
     "gamma-pytools     ==3.0",
@@ -95,7 +94,6 @@ Repository = "https://github.com/BCG-X-Official/artkit"
 no-binary.min = ["matplotlib"]
 
 [build.matrix.min]
-aiolimiter        = "==1.1.0"
 matplotlib        = "==3.7.1"
 pandas            = "~=2.1"
 python            = "==3.11"
@@ -104,7 +102,6 @@ fluxus            = "~=1.0.0"
 typing_inspect    = "==0.7.1"
 
 [build.matrix.max]
-aiolimiter        = "==1.1.0"
 matplotlib        = ">=3.8,<4a"
 pandas            = ">=2.2,<3a"
 python            = ">=3.12,<4a"

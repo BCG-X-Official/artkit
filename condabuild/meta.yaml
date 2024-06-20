@@ -21,7 +21,6 @@ requirements:
     - fluxus {{ environ.get('ARTKIT_V_FLUXUS') }}
     - gamma-pytools {{ environ.get('ARTKIT_V_GAMMA_PYTOOLS') }}
     - typing_inspect {{ environ.get('ARTKIT_V_TYPING_INSPECT') }}
-    - aiolimiter {{ environ.get('ARTKIT_V_AIOLIMITER') }}
 
 test:
   imports:
