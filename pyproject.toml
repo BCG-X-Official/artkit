@@ -16,7 +16,7 @@ license = "Apache Software License v2.0"
 requires = [
     "matplotlib        >=3.0",
     "pandas            >=2.1",
-    "gamma-pytools     ==3.0",
+    "gamma-pytools     ~=3.0",
     "fluxus            ~=1.0",
     "typing_inspect    >=0.7",
 ]
@@ -97,7 +97,7 @@ no-binary.min = ["matplotlib"]
 matplotlib        = "==3.7.1"
 pandas            = "~=2.1"
 python            = "==3.11"
-gamma-pytools     = "==3.0"
+gamma-pytools     = "~=3.0.0"
 fluxus            = "~=1.0.0"
 typing_inspect    = "==0.7.1"
 
@@ -105,7 +105,7 @@ typing_inspect    = "==0.7.1"
 matplotlib        = ">=3.8,<4a"
 pandas            = ">=2.2,<3a"
 python            = ">=3.12,<4a"
-gamma-pytools     = "==3.0"
+gamma-pytools     = "~=3.0"
 fluxus            = "~=1.0"
 typing_inspect    = ">=0.9,<1a"
 
