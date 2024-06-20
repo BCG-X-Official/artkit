@@ -12,9 +12,9 @@ testing and evaluation of Gen AI applications.
 Getting started
 ---------------
 
-- See the `ARTKIT Documentation <https://bcg-x-official.github.io/artkit/_generated/home.html>`_ for our User Guide, Examples, API reference, and more.
-- See `Contributing <https://github.com/BCG-X-Official/artkit/blob/HEAD/CONTRIBUTING.md>`_ or visit our `Contributor Guide <https://bcg-x-official.github.io/artkit/contributor_guide/index.html>`_ for information on contributing.
-- We have an `FAQ <https://bcg-x-official.github.io/artkit/faq.html>`_ for common questions. For anything else, please reach out to ARTKIT@bcg.com.
+- See the :doc:`ARTKIT Documentation </_generated/home>` for our User Guide, Examples, API reference, and more.
+- See `Contributing <https://github.com/BCG-X-Official/artkit/blob/HEAD/CONTRIBUTING.md>`_ or visit our :doc:`Contributor Guide </contributor_guide/index>` for information on contributing.
+- We have an :doc:`FAQ </faq>` for common questions. For anything else, please reach out to ARTKIT@bcg.com.
 
 .. _Introduction:
 
@@ -29,30 +29,30 @@ readily adapted to meet the testing and evaluation needs of a wide variety of Ge
 .. image:: sphinx/source/_images/artkit_pipeline_schematic.png
    :alt: ARTKIT pipeline schematic
 
-ARTKIT also supports automated `multi-turn conversations <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/multi_turn_conversations.ipynb>`_
+ARTKIT also supports automated :doc:`multi-turn conversations </user_guide/generating_challenges/multi_turn_personas>`
 between a challenger bot and a target system. Issues and vulnerabilities are more likely to arise after extended
 interactions with Gen AI systems, so multi-turn testing is critical for interactive applications. 
 
-We recommend starting with our `User Guide <https://bcg-x-official.github.io/artkit/user_guide/index.html>`_
+We recommend starting with our :doc:`User Guide </user_guide/index>`
 to learn the core concepts and functionality of ARTKIT.
-Visit our `Examples <https://bcg-x-official.github.io/artkit/examples/index.html>`_ to see how
+Visit our :doc:`Examples </examples/index>` to see how
 ARTKIT can be used to test and evaluate Gen AI systems for:
 
 1. Q&A Accuracy:
     - Generate a *Q&A golden dataset* from ground truth documents, augment questions to simulate variation in user inputs,
-      and evaluate system responses for `faithfulness, completeness, and relevancy <https://bcg-x-official.github.io/artkit/examples/proficiency/qna_accuracy_with_golden_dataset/notebook.html>`_.
+      and evaluate system responses for :doc:`faithfulness, completeness, and relevancy </examples/proficiency/qna_accuracy_with_golden_dataset/notebook>`.
 
 2. Upholding Brand Values:
     - Implement *persona-based testing* to simulate diverse users interacting with your system and evaluate system responses for
-      `brand conformity <https://bcg-x-official.github.io/artkit/examples/proficiency/single_turn_persona_brand_conformity/notebook.html>`_.
+      :doc:`brand conformity </examples/proficiency/single_turn_persona_brand_conformity/notebook>`.
 
 3. Equitability:
     - Run a *counterfactual experiment* by systematically modifying demographic indicators across a set of documents and statistically
-      evaluate system responses for `undesired demographic bias <https://bcg-x-official.github.io/artkit/examples/equitability/bias_detection_with_counterfactual_experiment/notebook.html>`_.
+      evaluate system responses for :doc:`undesired demographic bias </examples/equitability/bias_detection_with_counterfactual_experiment/notebook>`.
 
 4. Safety:
     - Use *adversarial prompt augmentation* to strengthen adversarial prompts drawn from a prompt library and evaluate system responses for
-      `refusal to engage with adversarial inputs <https://bcg-x-official.github.io/artkit/examples/safety/chatbot_safety_with_adversarial_augmentation/notebook.html>`_ .
+      :doc:`refusal to engage with adversarial inputs </examples/safety/chatbot_safety_with_adversarial_augmentation/notebook>` .
 
 5. Security:
     - Use *multi-turn attackers* to execute multi-turn strategies for extracting the system prompt from a chatbot, challenging the system's 
@@ -95,7 +95,7 @@ ARTKIT provides out-of-the-box support for the following model providers:
 - `Hugging Face <https://huggingface.co/>`_
 - `OpenAI <https://openai.com/>`_
 
-To connect to other services, users can develop `custom model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_custom_model_classes.ipynb>`_.
+To connect to other services, users can develop :doc:`custom model classes </user_guide/advanced_tutorials/creating_custom_model_classes>`.
 
 Installation
 -------------
@@ -319,14 +319,14 @@ From left to right, the results table shows:
 3. ``ask_chad``: The response from AskChad, which mirrors the tone of the user
 4. ``evaluation``: The evaluation score for the SARCASTIC metric, which flags the sarcastic response with a 1
 
-For a complete introduction to ARTKIT, please visit our `User Guide <https://bcg-x-official.github.io/artkit/user_guide/index.html>`_
-and `Examples <https://bcg-x-official.github.io/artkit/examples/index.html>`_.
+For a complete introduction to ARTKIT, please visit our :doc:`User Guide </user_guide/index>`
+and :doc:`Examples </examples/index>`.
 
 
 Contributing
 ------------
 
-Contributions to ARTKIT are welcome and appreciated! Please see the `Contributor Guide <https://bcg-x-official.github.io/artkit/contributor_guide/index.html>`_ section for information.
+Contributions to ARTKIT are welcome and appreciated! Please see the :doc:`Contributor Guide </contributor_guide/index>` section for information.
 
 
 License
