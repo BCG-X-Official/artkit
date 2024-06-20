@@ -21,6 +21,10 @@ requirements:
     - fluxus {{ environ.get('ARTKIT_V_FLUXUS') }}
     - gamma-pytools {{ environ.get('ARTKIT_V_GAMMA_PYTOOLS') }}
     - typing_inspect {{ environ.get('ARTKIT_V_TYPING_INSPECT') }}
+    - openai {{ environ.get('ARTKIT_V_OPENAI') }}
+    - anthropic {{ environ.get('ARTKIT_V_ANTHROPIC') }}
+    - groq {{ environ.get('ARTKIT_V_GROQ') }}
+    - google-generativeai {{ environ.get('ARTKIT_V_GOOGLE_GENERATIVEAI') }}
 
 test:
   imports:
@@ -28,15 +32,15 @@ test:
     - artkit.model
   requires:
     - "pytest ~= 8.2"
-    - "aiofiles ~= 23.2.1"
-    - "openai ~=1.33.0"
-    - "anthropic ~=0.28.0"
-    - "groq ~=0.8.0"
-    - "google-generativeai ~=0.6"
     - "aiohttp ~=3.9.5"
     - "pyyaml ~=6.0.1"
     - "transformers ~=4.41.2"
     - "pytorch ~=2.3.0"
+    # Optional LLM libraries for testing
+    - "openai" { { environ.get('ARTKIT_V_OPENAI', '[False]') } }
+    - "anthropic" { { environ.get('ARTKIT_V_ANTHROPIC', '[False]') } }
+    - "groq" { { environ.get('ARTKIT_V_GROQ', '[False]') } }
+    - "google-generativeai" { { environ.get('ARTKIT_V_GOOGLE_GENERATIVEAI', '[False]') } }
   commands:
     - conda list
     - python -c "import artkit; import os; assert artkit.__version__ == os.environ['ARTKIT_BUILD_ARTKIT_VERSION']"
