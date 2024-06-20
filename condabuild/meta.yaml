@@ -1,0 +1,56 @@
+package:
+  name: artkit
+  version: {{ environ.get('ARTKIT_BUILD_ARTKIT_VERSION') }}
+
+source:
+  path: ../
+
+build:
+  noarch: python
+  script: "flit install --deps none"
+
+requirements:
+  host:
+    - pip >=21
+    - python {{ environ.get('ARTKIT_V_PYTHON') }}
+    - flit =3
+  run:
+    - matplotlib-base {{ environ.get('ARTKIT_V_MATPLOTLIB') }}
+    - pandas {{ environ.get('ARTKIT_V_PANDAS') }}
+    - python {{ environ.get('ARTKIT_V_PYTHON') }}
+    - fluxus {{ environ.get('ARTKIT_V_FLUXUS') }}
+    - gamma-pytools {{ environ.get('ARTKIT_V_GAMMA_PYTOOLS') }}
+    - typing_inspect {{ environ.get('ARTKIT_V_TYPING_INSPECT') }}
+    - aiolimiter {{ environ.get('ARTKIT_V_AIOLIMITER') }}
+
+test:
+  imports:
+    - artkit
+    - artkit.model
+  requires:
+    - "pytest ~= 8.2"
+    - "aiofiles ~= 23.2.1"
+    - "openai ~=1.33.0"
+    - "anthropic ~=0.28.0"
+    - "groq ~=0.8.0"
+    - "google-generativeai ~=0.6"
+    - "aiohttp ~=3.9.5"
+    - "pyyaml ~=6.0.1"
+    - "transformers ~=4.41.2"
+    - "pytorch ~=2.3.0"
+  commands:
+    - conda list
+    - python -c "import artkit; import os; assert artkit.__version__ == os.environ['ARTKIT_BUILD_ARTKIT_VERSION']"
+    - cd "${ARTKIT_PATH}/artkit"
+    - pytest -vs test
+
+about:
+  home: https://github.com/BCG-X-Official/artkit
+  license: Apache Software License v2.0
+  license_file: LICENSE
+  description: |
+    A collection of generic ARTKIT extensions and tools, used across GAMMA's open-source
+    libraries.
+  dev_url: https://github.com/BCG-X-Official/artkit
+  doc_url: https://bcg-x-official.github.io/artkit/
+  doc_source_url: https://github.com/BCG-X-Official/artkit/blob/develop/README.rst
