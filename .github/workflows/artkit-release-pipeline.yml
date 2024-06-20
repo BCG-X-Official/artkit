@@ -165,8 +165,9 @@ jobs:
 
   conda_tox_essential:
     runs-on: ubuntu-latest
-    needs: [ detect_build_config_changes, code_quality_checks ]
-    if: ${{ needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' && github.event_name != 'schedule' && !startsWith(github.head_ref, 'dev/') && !startsWith(github.ref, 'refs/heads/release/') }}
+    needs: [ detect_build_config_changes, code_quality_checks, check_release]
+    # IF (no build configs changed) AND (not a scheduled run) AND (no PR creation/update merging dev/ to release/) AND (no PR merged into release/)
+    if: ${{ needs.detect_build_config_changes.outputs.conda_build_config_changed != '1' && github.event_name != 'schedule' && !startsWith(github.head_ref, 'dev/') && !startsWith(github.base_ref, 'release/') && !startsWith(github.ref, 'refs/heads/release/') }}
     strategy:
       matrix:
         python-version: [ 3.11 ]
@@ -229,8 +230,9 @@ jobs:
 
   conda_tox_matrix:
     runs-on: ubuntu-latest
-    needs: [ detect_build_config_changes, code_quality_checks ]
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
+    needs: [detect_build_config_changes, code_quality_checks, check_release]
+    # IF (build configs changed) OR (creating/syncing PR merging dev/ into release/) OR (PR merged into release/) OR (scheduled run)
+    if: needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' || (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
     strategy:
       matrix:
         python-version: [ 3.11 ]
@@ -292,7 +294,7 @@ jobs:
 
   veracode_check:
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
+    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
 
     steps:
       - name: Checkout code
@@ -321,8 +323,8 @@ jobs:
 
   check_release:
     runs-on: ubuntu-latest
-    needs: conda_tox_matrix
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
+    # IF (creating/syncing PR merging dev/ into release/) OR (PR merged into release/)
+    if: (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/')
 
     steps:
       - name: Checkout code
@@ -384,8 +386,9 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
-    needs: check_release
+    # IF (creating/syncing PR merging dev/ into release/) OR (PR merged into release/)
+    if: (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/')
+    needs: [check_release, conda_tox_matrix]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -482,7 +485,8 @@ jobs:
 
   docs:
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
+    # IF (creating/syncing PR merging dev/ into release/) OR (PR merged into release/)
+    if: (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
