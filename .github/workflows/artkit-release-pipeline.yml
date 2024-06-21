@@ -289,10 +289,12 @@ jobs:
         build-system: [ conda, tox ]
         pkg-dependencies: [ default, min, max ]
         exclude:
-          - python-version: 3.12
-            pkg-dependencies: [min, default]
           - python-version: 3.11
             pkg-dependencies: max
+          - python-version: 3.12
+            pkg-dependencies: default
+          - python-version: 3.12
+            pkg-dependencies: min
 
     steps:
       - name: Checkout code
