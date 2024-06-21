@@ -285,9 +285,14 @@ jobs:
     if: needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' || (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
     strategy:
       matrix:
-        python-version: [ 3.11 ]
+        python-version: [ 3.11, 3.12 ]
         build-system: [ conda, tox ]
         pkg-dependencies: [ default, min, max ]
+        exclude:
+          - python-version: 3.12
+            pkg-dependencies: [min, default]
+          - python-version: 3.11
+            pkg-dependencies: max
 
     steps:
       - name: Checkout code
