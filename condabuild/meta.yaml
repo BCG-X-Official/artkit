@@ -36,8 +36,7 @@ test:
     - google-generativeai {{ environ.get('ARTKIT_V_GOOGLE_GENERATIVEAI', '') }}
     - groq {{ environ.get('ARTKIT_V_GROQ', '') }}
     - openai {{ environ.get('ARTKIT_V_OPENAI', '') }}
-    - pyyaml {{ environ.get('ARTKIT_V_PYYAML', '') }}
-    - pytorch {{ environ.get('ARTKIT_V_PYTORCH', '') }}
+    - pytorch {{ environ.get('ARTKIT_V_TORCH', '') }}
     - transformers {{ environ.get('ARTKIT_V_TRANSFORMERS', '') }}
   commands:
     - conda list

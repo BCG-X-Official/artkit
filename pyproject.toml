@@ -74,7 +74,6 @@ testing = [
     "pytest                   ~= 8.2",
     "pytest-cov               ~= 5.0",
     "pytest-asyncio           ~= 0.23",
-    "pyyaml                   ~= 6.0.1",
 ]
 
 [tool.flit.metadata.urls]
