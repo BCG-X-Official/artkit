@@ -82,7 +82,7 @@ Repository = "https://github.com/BCG-X-Official/artkit"
 
 [build]
 # comma-separated list of packages to be built from source in pip min builds
-no-binary.min = ["matplotlib"]
+no-binary.min = []
 
 [build.matrix.min]
 matplotlib          = "~=3.6.3"
