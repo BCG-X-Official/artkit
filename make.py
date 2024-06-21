@@ -500,9 +500,9 @@ class ToxBuilder(Builder):
             dependencies that have been exposed as environment variables
         """
         if self.dependency_type == DEP_DEFAULT:
-            tox_env = "py311"
+            tox_env = "py3"
         else:
-            tox_env = "py311-custom-deps"
+            tox_env = "py3-custom-deps"
 
         original_dir = os.getcwd()
 
