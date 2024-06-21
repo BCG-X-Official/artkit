@@ -418,37 +418,29 @@ jobs:
           fi    
 
       - name: Check version consistency
+        # IF (PR from dev/ to release/) OR (push into release/)
+        if: (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/')
         run: |
           set -eux
           python -m pip install toml~=0.10.2 packaging~=20.9
           cd ${{ github.workspace }}/artkit
           python <<EOF
 
-          import re
-          from os import environ
           from make import ToxBuilder
 
           branch = "${{ env.BRANCH_NAME }}"
           print(f"Checking package version consistency with branch: {branch}")
 
-          assert (branch.startswith("release/") or branch.startswith("dev/") or branch=="1.0.x"
+          assert (
+            branch.startswith("release/") or branch.startswith("dev/")
           ), "This check should only run on versioned branches – check pipeline."
 
-          # check if branch is a main branch with pattern \d.\d.x; if so, extract the major and minor version number
-          main_branch = re.match(r"(\d+.\d+.)x", branch)
-          if main_branch:
-            branch_version = main_branch.group(1)
-            package_version = ToxBuilder("${{ env.project_name }}", "default").package_version
-            assert (
-              package_version.startswith(branch_version),
-              f"Package version '{package_version}' does not match '{branch_version}' from branch."
-            )
-          else:
-            branch_version = branch.split("/", maxsplit=1)[1]
-            package_version = ToxBuilder("${{ env.project_name }}", "default").package_version
-            assert (
+          branch_version = branch.split("/", maxsplit=1)[1]
+          package_version = ToxBuilder("${{ env.project_name }}", "default").package_version
+
+          assert (
               package_version == branch_version
-            ), f"Package version '{package_version}' does not match '{branch_version}' from branch."
+          ), f"Package version '{package_version}' does not match '{branch_version}' from branch."
 
           print("Check passed.")
           EOF
