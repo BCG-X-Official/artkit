@@ -32,14 +32,14 @@ test:
     - artkit.model
   requires:
     - pytest ~= 8.2
-    - aiohttp ~=3.9.5
-    - pyyaml ~=6.0.1
-    - transformers ~=4.41.2
-    - pytorch ~=2.3.0
-    - openai {{ environ.get('ARTKIT_V_OPENAI', '[False]') }}
+    - aiohttp {{ environ.get('ARTKIT_V_AIOHTTP', '[False]') }}
     - anthropic {{ environ.get('ARTKIT_V_ANTHROPIC', '[False]') }}
+    - google-generativeai {{ environ.get('ARTKIT_V_GOOGLE-GENERATIVEAI', '[False]') }}
     - groq {{ environ.get('ARTKIT_V_GROQ', '[False]') }}
-    - google-generativeai {{ environ.get('ARTKIT_V_GOOGLE_GENERATIVEAI', '[False]') }}
+    - openai {{ environ.get('ARTKIT_V_OPENAI', '[False]') }}
+    - pyyaml {{ environ.get('ARTKIT_V_PYYAML', '[False]') }}
+    - pytorch {{ environ.get('ARTKIT_V_PYTORCH', '[False]') }}
+    - transformers {{ environ.get('ARTKIT_V_TRANSFORMERS', '[False]') }}
   commands:
     - conda list
     - python -c "import artkit; import os; assert artkit.__version__ == os.environ['ARTKIT_BUILD_ARTKIT_VERSION']"
