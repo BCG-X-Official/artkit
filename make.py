@@ -512,7 +512,7 @@ class ToxBuilder(Builder):
             os.chdir(build_path)
 
             # run tox
-            build_cmd = f"tox -e {tox_env} -v"
+            build_cmd = f"tox -c '{self._get_tox_ini_path()}' -e {tox_env} -v"
             log(f"Build Command: {build_cmd}")
             subprocess.run(args=build_cmd, shell=True, check=True)
             log("Tox build completed – creating local PyPi index")
@@ -551,6 +551,23 @@ class ToxBuilder(Builder):
 
         finally:
             os.chdir(original_dir)
+
+    def _get_tox_ini_path(self) -> str:
+        """
+        Remove all lines from the tox.ini file that reference environment variables
+        that we have not exported.
+
+        :return: the path to the resulting temporary tox.ini file
+        """
+
+        tox_ini_dir = os.path.join(os.environ[ARTKIT_PATH_ENV], self.project)
+
+        # get the path to tox.ini
+        tox_ini_path = os.path.abspath(
+            os.path.join(tox_ini_dir, ToxBuilder.FILE_TOX_INI)
+        )
+
+        return tox_ini_path
 
 
 def get_projects_root_path() -> str:
