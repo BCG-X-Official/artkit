@@ -81,10 +81,19 @@ Pull Request (PR) Guidelines
 1. **Fork and Clone the Repository**: Start by forking the project and cloning your fork.
 
 2. **Create a New Branch**: Work on a new branch specific to the feature or fix.
+   - Naming convention: 
+      - Features: ``api/<name>``
+      - Bugs: ``fix/<name>``
+      - Documentation: ``doc/<name>``
+      - Tests: ``test/<name>``
+      - Build pipelines: ``build/<name>``
+   - Branch name should be separated with "-", example: ``api/new-feature``.
 
 3. **Adhere to Commit Guidelines**: Ensure your commits follow the above guidelines.
+   - Prefix your commits with ``API``, ``FIX``, ``DOC``, ``TEST``, ``BUILD``.
 
 4. **Write a Clear PR Title and Description**: When opening your PR, provide a detailed description of the changes and motivations.
+   - Prefix the PR title with: ``API``, ``FIX``, ``DOC``, ``TEST``, ``BUILD``.
 
 5. **Keep PRs Small and Focused**: This makes PRs easier to review and merge.
 
