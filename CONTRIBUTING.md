@@ -86,7 +86,7 @@ From the project root, create a dedicated environment for your project using, e.
 python -m venv artkit-env
 ```
 
-and activate it on MacOS with:
+and activate it on MacOS or Unix with:
 
 ```
 source artkit-env/bin/activate
