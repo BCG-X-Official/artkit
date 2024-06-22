@@ -12,7 +12,7 @@ import subprocess
 import sys
 import warnings
 from abc import ABCMeta, abstractmethod
-from collections.abc import Collection, Iterator, Mapping
+from collections.abc import Iterator, Mapping
 from glob import glob
 from traceback import print_exc
 from typing import Any, cast
@@ -500,9 +500,9 @@ class ToxBuilder(Builder):
             dependencies that have been exposed as environment variables
         """
         if self.dependency_type == DEP_DEFAULT:
-            tox_env = "py311"
+            tox_env = "py3"
         else:
-            tox_env = "py311-custom-deps"
+            tox_env = "py3-custom-deps"
 
         original_dir = os.getcwd()
 
@@ -511,12 +511,8 @@ class ToxBuilder(Builder):
             os.makedirs(build_path, exist_ok=True)
             os.chdir(build_path)
 
-            # create a copy of tox.ini, removing all lines that reference
-            # dependencies that have not been exposed as environment variables
-            path_tox_ini = self._patch_tox_ini(exposed_package_dependencies.keys())
-
             # run tox
-            build_cmd = f"tox -c '{path_tox_ini}' -e {tox_env} -v"
+            build_cmd = f"tox -c '{self._get_tox_ini_path()}' -e {tox_env} -v"
             log(f"Build Command: {build_cmd}")
             subprocess.run(args=build_cmd, shell=True, check=True)
             log("Tox build completed – creating local PyPi index")
@@ -556,13 +552,11 @@ class ToxBuilder(Builder):
         finally:
             os.chdir(original_dir)
 
-    def _patch_tox_ini(self, exposed_version_variables: Collection[str]) -> str:
+    def _get_tox_ini_path(self) -> str:
         """
         Remove all lines from the tox.ini file that reference environment variables
         that we have not exported.
 
-        :param exposed_version_variables: package names of the dependencies that have
-            been exposed as environment variables
         :return: the path to the resulting temporary tox.ini file
         """
 
@@ -573,53 +567,7 @@ class ToxBuilder(Builder):
             os.path.join(tox_ini_dir, ToxBuilder.FILE_TOX_INI)
         )
 
-        # create a temporary copy of tox.ini, with the prefix "tmp_" in the filename
-        tox_ini_tmp_path = os.path.abspath(
-            os.path.join(tox_ini_dir, ToxBuilder.FILE_TOX_INI_TMP)
-        )
-
-        # get the list of all environment variables starting with the ARTKIT prefix
-        print(
-            "Exported version variables: "
-            + ", ".join(sorted(exposed_version_variables))
-        )
-
-        # read all lines from the original tox.ini file and write them to the temporary
-        # file, unless they reference a ARTKIT dependency environment variable which
-        # has not been exported
-
-        removed_lines: list[str] = []
-        with open(tox_ini_path) as f_in, open(tox_ini_tmp_path, "w") as f_out:
-            for line in f_in.readlines():
-                # get all environment variables referenced in the line
-                # these use the tox.ini `{env:` syntax and start with the
-                # ARTKIT_DEPENDENCY_VERSION_ENV_PREFIX
-                referenced_env_vars = re.findall(
-                    pattern=PATTERN_ENV_VERSION_REFERENCE, string=line
-                )
-                # if there are no such environment variables, or all of them have been
-                # exported, write the line to the temporary file
-                if not referenced_env_vars or all(
-                    env_var in exposed_version_variables
-                    for env_var in referenced_env_vars
-                ):
-                    f_out.write(line)
-                else:
-                    removed_lines.append(line.strip())
-
-        # if there were any lines removed, print a warning
-        if removed_lines:
-            log(
-                f"WARNING: The following lines were removed from {tox_ini_path} "
-                f"because they referenced environment variables that have not been "
-                f"exported: \n{self.INDENT}" + f"\n{self.INDENT}".join(removed_lines)
-            )
-
-        # log the path to the temporary tox.ini file
-        log(f"Temporary tox.ini file created at: {tox_ini_tmp_path}")
-
-        # return the path to the temporary tox.ini file
-        return tox_ini_tmp_path
+        return tox_ini_path
 
 
 def get_projects_root_path() -> str:
