@@ -15,5 +15,7 @@
 # -----------------------------------------------------------------------------
 
 """
-Vision model implementations (image-to-text generation)
+Vision model implementations (image-to-text generation).
 """
+
+from ._cached import *

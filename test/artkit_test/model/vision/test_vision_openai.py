@@ -8,7 +8,8 @@ import pytest
 from openai import RateLimitError
 
 from artkit.model.util import RateLimitException
-from artkit.model.vision.base import CachedVisionModel, VisionModel
+from artkit.model.vision import CachedVisionModel
+from artkit.model.vision.base import VisionModel
 from artkit.model.vision.openai import OpenAIVision
 from artkit.util import Image
 
