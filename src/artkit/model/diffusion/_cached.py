@@ -22,14 +22,13 @@ from typing import Any, Generic, TypeVar
 
 from pytools.api import inheritdoc
 
-from ....util import Image
-from ._diffusion import DiffusionModel
+from ...util import Image
+from ..base import CachedGenAIModel
+from .base import DiffusionModel
 
 __all__ = [
     "CachedDiffusionModel",
 ]
-
-from ...base import CachedGenAIModel
 
 #
 # Type variables

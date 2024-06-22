@@ -15,5 +15,7 @@
 # -----------------------------------------------------------------------------
 
 """
-Diffusion model implementations (text-to-image generation)
+Diffusion model implementations (text-to-image generation).
 """
+
+from ._cached import *
