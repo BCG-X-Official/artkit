@@ -21,23 +21,23 @@ requirements:
     - fluxus {{ environ.get('ARTKIT_V_FLUXUS') }}
     - gamma-pytools {{ environ.get('ARTKIT_V_GAMMA_PYTOOLS') }}
     - typing_inspect {{ environ.get('ARTKIT_V_TYPING_INSPECT') }}
-    - aiolimiter {{ environ.get('ARTKIT_V_AIOLIMITER') }}
 
 test:
   imports:
     - artkit
     - artkit.model
   requires:
-    - "pytest ~= 8.2"
-    - "aiofiles ~= 23.2.1"
-    - "openai ~=1.33.0"
-    - "anthropic ~=0.28.0"
-    - "groq ~=0.8.0"
-    - "google-generativeai ~=0.6"
-    - "aiohttp ~=3.9.5"
-    - "pyyaml ~=6.0.1"
-    - "transformers ~=4.41.2"
-    - "pytorch ~=2.3.0"
+    - pytest ~= 8.2
+    # The following packages are required for the tests to run; we will limit the
+    # versions only if they are specified in the corresponding environment variables,
+    # and will otherwise let conda decide the versions.
+    - aiohttp {{ environ.get('ARTKIT_V_AIOHTTP', '') }}
+    - anthropic {{ environ.get('ARTKIT_V_ANTHROPIC', '') }}
+    - google-generativeai {{ environ.get('ARTKIT_V_GOOGLE_GENERATIVEAI', '') }}
+    - groq {{ environ.get('ARTKIT_V_GROQ', '') }}
+    - openai {{ environ.get('ARTKIT_V_OPENAI', '') }}
+    - pytorch {{ environ.get('ARTKIT_V_TORCH', '') }}
+    - transformers {{ environ.get('ARTKIT_V_TRANSFORMERS', '') }}
   commands:
     - conda list
     - python -c "import artkit; import os; assert artkit.__version__ == os.environ['ARTKIT_BUILD_ARTKIT_VERSION']"
