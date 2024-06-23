@@ -38,7 +38,7 @@
     :caption: Advanced Tutorials
     :hidden:
   
-    advanced_tutorials/creating_custom_model_classes    
+    advanced_tutorials/creating_new_model_classes    
     advanced_tutorials/prompt_formatting
     advanced_tutorials/cache_management
     advanced_tutorials/json_output_validation

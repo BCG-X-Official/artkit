@@ -69,7 +69,7 @@ pipelines for testing and evaluating your Gen AI system. Key features include:
 - **Simple API:** ARTKIT provides a small set of simple but powerful functions that support customized pipelines to test and evaluate virtually any Gen AI system.
 - **Asynchronous:** Leverage asynchronous processing to speed up processes that depend heavily on API calls.
 - **Caching:** Manage development costs by caching API responses to reduce the number of calls to external services.
-- **Model Agnostic:** ARTKIT supports connecting to major Gen AI model providers and allows users to develop custom model classes to connect to any Gen AI service.
+- **Model Agnostic:** ARTKIT supports connecting to major Gen AI model providers and allows users to develop new model classes to connect to any Gen AI service.
 - **End-to-End Pipelines:** Build end-to-end flows to generate test prompts, interact with a target system (i.e., system being tested), perform quantitative evaluations, and structure results for reporting.
 - **Multi-Turn Conversations:** Create automated interactive dialogs between a target system and an LLM persona programmed to interact with the target system in pursuit of a specific goal.
 - **Robust Data Flows:** Automatically track the flow of data through testing and evaluation pipelines, facilitating full traceability of data lineage in the results.
@@ -95,7 +95,7 @@ ARTKIT provides out-of-the-box support for the following model providers:
 - `Hugging Face <https://huggingface.co/>`_
 - `OpenAI <https://openai.com/>`_
 
-To connect to other services, users can develop `custom model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_custom_model_classes.html>`_.
+To connect to other services, users can develop `new model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_new_model_classes.html>`_.
 
 Installation
 -------------

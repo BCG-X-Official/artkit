@@ -120,7 +120,7 @@ direct and indirect costs of alternative options:
 Of course, LLMs are overkill for some tasks and we advocate for using
 the simplest approach that gets the job done. ARTKIT components can
 easily be customized to use non-LLM techniques. See our tutorial on 
-`Creating Custom Model Classes <user_guide/advanced_tutorials/creating_custom_model_classes.ipynb>`_.
+`Creating New Model Classes <user_guide/advanced_tutorials/creating_new_model_classes.ipynb>`_.
 
 
 If you develop a component which is likely to be useful for a wide range of use
@@ -169,7 +169,7 @@ Can I integrate my Gen AI application into an ARTKIT pipeline?
 
 Yes! Provided your application has an API endpoint, you can create a custom class for
 sending and receiving data from your endpoint. See the tutorial on
-`Creating Custom Model Classes <user_guide/advanced_tutorials/creating_custom_model_classes.ipynb>`_
+`Creating New Model Classes <user_guide/advanced_tutorials/creating_new_model_classes.ipynb>`_
 in the ARTKIT documentation.
 
 Does ARTKIT support testing and evaluation for multimodal systems?
@@ -179,7 +179,7 @@ Currently, ARTKIT supports text-to-image and image-to-text models from
 OpenAI (see our tutorial on `Generating and Evaluating Images <user_guide/multimodal/image_generation_and_evaluation.ipynb>`__).
 
 If you need to connect to a model which is not supported by ARTKIT, see our tutorial on
-`Creating Custom Model Classes <user_guide/advanced_tutorials/creating_custom_model_classes.ipynb>`_,
+`Creating New Model Classes <user_guide/advanced_tutorials/creating_new_model_classes.ipynb>`_,
 and please consider :ref:`Contributor Guide <contributor-guide-index>` to ARTKIT! 
 
 We also welcome contributions of multimodal examples to our `Examples <examples/index.rst>`_
