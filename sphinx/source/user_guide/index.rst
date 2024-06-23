@@ -53,7 +53,7 @@ This section provides comprehensive guidance for ARTKIT users, with content orga
 - **Introduction to ARTKIT**:
   Core concepts and mechanics of using ARTKIT
 - **Generating Challenges**:
-  Generating test prompts for GenAI systems
+  Generating test prompts for Gen AI systems
 - **Multimodal Models**:
   Use ARTKIT with multimodal models
 - **Evaluation and Analysis**:
