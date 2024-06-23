@@ -160,7 +160,7 @@ support functional testing. To run the test suite:
    pytest
 
 To maintain high standard for test coverage, the testing pipeline is
-configured to require at least 80% test coverage of the codebase,
+configured to require at least 90% test coverage of the codebase,
 otherwise ``pytest`` will exit with a failure status.
 
 Build documentation
