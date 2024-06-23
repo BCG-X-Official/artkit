@@ -358,7 +358,8 @@ jobs:
       - code_quality_checks
       - check_release
     # IF (PR from dev/ to release/) OR (push into release/) OR (scheduled run)
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
+    # if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
+    if: github.event_name == 'schedule'
 
     steps:
       - name: Checkout code
