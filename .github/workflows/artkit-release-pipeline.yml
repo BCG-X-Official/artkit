@@ -2,14 +2,38 @@ name: ARTKIT Release Pipeline
 
 on:
   push:
+    # The push trigger will cause the workflow to run when:
+    # - Commits are pushed directly to the 1.0.x branch or any release/* branch.
+    # - A pull request is merged into the 1.0.x branch or any release/* branch.
+    # - Changes are pushed to the 1.0.x or release/* branches through re-bases or
+    #   fast-forwards.
+    #
+    # The GitHub actions variable for the branch being pushed to is `github.ref`.
+    # values formatted as `refs/heads/<branch-name>`
     branches:
       - 1.0.x
       - release/*
   pull_request:
+    # The workflow will run when:
+    # - A pull request targeting the 1.0.x branch or any branch matching release/* is
+    #   created.
+    # - Commits are pushed to the source branch of an open pull request targeting these
+    #   branches.
+    # - An existing pull request targeting these branches is reopened or synchronized.
+    #
+    # The GitHub actions variable for the branch from which the pull request originates
+    # is `github.head_ref`.
+    # The GitHub actions variable for the branch being targeted by the pull request is
+    # `github.base_ref`.
+    # The values of these variables are the branch names without any prefixes.
+    #
+    # Variable github.ref represents the merge commit GitHub created to simulate the
+    # result of merging the pull request into the target branch, and it is formatted as
+    # `refs/pull/<pull-request-number>/merge`.
     branches:
       - 1.0.x
       - release/*
-  schedule:  # runs on default branch
+  schedule: # runs on default branch
     - cron: "0 2 * * 1-5" # Every weekday at 2 AM
 
 env:
@@ -23,7 +47,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          # We check out the result of the trigger action, i.e., either the merge commit
+          # from a pull request or the commit from a direct push to the target branch
           ref: ${{ github.ref }}
+          # We fetch the last two commits to ensure we have the base branch's history
+          fetch-depth: 2
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -31,42 +59,59 @@ jobs:
           python-version: 3.11
 
       - name: Upgrade pip
+        # Ensure we run the latest version of pip
         run: python -m pip install --upgrade pip
 
       - name: Run isort
+        # Check if the import order is correct
         run: |
           python -m pip install isort~=5.12
           python -m isort --check --diff .
 
       - name: Run black
+        # Check if the code is formatted correctly
         run: |
           python -m pip install black~=24.4.2
           python -m black --check .
 
       - name: Run flake8
+        # Check for code style issues
         run: |
           python -m pip install flake8~=5.0 flake8-comprehensions~=3.10
           python -m flake8 --config tox.ini -v .
 
       - name: Run mypy
+        # Check that type hints are complete and correct
         run: |
           python -m pip install mypy
           # add package dependencies for mypy
           dependencies=(
+            aiohttp
             fluxus~=1.0
             gamma-pytools~=3.0
             openai
             pandas-stubs
             pytest
             types-PyYAML
-            aiohttp
           )
           pip install "${dependencies[@]}"
           python -m mypy src --config-file pyproject.toml
 
   detect_build_config_changes:
+    # We check if the push or PR contains changes in the build configuration, in which
+    # case we will run the full pipeline. The build configuration files are any of the
+    # following:
+    #
+    # - meta.yaml
+    # - pyproject.toml
+    # - release-pipeline.yml
+    # - tox.ini
+    # - make.py
     runs-on: ubuntu-latest
     outputs:
+      # Export the output of the step as boolean variable `conda_build_config_changed`,
+      # where 1 indicates that the build configuration has changed and 0 indicates that
+      # it has not.
       conda_build_config_changed: ${{ steps.diff.outputs.conda_build_config_changed }}
     steps:
       - name: Checkout code
@@ -91,9 +136,10 @@ jobs:
           echo "::set-output name=conda_build_config_changed::$build_changed"
 
   unit_tests:
+    # Run unit tests on the codebase, in developer mode
     runs-on: ubuntu-latest
-    needs: detect_build_config_changes
-    if: ${{ needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' }}
+    # We only run the unit tests once the code quality checks have passed
+    needs: code_quality_checks
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -144,14 +190,25 @@ jobs:
           path: coverage.xml
 
   conda_tox_essential:
+    # The "essential" conda/tox test is a matrix test stripped down to a minimal set of
+    # configurations. It is run on pull requests that are not scheduled runs, do not
+    # involve changes to the build configuration, and are not PRs preparing or executing
+    # a release.
+    #
+    # The actual build for conda or PyPi is carried out in the make.py script, which
+    # will invoke tox or conda-build depending on the `build-system` parameter.
     runs-on: ubuntu-latest
-    needs: [detect_build_config_changes, code_quality_checks]
-    if: ${{ needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' && github.event_name != 'schedule' && !startsWith(github.head_ref, 'dev/') && !startsWith(github.ref, 'refs/heads/release/') }}
+    needs:
+      - code_quality_checks
+      - detect_build_config_changes
+      - check_release
+    # IF (no build configs changed) AND (not a scheduled run) AND (no PR from dev/ to release/) AND (no push into release/)
+    if: ${{ needs.detect_build_config_changes.outputs.conda_build_config_changed != '1' && github.event_name != 'schedule' && !startsWith(github.head_ref, 'dev/') && !startsWith(github.base_ref, 'release/') && !startsWith(github.ref, 'refs/heads/release/') }}
     strategy:
       matrix:
-        python-version: [3.11]
-        build-system: [conda, tox]
-        pkg-dependencies: [max, min]
+        python-version: [ 3.11 ]
+        build-system: [ conda, tox ]
+        pkg-dependencies: [ max, min ]
         exclude:
           - python-version: 3.11
             build-system: conda
@@ -204,18 +261,40 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.build-system }}_${{ matrix.pkg-dependencies }}
+          name: "${{ matrix.build-system }}_${{ matrix.pkg-dependencies }}"
           path: ${{ env.DIRNAME_WORKSPACE }}/dist
 
   conda_tox_matrix:
+    # The full conda/tox test is a matrix test that runs on scheduled runs, when the
+    # build configuration has changed, or for PRs from dev/ to release/ or pushes into
+    # the release/ branch (triggering a release).
+    #
+    # The matrix tests comprise six test runs, three for conda and three for tox. Both
+    # conda and tox are run with the default, minimum, and maximum package dependencies
+    # to ensure compatibility across the range of supported versions of 3rd party
+    # libraries.
+    #
+    # The actual build for conda or PyPi is carried out in the make.py script, which
+    # will invoke tox or conda-build depending on the `build-system` parameter.
     runs-on: ubuntu-latest
-    needs: [detect_build_config_changes, code_quality_checks]
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
+    needs:
+      - detect_build_config_changes
+      - code_quality_checks
+      - check_release
+    # IF (build config changed) OR (PR from dev/ to release/) OR (push into release/) OR (scheduled run)
+    if: needs.detect_build_config_changes.outputs.conda_build_config_changed == '1' || (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
     strategy:
       matrix:
-        python-version: [3.11]
-        build-system: [conda, tox]
-        pkg-dependencies: [default, min, max]
+        python-version: [ 3.11, 3.12 ]
+        build-system: [ conda, tox ]
+        pkg-dependencies: [ default, min, max ]
+        exclude:
+          - python-version: 3.11
+            pkg-dependencies: max
+          - python-version: 3.12
+            pkg-dependencies: default
+          - python-version: 3.12
+            pkg-dependencies: min
 
     steps:
       - name: Checkout code
@@ -267,11 +346,19 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.build-system }}_${{ matrix.pkg-dependencies }}
+          name: "${{ matrix.build-system }}_${{ matrix.pkg-dependencies }}"
           path: ${{ env.DIRNAME_WORKSPACE }}/dist
 
   veracode_check:
+    # Run Veracode static code analysis on the codebase.
+    # We only do this when the code quality checks have passed and the pipeline is
+    # preparing or executing a release.
     runs-on: ubuntu-latest
+    needs:
+      - code_quality_checks
+      - check_release
+    # IF (PR from dev/ to release/) OR (push into release/) OR (scheduled run)
+    # if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'schedule'
     if: github.event_name == 'schedule'
 
     steps:
@@ -300,9 +387,14 @@ jobs:
           scanpollinginterval: '60'
 
   check_release:
+    # Branch names include version information. THe main branches are named
+    # `<major>.<minor>.x`, while release branches are named `dev/<major>.<minor>.<patch>`
+    # or `release/<major>.<minor>.<patch>`.
+    #
+    # We check that the package version matches the branch name for versioned branches.
     runs-on: ubuntu-latest
-    needs: conda_tox_matrix
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
+    # IF (creating/syncing PR merging dev/ into release/) OR (push into release/) OR (PR into *.*.x)
+    if: (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/') || endsWith(github.base_ref, '.x')
 
     steps:
       - name: Checkout code
@@ -334,38 +426,46 @@ jobs:
           fi    
 
       - name: Check version consistency
+        # IF (PR from dev/ to release/) OR (push into release/)
+        if: (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/')
         run: |
           set -eux
           python -m pip install toml~=0.10.2 packaging~=20.9
           cd ${{ github.workspace }}/artkit
           python <<EOF
-          from os import environ
+
           from make import ToxBuilder
 
           branch = "${{ env.BRANCH_NAME }}"
           print(f"Checking package version consistency with branch: {branch}")
 
-          assert (branch.startswith("release/") or branch.startswith("dev/") or branch=="1.0.x"
+          assert (
+            branch.startswith("release/") or branch.startswith("dev/")
           ), "This check should only run on versioned branches – check pipeline."
 
-          if branch=="1.0.x":
-            branch_version = branch[:-2]
-            package_version = ToxBuilder("${{ env.project_name }}", "default").package_version
-            assert package_version.startswith(branch_version), f"Package version '{package_version}' does not match '{branch_version}' from branch."
-          else:
-            branch_version = branch.split("/", maxsplit=1)[1]
-            package_version = ToxBuilder("${{ env.project_name }}", "default").package_version
-            assert (
-                package_version == branch_version
-            ), f"Package version '{package_version}' does not match '{branch_version}' from branch."
+          branch_version = branch.split("/", maxsplit=1)[1]
+          package_version = ToxBuilder("${{ env.project_name }}", "default").package_version
+
+          assert (
+              package_version == branch_version
+          ), f"Package version '{package_version}' does not match '{branch_version}' from branch."
 
           print("Check passed.")
           EOF
 
   release:
+    # The release job is responsible for publishing the package to PyPi, Anaconda, and
+    # GitHub releases. It is triggered by a push to the release branch or a PR targeting
+    # the release branch.
+    #
+    # In the case of a PR, the job will prepare the release. The actual release will be
+    # only be executed upon a push to the release branch.
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
-    needs: check_release
+    # IF (PR from dev/ to release/) OR (push into release/)
+    if: (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/')
+    needs:
+      - check_release
+      - conda_tox_matrix
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -410,6 +510,8 @@ jobs:
           path: ${{ env.DIRNAME_WORKSPACE }}/dist
 
       - name: Publish to PyPi (Tox)
+        # Publish the package to PyPi using flit.
+        # Do this only upon a push to the release branch.
         if: startsWith(github.ref, 'refs/heads/release/')
         env:
           FLIT_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
@@ -423,6 +525,8 @@ jobs:
           echo "pypi_published=True" >> $GITHUB_ENV
 
       - name: Publish to Anaconda (Conda)
+        # Publish the package to Anaconda using anaconda-client.
+        # Do this only upon a push to the release branch.
         if: startsWith(github.ref, 'refs/heads/release/')
         env:
           CONDA_TOKEN: ${{ secrets.CONDA_TOKEN }}
@@ -436,6 +540,8 @@ jobs:
           echo "conda_published=True" >> $GITHUB_ENV
 
       - name: GitHub Release
+        # Create a GitHub release with the package artifacts.
+        # Do this only upon a push to the release branch.
         if: startsWith(github.ref, 'refs/heads/release/')
         uses: softprops/action-gh-release@v1
         with:
@@ -446,7 +552,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          release_name: ${{ env.project_name }} ${{ env.current_version }}
+          release_name: "${{ env.project_name }} ${{ env.current_version }}"
           body: |
             This is the ${{ env.current_version }} release of ${{ env.package_name }}.
 
@@ -461,8 +567,15 @@ jobs:
           prerelease: ${{ env.is_prerelease }}
 
   docs:
+    # The docs job is responsible for building and publishing the documentation to the
+    # GitHub Pages branch. It is triggered by a push to the release branch or a PR
+    # targeting the release branch.
+    #
+    # In the case of a PR, the job will only prepare the documentation.
+    # The actual publication will only be executed upon a push to the release branch.
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'dev/') || startsWith(github.ref, 'refs/heads/release/')
+    # IF (PR from dev/ to release/) OR (push into release/)
+    if: (startsWith(github.head_ref, 'dev/') && startsWith(github.base_ref, 'release/')) || startsWith(github.ref, 'refs/heads/release/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -521,6 +634,8 @@ jobs:
           python sphinx/make.py html
 
       - name: Merge previous and latest docs
+        # Merge the previous and latest documentation versions and prepare for
+        # deployment. The merged documentation is stored in the staging area.
         run: |
           set -eux
           export MAMBA_ROOT_PREFIX=~/micromamba
@@ -550,6 +665,8 @@ jobs:
           path: ${{ github.workspace }}/staging/docs
 
       - name: Publish docs to branch github-pages
+        # Publish the documentation to the GitHub Pages branch.
+        # Do this only upon a push to the release branch.
         if: startsWith(github.ref, 'refs/heads/release/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

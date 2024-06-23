@@ -86,29 +86,33 @@ From the project root, create a dedicated environment for your project using, e.
 python -m venv artkit-env
 ```
 
-and activate it with
+and activate it on MacOS or Unix with:
 
 ```
 source artkit-env/bin/activate
 ```
 
-on mac or `.\artkit\scripts\Activate` on Windows.
+or on Windows with: 
+
+```
+.\artkit\scripts\Activate
+```
 
 ### Enable import of local ARTKIT modules
 
 We recommend installing the project locally in developer mode to enable importing local ARTKIT modules in
 scripts or notebooks as if the library is installed, but with local changes immediately reflected.
 
-To install ARTKIT in developer model, run the following from your project root:
+To install ARTKIT in developer mode, run the following from your project root:
 
 ```
-pip install -e .[dev]
+pip install -e ".[dev]"
 ```
 
 There are optional dependencies for the compatible LLM providers (anthropic, google, groq, huggingface, openai as of June 19, 2024) which can be installed collectively via "dev" or individually as desired:
 
 ```
-pip install -e .[openai, groq]
+pip install -e ".[anthropic, google-generativeai, groq, huggingface_hub, openai]"
 ```
 
 Note: The LLM providers are optional to run and use ARTKIT, but the unit tests will fail without installing them

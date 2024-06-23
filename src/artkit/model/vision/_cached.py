@@ -23,9 +23,9 @@ from typing import Any, Generic, TypeVar
 
 from pytools.api import inheritdoc
 
-from ....util import Image
-from ...base import CachedGenAIModel
-from ._vision import VisionModel
+from ...util import Image
+from ..base import CachedGenAIModel
+from .base import VisionModel
 
 __all__ = [
     "CachedVisionModel",

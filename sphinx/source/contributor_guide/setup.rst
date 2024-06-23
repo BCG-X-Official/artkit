@@ -94,12 +94,12 @@ We recommend installing the project locally in developer mode to enable
 importing local ARTKIT modules in scripts or notebooks as if the library
 is installed, but with local changes immediately reflected.
 
-To install ARTKIT in developer model, run the following from your
+To install ARTKIT in developer mode, run the following from your
 project root:
 
 ::
 
-   pip install -e .
+   pip install -e ".[dev]"
 
 As an alternative approach, you can add the folder ``artkit/src`` to
 your ``PYTHONPATH``, and this will enable importing local ARTKIT modules
