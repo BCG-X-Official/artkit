@@ -368,6 +368,8 @@ SELECT model_id, COUNT(*) FROM ModelCache GROUP BY model_id;
         model_id: str | None = None,
         accessed_before: datetime | None = None,
         created_before: datetime | None = None,
+        accessed_after: datetime | None = None,
+        created_after: datetime | None = None,
     ) -> None:
         """
         Clears all entries from the cache, or only entries that match all specified
@@ -398,6 +400,12 @@ SELECT model_id, COUNT(*) FROM ModelCache GROUP BY model_id;
             if created_before:
                 conditions.append("ctime < ?")
                 params.append(_as_UTC_string(created_before))
+            if accessed_after:
+                conditions.append("atime > ?")
+                params.append(_as_UTC_string(accessed_after))
+            if created_after:
+                conditions.append("ctime > ?")
+                params.append(_as_UTC_string(created_after))
             if conditions:
                 filter = " WHERE " + " AND ".join(conditions)
                 filter_dependent = (
