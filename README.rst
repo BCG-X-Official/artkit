@@ -4,6 +4,11 @@
 
 Automated Red Teaming (ART) and testing toolkit
 ===============================================
+.. Begin-Badges
+
+|pypi| |conda| |python_versions| |code_style| |made_with_sphinx_doc| |License_badge|
+
+.. End-Badges
 
 **ARTKIT** is a Python framework developed by `BCG X <https://www.bcg.com/x>`_ for automating prompt-based
 testing and evaluation of Gen AI applications.
@@ -343,3 +348,25 @@ BCG X
 
 We are always on the lookout for talented data scientists and software engineers to join our team! 
 Visit `BCG X Careers <https://careers.bcg.com/x>`_ to learn more.
+
+.. Begin-Badges
+
+.. |conda| image:: https://anaconda.org/bcg_gamma/gamma-facet/badges/version.svg
+    :target: https://anaconda.org/BCG_Gamma/gamma-facet
+
+.. |pypi| image:: https://badge.fury.io/py/artkit.svg
+    :target: https://pypi.org/project/artkit/
+
+.. |python_versions| image:: https://img.shields.io/badge/python-3.10|3.11|3.12-blue.svg
+   :target: https://www.python.org/downloads/release/python-3100/
+
+.. |code_style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+
+.. |made_with_sphinx_doc| image:: https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg
+   :target: https://bcg-x-official.github.io/facet/index.html
+
+.. |license_badge| image:: https://img.shields.io/badge/License-Apache%202.0-olivegreen.svg
+   :target: https://opensource.org/licenses/Apache-2.0
+
+.. End-Badges
