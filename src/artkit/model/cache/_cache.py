@@ -380,6 +380,10 @@ SELECT model_id, COUNT(*) FROM ModelCache GROUP BY model_id;
             iso_timestamp (optional)
         :param created_before: delete only cache entries that were created before this
             iso_timestamp (optional)
+        :param accessed_after: delete only cache entries that were accessed after this
+            iso_timestamp (optional)
+        :param created_after: delete only cache entries that were created after this
+            iso_timestamp (optional)
         """
 
         conn = self.conn

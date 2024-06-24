@@ -187,6 +187,10 @@ class CachedGenAIModel(
             this time
         :param accessed_before: if specified, only evict cached responses last accessed
             before this time
+        :param created_after: if specified, only evict cached responses created after
+            this time
+        :param accessed_after: if specified, only evict cached responses last accessed
+            after this time
         """
         self.cache.clear(
             model_id=self.model_id,
