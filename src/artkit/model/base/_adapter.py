@@ -177,6 +177,8 @@ class CachedGenAIModel(
         *,
         created_before: datetime | None = None,
         accessed_before: datetime | None = None,
+        created_after: datetime | None = None,
+        accessed_after: datetime | None = None,
     ) -> None:
         """
         Evict cached responses before or after a certain time threshold.
@@ -190,6 +192,8 @@ class CachedGenAIModel(
             model_id=self.model_id,
             created_before=created_before,
             accessed_before=accessed_before,
+            created_after=created_after,
+            accessed_after=accessed_after,
         )
 
 
