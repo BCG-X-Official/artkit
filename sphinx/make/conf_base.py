@@ -167,6 +167,13 @@ imgmath_use_preview = True
 html_theme = "pydata_sphinx_theme"
 
 html_theme_options = {
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/BCG-X-Official/artkit",
+            "icon": "fab fa-github",
+        },
+    ],
     "collapse_navigation": True,
     "show_nav_level": 1,
     "show_toc_level": 2,
