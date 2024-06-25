@@ -193,6 +193,7 @@ def test_cache_clearing_before(cache: CacheDB) -> None:
         assert cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i]) is None
     assert cache.count_entries() == {}
 
+
 def test_cache_clearing_after(cache: CacheDB) -> None:
     """
     Test clearing the cache after a given datetime.
@@ -219,9 +220,8 @@ def test_cache_clearing_after(cache: CacheDB) -> None:
         for i in range(n_entries)
     ]
 
-
     # Create a new cache database
-    for i in range(0, n_entries-1):
+    for i in range(0, n_entries - 1):
         cache.add_entry(
             model_id=model_a, prompt=prompts[i], responses=responses[i], **params[i]
         )
@@ -246,13 +246,13 @@ def test_cache_clearing_after(cache: CacheDB) -> None:
             == responses[i]
         )
 
-    # Clear the entry with the oldest creation time
+    # Clear the entry with the newest creation time
     cache.clear(created_after=timestamp_0)
 
     # Check that entry n is not in the cache, but the others are
     assert cache.get_entry(model_id=model_a, prompt=prompts[-1], **params[-1]) is None
 
-    for i in range(0, n_entries-1):
+    for i in range(0, n_entries - 1):
         assert (
             cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i])
             == responses[i]
@@ -262,15 +262,21 @@ def test_cache_clearing_after(cache: CacheDB) -> None:
     timestamp_1 = now()
     time.sleep(1)
 
-    # Access entries 1, n-1
-    for i in range(1, n_entries-1):
-        assert cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i]) == responses[i]
+    # Access entries 1, n-2
+    for i in range(1, n_entries - 1):
+        assert (
+            cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i])
+            == responses[i]
+        )
 
     # Clear all entries accessed after timestamp_1
     cache.clear(accessed_after=timestamp_1, model_id=model_a)
 
     # Confirm only entry 0 is in the cache
-    assert cache.get_entry(model_id=model_a, prompt=prompts[0], **params[0]) == responses[0]
+    assert (
+        cache.get_entry(model_id=model_a, prompt=prompts[0], **params[0])
+        == responses[0]
+    )
 
     for i in range(1, n_entries):
         assert cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i]) is None
@@ -292,6 +298,7 @@ def test_cache_clearing_after(cache: CacheDB) -> None:
     for i in range(n_entries):
         assert cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i]) is None
     assert cache.count_entries() == {}
+
 
 def test_cache_access_times(cache: CacheDB) -> None:
     """
