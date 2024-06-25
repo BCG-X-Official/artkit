@@ -7,7 +7,8 @@ from unittest.mock import Mock, patch
 import pytest
 from openai import RateLimitError
 
-from artkit.model.diffusion.base import CachedDiffusionModel, DiffusionModel
+from artkit.model.diffusion import CachedDiffusionModel
+from artkit.model.diffusion.base import DiffusionModel
 from artkit.model.diffusion.openai import OpenAIDiffusion
 from artkit.model.util import RateLimitException
 
