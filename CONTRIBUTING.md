@@ -42,18 +42,19 @@ The basic requirements for developing this library are:
 
 We recommend using an IDE such as [VS Code](https://code.visualstudio.com/) or [PyCharm](https://www.jetbrains.com/pycharm/).
 
-### Clone git repository
+### Fork and clone git repository
+Fork the public repo and create your branch (e.g. `feat/`, `doc/`, etc.) from the default branch. Synchronize your forked repo/branch with the upstream occasionally. 
 
-Clone a local version of the library using HTTPS:
+Clone your fork using HTTPS:
 
 ```
-git clone https://github.com/BCG-X-Official/artkit.git
+git clone https://github.com/<username>/artkit.git
 ```
 
 or SSH:
 
 ```
-git clone git@github.com:BCG-X-Official/artkit.git
+git clone git@github.com:<username>/artkit.git
 ```
 
 ### Configure environment variables
