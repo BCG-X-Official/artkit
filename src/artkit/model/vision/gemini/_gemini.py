@@ -18,6 +18,7 @@
 Implementation of GeminiVision
 """
 
+from collections.abc import Iterator
 from contextlib import AsyncExitStack
 from typing import Any
 
@@ -26,7 +27,6 @@ from pytools.api import inheritdoc
 from ....util import Image
 from ...util import RateLimitException
 from ..base import VisionModelConnector
-from collections.abc import Iterator
 
 try:  # pragma: no covers
     from google.api_core.exceptions import TooManyRequests
@@ -45,12 +45,10 @@ except ImportError:
     ):
         """Placeholder class for missing ``GenerationConfig`` class."""
 
-
     class AsyncGenerateContentResponse(  # type: ignore[no-redef]
         metaclass=MissingClassMeta, module="google.generativeai.types"
     ):
         """Placeholder class for missing ``AsyncGenerateContentResponse`` class."""
-
 
     class configure(  # type: ignore[no-redef]
         # pragma: no cover
@@ -58,6 +56,7 @@ except ImportError:
         module="google.generativeai",
     ):
         """Placeholder class for missing ``configure`` function."""
+
 
 __all__ = [
     "GeminiVision",
@@ -88,8 +87,6 @@ class GeminiVision(VisionModelConnector[GenerativeModel]):
         configure(api_key=self.get_api_key())
         return GenerativeModel(self.model_id)
 
-
-
     async def image_to_text(  # pragma: no cover
         self,
         image: Image,
@@ -107,16 +104,20 @@ class GeminiVision(VisionModelConnector[GenerativeModel]):
                             "role": "user",
                             "parts": [
                                 {
-                                    "type": "text",
-                                    "text": (
-                                        self.DEFAULT_VISION_PROMPT
-                                        if prompt is None
-                                        else prompt
-                                    ),
+                                    "inline_data": {
+                                        "mime_type": "text/plain",
+                                        "data": (
+                                            self.DEFAULT_VISION_PROMPT
+                                            if prompt is None
+                                            else prompt
+                                        ).encode("utf-8"),
+                                    }
                                 },
                                 {
-                                    "type": "image_url",
-                                    "image_url": f"data:image/jpeg;base64,{image.to_b64_string()}"
+                                    "inline_data": {
+                                        "mime_type": "image/jpeg",
+                                        "data": image.to_b64_string().encode("utf-8"),
+                                    }
                                 },
                             ],
                         }
