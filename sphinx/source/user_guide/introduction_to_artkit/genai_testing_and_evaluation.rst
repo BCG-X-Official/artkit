@@ -5,7 +5,7 @@ Gen AI Testing and Evaluation
 Introduction
 ------------
 
-As GenAI systems become increasingly powerful and integrated into critical processes, rigorous testing and evaluation 
+As Gen AI systems become increasingly powerful and integrated into critical processes, rigorous testing and evaluation 
 is paramount to ensuring they operate safely, ethically, and effectively. 
 
 Testing and evaluating Gen AI systems requires a multifaceted approach that includes assessing a system's proficiency at its 
