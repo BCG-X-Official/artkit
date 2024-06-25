@@ -26,6 +26,7 @@ Contributing to the ARTKIT project is a rewarding experience. Here are the steps
 
 Following these processes not only helps maintain the quality and coherence of the project but also streamlines the contribution and review process.
 
+
 Creating Issues
 ----------------
 
@@ -72,6 +73,7 @@ Example Commit Message
    - Update `.env_example` with mock API credentials for NewService
    - Add NewService to list of out-of-box supported services in the `README` 
    - Resolves issue #42
+
 
 Pull Request (PR) Guidelines
 ----------------------------
