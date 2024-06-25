@@ -1,5 +1,5 @@
 **ARTKIT** is a Python framework developed by `BCG X <https://www.bcg.com/x>`_ for automating prompt-based
-testing and evaluation of GenAI applications.
+testing and evaluation of Gen AI applications.
 
 .. Begin-Badges
 

@@ -92,9 +92,9 @@ def test_cache_db(cache: CacheDB) -> None:
     assert cache.get_entry(model_id=model_a, prompt=prompt_b) is None
 
 
-def test_cache_clearing(cache: CacheDB) -> None:
+def test_cache_clearing_before(cache: CacheDB) -> None:
     """
-    Test clearing the cache.
+    Test clearing the cache before a given datetime.
     """
 
     cache.clear()
@@ -186,6 +186,112 @@ def test_cache_clearing(cache: CacheDB) -> None:
     assert cache.count_entries() == {model_a: 1}
 
     # Clear the cache agai, but this time for model_a
+    cache.clear(model_id=model_a)
+
+    # Check that all entries are cleared
+    for i in range(n_entries):
+        assert cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i]) is None
+    assert cache.count_entries() == {}
+
+
+def test_cache_clearing_after(cache: CacheDB) -> None:
+    """
+    Test clearing the cache after a given datetime.
+    """
+
+    cache.clear()
+
+    # Constants: model identifiers
+    model_a = "model a"
+    model_b = "model b"
+
+    # We create 4 cache entries
+    n_entries = 4
+
+    # Constants: prompts
+    prompts = [f"prompt {i}" for i in range(n_entries)]
+
+    # Constants: responses
+    responses = [[f"response {i}"] for i in range(n_entries)]
+
+    # Constants: model parameters
+    params: list[dict[str, str | int | float | bool]] = [
+        dict(a_int=i, a_text=f"parameter {i}", a_float=i + 0.5, a_text_shared="shared")
+        for i in range(n_entries)
+    ]
+
+    # Create a new cache database
+    for i in range(0, n_entries - 1):
+        cache.add_entry(
+            model_id=model_a, prompt=prompts[i], responses=responses[i], **params[i]
+        )
+
+    time.sleep(1)
+    timestamp_0 = now()
+    time.sleep(1)
+    # Create last cache entry
+    cache.add_entry(
+        model_id=model_a, prompt=prompts[-1], responses=responses[-1], **params[-1]
+    )
+
+    # Check that all entries are in the cache
+    for i in range(n_entries):
+        print(f"Checking entry {i}")
+        assert (
+            cache.get_entry(
+                model_id=model_a,
+                prompt=prompts[i],
+                **params[i],
+            )
+            == responses[i]
+        )
+
+    # Clear the entry with the newest creation time
+    cache.clear(created_after=timestamp_0)
+
+    # Check that entry n is not in the cache, but the others are
+    assert cache.get_entry(model_id=model_a, prompt=prompts[-1], **params[-1]) is None
+
+    for i in range(0, n_entries - 1):
+        assert (
+            cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i])
+            == responses[i]
+        )
+
+    time.sleep(1)
+    timestamp_1 = now()
+    time.sleep(1)
+
+    # Access entries 1, n-2
+    for i in range(1, n_entries - 1):
+        assert (
+            cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i])
+            == responses[i]
+        )
+
+    # Clear all entries accessed after timestamp_1
+    cache.clear(accessed_after=timestamp_1, model_id=model_a)
+
+    # Confirm only entry 0 is in the cache
+    assert (
+        cache.get_entry(model_id=model_a, prompt=prompts[0], **params[0])
+        == responses[0]
+    )
+
+    for i in range(1, n_entries):
+        assert cache.get_entry(model_id=model_a, prompt=prompts[i], **params[i]) is None
+
+    # Clear the cache
+    cache.clear(model_id=model_b)
+
+    # Confirm that we still have entry 1 in the cache
+    assert (
+        cache.get_entry(model_id=model_a, prompt=prompts[0], **params[0])
+        == responses[0]
+    )
+    assert cache.count_entries() == {model_a: 1}
+
+    # Clear the cache again, but this time for model_a
     cache.clear(model_id=model_a)
 
     # Check that all entries are cleared
