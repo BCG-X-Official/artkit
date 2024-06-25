@@ -91,7 +91,7 @@ class ConnectorMixin(GenAIModel, Generic[T_Client], metaclass=ABCMeta):
     """
     Mixin class for a Gen AI model that connects to the model's client.
 
-    Connects with a GenAI model client to interact with the model. The client is
+    Connects with a Gen AI model client to interact with the model. The client is
     shared across all instances of the same model ID and API key.
 
     Connectors can define any number of model parameters that are passed along with
