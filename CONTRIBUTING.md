@@ -36,7 +36,7 @@ For major contributions, reach out to the ARTKIT team in advance (ARTKIT@bcg.com
 
 The basic requirements for developing this library are:
 
-- [Python](https://www.python.org/downloads/) version 3.11.x or later
+- [Python](https://www.python.org/downloads/) 3.10 or later
 - [git](https://git-scm.com/downloads) for cloning and contributing to the library
 - [pip](https://pip.pypa.io/en/stable/installation/) or [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) for installing and managing Python libraries
 

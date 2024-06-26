@@ -19,7 +19,7 @@ License
 .. |pypi| image:: https://badge.fury.io/py/artkit.svg
     :target: https://pypi.org/project/artkit/
 
-.. |python_versions| image:: https://img.shields.io/badge/python-3.11%7C3.12-blue.svg
+.. |python_versions| image:: https://img.shields.io/badge/python-3.10%7C3.12-blue.svg
     :target: https://www.python.org/downloads/
 
 .. |code_style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
