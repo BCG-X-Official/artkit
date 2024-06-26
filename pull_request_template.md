@@ -1,7 +1,5 @@
-- [ ] Have you followed the guidelines in our [Contributor Guide](https://bcg-x-official.github.io/artkit/contributor_guide/how_to_contribute.html) document?
+- [ ] Have you followed our [PR guidelines](https://bcg-x-official.github.io/artkit/contributor_guide/how_to_contribute.html#pull-request-pr-guidelines) document?
 - [ ] Have you checked to ensure there aren't other open [Pull Requests](https://github.com/BCG-X-Official/artkit/pulls) for the same update/change?
-
-<!-- You can erase any parts of this template not applicable to your Pull Request. -->
 
 ## Description
 

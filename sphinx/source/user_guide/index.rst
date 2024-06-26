@@ -38,7 +38,7 @@
     :caption: Advanced Tutorials
     :hidden:
   
-    advanced_tutorials/creating_custom_model_classes    
+    advanced_tutorials/creating_new_model_classes    
     advanced_tutorials/prompt_formatting
     advanced_tutorials/cache_management
     advanced_tutorials/json_output_validation
@@ -53,7 +53,7 @@ This section provides comprehensive guidance for ARTKIT users, with content orga
 - **Introduction to ARTKIT**:
   Core concepts and mechanics of using ARTKIT
 - **Generating Challenges**:
-  Generating test prompts for GenAI systems
+  Generating test prompts for Gen AI systems
 - **Multimodal Models**:
   Use ARTKIT with multimodal models
 - **Evaluation and Analysis**:

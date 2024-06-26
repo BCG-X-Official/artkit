@@ -36,24 +36,25 @@ For major contributions, reach out to the ARTKIT team in advance (ARTKIT@bcg.com
 
 The basic requirements for developing this library are:
 
-- [Python](https://www.python.org/downloads/) version 3.11.x or later
+- [Python](https://www.python.org/downloads/) 3.10 or later
 - [git](https://git-scm.com/downloads) for cloning and contributing to the library
 - [pip](https://pip.pypa.io/en/stable/installation/) or [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) for installing and managing Python libraries
 
 We recommend using an IDE such as [VS Code](https://code.visualstudio.com/) or [PyCharm](https://www.jetbrains.com/pycharm/).
 
-### Clone git repository
+### Fork and clone git repository
+Fork the public repo and create your branch (e.g. `feat/`, `doc/`, etc.) from the default branch. Synchronize your forked repo/branch with the upstream occasionally. 
 
-Clone a local version of the library using HTTPS:
+Clone your fork using HTTPS:
 
 ```
-git clone https://github.com/BCG-X-Official/artkit.git
+git clone https://github.com/<username>/artkit.git
 ```
 
 or SSH:
 
 ```
-git clone git@github.com:BCG-X-Official/artkit.git
+git clone git@github.com:<username>/artkit.git
 ```
 
 ### Configure environment variables
