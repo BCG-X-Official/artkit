@@ -10,7 +10,7 @@ Pre-requisites
 
 The basic requirements for developing this library are:
 
--  `Python <https://www.python.org/downloads/>`__ version 3.11 or later
+-  `Python <https://www.python.org/downloads/>`__ 3.10 or later
 -  `git <https://git-scm.com/downloads>`__ for cloning and contributing to the library
 -  `pip <https://pip.pypa.io/en/stable/installation/>`__ or `conda <https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html>`__ for installing and managing Python libraries
 

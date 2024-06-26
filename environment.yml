@@ -1,11 +1,11 @@
 name: artkit
 channels:
-  - conda-forge
   - bcgx
+  - conda-forge
   - defaults
 dependencies:
   # Python
-  - python                   ~= 3.11.8
+  - python                   ~= 3.10.14
 
   # Additional libraries
   - fluxus                   ~= 1.0

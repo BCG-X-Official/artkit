@@ -21,7 +21,7 @@ requires = [
     "typing_inspect    ~=0.7",
 ]
 
-requires-python = ">=3.11,<4a"
+requires-python = ">=3.10,<4a"
 
 [tool.flit.metadata.requires-extra]
 openai = [
@@ -87,7 +87,7 @@ no-binary.min = []
 [build.matrix.min]
 matplotlib          = "~=3.6.3"
 pandas              = "~=2.1"
-python              = "==3.11"
+python              = ">=3.10.14,<3.11a"
 gamma-pytools       = "~=3.0.0"
 fluxus              = "~=1.0.0"
 typing_inspect      = "~=0.7.1"
@@ -117,7 +117,7 @@ torch               = ">=2.3"
 [tool.black]
 required-version = '24.4.2'
 line-length = 88
-target_version = ['py311']
+target_version = ['py310']
 include = '\.pyi?$'
 exclude = '''
 (

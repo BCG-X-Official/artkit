@@ -23,6 +23,7 @@ from __future__ import annotations
 import logging
 import os
 import sqlite3
+import sys
 from collections.abc import Iterable
 from datetime import datetime, timezone
 from pathlib import Path
@@ -465,7 +466,11 @@ def _parse_iso_utc(iso_timestamp: str) -> datetime:
     :return: the corresponding datetime object in UTC
     """
     try:
-        return datetime.fromisoformat(iso_timestamp + "Z")
+        if sys.version_info >= (3, 11):
+            return datetime.fromisoformat(iso_timestamp + "Z")
+        else:
+            # The "Z" suffix is not supported in Python versions before 3.11
+            return datetime.fromisoformat(iso_timestamp + "+00:00")
     except ValueError:
         # Try to parse the iso_timestamp without the 'Z' suffix
         return datetime.fromisoformat(iso_timestamp).astimezone(timezone.utc)

@@ -20,10 +20,10 @@ Implementation of llm module.
 
 import copy
 import logging
-
-# imports
 from abc import ABCMeta, abstractmethod
-from typing import Any, Generic, Self, TypeVar, final
+from typing import Any, Generic, TypeVar, final
+
+from typing_extensions import Self
 
 from pytools.api import appenddoc, inheritdoc, subsdoc
 
