@@ -1,6 +1,7 @@
 name: artkit
 channels:
   - bcgx
+  - conda-forge
   - defaults
 dependencies:
   # Python
