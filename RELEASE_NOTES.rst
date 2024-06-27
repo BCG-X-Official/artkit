@@ -1,6 +1,16 @@
 Release Notes
 =============
 
+*artkit* 1.0.3
+--------------
+
+- API: Key base classes are now exposed through the :mod:`artkit.api` module:
+  :class:`.ChatModel`, :class:`.CompletionModel`, :class:`.DiffusionModel`, and
+  :class:`.VisionModel`. These classes are frequently used in type hints, and this
+  change makes it easier to import them without having to know the exact module
+  they are defined in.
+
+
 *artkit* 1.0.2
 --------------
 
