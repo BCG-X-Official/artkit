@@ -46,8 +46,12 @@ huggingface = [
     "transformers             ~= 4.41",
 ]
 
+boto3 = [
+    "boto3                   ~= 1.34"
+]
+
 dev = [
-    "artkit[openai, groq, anthropic, google-generativeai, huggingface]",
+    "artkit[openai, groq, anthropic, google-generativeai, huggingface, boto3]",
     # We use dotenv in the tutorial notebooks
     "python-dotenv            ~= 1.0",
 
