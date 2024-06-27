@@ -23,6 +23,7 @@ from __future__ import annotations
 import logging
 import os
 import sqlite3
+import sys
 from collections.abc import Iterable
 from datetime import datetime, timezone
 from pathlib import Path
@@ -368,6 +369,8 @@ SELECT model_id, COUNT(*) FROM ModelCache GROUP BY model_id;
         model_id: str | None = None,
         accessed_before: datetime | None = None,
         created_before: datetime | None = None,
+        accessed_after: datetime | None = None,
+        created_after: datetime | None = None,
     ) -> None:
         """
         Clears all entries from the cache, or only entries that match all specified
@@ -377,6 +380,10 @@ SELECT model_id, COUNT(*) FROM ModelCache GROUP BY model_id;
         :param accessed_before: delete only cache entries that were accessed before this
             iso_timestamp (optional)
         :param created_before: delete only cache entries that were created before this
+            iso_timestamp (optional)
+        :param accessed_after: delete only cache entries that were accessed after this
+            iso_timestamp (optional)
+        :param created_after: delete only cache entries that were created after this
             iso_timestamp (optional)
         """
 
@@ -398,6 +405,12 @@ SELECT model_id, COUNT(*) FROM ModelCache GROUP BY model_id;
             if created_before:
                 conditions.append("ctime < ?")
                 params.append(_as_UTC_string(created_before))
+            if accessed_after:
+                conditions.append("atime > ?")
+                params.append(_as_UTC_string(accessed_after))
+            if created_after:
+                conditions.append("ctime > ?")
+                params.append(_as_UTC_string(created_after))
             if conditions:
                 filter = " WHERE " + " AND ".join(conditions)
                 filter_dependent = (
@@ -453,7 +466,11 @@ def _parse_iso_utc(iso_timestamp: str) -> datetime:
     :return: the corresponding datetime object in UTC
     """
     try:
-        return datetime.fromisoformat(iso_timestamp + "Z")
+        if sys.version_info >= (3, 11):
+            return datetime.fromisoformat(iso_timestamp + "Z")
+        else:
+            # The "Z" suffix is not supported in Python versions before 3.11
+            return datetime.fromisoformat(iso_timestamp + "+00:00")
     except ValueError:
         # Try to parse the iso_timestamp without the 'Z' suffix
         return datetime.fromisoformat(iso_timestamp).astimezone(timezone.utc)
