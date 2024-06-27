@@ -43,7 +43,8 @@ The basic requirements for developing this library are:
 We recommend using an IDE such as [VS Code](https://code.visualstudio.com/) or [PyCharm](https://www.jetbrains.com/pycharm/).
 
 ### Fork and clone git repository
-Fork the public repo and create your branch (e.g. `feat/`, `doc/`, etc.) from the default branch. Synchronize your forked repo/branch with the upstream occasionally. 
+
+Fork the public repo and create your branch (e.g. `feat/`, `doc/`, etc.) from the default branch. Synchronize your forked repo/branch with the upstream occasionally.
 
 Clone your fork using HTTPS:
 
@@ -140,9 +141,9 @@ Pandoc is required to render Jupyter Notebooks for building the sphinx documenta
 - MacOS users can install Pandoc with `brew install pandoc`
 - Windows and Linux users should follow the [Pandoc installation](https://pandoc.org/installing.html) instructions for their system
 
-### Install pre-commit hooks
+#### Pre-commit hooks
 
-This project uses [pre-commit hooks](https://pre-commit.com/) to automatically enforce uniform coding standards in commits:
+[Pre-commit hooks](https://pre-commit.com/) are required to automatically enforce uniform coding standards in commits :
 
 ```
 pre-commit install
