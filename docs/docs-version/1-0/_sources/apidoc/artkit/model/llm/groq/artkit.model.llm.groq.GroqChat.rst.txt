@@ -1,0 +1,46 @@
+artkit.model.llm.groq.GroqChat
+==============================
+
+.. currentmodule:: artkit.model.llm.groq
+
+.. autoclass:: GroqChat
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~GroqChat.get_api_key
+      ~GroqChat.get_client
+      ~GroqChat.get_default_api_key_env
+      ~GroqChat.get_model_params
+      ~GroqChat.get_response
+      ~GroqChat.to_expression
+      ~GroqChat.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~GroqChat.model_id
+      ~GroqChat.system_prompt
+      ~GroqChat.api_key_env
+      ~GroqChat.initial_delay
+      ~GroqChat.exponential_base
+      ~GroqChat.jitter
+      ~GroqChat.max_retries
+      ~GroqChat.model_params
+   
+   
+
+   .. rubric:: Definitions

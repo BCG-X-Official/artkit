@@ -1,0 +1,44 @@
+artkit.model.vision.base.VisionModelConnector
+=============================================
+
+.. currentmodule:: artkit.model.vision.base
+
+.. autoclass:: VisionModelConnector
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~VisionModelConnector.get_api_key
+      ~VisionModelConnector.get_client
+      ~VisionModelConnector.get_default_api_key_env
+      ~VisionModelConnector.get_model_params
+      ~VisionModelConnector.image_to_text
+      ~VisionModelConnector.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~VisionModelConnector.model_id
+      ~VisionModelConnector.api_key_env
+      ~VisionModelConnector.initial_delay
+      ~VisionModelConnector.exponential_base
+      ~VisionModelConnector.jitter
+      ~VisionModelConnector.max_retries
+      ~VisionModelConnector.model_params
+   
+   
+
+   .. rubric:: Definitions

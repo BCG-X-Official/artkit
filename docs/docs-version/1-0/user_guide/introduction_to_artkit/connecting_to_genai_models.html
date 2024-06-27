@@ -1,0 +1,1035 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Connecting to Gen AI Models &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/bcgx.css?v=9d1a9f92" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/introduction_to_artkit/connecting_to_genai_models';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Prompt Augmentation" href="../generating_challenges/prompt_augmentation.html" />
+    <link rel="prev" title="Building Your First ARTKIT Pipeline" href="building_your_first_artkit_pipeline.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to ARTKIT</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="genai_testing_and_evaluation.html">Gen AI Testing and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building_your_first_artkit_pipeline.html">Building Your First ARTKIT Pipeline</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Connecting to Gen AI Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Challenges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/prompt_augmentation.html">Prompt Augmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/single_turn_personas.html">Single-Turn Personas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/multi_turn_personas.html">Multi-Turn Personas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multimodal Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multimodal/image_generation_and_evaluation.html">Image Generation and Evaluation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/evaluator_design.html">Evaluator Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/interpreting_run_results.html">Interpreting Run Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/creating_new_model_classes.html">Creating New Model Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/prompt_formatting.html">Prompt Formatting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/cache_management.html">Cache Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/json_output_validation.html">JSON Output Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/advanced_design_patterns.html">Advanced Design Patterns</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Connecting...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Connecting-to-Gen-AI-Models">
+<h1>Connecting to Gen AI Models<a class="headerlink" href="#Connecting-to-Gen-AI-Models" title="Link to this heading">#</a></h1>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">#</a></h2>
+<p>ARTKIT model classes support connecting to Gen AI model APIs from various providers. This tutorial walks through the process of setting up various ARTKIT connectors to send requests and receive responses from popular Gen AI models.</p>
+<p>We currently support the following model connections:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://openai.com/">OpenAI</a> - <em>Text, Image Generation, Vision</em></p></li>
+<li><p><a class="reference external" href="https://www.anthropic.com/">Anthropic</a> - <em>Text only</em></p></li>
+<li><p><a class="reference external" href="https://groq.com/">Groq</a> - <em>Text only</em></p></li>
+<li><p><a class="reference external" href="https://gemini.google.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=2024enUS_gemfeb&amp;gad_source=1&amp;gclid=Cj0KCQjwpNuyBhCuARIsANJqL9MyZ6ryxPne5jK3hH8f8rRi9ACTUcbroOcdrJB2OaiLR6yTGMMfozwaArcyEALw_wcB">Google’s Gemini</a> - <em>Text only</em></p></li>
+<li><p><a class="reference external" href="https://huggingface.co/">Hugging Face</a> - <em>Text only</em></p></li>
+</ul>
+<p>Key benefits of using ARTKIT model classes include:</p>
+<ul class="simple">
+<li><p><strong>Built-in support for asynchronous requests</strong></p>
+<ul>
+<li><p>Asynchronicity improves the performance of I/O bound tasks like API calls or file operations by allowing them to run concurrently without blocking the execution of other parts of your program.</p></li>
+<li><p><em>All</em> ARTKIT model classes are designed for asynchronicity. This design decision promotes asynchronous programming in ARTKIT pipelines and keeps our library minimalistic.</p></li>
+<li><p>ARTKIT pipelines are capable of handling synchronous steps and users are welcome to define custom synchronous API connectors. However, running ARTKIT synchronously negates the performance gains enabled by the underlying asynchronous computing engine.</p></li>
+</ul>
+</li>
+<li><p><strong>Chat history management</strong></p>
+<ul>
+<li><p>Chat history management is essential for realistic multiturn interactions. Without chat history management, a chat model can only respond to the most recent request.</p></li>
+<li><p>ARTKIT chat model classes manage chat history in the background. See the <a class="reference internal" href="../generating_challenges/multi_turn_personas.html"><span class="doc">Multi-Turn Personas</span></a> tutorial for a demonstration of automated multiturn chats between a challenger bot and a target system.</p></li>
+<li><p>Additionally, ARTKIT offers the <code class="docutils literal notranslate"><span class="pre">HistorizedChatModel</span></code> wrapper class which manages chat histories for any given <code class="docutils literal notranslate"><span class="pre">ChatModel</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Local cache management</strong></p>
+<ul>
+<li><p>Caching Gen AI model responses is useful for ensuring reproducibility and avoiding repetitive API calls which can run up costs and runtime during development.</p></li>
+</ul>
+</li>
+</ul>
+<p>For technical details on ARTKIT model classes and all supported models, see the <a class="reference internal" href="../../apidoc/artkit.html"><span class="doc">API Reference</span></a>. If you need to connect to an endpoint which is not supported by ARTKIT, see our tutorial on <a class="reference internal" href="../advanced_tutorials/creating_new_model_classes.html"><span class="doc">Creating New Model Classes</span></a>, and please consider <a class="reference internal" href="../../contributor_guide/index.html"><span class="doc">Contributing</span></a> to ARTKIT!</p>
+</section>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Link to this heading">#</a></h2>
+<p>To connect to different model providers, you must install the necessary platform-specific libraries:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install openai
+pip install anthropic
+pip install groq
+pip install google-generativeai
+pip install huggingface
+</pre></div>
+</div>
+<p>You must obtain an API Key for each platform you plan to use. Platform-specific links are provided in the sections below. We recommend storing environment variables in a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file within your project and loading them using <code class="docutils literal notranslate"><span class="pre">load_dotenv</span></code>, as shown below. For a step-by-step guide, see our documentation on <a class="reference internal" href="../../_generated/home.html#environment-variables"><span class="std std-ref">Environment Variables</span></a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Important</strong>: The <code class="docutils literal notranslate"><span class="pre">await</span></code> keyword can normally only be used within an asynchronous function. In the codeblocks below, we are able to use <code class="docutils literal notranslate"><span class="pre">await</span></code> on its own because Jupyter notebooks implicitly execute cells asynchronously. If running code in a Python script, you must use ARTKIT connectors within the context of asynchonous functions, as demonstrated throughout the documentation (e.g., <a class="reference internal" href="building_your_first_artkit_pipeline.html"><span class="doc">Building Your First ARTKIT Pipeline</span></a>)</p>
+</div></blockquote>
+</section>
+<section id="OpenAI">
+<h2>OpenAI<a class="headerlink" href="#OpenAI" title="Link to this heading">#</a></h2>
+<p>To make API calls to OpenAI, you must install the <code class="docutils literal notranslate"><span class="pre">openai</span></code> Python library and obtain an <a class="reference external" href="https://platform.openai.com/docs/quickstart/account-setup">OpenAI API key</a>.</p>
+<p>ARTKIT connectors currently support three types of OpenAI models:</p>
+<ol class="arabic simple">
+<li><p>Chat (LLMs)</p></li>
+<li><p>Text-to-image (diffusion models)</p></li>
+<li><p>Image-to-text (vision models)</p></li>
+</ol>
+<p>Below we show how to instantiate each OpenAI model class with caching, send a request, and view the response.</p>
+<section id="Chat">
+<h3>Chat<a class="headerlink" href="#Chat" title="Link to this heading">#</a></h3>
+<p>Chat models are used to emulate a conversation between a user and language model by utilizing it’s text completion capabilities. The <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> class returns an ARTKIT list of strings, which are probable candidates for a conversational reply given the prompt.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize an OpenAI chat model</span>
+<span class="n">openai_chat_model</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span>
+        <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">,</span>
+        <span class="n">system_prompt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/connecting_to_openai_gpt3-5.db&quot;</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Send a message to the chat model and print the response</span>
+<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">openai_chat_model</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;What is 2+2?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2 + 2 equals 4.
+</pre></div></div>
+</div>
+</section>
+<section id="Text-to-Image">
+<h3>Text-to-Image<a class="headerlink" href="#Text-to-Image" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">OpenAIDiffusion</span></code> class returns an ARTKIT <code class="docutils literal notranslate"><span class="pre">Image</span></code> object, which has a <code class="docutils literal notranslate"><span class="pre">show</span></code> method for visualizing images.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize an OpenAI diffusion model</span>
+<span class="n">openai_diffusion_model</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedDiffusionModel</span><span class="p">(</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">OpenAIDiffusion</span><span class="p">(</span>
+        <span class="n">api_key_env</span> <span class="o">=</span> <span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">,</span>
+        <span class="n">model_id</span> <span class="o">=</span> <span class="s2">&quot;dall-e-2&quot;</span><span class="p">,</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="s2">&quot;256x256&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/connecting_to_openai_dalle.db&quot;</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Send text to the diffusion model and display the image response</span>
+<span class="n">winged_cat</span> <span class="o">=</span> <span class="k">await</span> <span class="n">openai_diffusion_model</span><span class="o">.</span><span class="n">text_to_image</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;a cat with wings&quot;</span><span class="p">)</span>
+
+<span class="n">winged_cat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/user_guide_introduction_to_artkit_connecting_to_genai_models_12_0.png" class="no-scaled-link" src="../../_images/user_guide_introduction_to_artkit_connecting_to_genai_models_12_0.png" style="width: 200px;" />
+</div>
+</div>
+</section>
+<section id="Vision">
+<h3>Vision<a class="headerlink" href="#Vision" title="Link to this heading">#</a></h3>
+<p>Here, we use ARTKIT’s <code class="docutils literal notranslate"><span class="pre">OpenAIVision</span></code> class to send an image and a prompt to GPT-4-turbo, which recently enabled image inputs through the API:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize an OpenAI vision model</span>
+<span class="n">openai_vision_model</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedVisionModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">OpenAIVision</span><span class="p">(</span>
+        <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s1">&#39;gpt-4-turbo&#39;</span>
+    <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/connecting_to_openai_gpt4v.db&quot;</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Send an image and a prompt to the vision model and print the response</span>
+<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">openai_vision_model</span><span class="o">.</span><span class="n">image_to_text</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">winged_cat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;What is this, in 10 words?&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Mythical winged cat, serene expression, feathers, tail, artistic creature portrayal.
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Anthropic">
+<h2>Anthropic<a class="headerlink" href="#Anthropic" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.anthropic.com/">Anthropic</a> is an AI research company that prioritizes ethics and social impact in their products and services. To interact with the Anthropic API, <a class="reference external" href="https://console.anthropic.com/">register</a> an account with Anthropic and generate an API key in your <a class="reference external" href="https://console.anthropic.com/account/keys">Account Settings</a>. You must also install the <code class="docutils literal notranslate"><span class="pre">anthropic</span></code> Python library. Visit <a class="reference external" href="https://docs.anthropic.com/en/docs/models-overview">Anthropic Models</a> for a list of
+available models.</p>
+<p>Just as with the OpenAI example ARTKIT offers an <code class="docutils literal notranslate"><span class="pre">AnthropicChat</span></code> class that returns a list of possible responses in string format. Below we show how to instantiate and use an Anthropic chat model:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize an Anthropic chat model</span>
+<span class="n">anthropic_chat_model</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">AnthropicChat</span><span class="p">(</span>
+        <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;ANTHROPIC_API_KEY&quot;</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;claude-3-sonnet-20240229&quot;</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/connecting_to_anthropic_chat.db&quot;</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Send a message to the chat model and print the response</span>
+<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">anthropic_chat_model</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;What is 2+2?&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2 + 2 = 4
+</pre></div></div>
+</div>
+</section>
+<section id="Groq">
+<h2>Groq<a class="headerlink" href="#Groq" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://wow.groq.com/why-groq/">Groq</a> is a Gen AI hardware and software platform that prioritizes inference speed. To make API calls to Groq, register an account and create your API key in your <a class="reference external" href="https://console.groq.com/keys">GroqCloud console</a>. Groq currently hosts a few popular Gen AI models, including LLaMA3, Mixtral, Gemma, and Whisper. Visit <a class="reference external" href="https://console.groq.com/docs/models">Groq Models</a> for the models you can use with Groq.</p>
+<p>Below we show how to instantiate a Groq chat model to interact with LLaMA-8b:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize a Groq chat model</span>
+<span class="n">groq_chat_model</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">GroqChat</span><span class="p">(</span>
+        <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;GROQ_API_KEY&quot;</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;llama3-8b-8192&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/connecting_to_groq_chat.db&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Send a message to the chat model and print the response</span>
+<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">groq_chat_model</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;What is 2 + 2&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The answer to 2 + 2 is 4.
+</pre></div></div>
+</div>
+</section>
+<section id="Google">
+<h2>Google<a class="headerlink" href="#Google" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://gemini.google.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=2024enUS_gemfeb&amp;gad_source=1&amp;gclid=Cj0KCQjwpNuyBhCuARIsANJqL9MyZ6ryxPne5jK3hH8f8rRi9ACTUcbroOcdrJB2OaiLR6yTGMMfozwaArcyEALw_wcB">Gemini</a> is a family of multimodal Gen AI models available through Vertex AI, Google’s fully-managed AI development platform for building and using Gen AI. To interact with the Gemini API, install the Python library <code class="docutils literal notranslate"><span class="pre">google-generativeai</span></code> and generate a <a class="reference external" href="https://ai.google.dev/gemini-api/docs/api-key">Gemini API
+key</a>. For a list of currently available Gemini models, visit <a class="reference external" href="https://ai.google.dev/gemini-api/docs/models/gemini">Gemini Models</a>.</p>
+<p>Below we show how to instantiate a Gemini model class to interact with the Gemini API:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize a Gemini chat model</span>
+<span class="n">gemini_chat_model</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">GeminiChat</span><span class="p">(</span>
+        <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;GEMINI_API_KEY&quot;</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gemini-1.5-pro-latest&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/connecting_to_gemini_chat.db&quot;</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Send a message to the chat model and print the response</span>
+<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">gemini_chat_model</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;What is 2 + 2?&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2 + 2 = 4
+
+</pre></div></div>
+</div>
+</section>
+<section id="Hugging-Face">
+<h2>Hugging Face<a class="headerlink" href="#Hugging-Face" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://huggingface.co/">Hugging Face</a> is a popular platform for hosting open source models, datasets, and code. To make API calls to HuggingFace, you must first register an account with Hugging Face and create a <a class="reference external" href="https://huggingface.co/settings/tokens">Hugging Face API key</a> in your profile settings. You must also install the <code class="docutils literal notranslate"><span class="pre">huggingface</span></code> Python library.</p>
+<p>Given the diversity of models hosted on Hugging Face, it is important to read the documentation for individual models to understand the expected input and output formats, model-specific parameters, limitations, and best practices. See <a class="reference external" href="https://huggingface.co/models?sort=trending&amp;search=huggingface">Hugging Face Models</a> to browse the models available on Hugging Face.</p>
+<p>Note that some models require you to request access by visiting the model’s repository site. Gated or private models require running the following:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Needed to access gated or private models on the Hugging Face Hub</span>
+<span class="kn">from</span> <span class="nn">huggingface_hub</span> <span class="kn">import</span> <span class="n">login</span>
+<span class="n">login</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ec04f3d9b4a941c9b344ac669998423e", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<section id="Chat-templates">
+<h3>Chat templates<a class="headerlink" href="#Chat-templates" title="Link to this heading">#</a></h3>
+<p>A key concept for working with Hugging Face models is <a class="reference external" href="https://huggingface.co/docs/transformers/main/chat_templating">chat templates</a>, which specify how to convert conversation histories into a format which works for a specific model. A conversation history is comprised of a list of messages, where each message is a dictionary containing <code class="docutils literal notranslate"><span class="pre">role</span></code> and <code class="docutils literal notranslate"><span class="pre">content</span></code> keys. For example:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;You are a friendly assistant.&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What is 2+2?&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;2 + 2 = 4&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Looks correct, thanks.&quot;</span><span class="p">},</span>
+ <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Individual LLMs are trained to recognize chat histories in a particular format. The Hugging Face <a class="reference external" href="https://huggingface.co/docs/transformers/main/en/chat_templating#advanced-how-do-chat-templates-work">standard for chat templates</a> is to represent them as <a class="reference external" href="https://jinja.palletsprojects.com/en/3.1.x/templates/">Jinja templates</a>, which look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{% for message in messages %}
+    {% if message[&#39;role&#39;] == &#39;user&#39; %}
+        {{ &#39; &#39; }}
+    {% endif %}
+    {{ message[&#39;content&#39;] }}
+    {% if not loop.last %}
+        {{ &#39;  &#39; }}
+    {% endif %}
+{% endfor %}
+{{ eos_token }}
+</pre></div>
+</div>
+<p>There are two types of Hugging Face models:</p>
+<ol class="arabic simple">
+<li><p><strong>Models with native chat templates</strong>:</p>
+<ul class="simple">
+<li><p>The chat template will be specified as the <code class="docutils literal notranslate"><span class="pre">chat_template</span></code> parameter inside the model’s <code class="docutils literal notranslate"><span class="pre">tokenizer_config.json</span></code> file.</p></li>
+<li><p>For example, the chat template for the <code class="docutils literal notranslate"><span class="pre">zephyr-7b-beta</span></code> model can be found <a class="reference external" href="https://huggingface.co/HuggingFaceH4/zephyr-7b-beta/blob/main/tokenizer_config.json#L34">here</a>.</p></li>
+</ul>
+</li>
+<li><p><strong>Models with empty chat templates</strong>:</p>
+<ul class="simple">
+<li><p>For many models on Hugging Face, the <code class="docutils literal notranslate"><span class="pre">chat_template</span></code> parameter in the <code class="docutils literal notranslate"><span class="pre">tokenizer_config.json</span></code> file is empty.</p></li>
+<li><p>Usually, the chat template can be found elsewhere in the documentation, e.g., on the model card page.</p></li>
+<li><p>However, if you’re unable to find any chat template, make sure that the model you’re trying to use is actually trained for chat applications</p></li>
+</ul>
+</li>
+</ol>
+<p>Below, we show how to work with both types of models. We’ll start with the first option, as it is the easiest:</p>
+</section>
+<section id="Native-chat-templates">
+<h3>Native chat templates<a class="headerlink" href="#Native-chat-templates" title="Link to this heading">#</a></h3>
+<p>We’ll demonstrate usage of a native chat template using the <code class="docutils literal notranslate"><span class="pre">zephyr-7b-beta</span></code> model referenced above. The fact that the chat template is specified <a class="reference external" href="https://huggingface.co/HuggingFaceH4/zephyr-7b-beta/blob/main/tokenizer_config.json#L34">here</a> in the <code class="docutils literal notranslate"><span class="pre">tokenizer_config.json</span></code> allows us to set up a Hugging Face connector like this:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf_chat_native</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">HuggingfaceChat</span><span class="p">(</span>
+    <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;HuggingFaceH4/zephyr-7b-beta&quot;</span><span class="p">,</span>
+    <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;HF_TOKEN&quot;</span><span class="p">,</span>
+    <span class="n">chat_template_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;add_generation_prompt&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Note the usage of the <code class="docutils literal notranslate"><span class="pre">add_generation_prompt</span></code> argument. The <a class="reference external" href="https://huggingface.co/docs/transformers/main/en/chat_templating#what-are-generation-prompts">generation prompt</a> argument adds a token to the end of each message to indicate that the bot should start its response. This helps ensure the model generates the next response in the conversation, which is useful for conversational applications of LLMs.</p>
+<p>Now let’s get a response from the model:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">hf_chat_native</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="s2">&quot;What is 2 + 2?&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/lontkealexander/.pyenv/versions/rai_red/lib/python3.12/site-packages/huggingface_hub/file_download.py:1132: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4 is the answer to the mathematical expression &#34;2 + 2&#34;. This is a basic arithmetic operation called addition, where you add two numbers (2 in this case) to get a sum (4).
+</pre></div></div>
+</div>
+<p>This approach works for models that have a chat template defined in their <code class="docutils literal notranslate"><span class="pre">tokenizer_config.json</span></code> file, but what if the chat template parameter is empty? That’s when custom chat templates are needed.</p>
+</section>
+<section id="Custom-chat-templates">
+<h3>Custom chat templates<a class="headerlink" href="#Custom-chat-templates" title="Link to this heading">#</a></h3>
+<p>For models without a chat template specified in the <code class="docutils literal notranslate"><span class="pre">tokenizer_config.json</span></code> file, it is essential to determine the expected template from another source. If you cannot find and specify a correct chat template, then the model is likely to return unexpected and unpredictable responses.</p>
+<p>We saw in the previous section that the <code class="docutils literal notranslate"><span class="pre">zephyr-7b</span></code> model has a native template defined, so we don’t need to specify a custom template. However, for illustrative purposes, we will define and use a custom chat template for <code class="docutils literal notranslate"><span class="pre">zephyr-7b</span></code> using the ARTKIT <code class="docutils literal notranslate"><span class="pre">HuggingfaceChat</span></code> connector and confirm that it produces the same output as the native template approach.</p>
+<p>Here is the <code class="docutils literal notranslate"><span class="pre">zephyr-7b</span></code> chat template defined as a Python string:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">zephyr_template</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;{</span><span class="si">% f</span><span class="s2">or message in messages %}</span><span class="se">\n</span><span class="s2">{</span><span class="si">% i</span><span class="s2">f message[&#39;role&#39;] == &#39;user&#39; %}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{{ &#39;&lt;|user|&gt;</span><span class="se">\n</span><span class="s2">&#39; + message[&#39;content&#39;] + eos_token }}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{</span><span class="si">% e</span><span class="s2">lif message[&#39;role&#39;] == &#39;system&#39; %}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{{ &#39;&lt;|system|&gt;</span><span class="se">\n</span><span class="s2">&#39; + message[&#39;content&#39;] + eos_token }}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{</span><span class="si">% e</span><span class="s2">lif message[&#39;role&#39;] == &#39;assistant&#39; %}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{{ &#39;&lt;|assistant|&gt;</span><span class="se">\n</span><span class="s2">&#39;  + message[&#39;content&#39;] + eos_token }}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{</span><span class="si">% e</span><span class="s2">ndif %}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{</span><span class="si">% i</span><span class="s2">f loop.last and add_generation_prompt %}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{{ &#39;&lt;|assistant|&gt;&#39; }}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{</span><span class="si">% e</span><span class="s2">ndif %}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;{</span><span class="si">% e</span><span class="s2">ndfor %}&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, we pass the Jinja template to the <code class="docutils literal notranslate"><span class="pre">chat_template</span></code> argument when we set up our <code class="docutils literal notranslate"><span class="pre">HuggingfaceChat</span></code> connector. Note that this argument was not used in the previous section because we used the native template. When we execute this code, ARTKIT will show a warning alerting us that we are overriding the native chat template with our custom template:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf_chat_custom</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">HuggingfaceChat</span><span class="p">(</span>
+    <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;HuggingFaceH4/zephyr-7b-beta&quot;</span><span class="p">,</span>
+    <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;HF_TOKEN&quot;</span><span class="p">,</span>
+    <span class="n">chat_template</span><span class="o">=</span><span class="n">zephyr_template</span><span class="p">,</span>
+    <span class="n">chat_template_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;add_generation_prompt&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now let’s get a response from the model. Since our custom chat template is identical to the native template for <code class="docutils literal notranslate"><span class="pre">zephyr-7b</span></code>, the response should be identical:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">hf_chat_custom</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="s2">&quot;What is 2 + 2?&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Tokenizer (HuggingFaceH4/zephyr-7b-beta) natively supports chat templates, but will be overridden by the given custom chat template.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4 is the answer to the mathematical expression &#34;2 + 2&#34;. This is a basic arithmetic operation called addition, where you add two numbers (2 in this case) to get a sum (4).
+</pre></div></div>
+</div>
+<p>Looks like it worked!</p>
+<p>Chat templates are one of the more challenging aspects of working with Hugging Face models, but understanding how they work and using them correctly is necessary for anyone who wishes to tap into the vast Gen AI model landscape available on Hugging Face.</p>
+</section>
+</section>
+<section id="Concluding-Remarks">
+<h2>Concluding Remarks<a class="headerlink" href="#Concluding-Remarks" title="Link to this heading">#</a></h2>
+<p>We hope this tutorial helps ARTKIT users to leverage our asynchronous model connectors with confidence. We aim to keep this notebook updated with the latest ARTKIT model classes, but please note that the <a class="reference internal" href="../../apidoc/artkit.html"><span class="doc">API Reference</span></a> always contains the most comprehensive list of connectors and capabilities.</p>
+<p>If you find any bugs or feature limitations, please <a class="reference internal" href="../../contributor_guide/how_to_contribute.html#general-git-process"><span class="std std-ref">open an issue</span></a> and we will follow up as soon as possible. If you need to a connector which is not supported by ARTKIT, our tutorial on <a class="reference internal" href="../advanced_tutorials/creating_new_model_classes.html"><span class="doc">Creating New Model Classes</span></a> provides guidance on how to build a custom connector class. If you create a connector which is likely to be useful for others, consider
+<a class="reference internal" href="../../contributor_guide/index.html"><span class="doc">Contributing</span></a> to ARTKIT!</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#OpenAI">OpenAI</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Chat">Chat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Text-to-Image">Text-to-Image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Vision">Vision</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Anthropic">Anthropic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Groq">Groq</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Google">Google</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Hugging-Face">Hugging Face</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Chat-templates">Chat templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Native-chat-templates">Native chat templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Custom-chat-templates">Custom chat templates</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Concluding-Remarks">Concluding Remarks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

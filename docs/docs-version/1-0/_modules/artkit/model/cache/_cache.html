@@ -1,0 +1,982 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>artkit.model.cache._cache &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/bcgx.css?v=9d1a9f92" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/artkit/model/cache/_cache';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">artkit.model...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for artkit.model.cache._cache</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># © 2024 Boston Consulting Group. All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Internal DB implementation for the cache.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;CacheDB&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># Constants</span>
+<span class="c1">#</span>
+
+<span class="n">_ERR_INVALID_PARAMETER_TYPE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;Model parameters must be strings, integers, floats, or booleans, but got &quot;</span>
+    <span class="s2">&quot;parameter </span><span class="si">{key}</span><span class="s2">=</span><span class="si">{value!r}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># Classes</span>
+<span class="c1">#</span>
+
+
+<div class="viewcode-block" id="CacheDB">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB">[docs]</a>
+<span class="k">class</span> <span class="nc">CacheDB</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A model cache implemented as an SQLite database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">TBL_MODEL_PARAMS</span> <span class="o">=</span> <span class="s2">&quot;ModelParams&quot;</span>
+    <span class="n">TBL_MODEL_RESPONSES</span> <span class="o">=</span> <span class="s2">&quot;ModelResponses&quot;</span>
+    <span class="n">TBL_MODEL_CACHE</span> <span class="o">=</span> <span class="s2">&quot;ModelCache&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the CacheDB with a connection to the SQLite database.</span>
+
+<span class="sd">        :param database: path to the SQLite database file; or ``:memory:`` to create an</span>
+<span class="sd">            in-memory database</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ensure the directory for the database exists</span>
+        <span class="k">if</span> <span class="n">database</span> <span class="o">!=</span> <span class="s2">&quot;:memory:&quot;</span><span class="p">:</span>
+            <span class="c1"># Only attempt to create directory if not using an in-memory database</span>
+            <span class="n">directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">database</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">directory</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Cache directory does not exist. Creating new directory: </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="n">database</span><span class="o">=</span><span class="n">database</span><span class="p">,</span>
+            <span class="c1"># We allow multiple threads to access the database connection; this is</span>
+            <span class="c1"># necessary since a new thread may need to be created to start a new</span>
+            <span class="c1"># asyncio event loop. We take care to ensure that DB transactions are</span>
+            <span class="c1"># serialized by using the &#39;with self.conn&#39; context manager.</span>
+            <span class="n">check_same_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_tables_and_indexes</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_create_tables_and_indexes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates the necessary tables and indexes in the SQLite database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">CREATE TABLE IF NOT EXISTS ModelCache (</span>
+<span class="sd">    id INTEGER PRIMARY KEY,</span>
+<span class="sd">    model_id TEXT NOT NULL,</span>
+<span class="sd">    ctime DATETIME DEFAULT CURRENT_TIMESTAMP,</span>
+<span class="sd">    atime DATETIME DEFAULT CURRENT_TIMESTAMP</span>
+<span class="sd">);</span>
+<span class="sd">&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="c1"># We create a table for unique string values, to avoid redundancy</span>
+            <span class="c1"># in the model parameters</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">CREATE TABLE IF NOT EXISTS UniqueStrings (</span>
+<span class="sd">    id INTEGER PRIMARY KEY,</span>
+<span class="sd">    value TEXT NOT NULL UNIQUE</span>
+<span class="sd">);</span>
+<span class="sd">&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="c1"># Model parameters can bes stored as a reference to a unique string, or as a</span>
+            <span class="c1"># integer, float, or boolean value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">CREATE TABLE IF NOT EXISTS ModelParams (</span>
+<span class="sd">    id INTEGER PRIMARY KEY,</span>
+<span class="sd">    cache_id INTEGER,</span>
+<span class="sd">    name TEXT,</span>
+<span class="sd">    value_string_id INTEGER,</span>
+<span class="sd">    value_int INTEGER,</span>
+<span class="sd">    value_float REAL,</span>
+<span class="sd">    FOREIGN KEY (cache_id) REFERENCES ModelCache(id)</span>
+<span class="sd">);</span>
+<span class="sd">&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">CREATE TABLE IF NOT EXISTS ModelResponses (</span>
+<span class="sd">    id INTEGER PRIMARY KEY,</span>
+<span class="sd">    cache_id INTEGER,</span>
+<span class="sd">    response TEXT NOT NULL,</span>
+<span class="sd">    FOREIGN KEY (cache_id) REFERENCES ModelCache(id)</span>
+<span class="sd">);</span>
+<span class="sd">&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">CREATE INDEX IF NOT EXISTS idx_prompt_model_id ON ModelCache(model_id);</span>
+<span class="sd">&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">CREATE INDEX IF NOT EXISTS idx_cache_id_name ON ModelParams(cache_id, name);</span>
+<span class="sd">&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+
+<div class="viewcode-block" id="CacheDB.add_entry">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB.add_entry">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_entry</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">responses</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">model_params</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new entry to the cache.</span>
+
+<span class="sd">        :param model_id: the identifier of the model that generated the response</span>
+<span class="sd">        :param responses: the response or responses generated by the model</span>
+<span class="sd">        :param model_params: additional parameters used by the model</span>
+<span class="sd">        :raises TypeError: if a model parameter is not a string, integer, float, or</span>
+<span class="sd">            boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">INSERT INTO ModelCache (model_id)</span>
+<span class="sd">VALUES (?);</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">model_id</span><span class="p">,),</span>
+            <span class="p">)</span>
+            <span class="n">cache_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+
+            <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="p">[</span><span class="n">responses</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">responses</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">responses</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                    </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">INSERT INTO ModelResponses (cache_id, response)</span>
+<span class="sd">VALUES (?, ?);</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">cache_id</span><span class="p">,</span> <span class="n">response</span><span class="p">),</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">model_params</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">model_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                            </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">INSERT OR IGNORE INTO UniqueStrings (value)</span>
+<span class="sd">VALUES (?);</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                            <span class="p">(</span><span class="n">value</span><span class="p">,),</span>
+                        <span class="p">)</span>
+                        <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">SELECT id FROM UniqueStrings WHERE value = ?;</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                                <span class="p">(</span><span class="n">value</span><span class="p">,),</span>
+                            <span class="p">)</span>
+                            <span class="n">value_string_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">value_string_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                            </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">INSERT INTO ModelParams (cache_id, name, value_string_id)</span>
+<span class="sd">VALUES (?, ?, ?);</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                            <span class="p">(</span><span class="n">cache_id</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value_string_id</span><span class="p">),</span>
+                        <span class="p">)</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                            </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">INSERT INTO ModelParams (cache_id, name, value_int)</span>
+<span class="sd">VALUES (?, ?, ?);</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                            <span class="p">(</span><span class="n">cache_id</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span>
+                        <span class="p">)</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                            </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">INSERT INTO ModelParams (cache_id, name, value_float)</span>
+<span class="sd">VALUES (?, ?, ?);</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                            <span class="p">(</span><span class="n">cache_id</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span>
+                        <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                            <span class="n">_ERR_INVALID_PARAMETER_TYPE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+                        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CacheDB.get_entry">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB.get_entry">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_entry</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">model_params</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve an entry from the cache based on the prompt, model ID, and model</span>
+<span class="sd">        parameters.</span>
+
+<span class="sd">        :param model_id: the identifier of the model used</span>
+<span class="sd">        :param model_params: additional used by the model</span>
+<span class="sd">        :return: a list of responses generated by the model or ``None`` if no matching</span>
+<span class="sd">            entry is found</span>
+<span class="sd">        :raises TypeError: if a model parameter is not a string, integer, float, or</span>
+<span class="sd">            boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">base_query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT MC.id FROM ModelCache MC</span>
+<span class="s2">    LEFT JOIN ModelParams MP ON MC.id = MP.cache_id</span>
+<span class="s2">    WHERE MC.model_id = ?&quot;&quot;&quot;</span>
+        <span class="n">base_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">model_id</span><span class="p">]</span>
+
+        <span class="n">param_query</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">param_params</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">model_params</span><span class="p">:</span>
+            <span class="n">subqueries</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">model_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">subqueries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="s2">&quot;(MP.name = ? AND MP.value_string_id = &quot;</span>
+                        <span class="s2">&quot;(SELECT id FROM UniqueStrings WHERE value = ?))&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)):</span>
+                    <span class="n">subqueries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;(MP.name = ? AND MP.value_int = ?)&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                    <span class="n">subqueries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;(MP.name = ? AND MP.value_float = ?)&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                        <span class="n">_ERR_INVALID_PARAMETER_TYPE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="n">param_params</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">])</span>
+            <span class="n">param_query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    AND (</span><span class="si">{</span><span class="s1">&#39; OR &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subqueries</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;&quot;&quot;</span>
+
+        <span class="n">final_query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">SELECT id</span>
+<span class="s2">FROM (</span><span class="si">{</span><span class="n">base_query</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">param_query</span><span class="si">}</span>
+<span class="s2">    GROUP BY MC.id</span>
+<span class="s2">    HAVING COUNT(DISTINCT MP.name) = ?</span>
+<span class="s2">) AS FilteredCache</span>
+<span class="s2">WHERE (SELECT COUNT(*) FROM ModelParams WHERE cache_id = FilteredCache.id) = ?</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="n">n_model_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_params</span><span class="p">)</span> <span class="k">if</span> <span class="n">model_params</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">final_params</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">base_params</span><span class="p">,</span> <span class="o">*</span><span class="n">param_params</span><span class="p">,</span> <span class="n">n_model_params</span><span class="p">,</span> <span class="n">n_model_params</span><span class="p">]</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">final_query</span><span class="p">,</span> <span class="n">final_params</span><span class="p">)</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">row</span><span class="p">:</span>
+                <span class="n">cache_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="n">response_cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                    </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">SELECT response FROM ModelResponses WHERE cache_id = ?;</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">cache_id</span><span class="p">,),</span>
+                <span class="p">)</span>
+                <span class="n">responses</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">response_row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">response_row</span> <span class="ow">in</span> <span class="n">response_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="p">]</span>
+
+                <span class="c1"># update the last accessed time stamp</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                    </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">UPDATE ModelCache</span>
+<span class="sd">SET atime = CURRENT_TIMESTAMP</span>
+<span class="sd">WHERE id = ?;</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">cache_id</span><span class="p">,),</span>
+                <span class="p">)</span>
+
+                <span class="k">return</span> <span class="n">responses</span>
+
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="CacheDB.count_entries">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB.count_entries">[docs]</a>
+    <span class="k">def</span> <span class="nf">count_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Count the number of entries in the cache per model ID.</span>
+
+<span class="sd">        :return: a dictionary with the number of entries for each model ID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">SELECT model_id, COUNT(*) FROM ModelCache GROUP BY model_id;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="CacheDB.get_earliest_creation_times">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB.get_earliest_creation_times">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_earliest_creation_times</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the earliest creation time for each model ID in the cache.</span>
+
+<span class="sd">        :return: a dictionary with the earliest creation time for each model ID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_times_per_model</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s2">&quot;ctime&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;MIN&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CacheDB.get_latest_creation_times">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB.get_latest_creation_times">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_latest_creation_times</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the latest creation time for each model ID in the cache.</span>
+
+<span class="sd">        :return: a dictionary with the latest creation time for each model ID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_times_per_model</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s2">&quot;ctime&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;MAX&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CacheDB.get_earliest_access_times">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB.get_earliest_access_times">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_earliest_access_times</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the earliest access time for each model ID in the cache.</span>
+
+<span class="sd">        :return: a dictionary with the earliest access time for each model ID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_times_per_model</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s2">&quot;atime&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;MIN&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CacheDB.get_latest_access_times">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB.get_latest_access_times">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_latest_access_times</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the latest access time for each model ID in the cache.</span>
+
+<span class="sd">        :return: a dictionary with the latest access time for each model ID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_times_per_model</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s2">&quot;atime&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;MAX&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CacheDB.clear">
+<a class="viewcode-back" href="../../../../apidoc/artkit/model/cache/artkit.model.cache.CacheDB.html#artkit.model.cache.CacheDB.clear">[docs]</a>
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">accessed_before</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">created_before</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">accessed_after</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">created_after</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clears all entries from the cache, or only entries that match all specified</span>
+<span class="sd">        conditions.</span>
+
+<span class="sd">        :param model_id: delete only cache entries for this model ID (optional)</span>
+<span class="sd">        :param accessed_before: delete only cache entries that were accessed before this</span>
+<span class="sd">            iso_timestamp (optional)</span>
+<span class="sd">        :param created_before: delete only cache entries that were created before this</span>
+<span class="sd">            iso_timestamp (optional)</span>
+<span class="sd">        :param accessed_after: delete only cache entries that were accessed after this</span>
+<span class="sd">            iso_timestamp (optional)</span>
+<span class="sd">        :param created_after: delete only cache entries that were created after this</span>
+<span class="sd">            iso_timestamp (optional)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">conn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span>
+
+        <span class="k">def</span> <span class="nf">_as_UTC_string</span><span class="p">(</span><span class="n">dt</span><span class="p">:</span> <span class="n">datetime</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="c1"># convert to UTC and format as string</span>
+            <span class="k">return</span> <span class="n">dt</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">conn</span><span class="p">:</span>
+            <span class="n">conditions</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="n">model_id</span><span class="p">:</span>
+                <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;model_id = ?&quot;</span><span class="p">)</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">accessed_before</span><span class="p">:</span>
+                <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;atime &lt; ?&quot;</span><span class="p">)</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_as_UTC_string</span><span class="p">(</span><span class="n">accessed_before</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">created_before</span><span class="p">:</span>
+                <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ctime &lt; ?&quot;</span><span class="p">)</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_as_UTC_string</span><span class="p">(</span><span class="n">created_before</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">accessed_after</span><span class="p">:</span>
+                <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;atime &gt; ?&quot;</span><span class="p">)</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_as_UTC_string</span><span class="p">(</span><span class="n">accessed_after</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">created_after</span><span class="p">:</span>
+                <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ctime &gt; ?&quot;</span><span class="p">)</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_as_UTC_string</span><span class="p">(</span><span class="n">created_after</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">conditions</span><span class="p">:</span>
+                <span class="nb">filter</span> <span class="o">=</span> <span class="s2">&quot; WHERE &quot;</span> <span class="o">+</span> <span class="s2">&quot; AND &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span>
+                <span class="n">filter_dependent</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot; WHERE cache_id IN (SELECT id FROM ModelCache</span><span class="si">{</span><span class="nb">filter</span><span class="si">}</span><span class="s2">)&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">filter</span> <span class="o">=</span> <span class="n">filter_dependent</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM ModelParams&quot;</span> <span class="o">+</span> <span class="n">filter_dependent</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM ModelResponses&quot;</span> <span class="o">+</span> <span class="n">filter_dependent</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM ModelCache&quot;</span> <span class="o">+</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+            <span class="c1"># Remove unused unique strings</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">DELETE FROM UniqueStrings</span>
+<span class="sd">WHERE id NOT IN (SELECT DISTINCT value_string_id FROM ModelParams);</span>
+<span class="sd">&quot;&quot;&quot;</span>
+            <span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_get_times_per_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]:</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">SELECT model_id, </span><span class="si">{</span><span class="n">func</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">) FROM ModelCache GROUP BY model_id;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="n">model_id</span><span class="p">:</span> <span class="n">_parse_iso_utc</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span> <span class="k">for</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">timestamp</span> <span class="ow">in</span> <span class="n">cursor</span>
+            <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Closes the connection to the SQLite database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+
+<span class="c1">#</span>
+<span class="c1"># Auxiliary functions</span>
+<span class="c1">#</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_iso_utc</span><span class="p">(</span><span class="n">iso_timestamp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse an ISO-formatted timestamp string and return a datetime object in UTC.</span>
+
+<span class="sd">    If the timezone is not specified, the timestamp is assumed to be in UTC.</span>
+
+<span class="sd">    If the timezone is specified, the timestamp will be converted to UTC.</span>
+
+<span class="sd">    :param iso_timestamp: an ISO-formatted timestamp string</span>
+<span class="sd">    :return: the corresponding datetime object in UTC</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">iso_timestamp</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># The &quot;Z&quot; suffix is not supported in Python versions before 3.11</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">iso_timestamp</span> <span class="o">+</span> <span class="s2">&quot;+00:00&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="c1"># Try to parse the iso_timestamp without the &#39;Z&#39; suffix</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">iso_timestamp</span><span class="p">)</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

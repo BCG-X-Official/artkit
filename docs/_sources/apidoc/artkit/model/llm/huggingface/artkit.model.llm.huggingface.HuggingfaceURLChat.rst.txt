@@ -1,0 +1,46 @@
+artkit.model.llm.huggingface.HuggingfaceURLChat
+===============================================
+
+.. currentmodule:: artkit.model.llm.huggingface
+
+.. autoclass:: HuggingfaceURLChat
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HuggingfaceURLChat.get_api_key
+      ~HuggingfaceURLChat.get_client
+      ~HuggingfaceURLChat.get_default_api_key_env
+      ~HuggingfaceURLChat.get_model_params
+      ~HuggingfaceURLChat.get_response
+      ~HuggingfaceURLChat.to_expression
+      ~HuggingfaceURLChat.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HuggingfaceURLChat.model_id
+      ~HuggingfaceURLChat.system_prompt
+      ~HuggingfaceURLChat.api_key_env
+      ~HuggingfaceURLChat.initial_delay
+      ~HuggingfaceURLChat.exponential_base
+      ~HuggingfaceURLChat.jitter
+      ~HuggingfaceURLChat.max_retries
+      ~HuggingfaceURLChat.model_params
+   
+   
+
+   .. rubric:: Definitions

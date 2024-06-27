@@ -1,0 +1,35 @@
+artkit.model.llm.history.AssistantMessage
+=========================================
+
+.. currentmodule:: artkit.model.llm.history
+
+.. autoclass:: AssistantMessage
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~AssistantMessage.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~AssistantMessage.ROLE
+      ~AssistantMessage.role
+      ~AssistantMessage.text
+   
+   
+
+   .. rubric:: Definitions

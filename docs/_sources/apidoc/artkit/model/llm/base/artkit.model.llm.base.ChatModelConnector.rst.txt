@@ -1,0 +1,46 @@
+artkit.model.llm.base.ChatModelConnector
+========================================
+
+.. currentmodule:: artkit.model.llm.base
+
+.. autoclass:: ChatModelConnector
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~ChatModelConnector.get_api_key
+      ~ChatModelConnector.get_client
+      ~ChatModelConnector.get_default_api_key_env
+      ~ChatModelConnector.get_model_params
+      ~ChatModelConnector.get_response
+      ~ChatModelConnector.to_expression
+      ~ChatModelConnector.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~ChatModelConnector.model_id
+      ~ChatModelConnector.system_prompt
+      ~ChatModelConnector.api_key_env
+      ~ChatModelConnector.initial_delay
+      ~ChatModelConnector.exponential_base
+      ~ChatModelConnector.jitter
+      ~ChatModelConnector.max_retries
+      ~ChatModelConnector.model_params
+   
+   
+
+   .. rubric:: Definitions

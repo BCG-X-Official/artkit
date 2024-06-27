@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>JSON Output Validation &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/bcgx.css?v=9d1a9f92" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/advanced_tutorials/json_output_validation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced Design Patterns" href="advanced_design_patterns.html" />
+    <link rel="prev" title="Cache Management" href="cache_management.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to ARTKIT</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/genai_testing_and_evaluation.html">Gen AI Testing and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/building_your_first_artkit_pipeline.html">Building Your First ARTKIT Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/connecting_to_genai_models.html">Connecting to Gen AI Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Challenges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/prompt_augmentation.html">Prompt Augmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/single_turn_personas.html">Single-Turn Personas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/multi_turn_personas.html">Multi-Turn Personas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multimodal Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multimodal/image_generation_and_evaluation.html">Image Generation and Evaluation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/evaluator_design.html">Evaluator Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/interpreting_run_results.html">Interpreting Run Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="creating_new_model_classes.html">Creating New Model Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt_formatting.html">Prompt Formatting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache_management.html">Cache Management</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">JSON Output Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_design_patterns.html">Advanced Design Patterns</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">JSON Output...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="JSON-Output-Validation">
+<h1>JSON Output Validation<a class="headerlink" href="#JSON-Output-Validation" title="Link to this heading">#</a></h1>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">#</a></h2>
+<p>When setting up ARTKIT pipelines, you’ll often want to parse multiple values from a model’s response. In these cases, prompting the model to return JSON-formatted output is incredibly useful.</p>
+<p>Many of the best commercial models are able to reliably produce JSONs in a particular format. Some LLM providers can even guarantee a specific output format, by setting invalid token probabilities to 0 when sampling the next token.</p>
+<p>However, if you are using a weaker model, have a high temperature, or require a complex custom format for your model response (perhaps not even JSON), it can be helpful to validate the output before passing it to the next step in the pipeline.</p>
+<p>To support JSON formatting, ARTKIT provides the <code class="docutils literal notranslate"><span class="pre">parse_json_autofix</span></code> utility function. Below, we’ll show you how it works.</p>
+</section>
+<section id="Example">
+<h2>Example<a class="headerlink" href="#Example" title="Link to this heading">#</a></h2>
+<p>We’ll start with a simple example that uses a JSON output format to pass model results between pipeline steps. In this case, we’ll ask an LLM for the five most populous states, and then multiply their population by two:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+<span class="kn">from</span> <span class="nn">artkit.model.llm.util</span> <span class="kn">import</span> <span class="n">parse_json_autofix</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+
+<span class="n">gpt_chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">,</span>
+        <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+     <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;./cache/json_output_validation.db&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Given an input integer &#39;N&#39;, list the &#39;N&#39; most populous states in the United States.</span>
+
+<span class="s2"># Output Format</span>
+<span class="s2">[</span>
+<span class="s2">  {{</span>
+<span class="s2">    &quot;state&quot;: &quot;&lt;state1&gt;&quot;,</span>
+<span class="s2">    &quot;population&quot;: &lt;state1 population&gt;,</span>
+<span class="s2">  }},</span>
+<span class="s2">  {{</span>
+<span class="s2">    &quot;state&quot;: &quot;&lt;state2&gt;&quot;,</span>
+<span class="s2">    &quot;populate&quot;: &lt;state2 population&gt;,</span>
+<span class="s2">  }}</span>
+<span class="s2">]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_states</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+        <span class="n">json_response</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">json_response</span><span class="p">:</span>
+            <span class="c1"># Note that the model response will always be a string, so we need to explicitly</span>
+            <span class="c1">#   cast &quot;population&quot; as an into to use in later steps</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">],</span> <span class="s2">&quot;population&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">])}</span>
+
+<span class="k">def</span> <span class="nf">multiply_population</span><span class="p">(</span><span class="n">population</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;factor&quot;</span><span class="p">:</span> <span class="n">factor</span><span class="p">,</span> <span class="s2">&quot;multiplied_population&quot;</span><span class="p">:</span> <span class="n">population</span> <span class="o">*</span> <span class="n">factor</span><span class="p">}</span>
+
+
+<span class="c1"># Run the steps and print results</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;get_states&quot;</span><span class="p">,</span> <span class="n">get_states</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">gpt_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">state_prompt</span><span class="p">)),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_population&quot;</span><span class="p">,</span> <span class="n">multiply_population</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th colspan="2" halign="left">get_states</th>
+      <th colspan="2" halign="left">multiply_population</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>n</th>
+      <th>state</th>
+      <th>population</th>
+      <th>factor</th>
+      <th>multiplied_population</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>California</td>
+      <td>39538223</td>
+      <td>2</td>
+      <td>79076446</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>Texas</td>
+      <td>29145505</td>
+      <td>2</td>
+      <td>58291010</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>Florida</td>
+      <td>21538187</td>
+      <td>2</td>
+      <td>43076374</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>New York</td>
+      <td>20201249</td>
+      <td>2</td>
+      <td>40402498</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Pennsylvania</td>
+      <td>13002700</td>
+      <td>2</td>
+      <td>26005400</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>If the model made small errors in the output format, the above pipeline would fail with a <code class="docutils literal notranslate"><span class="pre">JSONDecodeError</span></code>. We’ll handle this by calling <code class="docutils literal notranslate"><span class="pre">parse_json_autofix</span></code> before loading the raw model output as a JSON, which will use an LLM to attempt to fix any errors:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">error_state_prompt</span> <span class="o">=</span> <span class="n">state_prompt</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">You must introduce a few small errors in the output format, such as adding or removing commas, colons, quotation marks.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_and_validate_states</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">error_state_prompt</span><span class="p">)</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+        <span class="c1"># Instead of calling json.loads directly, we&#39;ll pass the result to parse_json_autofix</span>
+        <span class="n">parsed_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">parse_json_autofix</span><span class="p">(</span><span class="n">json</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">parsed_response</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">],</span> <span class="s2">&quot;population&quot;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]}</span>
+
+
+<span class="c1"># Run the steps and print results</span>
+<span class="n">error_steps</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;get_states&quot;</span><span class="p">,</span> <span class="n">get_and_validate_states</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">gpt_chat</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_population&quot;</span><span class="p">,</span> <span class="n">multiply_population</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">error_steps</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:artkit.model.llm.util._json:Attempting to fix malformed JSON:
+[
+  {
+    state: &#34;California&#34;,
+    population: 39538223
+  },
+  {
+    state: &#34;Texas&#34;
+    population: 29145505
+  },
+  {
+    &#34;state&#34;: &#34;Florida&#34;,
+    population: &#34;21538187&#34;
+  },
+  {
+    state: &#34;New York&#34;,
+    &#34;population&#34;: 20201249
+  },
+  {
+    state: &#34;Pennsylvania&#34;,
+    population: 12820878
+  }
+]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th colspan="2" halign="left">get_states</th>
+      <th colspan="2" halign="left">multiply_population</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>n</th>
+      <th>state</th>
+      <th>population</th>
+      <th>factor</th>
+      <th>multiplied_population</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>California</td>
+      <td>39538223</td>
+      <td>2</td>
+      <td>79076446</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>Texas</td>
+      <td>29145505</td>
+      <td>2</td>
+      <td>58291010</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>Florida</td>
+      <td>21538187</td>
+      <td>2</td>
+      <td>43076374</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>New York</td>
+      <td>20201249</td>
+      <td>2</td>
+      <td>40402498</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Pennsylvania</td>
+      <td>12820878</td>
+      <td>2</td>
+      <td>25641756</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>ARTKIT logs a warning that the original JSON output was malformed — however, we can see that after running <code class="docutils literal notranslate"><span class="pre">parse_json_autofix</span></code>, our final results are the same as in the initial run. Under the hood, <code class="docutils literal notranslate"><span class="pre">parse_json_autofix</span></code> sends a query to the LLM with the malformed json together with the error message, and asks the LLM to fix the error message.</p>
+</section>
+<section id="Concluding-remarks">
+<h2>Concluding remarks<a class="headerlink" href="#Concluding-remarks" title="Link to this heading">#</a></h2>
+<p>In order to enforce that an LLM’s output follows a particular format, the most reliable method is to normalize token probabilities after deterministically setting all invalid tokens’ probabilities to 0. However, this approach is infeasible for most projects, since they often do not have access to the model. For the special case of JSON and the latest OpenAI models, you can use the <code class="docutils literal notranslate"><span class="pre">response_format</span></code> <a class="reference external" href="https://platform.openai.com/docs/guides/text-generation/json-mode">parameter</a>.</p>
+<p>This notebook uses an approach that works more generally:</p>
+<ul class="simple">
+<li><p>apply a parser to the output</p></li>
+<li><p>show any eventual parsing errors to the LLM</p></li>
+<li><p>ask the LLM to resolve the error</p></li>
+</ul>
+<p>We have shown how to efficiently implement this approach with ARTKIT’s <code class="docutils literal notranslate"><span class="pre">parse_json_autofix</span></code>, which can be used to validate and fix JSON-formatted output from any LLM.</p>
+<p>If you have other ideas on this topic, please consider <a class="reference internal" href="../../contributor_guide/index.html"><span class="doc">contributing</span></a>!</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Concluding-remarks">Concluding remarks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

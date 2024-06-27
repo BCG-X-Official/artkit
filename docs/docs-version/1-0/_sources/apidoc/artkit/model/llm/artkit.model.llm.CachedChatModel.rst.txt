@@ -1,0 +1,40 @@
+artkit.model.llm.CachedChatModel
+================================
+
+.. currentmodule:: artkit.model.llm
+
+.. autoclass:: CachedChatModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CachedChatModel.clear_cache
+      ~CachedChatModel.get_model_params
+      ~CachedChatModel.get_response
+      ~CachedChatModel.to_expression
+      ~CachedChatModel.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CachedChatModel.model_id
+      ~CachedChatModel.system_prompt
+      ~CachedChatModel.cache
+      ~CachedChatModel.model
+   
+   
+
+   .. rubric:: Definitions

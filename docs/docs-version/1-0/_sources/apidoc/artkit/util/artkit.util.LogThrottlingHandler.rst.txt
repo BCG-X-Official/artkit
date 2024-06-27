@@ -1,0 +1,48 @@
+artkit.util.LogThrottlingHandler
+================================
+
+.. currentmodule:: artkit.util
+
+.. autoclass:: LogThrottlingHandler
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~LogThrottlingHandler.acquire
+      ~LogThrottlingHandler.addFilter
+      ~LogThrottlingHandler.close
+      ~LogThrottlingHandler.createLock
+      ~LogThrottlingHandler.emit
+      ~LogThrottlingHandler.filter
+      ~LogThrottlingHandler.flush
+      ~LogThrottlingHandler.format
+      ~LogThrottlingHandler.get_name
+      ~LogThrottlingHandler.handle
+      ~LogThrottlingHandler.handleError
+      ~LogThrottlingHandler.release
+      ~LogThrottlingHandler.removeFilter
+      ~LogThrottlingHandler.setFormatter
+      ~LogThrottlingHandler.setLevel
+      ~LogThrottlingHandler.set_name
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~LogThrottlingHandler.name
+   
+   
+
+   .. rubric:: Definitions

@@ -1,0 +1,45 @@
+artkit.model.llm.huggingface.base.HuggingfaceCompletionConnectorMixin
+=====================================================================
+
+.. currentmodule:: artkit.model.llm.huggingface.base
+
+.. autoclass:: HuggingfaceCompletionConnectorMixin
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HuggingfaceCompletionConnectorMixin.get_api_key
+      ~HuggingfaceCompletionConnectorMixin.get_client
+      ~HuggingfaceCompletionConnectorMixin.get_completion
+      ~HuggingfaceCompletionConnectorMixin.get_default_api_key_env
+      ~HuggingfaceCompletionConnectorMixin.get_model_params
+      ~HuggingfaceCompletionConnectorMixin.get_tokenizer
+      ~HuggingfaceCompletionConnectorMixin.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HuggingfaceCompletionConnectorMixin.model_id
+      ~HuggingfaceCompletionConnectorMixin.api_key_env
+      ~HuggingfaceCompletionConnectorMixin.initial_delay
+      ~HuggingfaceCompletionConnectorMixin.exponential_base
+      ~HuggingfaceCompletionConnectorMixin.jitter
+      ~HuggingfaceCompletionConnectorMixin.max_retries
+      ~HuggingfaceCompletionConnectorMixin.model_params
+   
+   
+
+   .. rubric:: Definitions

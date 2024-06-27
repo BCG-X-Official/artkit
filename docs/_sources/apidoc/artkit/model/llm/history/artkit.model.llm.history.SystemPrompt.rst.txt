@@ -1,0 +1,35 @@
+artkit.model.llm.history.SystemPrompt
+=====================================
+
+.. currentmodule:: artkit.model.llm.history
+
+.. autoclass:: SystemPrompt
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~SystemPrompt.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~SystemPrompt.ROLE
+      ~SystemPrompt.role
+      ~SystemPrompt.text
+   
+   
+
+   .. rubric:: Definitions

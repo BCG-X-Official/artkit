@@ -1,0 +1,746 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>FAQ &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/css/bcgx.css?v=9d1a9f92" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'faq';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Release Notes" href="_generated/release_notes.html" />
+    <link rel="prev" title="Package Builds" href="contributor_guide/package_builds.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="faq">
+<span id="id1"></span><h1>FAQ<a class="headerlink" href="#faq" title="Link to this heading">#</a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#about-the-project" id="id4">About the project</a></p>
+<ul>
+<li><p><a class="reference internal" href="#what-is-artkit-for" id="id5">What is ARTKIT for?</a></p></li>
+<li><p><a class="reference internal" href="#who-developed-artkit-and-why" id="id6">Who developed ARTKIT, and why?</a></p></li>
+<li><p><a class="reference internal" href="#is-artkit-an-effective-substitute-for-manual-testing-and-evaluation" id="id7">Is ARTKIT an effective substitute for manual testing and evaluation?</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#about-the-name" id="id8">About the name</a></p>
+<ul>
+<li><p><a class="reference internal" href="#what-is-red-teaming" id="id9">What is red teaming?</a></p></li>
+<li><p><a class="reference internal" href="#if-artkit-does-automated-red-teaming-and-testing-shouldnt-it-be-called-arttkit" id="id10">If ARTKIT does Automated Red Teaming and Testing, shouldn’t it be called ARTTKIT?</a></p></li>
+<li><p><a class="reference internal" href="#what-does-the-kit-in-artkit-stand-for" id="id11">What does the KIT in ARTKIT stand for?</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#design-decisions" id="id12">Design decisions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#why-do-i-have-to-write-asynchronous-functions-to-use-artkit" id="id13">Why do I have to write asynchronous functions to use ARTKIT?</a></p></li>
+<li><p><a class="reference internal" href="#why-does-artkit-use-llms-for-everything" id="id14">Why does ARTKIT use LLMs for everything?</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#limitations" id="id15">Limitations</a></p>
+<ul>
+<li><p><a class="reference internal" href="#why-can-t-i-push-a-button-and-get-fully-automated-report-card-for-my-gen-ai-system" id="id16">Why can’t I push a button and get fully automated report card for my Gen AI system?</a></p></li>
+<li><p><a class="reference internal" href="#why-can-t-artkit-output-a-simple-metric-to-tell-me-if-my-application-is-ready-to-launch" id="id17">Why can’t ARTKIT output a simple metric to tell me if my application is ready to launch?</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#using-artkit" id="id18">Using ARTKIT</a></p>
+<ul>
+<li><p><a class="reference internal" href="#can-i-integrate-my-gen-ai-application-into-an-artkit-pipeline" id="id19">Can I integrate my Gen AI application into an ARTKIT pipeline?</a></p></li>
+<li><p><a class="reference internal" href="#does-artkit-support-testing-and-evaluation-for-multimodal-systems" id="id20">Does ARTKIT support testing and evaluation for multimodal systems?</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#contributing" id="id21">Contributing</a></p>
+<ul>
+<li><p><a class="reference internal" href="#how-can-i-contribute-to-artkit" id="id22">How can I contribute to ARTKIT?</a></p></li>
+<li><p><a class="reference internal" href="#how-long-will-it-take-for-my-issue-or-pull-request-to-get-attention" id="id23">How long will it take for my issue or pull request to get attention?</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="about-the-project">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">About the project</a><a class="headerlink" href="#about-the-project" title="Link to this heading">#</a></h2>
+<section id="what-is-artkit-for">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">What is ARTKIT for?</a><a class="headerlink" href="#what-is-artkit-for" title="Link to this heading">#</a></h3>
+<p>ARTKIT is an Python framework for building fast, flexible, robust
+pipelines to automate testing and evaluation of Gen AI systems.</p>
+</section>
+<section id="who-developed-artkit-and-why">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Who developed ARTKIT, and why?</a><a class="headerlink" href="#who-developed-artkit-and-why" title="Link to this heading">#</a></h3>
+<p>ARTKIT was developed by data scientists and engineers at <a class="reference external" href="https://www.bcg.com/x">BCG X</a>
+in response to the growing need for a scalable, efficient, and effective framework
+for testing and evaluating Gen AI systems.</p>
+<p>We felt this need acutely in our work with clients, and we wanted to share our solution
+with the broader community to help accelerate the development of proficient, equitable, safe,
+and secure Gen AI systems.</p>
+<p>In the end, we believe all boats rise with the tide of Responsible Gen AI. When Gen AI systems
+fail to deliver their intended value, it can cause far reaching harms, erode trust in AI, and
+slow down progress for everyone.</p>
+</section>
+<section id="is-artkit-an-effective-substitute-for-manual-testing-and-evaluation">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Is ARTKIT an effective substitute for manual testing and evaluation?</a><a class="headerlink" href="#is-artkit-an-effective-substitute-for-manual-testing-and-evaluation" title="Link to this heading">#</a></h3>
+<p>No! We emphatically believe that manual testing and evaluation is an essential
+element of testing any Gen AI system that interacts with humans.
+Automated testing and evaluation is a powerful tool for enhancing and supplementing
+human efforts, but human expertise, ingenuity, and judgement is
+necessary to effectively map risk landscapes, develop strong tests, and
+disambiguate tricky evaluations.</p>
+</section>
+</section>
+<section id="about-the-name">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">About the name</a><a class="headerlink" href="#about-the-name" title="Link to this heading">#</a></h2>
+<section id="what-is-red-teaming">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">What is red teaming?</a><a class="headerlink" href="#what-is-red-teaming" title="Link to this heading">#</a></h3>
+<p>The term <em>red teaming</em> originates from the U.S. military, where it
+refers to simulating attacks from an adversary to pressure test military
+defenses. Later, the term was adopted by the cybersecurity community to
+describe simulated attacks on an organization’s IT infrastructure.</p>
+<p>In the context of Gen AI systems, we think of red teaming as being
+broader than adversarial attacks, because a purely adversarial focus
+does not capture the scope of risks presented by this technology. In
+particular:</p>
+<ol class="arabic simple">
+<li><p>Harmful, undesirable behavior of Gen AI systems can arise during both
+adversarial and innocent usage. Thus, it is important to test both
+adversarial and non-adversarial inputs.</p></li>
+<li><p>Guardrails which prevent a Gen AI system from producing certain
+harmful outputs may simultaneously reduce the system’s proficiency in
+its intended domain, exposing a different set of risks. Thus, it is
+important to test for both harmfulness and proficiency.</p></li>
+</ol>
+<p>For these reasons, we often describe any systematic effort to identify
+undesirable behavior in a Gen AI system as “red teaming”. However, given
+the common association of Red Teaming with adversarial threats, our
+official description of ARTKIT includes the phrase <em>Red Teaming &amp;
+Testing</em> to underscore that our scope is broader than adversarial attacks.</p>
+</section>
+<section id="if-artkit-does-automated-red-teaming-and-testing-shouldnt-it-be-called-arttkit">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">If ARTKIT does Automated Red Teaming and Testing, shouldn’t it be called ARTTKIT?</a><a class="headerlink" href="#if-artkit-does-automated-red-teaming-and-testing-shouldnt-it-be-called-arttkit" title="Link to this heading">#</a></h3>
+<p>We acknowledge the inexactitude of our acronym and realize this might trouble our
+more exacting users. Our decision reflects a preference for brevity and simplicity
+which we hope facilitates recollection and adoption of our tool.</p>
+</section>
+<section id="what-does-the-kit-in-artkit-stand-for">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">What does the KIT in ARTKIT stand for?</a><a class="headerlink" href="#what-does-the-kit-in-artkit-stand-for" title="Link to this heading">#</a></h3>
+<p>Nothing. ARTKIT is the Automated Red Teaming (ART) and testing toolkit. We suggested
+calling it ARTkit, but marketing said we had to choose between “artkit” and “ARTKIT”.
+We thought all-caps would be more readable, so that’s how our library became ARTKIT.</p>
+</section>
+</section>
+<section id="design-decisions">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Design decisions</a><a class="headerlink" href="#design-decisions" title="Link to this heading">#</a></h2>
+<section id="why-do-i-have-to-write-asynchronous-functions-to-use-artkit">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Why do I have to write asynchronous functions to use ARTKIT?</a><a class="headerlink" href="#why-do-i-have-to-write-asynchronous-functions-to-use-artkit" title="Link to this heading">#</a></h3>
+<p>Well, you only <em>have</em> to write asynchronous functions to work with ARTKIT’s built-in
+model classes. ARTKIT pipelines are perfectly capable of running synchronous steps.
+You will just have to create you own model classes if you wish to use ARTKIT to
+make synchronous API calls to our supported model providers.</p>
+<p>This design decision is intended to nudge users towards best practices for
+developing pipelines which make large numbers of API calls. While asynchronous
+programming may be unfamiliar to some users, it is a relatively simple set of
+patterns to learn, and in the age of Gen AI, it is easy to get help writing
+asynchronous functions.</p>
+</section>
+<section id="why-does-artkit-use-llms-for-everything">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Why does ARTKIT use LLMs for everything?</a><a class="headerlink" href="#why-does-artkit-use-llms-for-everything" title="Link to this heading">#</a></h3>
+<p>We are biased towards leveraging LLMs throughout the testing and
+evaluation process because of the ease of adapting LLMs to the wide
+variety and complexity of use cases enabled by Gen AI. While the
+compute has a cost, we find that these costs are often dwarfed by the
+direct and indirect costs of alternative options:</p>
+<ol class="arabic simple">
+<li><p>Testing at scale with manual labor typically requires
+recruiting and managing a network of temporary workers</p></li>
+<li><p>Testing at scale with traditional machine learning methods is
+technically challenging to tailor for specific use cases</p></li>
+<li><p>NOT testing at scale leaves an organization exposed to unknown risks</p></li>
+</ol>
+<p>Of course, LLMs are overkill for some tasks and we advocate for using
+the simplest approach that gets the job done. ARTKIT components can
+easily be customized to use non-LLM techniques. See our tutorial on
+<a class="reference internal" href="user_guide/advanced_tutorials/creating_new_model_classes.html"><span class="doc">Creating New Model Classes</span></a>.</p>
+<p>If you develop a component which is likely to be useful for a wide range of use
+cases, please consider contributing to ARTKIT! Visit our
+<a class="reference internal" href="contributor_guide/index.html#contributor-guide-index"><span class="std std-ref">Contributor Guide</span></a> for more information.</p>
+</section>
+</section>
+<section id="limitations">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Limitations</a><a class="headerlink" href="#limitations" title="Link to this heading">#</a></h2>
+<section id="why-can-t-i-push-a-button-and-get-fully-automated-report-card-for-my-gen-ai-system">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Why can’t I push a button and get fully automated report card for my Gen AI system?</a><a class="headerlink" href="#why-can-t-i-push-a-button-and-get-fully-automated-report-card-for-my-gen-ai-system" title="Link to this heading">#</a></h3>
+<p>Unfortunately, when it comes to testing and evaluation, there is no free lunch.
+ARTKIT does not provide a “push button” solution because experience has taught us
+that effective testing and evaluation must be tailored to each Gen AI use case.
+Automation is a strategy for scaling and accelerating testing and evaluation,
+not a substitute for case-specific risk landscape mapping, domain expertise, and critical thinking.</p>
+</section>
+<section id="why-can-t-artkit-output-a-simple-metric-to-tell-me-if-my-application-is-ready-to-launch">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Why can’t ARTKIT output a simple metric to tell me if my application is ready to launch?</a><a class="headerlink" href="#why-can-t-artkit-output-a-simple-metric-to-tell-me-if-my-application-is-ready-to-launch" title="Link to this heading">#</a></h3>
+<p>Because it isn’t possible, and we emphatically refuse to indulge in dangerous
+over-simplifications. Testing and evaluation metrics are influenced by too many
+factors and ignore too much context to be meaningful on their own. Readiness for
+launch depends on the quality and comprehensiveness of testing and evaluation,
+the diversity and severity of persistent failures, the inherent risk of the use
+case, and the risk tolerance of stakeholders.</p>
+<p>In general, we recommend two criteria for deciding when enough testing has been done:</p>
+<ol class="arabic simple">
+<li><p>The discovery rate of new system failures has plateaued, indicating
+diminishing returns to further testing. At this point, the remaining
+unresolved failures comprises <em>residual risk</em> in the system.</p></li>
+<li><p>The residual risk is reviewed by a committee of stakeholders and
+experts who decide whether the risks are acceptable. The committee
+should also weigh the risks against the expected <em>benefits</em> of
+deploying the system.</p></li>
+</ol>
+</section>
+</section>
+<section id="using-artkit">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">Using ARTKIT</a><a class="headerlink" href="#using-artkit" title="Link to this heading">#</a></h2>
+<section id="can-i-integrate-my-gen-ai-application-into-an-artkit-pipeline">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Can I integrate my Gen AI application into an ARTKIT pipeline?</a><a class="headerlink" href="#can-i-integrate-my-gen-ai-application-into-an-artkit-pipeline" title="Link to this heading">#</a></h3>
+<p>Yes! Provided your application has an API endpoint, you can create a custom class for
+sending and receiving data from your endpoint. See the tutorial on
+<a class="reference internal" href="user_guide/advanced_tutorials/creating_new_model_classes.html"><span class="doc">Creating New Model Classes</span></a>
+in the ARTKIT documentation.</p>
+</section>
+<section id="does-artkit-support-testing-and-evaluation-for-multimodal-systems">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Does ARTKIT support testing and evaluation for multimodal systems?</a><a class="headerlink" href="#does-artkit-support-testing-and-evaluation-for-multimodal-systems" title="Link to this heading">#</a></h3>
+<p>Currently, ARTKIT supports text-to-image and image-to-text models from
+OpenAI (see our tutorial on <a class="reference internal" href="user_guide/multimodal/image_generation_and_evaluation.html"><span class="doc">Generating and Evaluating Images</span></a>).</p>
+<p>If you need to connect to a model which is not supported by ARTKIT, see our tutorial on
+<a class="reference internal" href="user_guide/advanced_tutorials/creating_new_model_classes.html"><span class="doc">Creating New Model Classes</span></a>,
+and please consider <a class="reference internal" href="contributor_guide/index.html#contributor-guide-index"><span class="std std-ref">Contributor Guide</span></a> to ARTKIT!</p>
+<p>We also welcome contributions of multimodal examples to our <a class="reference internal" href="examples/index.html"><span class="doc">Examples</span></a>
+section, which includes end-to-end testing and evaluation examples inspired by real Gen AI use cases.</p>
+</section>
+</section>
+<section id="contributing">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">Contributing</a><a class="headerlink" href="#contributing" title="Link to this heading">#</a></h2>
+<section id="how-can-i-contribute-to-artkit">
+<h3><a class="toc-backref" href="#id22" role="doc-backlink">How can I contribute to ARTKIT?</a><a class="headerlink" href="#how-can-i-contribute-to-artkit" title="Link to this heading">#</a></h3>
+<p>We enthusiastically welcome contributions to ARTKIT!
+See the <a class="reference internal" href="contributor_guide/index.html#contributor-guide-index"><span class="std std-ref">Contributor Guide</span></a> for information on
+contributing to ARTKIT.</p>
+</section>
+<section id="how-long-will-it-take-for-my-issue-or-pull-request-to-get-attention">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">How long will it take for my issue or pull request to get attention?</a><a class="headerlink" href="#how-long-will-it-take-for-my-issue-or-pull-request-to-get-attention" title="Link to this heading">#</a></h3>
+<p>Response times will vary based on the urgency of the issue, bandwidth of
+the maintainers, and complexity of proposed changes. We will make every
+effort to respond within 2 weeks, but cannot make guarantees. We ask for
+your understanding and emphasize that all contributions are appreciated
+even if responses sometimes come slowly.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-project">About the project</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-artkit-for">What is ARTKIT for?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-developed-artkit-and-why">Who developed ARTKIT, and why?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-artkit-an-effective-substitute-for-manual-testing-and-evaluation">Is ARTKIT an effective substitute for manual testing and evaluation?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-name">About the name</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-red-teaming">What is red teaming?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-artkit-does-automated-red-teaming-and-testing-shouldnt-it-be-called-arttkit">If ARTKIT does Automated Red Teaming and Testing, shouldn’t it be called ARTTKIT?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-the-kit-in-artkit-stand-for">What does the KIT in ARTKIT stand for?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-decisions">Design decisions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-i-have-to-write-asynchronous-functions-to-use-artkit">Why do I have to write asynchronous functions to use ARTKIT?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-artkit-use-llms-for-everything">Why does ARTKIT use LLMs for everything?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-can-t-i-push-a-button-and-get-fully-automated-report-card-for-my-gen-ai-system">Why can’t I push a button and get fully automated report card for my Gen AI system?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-can-t-artkit-output-a-simple-metric-to-tell-me-if-my-application-is-ready-to-launch">Why can’t ARTKIT output a simple metric to tell me if my application is ready to launch?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-artkit">Using ARTKIT</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-i-integrate-my-gen-ai-application-into-an-artkit-pipeline">Can I integrate my Gen AI application into an ARTKIT pipeline?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-artkit-support-testing-and-evaluation-for-multimodal-systems">Does ARTKIT support testing and evaluation for multimodal systems?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-i-contribute-to-artkit">How can I contribute to ARTKIT?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-long-will-it-take-for-my-issue-or-pull-request-to-get-attention">How long will it take for my issue or pull request to get attention?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

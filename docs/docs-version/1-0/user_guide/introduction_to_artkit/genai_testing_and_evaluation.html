@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Gen AI Testing and Evaluation &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/bcgx.css?v=9d1a9f92" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/introduction_to_artkit/genai_testing_and_evaluation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Building Your First ARTKIT Pipeline" href="building_your_first_artkit_pipeline.html" />
+    <link rel="prev" title="User Guide" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to ARTKIT</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Gen AI Testing and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building_your_first_artkit_pipeline.html">Building Your First ARTKIT Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting_to_genai_models.html">Connecting to Gen AI Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Challenges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/prompt_augmentation.html">Prompt Augmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/single_turn_personas.html">Single-Turn Personas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/multi_turn_personas.html">Multi-Turn Personas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multimodal Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multimodal/image_generation_and_evaluation.html">Image Generation and Evaluation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/evaluator_design.html">Evaluator Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/interpreting_run_results.html">Interpreting Run Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/creating_new_model_classes.html">Creating New Model Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/prompt_formatting.html">Prompt Formatting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/cache_management.html">Cache Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/json_output_validation.html">JSON Output Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/advanced_design_patterns.html">Advanced Design Patterns</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Gen AI...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="gen-ai-testing-and-evaluation">
+<h1>Gen AI Testing and Evaluation<a class="headerlink" href="#gen-ai-testing-and-evaluation" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>As Gen AI systems become increasingly powerful and integrated into critical processes, rigorous testing and evaluation
+is paramount to ensuring they operate safely, ethically, and effectively.</p>
+<p>Testing and evaluating Gen AI systems requires a multifaceted approach that includes assessing a system’s proficiency at its
+intended function, as well as its adherence to ethical guidelines, compliance with legal and regulatory requirements, resilience
+to adversarial attacks, and ability to handle a wide range of scenarios and inputs.</p>
+<p>ARTKIT, the Automated Red Teaming (ART) and testing toolkit, provides a framework for automating key steps of the testing and evaluation process,
+including generating test prompts, interacting with Gen AI systems, evaluating responses, and integrating these steps into robust end-to-end pipelines.
+The outputs of ARTKIT pipelines can be easily integrated into reporting dashboards, enabling stakeholders to gain insights into the performance of
+Gen AI systems and identify areas for improvement.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Automated approaches are enhancements, not replacements, of human-driven Responsible AI testing and evaluation. Manual
+testing, human-in-the-loop evaluation, expert review, and <cite>critical thinking</cite> are essential and irreplaceable components of a robust
+testing and evaluation strategy.</p>
+</div>
+<p>This section outlines foundational concepts needed to plan and develop automated testing and evaluation pipelines using ARTKIT, including
+deciding what risks to test for, which types of tests to employ, which evaluation metrics to use, and how to best design ARTKIT pipelines
+to generate actionable insights into the performance of Gen AI systems.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Throughout the documentation, we refer to the Gen AI system being tested as the <em>target system</em>.</p>
+</div>
+</section>
+<section id="automated-test-eval">
+<h2>Automated Test &amp; Eval<a class="headerlink" href="#automated-test-eval" title="Link to this heading">#</a></h2>
+<p>Automated testing and evaluation of Gen AI systems involves a series of steps that can be automated with ARTKIT.
+At a high level, these steps include:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Target System Setup</strong></dt><dd><ul class="simple">
+<li><p>To integrate a target system into ARTKIT pipelines, it must have an endpoint that receives prompts and generates responses.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Generating Challenges</strong></dt><dd><ul class="simple">
+<li><p>A <em>challenge</em> is a test prompt which is presented to the target system to elicit a response.
+They can be generated manually, sampled and/or augmented from prompt libraries, or generated <em>de novo</em> using LLMs.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Evaluating Interactions</strong></dt><dd><ul class="simple">
+<li><p>Target system responses are evaluated with metrics tailored to the use case. Gen AI evaluation metrics may
+include factuality, relevance, completeness, coherence, and many other dimensions related to system performance.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Reporting</strong></dt><dd><ul class="simple">
+<li><p>Evaluation results must be presented in a structured way to provide insights into target system performance and
+specific areas for improvement.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>ARTKIT supports combining these steps into end-to-end pipelines that automate the testing and evaluation process, allowing for rapid, scalable,
+and repeatable assessment of Gen AI systems.</p>
+<p>Before diving into each of these steps, it is important to establish what you are testing for, as this dictates the types of challenges,
+evaluation metrics, and reporting mechanisms that are applicable for your use case. The process of identifying and prioritizing risks is known
+as <em>risk landscape mapping</em>.</p>
+</section>
+<section id="risk-landscape-mapping">
+<h2>Risk Landscape Mapping<a class="headerlink" href="#risk-landscape-mapping" title="Link to this heading">#</a></h2>
+<p>The question of which risks to test for is a critical starting point for every project. It determines the scope, depth, and focus of the
+testing and evaluation process. At a high level, risk landscape mapping begins with four key questions:</p>
+<a class="reference internal image-reference" href="../../_images/risk_landscape.png"><img alt="Risk Landscape Key Questions" class="align-center" src="../../_images/risk_landscape.png" style="width: 800px;" />
+</a>
+<p>It is impossible to provide a comprehensive list of all the factors that should be considered when testing a Gen AI system, but the following
+considerations provide a starting point for developing a strategy for testing and evaluating your Gen AI use case:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Use Case and Intended Functionality</strong></dt><dd><ul class="simple">
+<li><p>What is the primary use case of the target system? What tasks or functions is it designed to perform?
+What are the key performance indicators (KPIs) that define success for the target system?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Persona and Interactivity</strong></dt><dd><ul class="simple">
+<li><p>What “persona” should the system embody? How should the system handle unexpected inputs, out-of-scope requests, user feedback,
+corrections, emotional cues, or other forms of user interaction?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Robustness and Generalization</strong></dt><dd><ul class="simple">
+<li><p>What variations in input data could the target system encounter in real-world scenarios? For example, is the system likely to
+encounter user errors, multiple languages, noisy data, or other perturbations?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Adversarial Resilience</strong></dt><dd><ul class="simple">
+<li><p>What types of adversarial attacks or manipulations could the target system be exposed to? For example, is the system likely to
+encounter hackers, trolls, or other malicious actors?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Safety</strong></dt><dd><ul class="simple">
+<li><p>What types of harmful outputs could be unintentionally generated by the target system? For example, could the system produce misinformation,
+offensive content, or other harmful outputs in the course of normal user interactions?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Fairness and Bias</strong></dt><dd><ul class="simple">
+<li><p>Is there potential for the system to exhibit bias or unfairness in its outputs? How is fairness defined and measured in the context of the
+target system?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Explainability</strong></dt><dd><ul class="simple">
+<li><p>Is it important for users to understand how the target system arrived at its conclusions? How explainable are its decisions or outputs?</p></li>
+<li><p>Asking a Gen AI Evaluator to justify their evaluation can provide valuable insights into the decision-making process and help identify
+areas for improvement. In addition, asking Gen AI models to provide a justification for their response can improve the quality of the
+response, a phenomenon which has been described as <a class="reference external" href="https://arxiv.org/abs/2210.11610">self-improvement via rationale-augmented answers</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Performance Benchmarks and Baselines</strong></dt><dd><ul class="simple">
+<li><p>Are there existing performance benchmarks or baselines for the target system? How does the system compare to state-of-the-art models or
+human performance?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Ethical and Legal Considerations</strong></dt><dd><ul class="simple">
+<li><p>Are there ethical guidelines, legal requirements, or regulatory constraints that the target system must adhere to? For example, are there
+restrictions on the use of personal data, limitations on the content that can be generated, or requirements for transparency or fairness?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>By considering these factors, you can develop a comprehensive testing and evaluation strategy that covers a wide range of dimensions related to the
+performance, safety, security, and usability of the target system. This strategy can then guide the selection of appropriate testing paradigms, evaluation
+metrics, and reporting mechanisms to assess the system’s performance across these dimensions.</p>
+</section>
+<section id="challenge-paradigms">
+<h2>Challenge Paradigms<a class="headerlink" href="#challenge-paradigms" title="Link to this heading">#</a></h2>
+<p>There are several major paradigms for challenging a target system that differ in their structure, goals, and complexity. A given use case may require a combination of
+these challenge paradigms to comprehensively test the target system’s performance:</p>
+<a class="reference internal image-reference" href="../../_images/testing_paradigms.png"><img alt="Testing Paradigms" class="align-center" src="../../_images/testing_paradigms.png" style="width: 800px;" />
+</a>
+<p>A given paradigm may be more or less relevant depending on the use case and risk profile of the target system. As discussed in the next section,
+the paradigm also influences which evaluation metrics are applicable.</p>
+</section>
+<section id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
+<p>Evaluating the performance of Gen AI systems requires careful consideration of the risk landscape and the types of challenges being employed. Below,
+we highlight key evaluation metrics that may be relevant for different types of Gen AI use cases, as well as best practices for developing evaluation
+pipelines that provide valid and actionable insights.</p>
+<section id="metrics">
+<h3>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">#</a></h3>
+<p>Evaluation metrics should be interpretable and actionable, providing insights into the system’s performance that can guide improvements.
+Compared to traditional machine learning, evaluation metrics for Gen AI systems are typically nuanced and domain-specific, reflecting the
+diverse range of tasks and capabilities that Gen AI systems are designed to perform. These more complex evaluation metrics are themselves
+enabled by Gen AI models, which are readily adapted to specific evaluation tasks through prompt engineering and/or fine-tuning.</p>
+<p>Below is an illustrative list of evaluation metrics that may be relevant for different types of Gen AI use cases. This list is not
+exhaustive and is intended to provide a starting point for developing evaluation metrics for Gen AI systems. Depending on the use case,
+additional metrics may be relevant, and existing metrics may need to be adapted or combined to suit the needs of specific use cases.</p>
+<a class="reference internal image-reference" href="../../_images/evaluation_metrics.png"><img alt="Evaluation Metrics" class="align-center" src="../../_images/evaluation_metrics.png" style="width: 800px;" />
+</a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some evaluation metrics depend only on the target system response (e.g., toxicity), while others require the challenge prompt (e.g., relevance),
+and others a reference answer (e.g., factuality). <em>Fairness/Bias</em> assessment also requires statistical analysis of predictions
+or evaluation metrics across protected categories.</p>
+</div>
+</section>
+<section id="best-practices">
+<h3>Best practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h3>
+<p>Gen AI models are highly flexible and can be adapted to a wide range of evaluation tasks by designing appropriate prompts, therefore we recommend leveraging
+Gen AI models for evaluation whenever possible. When designing Gen AI evaluations, we recommend considering the following best practices:</p>
+<a class="reference internal image-reference" href="../../_images/evaluation_best_practices.png"><img alt="Evaluation Best Practices" class="align-center" src="../../_images/evaluation_best_practices.png" style="width: 800px;" />
+</a>
+<p>By following best practices and tailoring evaluation metrics to the requirements of your use case, you can develop a robust, comprehensive
+and insightful evaluation methodology.</p>
+</section>
+</section>
+<section id="reporting">
+<h2>Reporting<a class="headerlink" href="#reporting" title="Link to this heading">#</a></h2>
+<p>Reporting is the critical final step of a testing and evaluation pipeline. ARTKIT currently does not support automated reporting, but provides a framework
+for structuring pipeline outputs in a way that facilitates insightful summaries and integration into your organization’s preferred reporting framework.</p>
+<p>It is necessary to plan the structure of your final report before designing a testing and evaluation pipeline, since the desired report determines the nature
+of the insights your results will provide and should guide the development of challenges, evaluation metrics, and other components of the pipeline. The key
+questions to ask yourself are:</p>
+<ol class="arabic simple">
+<li><p><em>What insights do I want to gain from the evaluation results?</em></p></li>
+<li><p><em>What visualizations and summary metrics will facilitate these insights?</em></p></li>
+<li><p><em>What data structure will allow me to create these visualizations and metrics?</em></p></li>
+<li><p><em>How do I design my ARTKIT pipeline to produce outputs in this data structure?</em></p></li>
+</ol>
+<p>Working backwards from the desired output will help you to design pipelines that effectively identify
+patterns, trends, and outliers in the target system’s performance. For example, a summary that aggregates performance across…</p>
+<ul class="simple">
+<li><p><strong>… different challenge categories and evaluation metrics</strong> can help identify <em>which categories of inputs are most likely to cause issues for specific evaluation dimensions</em>.</p></li>
+<li><p><strong>… different goals and approaches of persona-generated challenges</strong> can help identify <em>which users and interaction approaches are most likely to cause issues</em>.</p></li>
+<li><p><strong>… different types of augmentations</strong> can help identify <em>which input styles or perturbations are most likely to cause issues</em>.</p></li>
+<li><p><strong>… different protected categories</strong> can help identify <em>whether the system’s outputs are biased with respect to different groups</em>.</p></li>
+</ul>
+<p>By designing pipelines with the final report in mind, you can ensure the results are meaningful, actionable, and insightful.</p>
+<p>Future versions of ARTKIT may support automated reporting, but for now, users are encouraged to visit the <a class="reference external" href="../../examples/index.html">Examples</a> section for realistic
+examples of how to use ARTKIT to design and implement insightful testing and evaluation pipelines.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-test-eval">Automated Test &amp; Eval</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-landscape-mapping">Risk Landscape Mapping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge-paradigms">Challenge Paradigms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best practices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting">Reporting</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

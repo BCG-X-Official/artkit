@@ -1,0 +1,55 @@
+artkit.model.diffusion
+======================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.diffusion
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: diffusion
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      CachedDiffusionModel
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+==========
+Submodules
+==========
+.. autosummary::
+   :toctree: diffusion
+   :template: custom-module-template.rst
+   :recursive:
+
+   artkit.model.diffusion.base
+   artkit.model.diffusion.openai
+

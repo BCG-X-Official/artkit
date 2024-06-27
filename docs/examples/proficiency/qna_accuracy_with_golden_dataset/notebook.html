@@ -1,0 +1,2391 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Q&amp;A Accuracy with Golden Datasets &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/bcgx.css?v=9d1a9f92" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/proficiency/qna_accuracy_with_golden_dataset/notebook';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Single-Turn Personas: Brand Conformity" href="../single_turn_persona_brand_conformity/notebook.html" />
+    <link rel="prev" title="Examples" href="../../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Proficiency</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Q&amp;A Accuracy with Golden Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../single_turn_persona_brand_conformity/notebook.html">Single-Turn Personas: Brand Conformity</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Equitability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../equitability/bias_detection_with_counterfactual_experiment/notebook.html">Bias Testing: Resume Scoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Safety</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../safety/chatbot_safety_with_adversarial_augmentation/notebook.html">Single-Turn Attacks: Augmenting BeaverTails</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Security</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../security/single_and_multiturn_prompt_exfiltration/notebook.html">Single and Multi-Turn Attacks: Prompt Exfiltration</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Q&amp;A...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Q&amp;A-Accuracy-with-Golden-Datasets">
+<h1>Q&amp;A Accuracy with Golden Datasets<a class="headerlink" href="#Q&A-Accuracy-with-Golden-Datasets" title="Link to this heading">#</a></h1>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">#</a></h2>
+<p>For many LLM use cases, an ability to provide accurate information is paramount. LLMs are susceptible to generating plausible but factually incorrect information, colloquially known as “hallucination”. While system designs such as <a class="reference external" href="https://aws.amazon.com/what-is/retrieval-augmented-generation/">Retrieval Augmented Generation</a> (RAG) help mitigate the risk of hallucination, RAG systems come with their own potential failure points, such as errors during retrieval from a knowledgebase or errors
+in the knowledgebase itself.</p>
+<p>LLM applications which generate incorrect information can pose significant risks. For instance, a sales chatbot that provides incorrect information about products can lead to poor customer experiences, reputational damage, and even legal liability. Thus, rigorous testing and evaluation is critical to ensuring systems reliably produce accurate responses to user queries.</p>
+<p>This notebook focuses on testing and evaluating the accuracy of a Q&amp;A chatbot using a “golden dataset” — validated correct answers to a set of standard questions. We will set up a fictional Q&amp;A chatbot and demonstrate how to:</p>
+<ul class="simple">
+<li><p><strong>Create a golden dataset</strong>: Use LLMs to assist in developing a benchmark dataset of golden questions and answers.</p></li>
+<li><p><strong>Create challenges by augmenting golden questions</strong>: Leverage LLM augmentors to systematically generate diverse and challenging variants of the golden questions to test chatbot accuracy and robustness to different user inputs.</p></li>
+<li><p><strong>Validate evaluators</strong>: Use LLMs to assist in creating a Q&amp;A validation dataset for assessing performance of LLM evaluators, with “accuracy” comprised of 3 metrics:</p>
+<ul>
+<li><p><em>Faithfulness</em>: Is the response consistent with all parts of the golden answer?</p></li>
+<li><p><em>Completeness</em>: Does the response cover all the key information in the golden answer?</p></li>
+<li><p><em>Relevance</em>: Are all parts of the response relevant to the question?</p></li>
+</ul>
+</li>
+<li><p><strong>Run pipeline</strong>: Run the testing and evaluation pipeline to get insights into the chatbot’s performance.</p></li>
+</ul>
+<p>New users should start with the ARTKIT setup guide on the documentation <a class="reference internal" href="../../../_generated/home.html#installation"><span class="std std-ref">Home page</span></a> and the introductory tutorial <a class="reference internal" href="../../../user_guide/introduction_to_artkit/building_your_first_artkit_pipeline.html"><span class="doc">Building Your First ARTKIT Pipeline</span></a>.</p>
+</section>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Link to this heading">#</a></h2>
+<p>This notebook uses several libraries which are not part of the standard ARTKIT environment. You can install them with pip:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">matplotlib</span> <span class="pre">seaborn</span></code></p>
+<p>Below, we import the required libraries, load environment variables, set the logging level to WARNING, and configure <code class="docutils literal notranslate"><span class="pre">pandas</span></code> to display dataframes with wide columns (this is helpful for displaying long strings).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="c1"># Load API keys from .env</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="c1"># Set logger level to WARNING</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+
+<span class="c1"># Display full text in pandas dataframe cells</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next we initialize a session with OpenAI’s GPT-4, which we will use for all LLM steps in this tutorial.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize an OpenAI chat model with caching</span>
+<span class="n">gpt4_chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span>
+        <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">,</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/qna_accuracy.db&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Target-System:-SwiftPost-Q&amp;A">
+<h2>Target System: SwiftPost Q&amp;A<a class="headerlink" href="#Target-System:-SwiftPost-Q&A" title="Link to this heading">#</a></h2>
+<p>This section introduces a simple Q&amp;A chatbot called Swifty, which interacts with customers of a fictional shipping company called SwiftPost. Swifty is programmed to answer customer questions about a specific SwiftPost offering called “Express Delivery Service”.</p>
+<p>Here are the details of Express Delivery Service which Swifty will reference in its answers:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EXPRESS_DELIVERY_SERVICE_CONTEXT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2"># SwiftPost Express Delivery Service</span>
+
+<span class="s2">General Information</span>
+<span class="s2">- It is a premium service that ensures faster delivery of packages</span>
+<span class="s2">- The main benefit is that it ensures faster delivery of packages</span>
+<span class="s2">- It offers domestic shipping within the United States, excluding Hawaii and Alaska</span>
+<span class="s2">- It does not offer international shipping</span>
+
+<span class="s2">Weight and Size Restrictions</span>
+<span class="s2">- We accommodate packages up to 30 kg in weight and 150 cm in combined length and width</span>
+
+<span class="s2">Pricing by Package Weight</span>
+<span class="s2">- If weight is less than 1 kg: Shipping price is $5</span>
+<span class="s2">- If weight is within 1-5 kg: Shipping price is $15</span>
+<span class="s2">- If weight is greater than 5 kg: Shipping price is $25</span>
+
+<span class="s2">Add-ons (extra fees)</span>
+<span class="s2">- Signature confirmation: $5</span>
+<span class="s2">- Insurance: 1</span><span class="si">% o</span><span class="s2">f the value of the goods</span>
+
+<span class="s2">Advanced Tracking System</span>
+<span class="s2">- Free for all Express Delivery customers</span>
+<span class="s2">- Each package is assigned a unique tracking number</span>
+<span class="s2">- Real-time updates are available via our website, mobile app, or SMS</span>
+
+<span class="s2">Packing Guidelines</span>
+<span class="s2">- Comply with size and weight restrictions</span>
+<span class="s2">- Use a sturdy, corrugated box secured with strong packing tape</span>
+<span class="s2">- Provide internal cushioning with bubble wrap or foam peanuts</span>
+<span class="s2">- Distribute contents evenly</span>
+<span class="s2">- Clearly label fragile items</span>
+<span class="s2">- Non-compliance with packing guidelines that necessitates repacking will result in </span><span class="se">\</span>
+<span class="s2">a charge of $10</span>
+
+<span class="s2">Next-Day Guarantee</span>
+<span class="s2">- All domestic shipments are guaranteed to be delivered by the next business day</span>
+<span class="s2">- If a package is delivered late, contact customer support to request a refund</span>
+
+<span class="s2">Customer Service</span>
+<span class="s2">- Phone number: 1-800-123-4567</span>
+<span class="s2">- Email: CustomerSupport@SwiftPost.com</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we incorporate the context above into a general system prompt which instructs Swifty on how it should interact with customers and leverage the information in the context appropriately:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SWIFTY_SYSTEM_PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">You are Swifty, a customer service chatbot for SwiftPost, a fictional shipping company.</span>
+
+<span class="s2">YOUR SCOPE:</span>
+<span class="s2">- You provide direct, concise answers to questions about SwiftPost&#39;s &quot;Express Delivery Service&quot; offering.</span>
+<span class="s2">- You can only answer questions related to SwiftPost&#39;s &quot;Express Delivery Service&quot; offering.</span>
+<span class="s2">- All relevant information about &quot;Express Delivery Service&quot; is provided in your CONTEXT.</span>
+<span class="s2">- You do not discuss any other topics or provide information which is not in your CONTEXT.</span>
+<span class="s2">- You provide measurements in metric units (e.g. kilometers, kilograms) and prices in dollars ($).</span>
+<span class="s2">- When quoting prices, do not include add-ons or extra charges unless the user asks for them, and </span><span class="se">\</span>
+<span class="s2">explicitly state that the price does not include add-ons or extra charges.</span>
+<span class="s2">- You only respond in English.</span>
+
+<span class="s2">YOUR APPROACH TO OUT-OF-SCOPE USER MESSAGES:</span>
+<span class="s2">- If a user message is unclear, politely say you don&#39;t understand and ask for clarification.</span>
+<span class="s2">- If a user writes in non-English, you acknowledge the language they are speaking, and </span><span class="se">\</span>
+<span class="s2">inform them *in English* that you can only respond in English.</span>
+<span class="s2">- If a user asks an in-scope question and you don&#39;t know the answer, advise them to contact </span><span class="se">\</span>
+<span class="s2">customer service.</span>
+<span class="s2">- If a user tries to discuss out-of-scope topics which a SwiftPost customer service agent </span><span class="se">\</span>
+<span class="s2">could help with, you advise them to contact customer service.</span>
+<span class="s2">- If a user is in distress or asks for help with a serious customer service issue, </span><span class="se">\</span>
+<span class="s2">you politely inform them that you are a chatbot and advise them to contact customer service </span><span class="se">\</span>
+<span class="s2">for serious issues.</span>
+<span class="s2">- If a user tries to discuss completely out-of-scope topics, you politely remind them that you </span><span class="se">\</span>
+<span class="s2">are a chatbot who only provides information about &quot;Express Delivery Service&quot;.</span>
+<span class="s2">- If a user seems to have malicious intent or is using inappropriate language, you politely </span><span class="se">\</span>
+<span class="s2">inform them that you are a customer service chatbot and will not respond to inappropriate requests.</span>
+<span class="s2">- When advising to contact customer service, always provide the customer service phone number and email.</span>
+
+<span class="s2">YOUR MISSION:</span>
+<span class="s2">- You respond to all customer messages in a concise, professional manner.</span>
+<span class="s2">- You strive to answer in-scope customer questions with perfect accuracy. This means your responses are:</span>
+<span class="s2">  1. *Faithful:* You only provide information that is in your CONTEXT.</span>
+<span class="s2">  2. *Complete:* You provide all the relevant details from your CONTEXT.</span>
+<span class="s2">  3. *Relevant:* You only provide information that directly answers the user&#39;s question.</span>
+
+<span class="s2">YOUR CONTEXT:</span>
+<span class="s2">&lt;CONTEXT&gt;</span>
+<span class="si">{</span><span class="n">EXPRESS_DELIVERY_SERVICE_CONTEXT</span><span class="si">}</span>
+<span class="s2">&lt;/CONTEXT&gt;</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>A quick check shows that our chatbot passes a sniff test:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asynchronous generator to get responses from a chat system</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_response</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">question</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span>
+
+
+<span class="c1"># Define a few simple test questions</span>
+<span class="n">questions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s1">&#39;What is the maximum package weight?&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s1">&#39;Does Advanced Tracking cost extra?&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s1">&#39;How much does it cost to ship a 3.5 kg package?&#39;</span><span class="p">},</span>
+<span class="p">]</span>
+
+
+<span class="c1"># Define a simple responder step using the Swifty system prompt</span>
+<span class="n">step_test_swifty</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ask_swifty&quot;</span><span class="p">,</span> <span class="n">get_response</span><span class="p">,</span>
+                           <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">SWIFTY_SYSTEM_PROMPT</span><span class="p">)</span>
+                           <span class="p">)</span>
+
+
+<span class="c1"># Run the test prompts through the responder step</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">step_test_swifty</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">questions</span><span class="p">)</span>
+
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th>ask_swifty</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>question</th>
+      <th>response</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What is the maximum package weight?</td>
+      <td>The maximum package weight for SwiftPost's Express Delivery Service is 30 kg.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Does Advanced Tracking cost extra?</td>
+      <td>No, Advanced Tracking is free for all Express Delivery customers.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>How much does it cost to ship a 3.5 kg package?</td>
+      <td>The cost to ship a 3.5 kg package with SwiftPost's Express Delivery Service is $15. This price does not include any add-ons or extra charges.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>This is a promising start, but more comprehensive testing is needed before we can be confident that Swifty is reliable and resilient to unexpected inputs. In the next section, we use LLMs to assist us in creating a golden dataset with validated question and answer pairs which we can use to systematically evaluate Swifty’s Q&amp;A accuracy.</p>
+</section>
+<section id="Create-a-Golden-Dataset">
+<h2>Create a Golden Dataset<a class="headerlink" href="#Create-a-Golden-Dataset" title="Link to this heading">#</a></h2>
+<p>A golden dataset is a benchmark dataset containing representative questions and validated correct answers, which can be used to assess system performance. Golden datasets are the gold standard approach to evaluating the accuracy of knowledge systems. Often, golden datasets are hand-crafted by domain experts who deeply understand the requirements of the use case.</p>
+<p>In this tutorial, we show how to leverage LLMs to automatically generate a basic golden dataset. We emphasize that in general, LLMs should only used as a starting point for a golden dataset. Human validation is critical to ensure the golden dataset is as “golden” as possible, as any errors in the golden dataset will lead to invalid evaluation results.</p>
+<p>Below is a system prompt which instructs an LLM to create a golden dataset based on the given context. We request the results as a single JSON output to ensure that the results represent a coherent set of Q&amp;A pairs which ensure variation in the pairs and respect specific distributional considerations.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GOLDEN_DATASET_CREATION_PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Your job is to generate a Golden Dataset of question and answer (Q&amp;A) pairs based on</span>
+<span class="s2">the CONTEXT provided below. The goal is to create a representative set of questions</span>
+<span class="s2">paired with accurate answers which can be used to test the performance of a Q&amp;A chatbot.</span>
+
+<span class="s2">You expect an input integer (N) from the user and you respond by generating exactly N Q&amp;A pairs.</span>
+<span class="s2">Your questions should be clearly and completely answerable using information in the CONTEXT.</span>
+<span class="s2">You ask diverse questions which provide coverage across different parts of the CONTEXT.</span>
+<span class="s2">You should ask a mix of straightforward questions that require simple recall of facts from </span><span class="se">\</span>
+<span class="s2">the CONTEXT and questions which involve applying knowledge to specific, practical scenarios.</span>
+
+<span class="s2"># Question Topic</span>
+
+<span class="s2">You tag each Q&amp;A pair with a &quot;topic&quot; label to indicate the type of question being asked.</span>
+<span class="s2">The categories should reflect the major topics users are expected to ask about.</span>
+
+<span class="s2"># Key Considerations</span>
+
+<span class="s2">- Double check that your response format matches the output format defined below.</span>
+<span class="s2">- Double check that all questions can be answered using the CONTEXT provided.</span>
+<span class="s2">- Double check that answers are accurate, complete, and relevant to the question.</span>
+
+<span class="s2">&lt;CONTEXT&gt;</span>
+<span class="si">{</span><span class="n">EXPRESS_DELIVERY_SERVICE_CONTEXT</span><span class="si">}</span>
+<span class="s2">&lt;/CONTEXT&gt;</span>
+
+<span class="s2"># You must return your output in the below JSON format, with no additional context:</span>
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">[</span>
+<span class="s2">  </span><span class="se">{{</span>
+<span class="s2">    &quot;topic&quot;: &quot;&lt;Topic&gt;&quot;,</span>
+<span class="s2">    &quot;question&quot;: &quot;&lt;Question&gt;&quot;,</span>
+<span class="s2">    &quot;answer&quot;: &quot;&lt;Answer&gt;&quot;,</span>
+<span class="s2">  </span><span class="se">}}</span><span class="s2">,</span>
+<span class="s2">  </span><span class="se">{{</span>
+<span class="s2">    &quot;topic: &quot;&lt;Topic&gt;&quot;,</span>
+<span class="s2">    &quot;question&quot;: &quot;&lt;Question&gt;&quot;,</span>
+<span class="s2">    &quot;answer&quot;: &quot;&lt;Answer&gt;&quot;,</span>
+<span class="s2">  </span><span class="se">}}</span><span class="s2">,</span>
+<span class="s2">]</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">Double check the your output is in the correct format before returning.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Now we define an asynchronous function to request a Golden Dataset from a chat system using the system prompt defined above:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asynchronous function to request golden dataset from a chat system</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_golden_dataset</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;topic&quot;</span><span class="p">],</span>
+                   <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">],</span>
+                   <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">]}</span>
+
+
+<span class="c1"># Define steps to get the golden dataset</span>
+<span class="n">step_golden_dataset</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;get_golden_dataset&quot;</span><span class="p">,</span> <span class="n">get_golden_dataset</span><span class="p">,</span>
+                              <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">GOLDEN_DATASET_CREATION_PROMPT</span><span class="p">))</span>
+
+
+<span class="c1"># Run the golden dataset creation step to create 20 Q&amp;A pairs</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">step_golden_dataset</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+
+
+<span class="c1"># Format outputs nicely as a dataframe</span>
+<span class="n">auto_golden_dataset</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()[</span><span class="s1">&#39;get_golden_dataset&#39;</span><span class="p">]</span>
+<span class="n">auto_golden_dataset</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>General Information</td>
+      <td>What is the main benefit of using SwiftPost Express Delivery Service?</td>
+      <td>The main benefit of using SwiftPost Express Delivery Service is that it ensures faster delivery of packages.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>General Information</td>
+      <td>Does SwiftPost Express Delivery Service offer international shipping?</td>
+      <td>No, SwiftPost Express Delivery Service does not offer international shipping.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>General Information</td>
+      <td>Which states are excluded from SwiftPost Express Delivery Service's domestic shipping?</td>
+      <td>SwiftPost Express Delivery Service's domestic shipping excludes Hawaii and Alaska.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Weight and Size Restrictions</td>
+      <td>What is the maximum weight allowed for a package with SwiftPost Express Delivery Service?</td>
+      <td>The maximum weight allowed for a package with SwiftPost Express Delivery Service is 30 kg.</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Weight and Size Restrictions</td>
+      <td>What is the maximum combined length and width allowed for a package?</td>
+      <td>The maximum combined length and width allowed for a package is 150 cm.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>We manually reviewed these LLM-generated results to ensure representativeness of the questions and accuracy of the answers. We found the questions were adequately representative of our simple context and there were no errors in the answer, so we use this as our golden dataset without modification.</p>
+<p>Let’s export the dataset as a CSV file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">auto_golden_dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;data/auto_golden_dataset.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This section illustrated how LLMs can accelerate the laborious process of generating golden datasets by providing a strong starting point. In the next section, we will use LLMs to augment this benchmark dataset to produce strong challenges for our chatbot</p>
+</section>
+<section id="Augment-Golden-Questions">
+<h2>Augment Golden Questions<a class="headerlink" href="#Augment-Golden-Questions" title="Link to this heading">#</a></h2>
+<p>LLM-based prompt augmentation is a powerful and versatile technique for systematically creating variations on a simple base prompt. Common types of prompt augmentations include language translation, tone rephrasing, and injecting user input errors such as common misspellings. Our User Guide tutorial on <a class="reference internal" href="../../../user_guide/generating_challenges/prompt_augmentation.html"><span class="doc">Prompt Augmentation</span></a> shows how to implement some of the most common types of augmentors.</p>
+<p>We focus on augmenting the questions in our golden datasets in a way which will challenge our chatbot’s ability to answer accurately:</p>
+<p><strong>Misleading Questions:</strong> Rephrase the base question as a “leading question” which is indirectly suggestive of an incorrect answer. For example, if the package weight limit is 30 kg and we have a base question which asks, “What is the maximum package weight?” An example of a misleading version of this question is, “Isn’t the maximum package weight 40 kg?”</p>
+<p>Unlike many types of augmentation, misleading question augmentation depends on knowing the correct answer so that an incorrect answer can be generated. Below, we define an augmentation step which takes both the golden question and the golden answer as inputs. We also define a passthrough function which will allow both the original question and the augmented question to flow through to the chatbot in the final end-to-end ARTKIT pipeline.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MISLEADING_QUESTION_AUGMENTOR_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">The user will provide an ORIGINAL QUESTION and a GOLDEN ANSWER. </span><span class="se">\</span>
+<span class="s2">Your job is to rewrite the ORIGNAL QUESTION in the form of a misleading question </span><span class="se">\</span>
+<span class="s2">which subtly suggests a different answer than the GOLDEN ANSWER. The goal is to test a </span><span class="se">\</span>
+<span class="s2">chatbot&#39;s ability to answer correctly even when faced with a misleading question.</span><span class="se">\n</span>
+<span class="s2">For example:</span><span class="se">\n</span>
+<span class="s2">ORIGINAL QUESTION: &quot;What is the weight limit for Express Delivery?&quot;</span>
+<span class="s2">GOLDEN ANSWER: &quot;The weight limit is 30 kg.&quot;</span>
+<span class="s2">MISLEADING QUESTION: &quot;Isn&#39;t the weight limit for Express Delivery 50 kg?&quot;</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># A passthrough function to repeat the original question</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">golden_question_passthrough</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">}</span>
+
+
+<span class="c1"># Generate a misleading question based on the original question and golden answer</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">misleading_question_augmentor</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">PROMPT</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;ORIGINAL QUESTION: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;GOLDEN ANSWER: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;MISLEADING QUESTION:&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">PROMPT</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Now we construct an ARTKIT pipeline which augments each question into 2 questions:</p>
+<ol class="arabic simple">
+<li><p>Original</p></li>
+<li><p>Misleading question</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">augment_flow</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">auto_golden_dataset</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;augment&quot;</span><span class="p">,</span> <span class="n">golden_question_passthrough</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;original&quot;</span><span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;augment&quot;</span><span class="p">,</span> <span class="n">misleading_question_augmentor</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;misleading&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">MISLEADING_QUESTION_AUGMENTOR_PROMPT</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">augment_flow</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_proficiency_qna_accuracy_with_golden_dataset_notebook_28_0.svg" src="../../../_images/examples_proficiency_qna_accuracy_with_golden_dataset_notebook_28_0.svg" /></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">augmentation_result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">augment_flow</span><span class="p">)</span>
+<span class="n">augmentation_results_df</span> <span class="o">=</span> <span class="n">augmentation_result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">augmentation_results_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;augment&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">)],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">input</th>
+      <th colspan="2" halign="left">augment</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+      <th>label</th>
+      <th>question</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>General Information</td>
+      <td>Which states are excluded from SwiftPost Express Delivery Service's domestic shipping?</td>
+      <td>SwiftPost Express Delivery Service's domestic shipping excludes Hawaii and Alaska.</td>
+      <td>original</td>
+      <td>Which states are excluded from SwiftPost Express Delivery Service's domestic shipping?</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>General Information</td>
+      <td>Which states are excluded from SwiftPost Express Delivery Service's domestic shipping?</td>
+      <td>SwiftPost Express Delivery Service's domestic shipping excludes Hawaii and Alaska.</td>
+      <td>misleading</td>
+      <td>Isn't SwiftPost Express Delivery Service's domestic shipping available in all states, including Hawaii and Alaska?</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Packing Guidelines</td>
+      <td>What type of box should be used for packing with SwiftPost Express Delivery Service?</td>
+      <td>A sturdy, corrugated box secured with strong packing tape should be used for packing with SwiftPost Express Delivery Service.</td>
+      <td>original</td>
+      <td>What type of box should be used for packing with SwiftPost Express Delivery Service?</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Packing Guidelines</td>
+      <td>What type of box should be used for packing with SwiftPost Express Delivery Service?</td>
+      <td>A sturdy, corrugated box secured with strong packing tape should be used for packing with SwiftPost Express Delivery Service.</td>
+      <td>misleading</td>
+      <td>Shouldn't a lightweight, plastic box be used for packing with SwiftPost Express Delivery Service?</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Validate-Evaluators">
+<h2>Validate Evaluators<a class="headerlink" href="#Validate-Evaluators" title="Link to this heading">#</a></h2>
+<p>In the context of Q&amp;A, accuracy is a multifaceted concept. In this section, we define LLM evaluators for 3 metrics which together provide a holistic assessment of response accuracy:</p>
+<ul class="simple">
+<li><p><em>Faithfulness</em>: Is the response consistent with all parts of the Golden Answer?</p></li>
+<li><p><em>Completeness</em>: Does the response cover all parts of the Golden Answer?</p></li>
+<li><p><em>Relevance</em>: Are all parts of the response relevant to the question?</p></li>
+</ul>
+<p>We will then validate the performance of these evaluators to ensure they are trustworthy. Rigorously validating evaluators to ensure they have high precision and recall is essential to ensure they are able to identify serious issues without raising too many false positives. Below, we leverage LLMs to help create a validation dataset tailored to our evaluation metrics.</p>
+<section id="Create-a-validation-dataset">
+<h3>Create a validation dataset<a class="headerlink" href="#Create-a-validation-dataset" title="Link to this heading">#</a></h3>
+<p>To validate the performance of our evaluators, we require a validation dataset which includes validated “good” and “bad” responses, according to each metric. Previously, we leveraged LLMs to help us create a golden dataset with “good” answers. Here, we will again leverage LLMs to create “bad” versions of the answers in the golden dataset.</p>
+<p>To do this, we apply augmentations to the <em>answers</em> in the golden dataset, specifically creating versions of each answer which are “bad” with respect to our 3 evaluation metrics: Faithfulness, Completeness, and Relevance. We begin by defining system prompts for 3 augmentors, each designed to generate a “bad” version of a golden question with respect to each evaluation metric:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">UNFAITHFUL_ANSWER_AUGMENTOR_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">The user will provide a GOLDEN ANSWER with some information. </span><span class="se">\</span>
+<span class="s2">Your job is to rewrite the GOLDEN ANSWER in the form of an UNFAITHFUL ANSWER </span><span class="se">\</span>
+<span class="s2">which subtly contradicts the GOLDEN ANSWER. For example:</span><span class="se">\n</span>
+<span class="s2">GOLDEN ANSWER: &quot;The weight limit is 30 kg.&quot;</span>
+<span class="s2">UNFAITHFUL ANSWER: &quot;The weight limit is 50 kg.&quot;</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">INCOMPLETE_ANSWER_AUGMENTOR_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">The user will provide a QUESTION and GOLDEN ANSWER with complete information. </span><span class="se">\</span>
+<span class="s2">Your job is to rewrite the GOLDEN ANSWER in the form of an INCOMPLETE ANSWER </span><span class="se">\</span>
+<span class="s2">which addresses the QUESTION, but leaves out a key detail of the GOLDEN ANSWER. </span><span class="se">\</span>
+<span class="s2">For example:</span><span class="se">\n</span>
+<span class="s2">QUESTION: &quot;What is the weight limit for Express Delivery?&quot;</span>
+<span class="s2">GOLDEN ANSWER: &quot;The weight limit is 30 kg.&quot;</span>
+<span class="s2">INCOMPLETE ANSWER: &quot;The weight limit is 30.&quot;</span><span class="se">\n\n\</span>
+<span class="s2">The answer is almost correct, but incomplete because it doesn&#39;t include the units (kg).</span><span class="se">\</span>
+<span class="s2">It is critical that your INCOMPLETE ANSWER excludes some piece of information which </span><span class="se">\</span>
+<span class="s2">leaves the user without an adequate answer to their question.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">IRRELEVANT_ANSWER_AUGMENTOR_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">The user will provide a QUESTION and an GOLDEN ANSWER. Your job is to rewrite the </span><span class="se">\</span>
+<span class="s2">GOLDEN ANSWER so that it is subtly irrelevant to the QUESTION.</span><span class="se">\n</span>
+<span class="s2">For example:</span><span class="se">\n</span>
+<span class="s2">QUESTION: &quot;What is the weight limit for Express Delivery?&quot;</span>
+<span class="s2">GOLDEN ANSWER: &quot;The weight limit is 30 kg.&quot;</span>
+<span class="s2">IRRELEVANT ANSWER: &quot;There is no size limit for packages.&quot;</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Next we define asynchronous functions which will later be called with the system prompts define above. Within each function, the <code class="docutils literal notranslate"><span class="pre">PROMPT</span></code> is a template for formatting the input to the function, which is passed as a message to the LLM which will respond according to its system prompt.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A passthrough function to repeat the original question</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">golden_dataset_passthrough</span><span class="p">(</span><span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="n">topic</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="n">answer</span><span class="p">}</span>
+
+
+<span class="c1"># Evaluate whether an answer is faithful to the golden answer</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">unfaithful_answer_augmentor</span><span class="p">(</span><span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;GOLDEN ANSWER: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">UNFAITHFUL ANSWER:&quot;</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">PROMPT</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="n">topic</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span>
+
+
+<span class="c1"># Evaluate whether an answer is incomplete compared to the golden answer</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">incomplete_answer_augmentor</span><span class="p">(</span><span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;QUESTION: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="se">\n</span><span class="s2">GOLDEN ANSWER: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">INCOMPLETE ANSWER:&quot;</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">PROMPT</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="n">topic</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span>
+
+
+<span class="c1"># Evaluate whether an answer is irrelevant to the question, using the golden answer as a reference</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">irrelevant_answer_augmentor</span><span class="p">(</span><span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;QUESTION: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="se">\n</span><span class="s2">GOLDEN ANSWER: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">IRRELEVANT ANSWER:&quot;</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">PROMPT</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="n">topic</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Now we run a pipeline to create our LLM-assisted validation dataset.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation_dataset_flow</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">auto_golden_dataset</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;augment_answer&quot;</span><span class="p">,</span> <span class="n">golden_dataset_passthrough</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;golden&quot;</span><span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;augment_answer&quot;</span><span class="p">,</span> <span class="n">unfaithful_answer_augmentor</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;unfaithful&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">UNFAITHFUL_ANSWER_AUGMENTOR_PROMPT</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;augment_answer&quot;</span><span class="p">,</span> <span class="n">incomplete_answer_augmentor</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">INCOMPLETE_ANSWER_AUGMENTOR_PROMPT</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;augment_answer&quot;</span><span class="p">,</span> <span class="n">irrelevant_answer_augmentor</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;irrelevant&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">IRRELEVANT_ANSWER_AUGMENTOR_PROMPT</span><span class="p">)</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="n">validation_dataset_flow</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_proficiency_qna_accuracy_with_golden_dataset_notebook_38_0.svg" src="../../../_images/examples_proficiency_qna_accuracy_with_golden_dataset_notebook_38_0.svg" /></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation_results</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">validation_dataset_flow</span><span class="p">)</span>
+<span class="n">auto_validation_data</span> <span class="o">=</span> <span class="n">validation_results</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;augment_answer&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">)])</span>
+<span class="n">auto_validation_data</span> <span class="o">=</span> <span class="n">auto_validation_data</span><span class="p">[</span><span class="s2">&quot;augment_answer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">auto_validation_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>golden</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>incomplete</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>irrelevant</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Our customer service team is available 24/7 to assist with any inquiries you may have.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>unfaithful</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered within three business days.</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>golden</td>
+      <td>General Information</td>
+      <td>Does SwiftPost Express Delivery Service offer international shipping?</td>
+      <td>No, SwiftPost Express Delivery Service does not offer international shipping.</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>incomplete</td>
+      <td>General Information</td>
+      <td>Does SwiftPost Express Delivery Service offer international shipping?</td>
+      <td>No, SwiftPost Express Delivery Service does not offer.</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>irrelevant</td>
+      <td>General Information</td>
+      <td>Does SwiftPost Express Delivery Service offer international shipping?</td>
+      <td>SwiftPost Express Delivery Service provides same-day delivery options.</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>unfaithful</td>
+      <td>General Information</td>
+      <td>Does SwiftPost Express Delivery Service offer international shipping?</td>
+      <td>Yes, SwiftPost Express Delivery Service offers international shipping.</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>golden</td>
+      <td>Advanced Tracking System</td>
+      <td>How can customers receive real-time updates on their packages?</td>
+      <td>Customers can receive real-time updates on their packages via the SwiftPost website, mobile app, or SMS.</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>incomplete</td>
+      <td>Advanced Tracking System</td>
+      <td>How can customers receive real-time updates on their packages?</td>
+      <td>Customers can receive real-time updates on their packages via the SwiftPost website or mobile app.</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>irrelevant</td>
+      <td>Advanced Tracking System</td>
+      <td>How can customers receive real-time updates on their packages?</td>
+      <td>Customers can track their packages by visiting the nearest SwiftPost office or calling customer service.</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>unfaithful</td>
+      <td>Advanced Tracking System</td>
+      <td>How can customers receive real-time updates on their packages?</td>
+      <td>Customers can receive real-time updates on their packages only via the SwiftPost website.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>As with golden datasets, it is essential for LLM-generated validation datasets to be carefully reviewed and modified to ensure the answers reflect the different types of inaccuracies which our evaluators must detect. In this case, the validation data produced by the LLM is mostly useful, but required a few manual edits to ensure the answers represent clear failures according to each evaluation metric.</p>
+<p>We save the automatically generated version of the dataset:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write the auto-generated validation data</span>
+<span class="n">auto_validation_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;data/auto_validation_dataset.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>And load the version with manual adjustments to use in our validation analysis:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the manually-adjusted validation data</span>
+<span class="n">final_validation_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/evaluator_validation_dataset.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Define-evaluators">
+<h3>Define evaluators<a class="headerlink" href="#Define-evaluators" title="Link to this heading">#</a></h3>
+<p>Now we define the evaluators, beginning with the faithfulness evaluator. All three evaluators follow a similar logic and differ mainly in the system and input prompts.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EVALUATE_FAITHFULNESS_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">You will be presented with a GOLDEN ANSWER and a RESPONSE from a chatbot. </span><span class="se">\</span>
+<span class="s2">Your job is to evaluate the faithfulness of the RESPONSE with respect to the GOLDEN ANSWER. </span><span class="se">\</span>
+<span class="s2">A faithful RESPONSE is one that accurately reflects the information in the GOLDEN ANSWER. </span><span class="se">\</span>
+<span class="s2">If any part of the RESPONSE contradicts or is not supported by the GOLDEN ANSWER, then the </span><span class="se">\</span>
+<span class="s2">RESPONSE is unfaithful. If the RESPONSE is faithful, return 1, otherwise return 0.</span>
+
+<span class="s2">You must return your response in valid JSON format, with no additional context:</span>
+
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">{</span>
+<span class="s2">  &quot;justification&quot;: &quot;&lt;Your Justification Here&gt;&quot;,</span>
+<span class="s2">  &quot;score&quot;: &quot;&lt;0 or 1&gt;&quot;</span>
+<span class="s2">}</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">evaluate_faithfulness</span><span class="p">(</span><span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">golden_answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;GOLDEN ANSWER: </span><span class="si">{</span><span class="n">golden_answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">RESPONSE: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">PROMPT</span><span class="p">,</span>
+                                           <span class="n">response_format</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;json_object&quot;</span><span class="p">}):</span>
+        <span class="n">json_result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">metric</span><span class="p">,</span>
+               <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">json_result</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]),</span>
+               <span class="s2">&quot;justification&quot;</span><span class="p">:</span> <span class="n">json_result</span><span class="p">[</span><span class="s1">&#39;justification&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<p>Next we define the completeness evaluator.</p>
+<blockquote>
+<div><p>Note: The ‘Key terms’ section in the prompt below lists key terms that are critical to the context. This detail was added after observing that the evaluator failed to recognize that dropping the word ‘business’ from ‘business day’ is a significant omission, and specifying ‘business day’ as a key term fixed the issue. This example illustrates the importance of evaluating your evaluators and tuning the prompts to suit your context.</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EVALUATE_COMPLETENESS_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">You will be presented with a GOLDEN ANSWER and a RESPONSE from a chatbot. </span><span class="se">\</span>
+<span class="s2">Your job is to evaluate the completeness of the RESPONSE with respect to the GOLDEN ANSWER. </span><span class="se">\</span>
+<span class="s2">A complete RESPONSE accurately captures all the key information in the GOLDEN ANSWER. </span><span class="se">\</span>
+<span class="s2">You must pay attention to small details in the GOLDEN ANSWER which, if excluded, could </span><span class="se">\</span>
+<span class="s2">subtly alter the meaning of the RESPONSE or render the RESPONSE ambiguous or confusing. </span><span class="se">\</span>
+<span class="s2">For example, dropping a unit of measurement or a key term could make the RESPONSE incomplete.</span>
+
+<span class="s2">- Key terms: &#39;business day&#39;</span>
+
+<span class="s2">If any key information in the GOLDEN ANSWER is missing from or unclear in the RESPONSE, then </span><span class="se">\</span>
+<span class="s2">the RESPONSE is incomplete.</span>
+
+<span class="s2">If the RESPONSE is complete, return 1, otherwise return 0.</span>
+
+<span class="s2">You must return your response in valid JSON format, with no additional context:</span>
+
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">{</span>
+<span class="s2">  &quot;justification&quot;: &quot;&lt;Your Justification Here in less than 20 words&gt;&quot;,</span>
+<span class="s2">  &quot;score&quot;: &quot;&lt;0 or 1&gt;&quot;</span>
+<span class="s2">}</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">evaluate_completeness</span><span class="p">(</span><span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">golden_answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;GOLDEN ANSWER: </span><span class="si">{</span><span class="n">golden_answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">RESPONSE: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">PROMPT</span><span class="p">,</span>
+                                           <span class="n">response_format</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;json_object&quot;</span><span class="p">}):</span>
+        <span class="n">json_result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">metric</span><span class="p">,</span>
+               <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">json_result</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]),</span>
+               <span class="s2">&quot;justification&quot;</span><span class="p">:</span> <span class="n">json_result</span><span class="p">[</span><span class="s1">&#39;justification&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, we define the relevancy evaluator. Note that the faithfulness and completeness evaluators ignored the input question and simply compared the chatbot’s responses with the golden answer. In contrast, the relevancy evalator requires the input question to assess response relevancy, and also considers the golden answer as an example of a relevant response in the context of our chatbot.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EVALUATE_RELEVANCY_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">You will be presented with a QUESTION, GOLDEN ANSWER, and a RESPONSE from a chatbot. </span><span class="se">\</span>
+<span class="s2">Your job is to evaluate the relevancy of the RESPONSE with respect to the QUESTION. </span><span class="se">\</span>
+
+<span class="s2">Key Considerations for Determining if the RESPONSE is Relevant:</span>
+
+<span class="s2">- If the QUESTION can be answered with the information in the GOLDEN ANSWER, then the </span><span class="se">\</span>
+<span class="s2">RESPONSE should directly address the QUESTION to be considered relevant.</span>
+<span class="s2">- If any content in the RESPONSE is irrelevant to the QUESTION, then the RESPONSE is irrelevant.</span>
+<span class="s2">- The RESPONSE does not need to be perfect or comprehensive to be considered relevant.</span>
+<span class="s2">- If a QUESTION is unclear, ambiguous, out of scope, or includes statements or instructions </span><span class="se">\</span>
+<span class="s2">the responding chatbot cannot comply with (e.g., requests to provide inaccurate or unethical </span><span class="se">\</span>
+<span class="s2">responses, or discuss off-topic content), then a RESPONSE which acknowledges the QUESTION </span><span class="se">\</span>
+<span class="s2">without complying or directly responding to problematic portions is considered relevant.</span>
+<span class="s2">- The GOLDEN ANSWER provides an example of a relevant response to the &quot;Golden Version&quot; of </span><span class="se">\</span>
+<span class="s2">the given QUESTION, which is pristine version of the given QUESTION.</span>
+
+<span class="s2">If the RESPONSE is relevant, return 1, otherwise return 0.</span>
+
+<span class="s2">You must return your response in valid JSON format, with no additional context:</span>
+
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">{</span>
+<span class="s2">  &quot;justification&quot;: &quot;&lt;Your Justification in less than 20 words&gt;&quot;,</span>
+<span class="s2">  &quot;score&quot;: &quot;&lt;0 or 1&gt;&quot;</span>
+<span class="s2">}</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">evaluate_relevancy</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">golden_answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;QUESTION: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="se">\n</span><span class="s2">GOLDEN ANSWER: </span><span class="si">{</span><span class="n">golden_answer</span><span class="si">}</span><span class="se">\n</span><span class="s2">RESPONSE: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">PROMPT</span><span class="p">,</span>
+                                           <span class="n">response_format</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;json_object&quot;</span><span class="p">}):</span>
+        <span class="n">json_result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">metric</span><span class="p">,</span>
+               <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">json_result</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]),</span>
+               <span class="s2">&quot;justification&quot;</span><span class="p">:</span> <span class="n">json_result</span><span class="p">[</span><span class="s1">&#39;justification&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s assess the performance of these evaluators against our validation dataset. For each evaluator, we subset the validation data to include only the golden answers and the “bad” answers which are specifically designed to fail according to the given evaluation metric. The code below ensures the original question, golden answer, and actual answer are available for the validation analysis.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subset of the data with only the golden questions and answers</span>
+<span class="n">golden_qna_dataset</span> <span class="o">=</span> <span class="n">final_validation_dataset</span><span class="p">[</span><span class="n">final_validation_dataset</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;golden&#39;</span><span class="p">]</span>
+<span class="n">golden_qna_dataset</span> <span class="o">=</span> <span class="n">golden_qna_dataset</span><span class="p">[[</span><span class="s1">&#39;question&#39;</span><span class="p">,</span> <span class="s1">&#39;answer&#39;</span><span class="p">]]</span> \
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="s1">&#39;golden_answer&#39;</span><span class="p">})</span>
+
+<span class="c1"># Join &#39;golden answer&#39; column to create validation dataset</span>
+<span class="n">validation_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">final_validation_dataset</span><span class="p">,</span> <span class="n">golden_qna_dataset</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;question&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create column of validated labels to be compared with evaluator scores</span>
+<span class="c1"># Golden Answers are always &#39;1&#39;, bad answers are always &#39;0&#39;</span>
+<span class="n">validation_dataset</span><span class="p">[</span><span class="s1">&#39;true_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validation_dataset</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> \
+    <span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s1">&#39;golden&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;unfaithful&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;incomplete&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;irrelevant&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+
+<span class="c1"># Create subsets of validation data for each evaluator</span>
+<span class="n">faithfulness_validation_data</span> <span class="o">=</span> <span class="n">validation_dataset</span><span class="p">[</span><span class="n">validation_dataset</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;golden&#39;</span><span class="p">,</span> <span class="s1">&#39;unfaithful&#39;</span><span class="p">])]</span>
+<span class="n">completeness_validation_data</span> <span class="o">=</span> <span class="n">validation_dataset</span><span class="p">[</span><span class="n">validation_dataset</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;golden&#39;</span><span class="p">,</span> <span class="s1">&#39;incomplete&#39;</span><span class="p">])]</span>
+<span class="n">relevancy_validation_data</span> <span class="o">=</span> <span class="n">validation_dataset</span><span class="p">[</span><span class="n">validation_dataset</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;golden&#39;</span><span class="p">,</span> <span class="s1">&#39;irrelevant&#39;</span><span class="p">])]</span>
+
+<span class="c1"># Check data structure</span>
+<span class="n">faithfulness_validation_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+      <th>golden_answer</th>
+      <th>true_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>golden</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>unfaithful</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>No, domestic shipments are typically delivered within three to five business days.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Validate-evaluators">
+<h3>Validate evaluators<a class="headerlink" href="#Validate-evaluators" title="Link to this heading">#</a></h3>
+<p>Now we run the validation data through each of the evaluators.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run validation of Faithfulness Evaluator</span>
+<span class="n">validate_faithful</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">faithfulness_validation_data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evaluate_faithfulness</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;evaluate_faithfulness&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">EVALUATE_FAITHFULNESS_PROMPT</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">validate_faithful_df</span> <span class="o">=</span> <span class="n">validate_faithful</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">validate_faithful_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">((</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;question&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="6" halign="left">input</th>
+      <th colspan="3" halign="left">evaluate</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>label</th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+      <th>golden_answer</th>
+      <th>true_score</th>
+      <th>metric</th>
+      <th>score</th>
+      <th>justification</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>golden</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>1</td>
+      <td>evaluate_faithfulness</td>
+      <td>1</td>
+      <td>The RESPONSE accurately reflects the information provided in the GOLDEN ANSWER without any contradictions or unsupported information.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>unfaithful</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>No, domestic shipments are typically delivered within three to five business days.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>0</td>
+      <td>evaluate_faithfulness</td>
+      <td>0</td>
+      <td>The RESPONSE contradicts the GOLDEN ANSWER. The GOLDEN ANSWER states that all domestic shipments are guaranteed to be delivered by the next business day, while the RESPONSE claims that domestic shipments are typically delivered within three to five business days.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run validation of Completeness Evaluator</span>
+<span class="n">validate_complete</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">completeness_validation_data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evaluate_completeness</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;completeness&quot;</span><span class="p">,</span>
+               <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">EVALUATE_COMPLETENESS_PROMPT</span><span class="p">),</span>
+               <span class="p">)</span>
+            <span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">validate_complete_df</span> <span class="o">=</span> <span class="n">validate_complete</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">validate_complete_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">((</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;question&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="6" halign="left">input</th>
+      <th colspan="3" halign="left">evaluate</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>label</th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+      <th>golden_answer</th>
+      <th>true_score</th>
+      <th>metric</th>
+      <th>score</th>
+      <th>justification</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>golden</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>1</td>
+      <td>completeness</td>
+      <td>1</td>
+      <td>The RESPONSE captures all key information accurately.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>incomplete</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>All domestic shipments are guaranteed to be delivered by the next day.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>0</td>
+      <td>completeness</td>
+      <td>0</td>
+      <td>The RESPONSE omits the key term 'business day'.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run validation of Relevancy Evaluator</span>
+<span class="n">validate_relevant</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">relevancy_validation_data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evaluate_relevancy</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;relevancy&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">EVALUATE_RELEVANCY_PROMPT</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">validate_relevant_df</span> <span class="o">=</span> <span class="n">validate_relevant</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">validate_relevant_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">((</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;question&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="6" halign="left">input</th>
+      <th colspan="3" halign="left">evaluate</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>label</th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+      <th>golden_answer</th>
+      <th>true_score</th>
+      <th>metric</th>
+      <th>score</th>
+      <th>justification</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>golden</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>1</td>
+      <td>relevancy</td>
+      <td>1</td>
+      <td>The response directly answers the question accurately.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>irrelevant</td>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Our service ensures that all packages are handled with the utmost care.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>0</td>
+      <td>relevancy</td>
+      <td>0</td>
+      <td>The response does not address the delivery guarantee for domestic shipments.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Next, we calculate and visualize confusion matrices of the results. Each matrix compares the ‘true scores’ from our validation data to the scores inferred by each evaluator, providing an assessment of evaluator accuracy.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up matplotlib figure and axes for 1x3 grid</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 1 row, 3 columns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="c1"># Plot Faithfulness evaluator&#39;s confusion matrix</span>
+<span class="n">cm1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">validate_faithful_df</span><span class="p">[(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;true_score&#39;</span><span class="p">)],</span> <span class="n">validate_faithful_df</span><span class="p">[(</span><span class="s1">&#39;evaluate&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">)])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Faithfulness Evaluator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot Completeness evaluator&#39;s confusion matrix</span>
+<span class="n">cm2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">validate_complete_df</span><span class="p">[(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;true_score&#39;</span><span class="p">)],</span> <span class="n">validate_complete_df</span><span class="p">[(</span><span class="s1">&#39;evaluate&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">)])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Completeness Evaluator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot Relevancy evaluator&#39;s confusion matrix</span>
+<span class="n">cm3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">validate_relevant_df</span><span class="p">[(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;true_score&#39;</span><span class="p">)],</span> <span class="n">validate_relevant_df</span><span class="p">[(</span><span class="s1">&#39;evaluate&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">)])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Relevancy Evaluator&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the same axis and tick labels to each plot</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Validated Score&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Evaluator Score&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">&#39;Fail&#39;</span><span class="p">,</span> <span class="s1">&#39;Pass&#39;</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;Fail&#39;</span><span class="p">,</span> <span class="s1">&#39;Pass&#39;</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_proficiency_qna_accuracy_with_golden_dataset_notebook_59_0.png" src="../../../_images/examples_proficiency_qna_accuracy_with_golden_dataset_notebook_59_0.png" />
+</div>
+</div>
+<p>All three evaluators have 100% accuracy on the validation data. It is important to call out that this perfect result was only achieved after several rounds of observing failures and adjusting the system prompts of the evaluators. A larger and more diverse validation dataset would likely uncover new shortcomings which we could use to further improve the evaluator system prompts. Developing strong LLM evaluators is an art and an iterative process which depends on regularly assessing evaluator
+performance with strong validation datasets.</p>
+<p>If any errors were revealed in the confusion matrices above, we could drill down into the details using a line of code like the following. This would allow us to explore specific evaluator errors and the evaluator justifications for their scores, which often provide insight into why the evaluator gave the incorrect score and how we can mitigate the issue.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validate_relevant_df</span><span class="p">[</span><span class="n">validate_relevant_df</span><span class="p">[(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;true_score&#39;</span><span class="p">)]</span> <span class="o">!=</span> <span class="n">validate_relevant_df</span><span class="p">[(</span><span class="s1">&#39;evaluate&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">)]]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="6" halign="left">input</th>
+      <th colspan="3" halign="left">evaluate</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>label</th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+      <th>golden_answer</th>
+      <th>true_score</th>
+      <th>metric</th>
+      <th>score</th>
+      <th>justification</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Run-Pipeline">
+<h2>Run Pipeline<a class="headerlink" href="#Run-Pipeline" title="Link to this heading">#</a></h2>
+<p>Now we build an end-to-end ARTKIT pipeline which does the following:</p>
+<ol class="arabic simple">
+<li><p>Takes the golden dataset as input</p></li>
+<li><p>Applies augmentations to the golden questions:</p>
+<ul class="simple">
+<li><p>Passthrough function</p></li>
+<li><p>Misleading question rephraser</p></li>
+</ul>
+</li>
+<li><p>Sends questions to the Swifty chatbot and gets responses</p></li>
+<li><p>Evaluates Swifty’s responses using our validated evaluators for:</p>
+<ul class="simple">
+<li><p>Faithfulness</p></li>
+<li><p>Completeness</p></li>
+<li><p>Relevancy</p></li>
+</ul>
+</li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add &#39;golden_answer&#39; column to the golden dataset</span>
+<span class="n">e2e_dataset</span> <span class="o">=</span> <span class="n">auto_golden_dataset</span>
+<span class="n">e2e_dataset</span><span class="p">[</span><span class="s1">&#39;golden_answer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auto_golden_dataset</span><span class="p">[</span><span class="s1">&#39;answer&#39;</span><span class="p">]</span>
+<span class="n">e2e_dataset</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+      <th>golden_answer</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>General Information</td>
+      <td>What is the main benefit of using SwiftPost Express Delivery Service?</td>
+      <td>The main benefit of using SwiftPost Express Delivery Service is that it ensures faster delivery of packages.</td>
+      <td>The main benefit of using SwiftPost Express Delivery Service is that it ensures faster delivery of packages.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>General Information</td>
+      <td>Does SwiftPost Express Delivery Service offer international shipping?</td>
+      <td>No, SwiftPost Express Delivery Service does not offer international shipping.</td>
+      <td>No, SwiftPost Express Delivery Service does not offer international shipping.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e2e_flow</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">e2e_dataset</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;augment&quot;</span><span class="p">,</span> <span class="n">golden_question_passthrough</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;original&quot;</span><span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;augment&quot;</span><span class="p">,</span> <span class="n">misleading_question_augmentor</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;misleading&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">MISLEADING_QUESTION_AUGMENTOR_PROMPT</span><span class="p">))</span>
+    <span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ask_swifty&quot;</span><span class="p">,</span> <span class="n">get_response</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">SWIFTY_SYSTEM_PROMPT</span><span class="p">)),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evaluate_faithfulness</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;faithfulness&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">EVALUATE_FAITHFULNESS_PROMPT</span><span class="p">)),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evaluate_completeness</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;completeness&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">EVALUATE_COMPLETENESS_PROMPT</span><span class="p">)),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evaluate_relevancy</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;relevancy&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">EVALUATE_RELEVANCY_PROMPT</span><span class="p">))</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">e2e_flow</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_proficiency_qna_accuracy_with_golden_dataset_notebook_65_0.svg" src="../../../_images/examples_proficiency_qna_accuracy_with_golden_dataset_notebook_65_0.svg" /></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e2e_results</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">e2e_flow</span><span class="p">)</span>
+<span class="n">e2e_results_df</span> <span class="o">=</span> <span class="n">e2e_results</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">e2e_results_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;question&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;augment&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">)])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="4" halign="left">input</th>
+      <th colspan="2" halign="left">augment</th>
+      <th>ask_swifty</th>
+      <th colspan="3" halign="left">evaluate</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>topic</th>
+      <th>question</th>
+      <th>answer</th>
+      <th>golden_answer</th>
+      <th>label</th>
+      <th>question</th>
+      <th>response</th>
+      <th>metric</th>
+      <th>score</th>
+      <th>justification</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>16</th>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>misleading</td>
+      <td>Isn't it true that only some domestic shipments are guaranteed to be delivered by the next business day?</td>
+      <td>No, all domestic shipments with SwiftPost's Express Delivery Service are guaranteed to be delivered by the next business day. If a package is delivered late, you can contact customer support to request a refund.</td>
+      <td>faithfulness</td>
+      <td>1</td>
+      <td>The RESPONSE accurately reflects the information provided in the GOLDEN ANSWER without any contradictions or unsupported information.</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>misleading</td>
+      <td>Isn't it true that only some domestic shipments are guaranteed to be delivered by the next business day?</td>
+      <td>No, all domestic shipments with SwiftPost's Express Delivery Service are guaranteed to be delivered by the next business day. If a package is delivered late, you can contact customer support to request a refund.</td>
+      <td>completeness</td>
+      <td>1</td>
+      <td>The RESPONSE captures all key information accurately.</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Next-Day Guarantee</td>
+      <td>Are all domestic shipments guaranteed to be delivered by the next business day?</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>Yes, all domestic shipments are guaranteed to be delivered by the next business day.</td>
+      <td>misleading</td>
+      <td>Isn't it true that only some domestic shipments are guaranteed to be delivered by the next business day?</td>
+      <td>No, all domestic shipments with SwiftPost's Express Delivery Service are guaranteed to be delivered by the next business day. If a package is delivered late, you can contact customer support to request a refund.</td>
+      <td>relevancy</td>
+      <td>1</td>
+      <td>The RESPONSE directly addresses and corrects the QUESTION.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Let’s look at a breakdown of evaluation scores across the different augmentation styles and metrics:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e2e_results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">e2e_results_df</span><span class="p">[(</span><span class="s2">&quot;augment&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">)],</span> <span class="n">e2e_results_df</span><span class="p">[(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="s2">&quot;metric&quot;</span><span class="p">)]]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">pass_rate</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">),</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">),</span>
+        <span class="n">passing_scores</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">),</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">),</span>
+        <span class="n">count_scores</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">),</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>pass_rate</th>
+      <th>passing_scores</th>
+      <th>count_scores</th>
+    </tr>
+    <tr>
+      <th>(augment, label)</th>
+      <th>(evaluate, metric)</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">misleading</th>
+      <th>completeness</th>
+      <td>1.0</td>
+      <td>20</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>faithfulness</th>
+      <td>1.0</td>
+      <td>20</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>relevancy</th>
+      <td>1.0</td>
+      <td>20</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">original</th>
+      <th>completeness</th>
+      <td>1.0</td>
+      <td>20</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>faithfulness</th>
+      <td>1.0</td>
+      <td>20</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>relevancy</th>
+      <td>1.0</td>
+      <td>20</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>We have 100% passing scores in every segment - pretty encouraging! However, keep in mind that we’re using a relatively simple Q&amp;A use case and only exploring one dimension of variation with our augmentors. Depending on the complexity of your Q&amp;A use case, the strength of your tests, and your risk tolerance, 100% accuracy is usually not reasonable or necessary to determine that a system is performing adequately.</p>
+</section>
+<section id="Concluding-Remarks">
+<h2>Concluding Remarks<a class="headerlink" href="#Concluding-Remarks" title="Link to this heading">#</a></h2>
+<p>In this notebook, we’ve shown how to leverage ARTKIT to create a golden dataset and evaluate the performance of a Q&amp;A chatbot. Specifically, we:</p>
+<ol class="arabic simple">
+<li><p>Created a first-pass golden dataset with help from an LLM</p></li>
+<li><p>Used an LLM to augment golden questions into more challenging test prompts</p></li>
+<li><p>Defined LLM evaluators for faithfulness, accuracy, and relevance of chatbot responses to the test prompts</p></li>
+<li><p>Validated evaluator performance using a validation dataset created with help from an LLM</p></li>
+<li><p>Set up an end-to-end ARTKIT pipeline to test and evaluate our chatbot using the augmented golden dataset and our validated evaluators</p></li>
+</ol>
+<p>Interested users may wish to expand on this limited example as an exercise. For example, you can explore the impact of additional augmentations such as language translation or tone modulation. You might also consider different evaluation dimensions or metrics which provide more nuance, e.g., by using an ordinal scale instead of binary pass/fail, or having the evaluator output a confidence level along with its scores.</p>
+<p>The steps outlined here can be tailored to meet the needs of a wide variety of projects. Users are encouraged to build off this work, and if you develop an interesting example, please consider <a class="reference internal" href="../../../contributor_guide/index.html"><span class="doc">Contributing</span></a> to ARTKIT!</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Target-System:-SwiftPost-Q&amp;A">Target System: SwiftPost Q&amp;A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-a-Golden-Dataset">Create a Golden Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Augment-Golden-Questions">Augment Golden Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Validate-Evaluators">Validate Evaluators</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-a-validation-dataset">Create a validation dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-evaluators">Define evaluators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Validate-evaluators">Validate evaluators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-Pipeline">Run Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Concluding-Remarks">Concluding Remarks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

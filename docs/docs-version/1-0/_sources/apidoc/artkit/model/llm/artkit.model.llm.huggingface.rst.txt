@@ -1,0 +1,58 @@
+artkit.model.llm.huggingface
+============================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.llm.huggingface
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: huggingface
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      HuggingfaceChat
+      HuggingfaceChatLocal
+      HuggingfaceCompletion
+      HuggingfaceCompletionLocal
+      HuggingfaceURLChat
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+==========
+Submodules
+==========
+.. autosummary::
+   :toctree: huggingface
+   :template: custom-module-template.rst
+   :recursive:
+
+   artkit.model.llm.huggingface.base
+

@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>artkit.model.llm.huggingface.HuggingfaceChat &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/bcgx.css?v=9d1a9f92" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../../../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'apidoc/artkit/model/llm/huggingface/artkit.model.llm.huggingface.HuggingfaceChat';</script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="artkit.model.llm.huggingface.HuggingfaceChatLocal" href="artkit.model.llm.huggingface.HuggingfaceChatLocal.html" />
+    <link rel="prev" title="artkit.model.llm.huggingface" href="../artkit.model.llm.huggingface.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../artkit.html">API Reference</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../artkit.api.html">artkit.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../artkit.flow.html">artkit.flow</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../artkit.model.html">artkit.model</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../artkit.model.html">artkit.model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../artkit.model.base.html">artkit.model.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../artkit.model.cache.html">artkit.model.cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../artkit.model.diffusion.html">artkit.model.diffusion</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../../artkit.model.llm.html">artkit.model.llm</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../artkit.model.llm.html">artkit.model.llm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.CachedChatModel.html">artkit.model.llm.CachedChatModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.CachedCompletionModel.html">artkit.model.llm.CachedCompletionModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.ChatFromCompletionModel.html">artkit.model.llm.ChatFromCompletionModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.HistorizedChatModel.html">artkit.model.llm.HistorizedChatModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.TextGenerator.html">artkit.model.llm.TextGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.anthropic.html">artkit.model.llm.anthropic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.base.html">artkit.model.llm.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.gemini.html">artkit.model.llm.gemini</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.groq.html">artkit.model.llm.groq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.history.html">artkit.model.llm.history</a></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="../artkit.model.llm.huggingface.html">artkit.model.llm.huggingface</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../artkit.model.llm.huggingface.html">artkit.model.llm.huggingface</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">artkit.model.llm.huggingface.HuggingfaceChat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="artkit.model.llm.huggingface.HuggingfaceChatLocal.html">artkit.model.llm.huggingface.HuggingfaceChatLocal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="artkit.model.llm.huggingface.HuggingfaceCompletion.html">artkit.model.llm.huggingface.HuggingfaceCompletion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="artkit.model.llm.huggingface.HuggingfaceCompletionLocal.html">artkit.model.llm.huggingface.HuggingfaceCompletionLocal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="artkit.model.llm.huggingface.HuggingfaceURLChat.html">artkit.model.llm.huggingface.HuggingfaceURLChat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="artkit.model.llm.huggingface.base.html">artkit.model.llm.huggingface.base</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.multi_turn.html">artkit.model.llm.multi_turn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.openai.html">artkit.model.llm.openai</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../artkit.model.llm.util.html">artkit.model.llm.util</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../artkit.model.util.html">artkit.model.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../artkit.model.vision.html">artkit.model.vision</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../artkit.util.html">artkit.util</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../../artkit.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../artkit.model.llm.huggingface.html" class="nav-link">artkit.model.llm.huggingface</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">artkit.model...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="artkit-model-llm-huggingface-huggingfacechat">
+<h1>artkit.model.llm.huggingface.HuggingfaceChat<a class="headerlink" href="#artkit-model-llm-huggingface-huggingfacechat" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artkit.model.llm.huggingface.</span></span><span class="sig-name descname"><span class="pre">HuggingfaceChat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'HF_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exponential_base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_prompt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chat_template</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chat_template_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">model_params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/artkit/model/llm/huggingface/_huggingface.html#HuggingfaceChat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronous Huggingface API LLM.</p>
+<p>Examples:</p>
+<p>Model usage where chat template is implicitly derived from the tokenizer:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">HuggingfaceChat</span><span class="p">(</span>
+    <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;meta-llama/Meta-Llama-3-8B-Instruct&quot;</span><span class="p">,</span>
+    <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;HF_TOKEN&quot;</span><span class="p">,</span>
+    <span class="n">template_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;add_generation_prompt&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">chat</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="s2">&quot;Hello, how are you?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Set your own chat template:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">HuggingfaceChat</span><span class="p">(</span>
+    <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;meta-llama/Meta-Llama-3-8B-Instruct&quot;</span><span class="p">,</span>
+    <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;HF_TOKEN&quot;</span><span class="p">,</span>
+    <span class="n">custom_chat_template</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;{</span><span class="si">% s</span><span class="s2">et loop_messages = messages %}&quot;</span>
+        <span class="s2">&quot;{</span><span class="si">% f</span><span class="s2">or message in loop_messages %}&quot;</span>
+        <span class="s2">&quot;{</span><span class="si">% s</span><span class="s2">et content = &#39;&#39; + message[&#39;role&#39;] + &#39;</span><span class="se">\n\n</span><span class="s2">&#39; + message[&#39;content&#39;] | trim + &#39;&#39; %}&quot;</span>
+        <span class="s2">&quot;{</span><span class="si">% i</span><span class="s2">f loop.index0 == 0 %}{</span><span class="si">% s</span><span class="s2">et content = bos_token + content %}{</span><span class="si">% e</span><span class="s2">ndif %}&quot;</span>
+        <span class="s2">&quot;{{ content }}&quot;</span>
+        <span class="s2">&quot;{</span><span class="si">% e</span><span class="s2">ndfor %}&quot;</span>
+        <span class="s2">&quot;{</span><span class="si">% i</span><span class="s2">f add_generation_prompt %}&quot;</span>
+        <span class="s2">&quot;{{ &#39;assistant</span><span class="se">\n\n</span><span class="s2">&#39; }}&quot;</span>
+        <span class="s2">&quot;{</span><span class="si">% e</span><span class="s2">ndif %}&quot;</span>
+    <span class="p">),</span>
+    <span class="n">template_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;add_generation_prompt&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">chat</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="s2">&quot;Hello, how are you?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Bases<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="base/artkit.model.llm.huggingface.base.HuggingfaceRemoteConnectorMixin.html#artkit.model.llm.huggingface.base.HuggingfaceRemoteConnectorMixin" title="artkit.model.llm.huggingface.base.HuggingfaceRemoteConnectorMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HuggingfaceRemoteConnectorMixin</span></code></a>, <a class="reference internal" href="base/artkit.model.llm.huggingface.base.HuggingfaceChatConnectorMixin.html#artkit.model.llm.huggingface.base.HuggingfaceChatConnectorMixin" title="artkit.model.llm.huggingface.base.HuggingfaceChatConnectorMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HuggingfaceChatConnectorMixin</span></code></a> [<code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncInferenceClient</span></code>]</p>
+</dd>
+<dt class="field-even">Metaclasses<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.7/library/abc.html#abc.ABCMeta" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a></p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – the ID of the model to use</p></li>
+<li><p><strong>api_key_env</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – the environment variable that holds the API key; if not
+specified, use the default API key environment variable for the model as
+returned by <a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_default_api_key_env" title="artkit.model.llm.huggingface.HuggingfaceChat.get_default_api_key_env"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_default_api_key_env()</span></code></a></p></li>
+<li><p><strong>initial_delay</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – the initial delay in seconds between client requests
+(defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>)</p></li>
+<li><p><strong>exponential_base</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – the base for the exponential backoff
+(defaults to <code class="docutils literal notranslate"><span class="pre">2.0</span></code>)</p></li>
+<li><p><strong>jitter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</span>) – whether to add jitter to the delay
+(defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p></li>
+<li><p><strong>max_retries</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</span>) – the maximum number of retries for client requests
+(defaults to <code class="docutils literal notranslate"><span class="pre">5</span></code>)
+parameters with <code class="docutils literal notranslate"><span class="pre">None</span></code> values are considered unset and will be ignored</p></li>
+<li><p><strong>system_prompt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – the system prompt to initialise the chat system with
+(optional)</p></li>
+<li><p><strong>chat_template</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – an optional jinja template which will be used to
+format the input to the model based on hugging face implementation
+for more information see:                <a class="reference external" href="https://huggingface.co/docs/transformers/main/en/chat_templating">https://huggingface.co/docs/transformers/main/en/chat_templating</a></p></li>
+<li><p><strong>chat_template_params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/collections.abc.html#collections.abc.Mapping" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Any" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]</span>) – additional arguments to pass while formatting the
+input this allows reusing the same template for multiple models by</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Method summary</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_api_key" title="artkit.model.llm.huggingface.HuggingfaceChat.get_api_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_api_key</span></code></a></p></td>
+<td><p>Get the API key from the environment variable specified by <a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.api_key_env" title="artkit.model.llm.huggingface.HuggingfaceChat.api_key_env"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api_key_env</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_client" title="artkit.model.llm.huggingface.HuggingfaceChat.get_client"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_client</span></code></a></p></td>
+<td><p>Get a shared client instance for this connector; return a cached instance if for this model's API key if available.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_default_api_key_env" title="artkit.model.llm.huggingface.HuggingfaceChat.get_default_api_key_env"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_default_api_key_env</span></code></a></p></td>
+<td><p>Get the default name of the environment variable that holds the API key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_model_params" title="artkit.model.llm.huggingface.HuggingfaceChat.get_model_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_model_params</span></code></a></p></td>
+<td><p>Get the parameters of the model as a mapping.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_response" title="artkit.model.llm.huggingface.HuggingfaceChat.get_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code></a></p></td>
+<td><p>Get a response, or multiple alternative responses, from the chat system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_tokenizer" title="artkit.model.llm.huggingface.HuggingfaceChat.get_tokenizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_tokenizer</span></code></a></p></td>
+<td><p>The tokenizer used by this connector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.to_expression" title="artkit.model.llm.huggingface.HuggingfaceChat.to_expression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_expression</span></code></a></p></td>
+<td><p>Render this object as an expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.with_system_prompt" title="artkit.model.llm.huggingface.HuggingfaceChat.with_system_prompt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_system_prompt</span></code></a></p></td>
+<td><p>Set the system prompt for the LLM system.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Attribute summary</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.model_id" title="artkit.model.llm.huggingface.HuggingfaceChat.model_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_id</span></code></a></p></td>
+<td><p>The ID of the model to use.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.system_prompt" title="artkit.model.llm.huggingface.HuggingfaceChat.system_prompt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_prompt</span></code></a></p></td>
+<td><p>The system prompt used to set up the LLM system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.chat_template" title="artkit.model.llm.huggingface.HuggingfaceChat.chat_template"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chat_template</span></code></a></p></td>
+<td><p>The chat template to use for the model; <code class="docutils literal notranslate"><span class="pre">None</span></code> if using the default template.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.chat_template_params" title="artkit.model.llm.huggingface.HuggingfaceChat.chat_template_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chat_template_params</span></code></a></p></td>
+<td><p>Additional chat template parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.api_key_env" title="artkit.model.llm.huggingface.HuggingfaceChat.api_key_env"><code class="xref py py-obj docutils literal notranslate"><span class="pre">api_key_env</span></code></a></p></td>
+<td><p>The environment variable that holds the API key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.initial_delay" title="artkit.model.llm.huggingface.HuggingfaceChat.initial_delay"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initial_delay</span></code></a></p></td>
+<td><p>The initial delay in seconds between client requests.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.exponential_base" title="artkit.model.llm.huggingface.HuggingfaceChat.exponential_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exponential_base</span></code></a></p></td>
+<td><p>The base for the exponential backoff.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.jitter" title="artkit.model.llm.huggingface.HuggingfaceChat.jitter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jitter</span></code></a></p></td>
+<td><p>Whether to add jitter to the delay.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.max_retries" title="artkit.model.llm.huggingface.HuggingfaceChat.max_retries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_retries</span></code></a></p></td>
+<td><p>The maximum number of retries for client requests.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.model_params" title="artkit.model.llm.huggingface.HuggingfaceChat.model_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_params</span></code></a></p></td>
+<td><p>Additional model parameters, passed with every request.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Definitions</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.get_api_key">
+<span class="sig-name descname"><span class="pre">get_api_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_api_key" title="Link to this definition">#</a></dt>
+<dd><p>Get the API key from the environment variable specified by <a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat.api_key_env" title="artkit.model.llm.huggingface.HuggingfaceChat.api_key_env"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api_key_env</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the API key</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><strong>ValueError</strong></a> – if the environment variable is not set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.get_client">
+<span class="sig-name descname"><span class="pre">get_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_client" title="Link to this definition">#</a></dt>
+<dd><p>Get a shared client instance for this connector; return a cached instance if
+for this model’s API key if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#artkit.model.llm.huggingface.HuggingfaceChat" title="artkit.model.llm.huggingface._huggingface.HuggingfaceChat"><code class="xref py py-class docutils literal notranslate"><span class="pre">HuggingfaceChat</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the shared client instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.get_default_api_key_env">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_api_key_env</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_default_api_key_env" title="Link to this definition">#</a></dt>
+<dd><p>Get the default name of the environment variable that holds the API key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the default name of the api key environment variable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.get_model_params">
+<span class="sig-name descname"><span class="pre">get_model_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_model_params" title="Link to this definition">#</a></dt>
+<dd><p>Get the parameters of the model as a mapping.</p>
+<p>This includes all parameters that influence the model’s behavior, but not
+parameters that determine the model itself or are are specific to the client
+such as the model ID or the API key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/collections.abc.html#collections.abc.Mapping" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Any" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the model parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.get_response">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">model_params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_response" title="Link to this definition">#</a></dt>
+<dd><p>Get a response, or multiple alternative responses, from the chat system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – the user prompt to pass to the chat system</p></li>
+<li><p><strong>history</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../history/artkit.model.llm.history.ChatHistory.html#artkit.model.llm.history.ChatHistory" title="artkit.model.llm.history._history.ChatHistory"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChatHistory</span></code></a>]</span>) – the chat history preceding the message</p></li>
+<li><p><strong>model_params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Any" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span>) – additional parameters for the chat system</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the response or alternative responses generated by the chat system</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RequestLimitException</strong> – if an error occurs while communicating
+with the chat system</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.get_tokenizer">
+<span class="sig-name descname"><span class="pre">get_tokenizer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_tokenizer" title="Link to this definition">#</a></dt>
+<dd><p>The tokenizer used by this connector.</p>
+<p>Gets loaded on first access.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AutoTokenizer</span></code></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the tokenizer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.to_expression">
+<span class="sig-name descname"><span class="pre">to_expression</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.to_expression" title="Link to this definition">#</a></dt>
+<dd><p>Render this object as an expression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expression</span></code></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the expression representing this object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.with_system_prompt">
+<span class="sig-name descname"><span class="pre">with_system_prompt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system_prompt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.with_system_prompt" title="Link to this definition">#</a></dt>
+<dd><p>Set the system prompt for the LLM system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>system_prompt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – the system prompt to use</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a new LLM system with the system prompt set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.api_key_env">
+<span class="sig-name descname"><span class="pre">api_key_env</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.api_key_env" title="Link to this definition">#</a></dt>
+<dd><p>The environment variable that holds the API key.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.chat_template">
+<span class="sig-name descname"><span class="pre">chat_template</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.chat_template" title="Link to this definition">#</a></dt>
+<dd><p>The chat template to use for the model; <code class="docutils literal notranslate"><span class="pre">None</span></code> if using the default template.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.chat_template_params">
+<span class="sig-name descname"><span class="pre">chat_template_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/collections.abc.html#collections.abc.Mapping" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Any" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.chat_template_params" title="Link to this definition">#</a></dt>
+<dd><p>Additional chat template parameters.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.exponential_base">
+<span class="sig-name descname"><span class="pre">exponential_base</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.exponential_base" title="Link to this definition">#</a></dt>
+<dd><p>The base for the exponential backoff.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.initial_delay">
+<span class="sig-name descname"><span class="pre">initial_delay</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.initial_delay" title="Link to this definition">#</a></dt>
+<dd><p>The initial delay in seconds between client requests.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.jitter">
+<span class="sig-name descname"><span class="pre">jitter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.jitter" title="Link to this definition">#</a></dt>
+<dd><p>Whether to add jitter to the delay.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.max_retries">
+<span class="sig-name descname"><span class="pre">max_retries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.max_retries" title="Link to this definition">#</a></dt>
+<dd><p>The maximum number of retries for client requests.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.model_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><span class="pre">str</span></a></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.model_id" title="Link to this definition">#</a></dt>
+<dd><p>The ID of the model to use.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.model_params">
+<span class="sig-name descname"><span class="pre">model_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">,</span> <a class="reference external" href="https://docs.python.org/3.7/library/typing.html#typing.Any" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.model_params" title="Link to this definition">#</a></dt>
+<dd><p>Additional model parameters, passed with every request.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="artkit.model.llm.huggingface.HuggingfaceChat.system_prompt">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">system_prompt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><span class="pre">None</span></a></em><a class="headerlink" href="#artkit.model.llm.huggingface.HuggingfaceChat.system_prompt" title="Link to this definition">#</a></dt>
+<dd><p>The system prompt used to set up the LLM system.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_api_key"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.get_api_key()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_client"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.get_client()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_default_api_key_env"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.get_default_api_key_env()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_model_params"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.get_model_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_response"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.get_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.get_tokenizer"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.get_tokenizer()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.to_expression"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.to_expression()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.with_system_prompt"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.with_system_prompt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.api_key_env"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.api_key_env</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.chat_template"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.chat_template</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.chat_template_params"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.chat_template_params</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.exponential_base"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.exponential_base</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.initial_delay"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.initial_delay</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.jitter"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.jitter</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.max_retries"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.max_retries</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.model_id"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.model_id</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.model_params"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.model_params</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.model.llm.huggingface.HuggingfaceChat.system_prompt"><code class="docutils literal notranslate"><span class="pre">HuggingfaceChat.system_prompt</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

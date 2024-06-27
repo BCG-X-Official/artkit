@@ -1,0 +1,45 @@
+artkit.model.llm.huggingface.base.HuggingfaceLocalConnectorMixin
+================================================================
+
+.. currentmodule:: artkit.model.llm.huggingface.base
+
+.. autoclass:: HuggingfaceLocalConnectorMixin
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HuggingfaceLocalConnectorMixin.get_api_key
+      ~HuggingfaceLocalConnectorMixin.get_client
+      ~HuggingfaceLocalConnectorMixin.get_default_api_key_env
+      ~HuggingfaceLocalConnectorMixin.get_model_params
+      ~HuggingfaceLocalConnectorMixin.get_tokenizer
+      ~HuggingfaceLocalConnectorMixin.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HuggingfaceLocalConnectorMixin.model_id
+      ~HuggingfaceLocalConnectorMixin.use_cuda
+      ~HuggingfaceLocalConnectorMixin.api_key_env
+      ~HuggingfaceLocalConnectorMixin.initial_delay
+      ~HuggingfaceLocalConnectorMixin.exponential_base
+      ~HuggingfaceLocalConnectorMixin.jitter
+      ~HuggingfaceLocalConnectorMixin.max_retries
+      ~HuggingfaceLocalConnectorMixin.model_params
+   
+   
+
+   .. rubric:: Definitions

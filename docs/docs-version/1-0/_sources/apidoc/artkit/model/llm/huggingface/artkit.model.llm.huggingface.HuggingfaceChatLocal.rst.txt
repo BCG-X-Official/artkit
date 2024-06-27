@@ -1,0 +1,50 @@
+artkit.model.llm.huggingface.HuggingfaceChatLocal
+=================================================
+
+.. currentmodule:: artkit.model.llm.huggingface
+
+.. autoclass:: HuggingfaceChatLocal
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HuggingfaceChatLocal.get_api_key
+      ~HuggingfaceChatLocal.get_client
+      ~HuggingfaceChatLocal.get_default_api_key_env
+      ~HuggingfaceChatLocal.get_model_params
+      ~HuggingfaceChatLocal.get_response
+      ~HuggingfaceChatLocal.get_tokenizer
+      ~HuggingfaceChatLocal.to_expression
+      ~HuggingfaceChatLocal.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HuggingfaceChatLocal.model_id
+      ~HuggingfaceChatLocal.system_prompt
+      ~HuggingfaceChatLocal.use_cuda
+      ~HuggingfaceChatLocal.chat_template
+      ~HuggingfaceChatLocal.chat_template_params
+      ~HuggingfaceChatLocal.api_key_env
+      ~HuggingfaceChatLocal.initial_delay
+      ~HuggingfaceChatLocal.exponential_base
+      ~HuggingfaceChatLocal.jitter
+      ~HuggingfaceChatLocal.max_retries
+      ~HuggingfaceChatLocal.model_params
+   
+   
+
+   .. rubric:: Definitions

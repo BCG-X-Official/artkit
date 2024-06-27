@@ -1,0 +1,2015 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Building Your First ARTKIT Pipeline &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/bcgx.css?v=9d1a9f92" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/introduction_to_artkit/building_your_first_artkit_pipeline';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Connecting to Gen AI Models" href="connecting_to_genai_models.html" />
+    <link rel="prev" title="Gen AI Testing and Evaluation" href="genai_testing_and_evaluation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to ARTKIT</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="genai_testing_and_evaluation.html">Gen AI Testing and Evaluation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Building Your First ARTKIT Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting_to_genai_models.html">Connecting to Gen AI Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Challenges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/prompt_augmentation.html">Prompt Augmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/single_turn_personas.html">Single-Turn Personas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/multi_turn_personas.html">Multi-Turn Personas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multimodal Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multimodal/image_generation_and_evaluation.html">Image Generation and Evaluation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/evaluator_design.html">Evaluator Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/interpreting_run_results.html">Interpreting Run Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/creating_new_model_classes.html">Creating New Model Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/prompt_formatting.html">Prompt Formatting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/cache_management.html">Cache Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/json_output_validation.html">JSON Output Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/advanced_design_patterns.html">Advanced Design Patterns</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Building...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Building-Your-First-ARTKIT-Pipeline">
+<h1>Building Your First ARTKIT Pipeline<a class="headerlink" href="#Building-Your-First-ARTKIT-Pipeline" title="Link to this heading">#</a></h1>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">#</a></h2>
+<p>This notebook introduces the basic building blocks for developing ARTKIT testing and evaluation pipelines. You will learn how to:</p>
+<ol class="arabic simple">
+<li><p><strong>Set up your environment:</strong> Import ARTKIT and supporting libraries, set up logging, and load environment variables.</p></li>
+<li><p><strong>Connect to an LLM:</strong> Establish a secure API connection with OpenAI, enabling you to send requests and receive responses.</p></li>
+<li><p><strong>Learn core ARTKIT functions:</strong> Get familiar with ARTKIT’s flexible functions to build a basic pipeline.</p></li>
+<li><p><strong>Build E2E test &amp; eval pipeline:</strong> Define and run a simple end-to-end testing and evaluation pipeline.</p></li>
+</ol>
+<p>The functions introduced in this tutorial enable developers to address a wide range of testing and evaluation use cases with ARTKIT.</p>
+<p>New users are encouraged to start with the ARTKIT setup guide on the documentation <a class="reference internal" href="../../_generated/home.html#installation"><span class="std std-ref">Home</span></a> page and the <a class="reference internal" href="genai_testing_and_evaluation.html"><span class="doc">Gen AI Testing and Evaluation</span></a> overview in our User Guide.</p>
+</section>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Link to this heading">#</a></h2>
+<p>The recommended way to use ARTKIT is to import <code class="docutils literal notranslate"><span class="pre">artkit.api</span></code> with the alias <code class="docutils literal notranslate"><span class="pre">ak</span></code>, since the <code class="docutils literal notranslate"><span class="pre">api</span></code> module provides a clean interface to all ARTKIT methods and classes which are designed to be user-facing.</p>
+<p>We also import the standard library <code class="docutils literal notranslate"><span class="pre">json</span></code>, which is useful for converting JSON formatted outputs from LLMs into Python dictionaries</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+</pre></div>
+</div>
+</div>
+<p>ARTKIT is designed to work in conjunction with <code class="docutils literal notranslate"><span class="pre">pandas</span></code> for data processing. The display setting below is helpful for viewing dataframes in notebooks when there are long strings in the cells, which occurs frequently when working with prompts.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>ARTKIT supports detailed logging. In this notebook, we set the logging level to WARNING to keep the outputs minimal. When developing your own ARTKIT pipelines, it may be helpful to set the logging level to INFO or DEBUG for richer outputs.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This notebook interacts with the OpenAI API. To run this notebook, obtain an <a class="reference external" href="https://platform.openai.com/docs/quickstart/account-setup">OpenAI API key</a> and store it in an environment variable called <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code>. For a step-by-step guide, see our documentation on <a class="reference internal" href="../../_generated/home.html#environment-variables"><span class="std std-ref">Environment Variables</span></a>.</p>
+<p>We recommend storing environment variables in a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file within your project and loading them using <code class="docutils literal notranslate"><span class="pre">load_dotenv</span></code>, as shown below:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Connect-to-an-LLM">
+<h2>Connect to an LLM<a class="headerlink" href="#Connect-to-an-LLM" title="Link to this heading">#</a></h2>
+<p>ARTKIT model classes provide interfaces for connecting to a variety Gen AI models from different model providers, including OpenAI, Anthropic, HuggingFace, Groq, and Google Vertex AI. Benefits of using ARTKIT model classes include built-in support for asynchronous requests and managing chat history.</p>
+<p>The codeblock below uses ARTKIT’s <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> model class to initiate a client session with GPT-4. ARTKIT is designed to work asynchronously, as this unlocks massive performance gains when running pipelines with many API calls. Accordingly, ARTKIT’s built-in LLM connectors are all asynchronous. Later in the tutorial, we demonstrate how to write asynchronous functions to leverage ARTKIT’s async capabilities. Note that users can always implement and include non-async functions in ARTKIT
+pipelines if they choose, but it is strongly recommended to use asynchronous methods whenever possible.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> model class is passed as the <code class="docutils literal notranslate"><span class="pre">model</span></code> parameter to a <code class="docutils literal notranslate"><span class="pre">CachedChatModel</span></code> class. This optional step allows us to leverage ARTKIT’s automatic caching functionality, which caches model responses in a database using Python’s built in <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html">sqlit3</a> library. Using a cache ensures reproducibility and avoids repetitive API calls which can run up costs and runtime during development. The code below specifies a cache database as a file path
+relative to this notebook:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chat_llm</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-4&quot;</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/building_your_first_artkit_pipeline.db&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>See the <a class="reference internal" href="connecting_to_genai_models.html"><span class="doc">Connecting to Model APIs</span></a> tutorial for an overview of how to use different ARTKIT model classes. The <a class="reference internal" href="../../apidoc/artkit.html"><span class="doc">API Reference</span></a> contains the most up-to-date list of supported models.</p>
+<p>If you need to connect to a model which is not supported by ARTKIT, see our tutorial on <a class="reference internal" href="../advanced_tutorials/creating_new_model_classes.html"><span class="doc">Creating New Model Classes</span></a>, and please consider <a class="reference internal" href="../../contributor_guide/index.html"><span class="doc">Contributing</span></a> to ARTKIT!</p>
+</section>
+<section id="Core-ARTKIT-functions">
+<h2>Core ARTKIT functions<a class="headerlink" href="#Core-ARTKIT-functions" title="Link to this heading">#</a></h2>
+<p>This section introduces the core functions for building ARTKIT pipelines:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>: Execute one or more pipeline steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code>: A single pipeline step which produces a dictionary or an iterable of dictionaries</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chain</span></code> or <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>: A set of steps that run in sequence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parallel</span></code> or <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>: A set of steps that run in parallel</p></li>
+</ol>
+<section id="Run">
+<h3>Run<a class="headerlink" href="#Run" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">run</span></code> function takes two arguments:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">steps</span></code>: One or more steps to execute</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code> (optional): One or more inputs to the steps. This must be a dictionary or an iterable of dictionaries. This is optional since the inputs to a flow can alternatively be defined in an initial step which takes no input arguments and outputs a dictionary or iterable of dictionaries to be passed to the downstream steps.</p></li>
+</ol>
+<p>The result of executing <code class="docutils literal notranslate"><span class="pre">run</span></code> is always a dictionary or an iterable of dictionaries.</p>
+<p>Use of the <code class="docutils literal notranslate"><span class="pre">run</span></code> function will be illustrated in the next section, where we will use it to execute a <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+</section>
+<section id="Step">
+<h3>Step<a class="headerlink" href="#Step" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">step</span></code> function is used to define individual steps in an ARTKIT pipeline. Key characteristics of the <code class="docutils literal notranslate"><span class="pre">step</span></code> function are:</p>
+<ol class="arabic simple">
+<li><p>The first argument is the name of the step, which is passed through in the pipeline results</p></li>
+<li><p>The second argument can be either:</p>
+<ul class="simple">
+<li><p>A dictionary or iterable of dictionaries. This is often useful for defining the first step in a pipeline as a fixed set of initial prompts that are passed on to subsequent steps which transform the inputs or send them as inputs to an API.</p></li>
+<li><p>A function which returns a dictionary or an iterable of dictionaries. Aside from the first step in a pipeline, this is typically how <code class="docutils literal notranslate"><span class="pre">step</span></code> is used.</p></li>
+</ul>
+</li>
+<li><p>Optionally, any additional keyword arguments to be passed to the function</p></li>
+</ol>
+<p>Let’s look at a toy example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ULTIMATE_QUESTION</span> <span class="o">=</span> <span class="s1">&#39;What is the answer to the Ultimate Question of Life, </span><span class="se">\</span>
+<span class="s1">    the Universe, and Everything?&#39;</span>
+
+<span class="c1"># Define input, which can be a dict or iterable of dicts</span>
+<span class="n">question</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="n">ULTIMATE_QUESTION</span><span class="p">}</span>
+
+
+<span class="c1"># Define function to be used in a step</span>
+<span class="k">def</span> <span class="nf">ultimate_answer</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
+
+
+<span class="c1"># Define step</span>
+<span class="n">step_ultimate_answer</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+    <span class="s2">&quot;ultimate_answer&quot;</span><span class="p">,</span>  <span class="c1"># Step name</span>
+    <span class="n">ultimate_answer</span><span class="p">,</span>  <span class="c1"># Step function to run</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Run step with the question passed as the input</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">step_ultimate_answer</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th>ultimate_answer</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>question</th>
+      <th>answer</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question of Life,     the Universe, and Everything?</td>
+      <td>42</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>In this non-sensical example, the input question is not actually used by the step, however this illustrates that the input data automatically flows through to the final output. This is significant, because it ensures the input is available in the pipeline output without having to include it as an output of the step.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">to_frame</span></code> method unpacks the dictionary into in a multi-column dataframe where:</p>
+<ol class="arabic simple">
+<li><p>The first column level represents the name of the step (in the example above, the steps are <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">ultimate_answer</span></code>)</p></li>
+<li><p>The second column level represents the output from each step (in the example above, the step outputs are <code class="docutils literal notranslate"><span class="pre">question</span></code> and <code class="docutils literal notranslate"><span class="pre">answer</span></code>, respectively)</p></li>
+</ol>
+<p>As we will see later, this two-level column structure becomes extremely helpful in multi-step flows, since it allows us to keep track of which step produced each output.</p>
+<p>Now let’s look at a more realistic example which uses <code class="docutils literal notranslate"><span class="pre">chat_llm</span></code> to accept an input and return a response from GPT-4.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define step function (technically, an asynchronous generator)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">gpt4</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">question</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="nb">dict</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="c1"># Define step</span>
+<span class="n">step_gpt4</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+    <span class="s2">&quot;gpt4&quot;</span><span class="p">,</span>  <span class="c1"># Step name</span>
+    <span class="n">gpt4</span><span class="p">,</span>  <span class="c1"># Step function to run</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span>  <span class="c1"># LLM system to use</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Input prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;prompt&#39;</span><span class="p">:</span> <span class="s1">&#39;What is the answer to the Ultimate Question </span><span class="se">\</span>
+<span class="s1">          of Life, the Universe, and Everything?&#39;</span><span class="p">}</span>
+
+
+<span class="c1"># Run step with the input prompt</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">step_gpt4</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th>gpt4</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>question</th>
+      <th>response</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question of Life,     the Universe, and Everything?</td>
+      <td>The answer is 42, according to "The Hitchhiker's Guide to the Galaxy" by Douglas Adams.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The step function above introduces a few advanced Python concepts which are powerful and easy to implement with slight adjustments to traditional Python function definition syntax:</p>
+<ul class="simple">
+<li><p>Asynchronous Programming (<code class="docutils literal notranslate"><span class="pre">async</span></code>, <code class="docutils literal notranslate"><span class="pre">await</span></code>):</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">def</span></code> syntax is used to define an <a class="reference external" href="https://docs.python.org/3/library/asyncio.html">asynchronous function</a>. Asynchronous functions allow certain operations, typically I/O bound tasks like API calls or file operations, to run without blocking the execution of other parts of your program. This is especially useful in web applications and services where handling multiple tasks concurrently can significantly improve performance.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">await</span></code> keyword is used to pause the execution of the surrounding coroutine (asynchronous function) until the awaited task completes. <code class="docutils literal notranslate"><span class="pre">await</span></code> is used here to wait for the response from the asynchronous method call, <code class="docutils literal notranslate"><span class="pre">llm.get_response_async()</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Generators (<code class="docutils literal notranslate"><span class="pre">yield</span></code>):</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword turns a function into a <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#yieldexpr">generator</a>, which is a type of iterator that generates one item at a time and only when required, usually in a loop. Unlike a regular function that terminates once it hits a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement, a generator can yield multiple values over time, pausing after each <code class="docutils literal notranslate"><span class="pre">yield</span></code> and resuming from there the next time it’s called. This is useful when dealing with a potentially large
+set of results that you don’t want to store in memory all at once.</p></li>
+</ul>
+</li>
+</ul>
+<p>We <em>strongly</em> recommend defining functions as asynchronous generators for ARTKIT pipelines, since this allows you to take full advantage of the library’s asynchronous capabilities. For this reason, ARTKIT’s built-in model connectors only support asynchronous calls. However, ARTKIT pipelines are perfectly capable of working with non-async functions, and users are free to implement non-async functions and model connectors as needed.</p>
+</section>
+<section id="Chain-(&gt;&gt;)">
+<h3>Chain (&gt;&gt;)<a class="headerlink" href="#Chain-(>>)" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">chain</span></code> function is used to connect steps, such that the outputs of the previous step are available as inputs to the next step. To illustrate this, let’s define two functions:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="s1">&#39;What is the answer to the Ultimate Question </span><span class="se">\</span>
+<span class="s1">            of Life, the Universe, and Everything?&#39;</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">step_ultimate_answer</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">step_multiply_answer</span><span class="p">(</span><span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;answer_multiplied&#39;</span><span class="p">:</span> <span class="n">answer</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Now we can run these in a pipeline by creating two steps and combining them with <code class="docutils literal notranslate"><span class="pre">chain</span></code>. Within a chain, steps can automatically access items in the output dictionary of the previous step. In the example below, the “answer” in the output from the first step is automatically used as the “answer” argument in the second step.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ultimate_answer&quot;</span><span class="p">,</span> <span class="n">step_ultimate_answer</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">chain</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th>ultimate_answer</th>
+      <th>multiply_answer</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>question</th>
+      <th>answer</th>
+      <th>answer_multiplied</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question             of Life, the Universe, and Everything?</td>
+      <td>42</td>
+      <td>84</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Properties of chains include:</p>
+<ul class="simple">
+<li><p>Chains can be composed of multiple steps</p></li>
+<li><p>Chains can be nested within other chains. This can be helpful when developing very complex chains: You can improve code readability and testability by breaking up the problem into simpler sub-chains, which are later combined together in a final pipeline.</p></li>
+<li><p>Within a chain, steps automatically match outputs from each step to the input parameters of the next step. For example, if “answer” is in the output dictionary of a step, and if the following step has an input parameter called “answer”, then the second step will use the value from the previous step for the “answer” parameter.</p></li>
+</ul>
+</section>
+<section id="Parallel-(&amp;)">
+<h3>Parallel (&amp;)<a class="headerlink" href="#Parallel-(&)" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">parallel</span></code> function is used to define a set of steps or chains, or <em>sub-flows</em>, which will run in parallel.</p>
+<p>All sub-flows inside a <code class="docutils literal notranslate"><span class="pre">parallel</span></code> function must have compatible input and output types, since they will accept the same inputs and the outputs will be combined. To illustrate this function, we will pass the “answer” in as the initial input:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">step_multiply_answer</span><span class="p">(</span><span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;multiplier&#39;</span><span class="p">:</span> <span class="n">multiplier</span><span class="p">,</span>
+            <span class="s1">&#39;answer_multiplied&#39;</span><span class="p">:</span> <span class="n">answer</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">}</span>
+
+
+<span class="n">parallel</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">answer</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="s2">&quot;multiplier&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th colspan="2" halign="left">multiply_answer</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>answer</th>
+      <th>multiplier</th>
+      <th>answer_multiplied</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>42</td>
+      <td>1</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>42</td>
+      <td>2</td>
+      <td>84</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>42</td>
+      <td>3</td>
+      <td>126</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Properties of parallel steps include:</p>
+<ul class="simple">
+<li><p>A set of parallel steps can itself be part of a chain</p></li>
+<li><p>Chains can be used inside parallel steps</p></li>
+</ul>
+<p>In the output above you can also clearly see the multi-level index for columns, where again the first level denotes the name of the step and the second level the output.</p>
+</section>
+<section id="Putting-it-all-together">
+<h3>Putting it all together<a class="headerlink" href="#Putting-it-all-together" title="Link to this heading">#</a></h3>
+<p>The four functions <code class="docutils literal notranslate"><span class="pre">run</span></code>, <code class="docutils literal notranslate"><span class="pre">step</span></code>, <code class="docutils literal notranslate"><span class="pre">chain</span></code>, and <code class="docutils literal notranslate"><span class="pre">parallel</span></code> can be flexibly combined to create end-to-end flows. For example, the flow below leverages all four functions to do the following:</p>
+<ol class="arabic simple">
+<li><p>The first step is simply the Ultimate Question input, which is passed to the next step</p></li>
+<li><p>The second step accepts “question” as an input and always returns the Ultimate Answer: 42</p></li>
+<li><p>In parallel, multiply the answer by 3 different multipliers, yielding 3 different multiplied answers</p></li>
+<li><p>Finally, check whether each answer is greater than 100</p></li>
+</ol>
+<p>Before running this flow, we demonstrate use of the <code class="docutils literal notranslate"><span class="pre">draw</span></code> method, which can be used to create a flow diagram for ARTKIT flows:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="s1">&#39;What is the answer to the Ultimate Question </span><span class="se">\</span>
+<span class="s1">            of Life, the Universe, and Everything?&#39;</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">step_ultimate_answer</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">step_multiply_answer</span><span class="p">(</span><span class="n">answer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;multiplier&#39;</span><span class="p">:</span> <span class="n">multiplier</span><span class="p">,</span>
+            <span class="s1">&#39;answer&#39;</span><span class="p">:</span> <span class="n">answer</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">check_greater_than_100</span><span class="p">(</span><span class="n">answer</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;greater_than_100&#39;</span><span class="p">:</span> <span class="n">answer</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">}</span>
+
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ultimate_question&quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ultimate_answer&quot;</span><span class="p">,</span> <span class="n">step_ultimate_answer</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;check_greater_than_100&quot;</span><span class="p">,</span> <span class="n">check_greater_than_100</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="n">pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/user_guide_introduction_to_artkit_building_your_first_artkit_pipeline_38_0.svg" src="../../_images/user_guide_introduction_to_artkit_building_your_first_artkit_pipeline_38_0.svg" /></div>
+</div>
+<p>Now we run the flow:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">pipeline</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="s2">&quot;multiplier&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ultimate_question</th>
+      <th>ultimate_answer</th>
+      <th colspan="2" halign="left">multiply_answer</th>
+      <th>check_greater_than_100</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>question</th>
+      <th>answer</th>
+      <th>multiplier</th>
+      <th>answer</th>
+      <th>greater_than_100</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question             of Life, the Universe, and Everything?</td>
+      <td>42</td>
+      <td>1</td>
+      <td>42</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question             of Life, the Universe, and Everything?</td>
+      <td>42</td>
+      <td>2</td>
+      <td>84</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question             of Life, the Universe, and Everything?</td>
+      <td>42</td>
+      <td>3</td>
+      <td>126</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>For convenience, ARTKIT also provides two operators which allow implementation of chained and parallel steps in a more visually compact and intuitive way:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> represents chaining between steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code> represents parallelism between steps</p></li>
+</ul>
+<p>For example, the following implementation is identical to the pipeline above:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ultimate_question&quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span>
+    <span class="o">&gt;&gt;</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ultimate_answer&quot;</span><span class="p">,</span> <span class="n">step_ultimate_answer</span><span class="p">)</span>
+    <span class="o">&gt;&gt;</span> <span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="n">step_multiply_answer</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">&gt;&gt;</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;check_greater_than_100&quot;</span><span class="p">,</span> <span class="n">check_greater_than_100</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">pipeline</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;multiply_answer&quot;</span><span class="p">,</span> <span class="s2">&quot;multiplier&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ultimate_question</th>
+      <th>ultimate_answer</th>
+      <th colspan="2" halign="left">multiply_answer</th>
+      <th>check_greater_than_100</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>question</th>
+      <th>answer</th>
+      <th>multiplier</th>
+      <th>answer</th>
+      <th>greater_than_100</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question             of Life, the Universe, and Everything?</td>
+      <td>42</td>
+      <td>1</td>
+      <td>42</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question             of Life, the Universe, and Everything?</td>
+      <td>42</td>
+      <td>2</td>
+      <td>84</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>What is the answer to the Ultimate Question             of Life, the Universe, and Everything?</td>
+      <td>42</td>
+      <td>3</td>
+      <td>126</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>This introductory tutorial touches on the most common design patterns for ARTKIT pipelines, but interested users are encouraged to explore the <a class="reference internal" href="../advanced_tutorials/advanced_design_patterns.html"><span class="doc">advanced tutorials</span></a> in the User Guide to learn about more advanced design patterns and syntax options supported by ARTKIT.</p>
+<p>This section demonstrated core ARTKIT functionality with a non-sensical example. The next section showcases a more realistic example by building up a simple testing and evaluation pipeline.</p>
+</section>
+</section>
+<section id="Demo-E2E-Test-&amp;-Eval-Pipeline">
+<h2>Demo E2E Test &amp; Eval Pipeline<a class="headerlink" href="#Demo-E2E-Test-&-Eval-Pipeline" title="Link to this heading">#</a></h2>
+<p>This end-to-end example demonstrates how you can use ARTKIT to test and evaluate a chatbot (i.e., <em>target system</em>) based on (automatically) generated prompts (i.e., “challenges”).</p>
+<p>The demonstration includes the following steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Generate challenges:</strong> Starting from simple base prompts, use LLMs to augment the prompts, yielding creative “challenges” for a <em>target system</em>, which is the system undergoing testing by responding to the challenge prompts.</p></li>
+<li><p><strong>Get responses:</strong> Define a simple LLM-based chatbot called AskChad to serve as the target system.</p></li>
+<li><p><strong>Evaluate responses:</strong> Define an LLM evaluator which scores AskChad’s responses according to a custom “sarcasm” metric.</p></li>
+<li><p><strong>Run pipeline:</strong> Bring the previous steps together in an ARTKIT pipeline which runs end-to-end.</p></li>
+</ol>
+<section id="Generate-challenges">
+<h3>Generate challenges<a class="headerlink" href="#Generate-challenges" title="Link to this heading">#</a></h3>
+<p>We begin by defining two simple base prompts.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;How often should I exercise each week?&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;What is a fun activity to do in Boston?&quot;</span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we define a step function designed to rephrase an input prompt to have a specified tone.</p>
+<blockquote>
+<div><p>Note: LLMs are sensitive to white space in prompts! When specifying multi-line prompts within Python functions, care must be taken to ensure unexpected white space is not introduced. Best practices include using string concatenation and printing prompts during development.</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">rephrase_tone</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">,</span> <span class="n">tone</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+    <span class="n">INSTRUCTIONS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Your job is to rephrase prompts to have a very </span><span class="si">{</span><span class="n">tone</span><span class="si">}</span><span class="s2"> tone. &quot;</span>
+        <span class="s2">&quot;It is critical to retain the original meaning, and only change the &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;tone to be </span><span class="si">{</span><span class="n">tone</span><span class="si">}</span><span class="s2">. &quot;</span>
+        <span class="s2">&quot;For example, if the original prompt is a question, the rephrased &quot;</span>
+        <span class="s2">&quot;prompt should also be a question. &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;This is the prompt you must rephrase:</span><span class="se">\n\n</span><span class="s2">- </span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">INSTRUCTIONS</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="nb">dict</span><span class="p">(</span><span class="n">prompt</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="n">tone</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To create and test this individual step:</p>
+<ol class="arabic simple">
+<li><p>Pass the function to <code class="docutils literal notranslate"><span class="pre">step</span></code></p></li>
+<li><p>Pass the step and the inputs to <code class="docutils literal notranslate"><span class="pre">run</span></code></p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">to_frame</span></code> method to transform the results into a dataframe.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">step_rephrase_tone</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+    <span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span>  <span class="c1"># Step name</span>
+    <span class="n">rephrase_tone</span><span class="p">,</span>  <span class="c1"># Step function to run</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span>  <span class="c1"># LLM system to use</span>
+    <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;RUDE&quot;</span><span class="p">,</span>  <span class="c1"># Tone to rephrase to</span>
+<span class="p">)</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">step_rephrase_tone</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">prompts</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th colspan="2" halign="left">tone_rephraser</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>prompt</th>
+      <th>prompt</th>
+      <th>tone</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>How many times do I have to repeat it for you to get it into your thick skull, how much should you exercise each week?</td>
+      <td>RUDE</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>What's an even remotely entertaining thing to do in that dump known as Boston?</td>
+      <td>RUDE</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The tone augmenter appears to work!</p>
+</section>
+<section id="Get-responses">
+<h3>Get responses<a class="headerlink" href="#Get-responses" title="Link to this heading">#</a></h3>
+<p>In this section, we’ll create a toy chatbot called “AskChad” to respond to our challenge prompts. AskChad’s defining characteristic is that it mirrors the tone of the user in its responses.</p>
+<p>First, we define an async function for getting responses from a given LLM chat system:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">ask_chad</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chat_llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">chat_llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">prompt</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we define a system prompt which provides instructions to the LLM chat system. In the case of AskChad, we instruct the system to mirror the tone of the user. To accomplish this in ARTKIT we can create a chat model with a given system prompt through the <code class="docutils literal notranslate"><span class="pre">.with_system_prompt()</span></code> function. To keep the demo succinct, we also instruct AskChad to respond in 15 words or less.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TARGET_SYSTEM_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">You are a chatbot that strongly mirrors the user&#39;s tone. </span><span class="se">\</span>
+<span class="s2">For example, if the user is rude, you are rude. </span><span class="se">\</span>
+<span class="s2">If the user has a neutral tone, you have a neutral tone. </span><span class="se">\</span>
+<span class="s2">Your responses must contain no more than 15 words.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="n">step_ask_chad</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+    <span class="s2">&quot;ask_chad&quot;</span><span class="p">,</span>  <span class="c1"># Step name</span>
+    <span class="n">ask_chad</span><span class="p">,</span>  <span class="c1"># Step function to run</span>
+    <span class="n">chat_llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">TARGET_SYSTEM_PROMPT</span><span class="p">)</span>  <span class="c1"># LLM system to use with a system prompt</span>
+<span class="p">)</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">step_ask_chad</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">prompts</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th>ask_chad</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>prompt</th>
+      <th>response</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>At least 3 times, but for best results, aim for 5 workout sessions weekly.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>Visit Fenway Park, it's an absolute blast, I bet you'd enjoy it!</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>AskChad seems to provide reasonable responses to vanilla inputs. However, to test its ability to mirror the tone of the user, we will need to provide some challenges that vary in tone.</p>
+<p>To do this, we will use the tone augmentor defined in the previous section:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">step_ask_chad</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="n">rephrase_tone</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;INSTAGRAM INFLUENCER&quot;</span><span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="n">rephrase_tone</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;SCIENTIFIC&quot;</span><span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="n">rephrase_tone</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;SARCASTIC&quot;</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ask_chad&quot;</span><span class="p">,</span> <span class="n">ask_chad</span><span class="p">,</span> <span class="n">chat_llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">TARGET_SYSTEM_PROMPT</span><span class="p">)),</span>
+<span class="p">)</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">step_ask_chad</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">prompts</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="s2">&quot;tone&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th colspan="2" halign="left">tone_rephraser</th>
+      <th>ask_chad</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>prompt</th>
+      <th>prompt</th>
+      <th>tone</th>
+      <th>response</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>So babes, how many sweat sessions should we be scheduling in our calendars each week? #fitnessgoals 💪🏼👟🏋️‍♀️</td>
+      <td>INSTAGRAM INFLUENCER</td>
+      <td>Sweetie, aim for a minimum of three to five sassy workouts a week. #keepslaying 🏋️‍♀️🔥💃🏼</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>Hey babes, what's a cool, must-try adventure in the heart of Boston? #BostonFun #AdventureTime</td>
+      <td>INSTAGRAM INFLUENCER</td>
+      <td>Hey darling, try the Freedom Trail walk. #HistoricalAdventure #BostonWalkingTour</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>Oh, I'm dying to know, how frequently should I be torturing myself with exercise each week?</td>
+      <td>SARCASTIC</td>
+      <td>Well aren't you dramatic! Aim for 150 minutes of moderate intensity exercise a week, darling.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>Oh yes, because we all know how Boston is just the epicentre of entertainment. So, what's considered a fun activity in Boston, then?</td>
+      <td>SARCASTIC</td>
+      <td>Oh yes, praying to the God of Fun at the Ben Franklin statue. Exciting, right?</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>What is the recommended frequency of physical exertion on a weekly basis?</td>
+      <td>SCIENTIFIC</td>
+      <td>Experts recommend engaging in physical activity for 150 minutes per week, ideally.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>What recreational activities possess favorable entertaining parameters in the geographical locale of Boston?</td>
+      <td>SCIENTIFIC</td>
+      <td>One might enjoy the Boston Symphony, historical sights, or even rowing on Charles River.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The tone augmentor and AskChad seem to be working as intended!</p>
+</section>
+<section id="Evaluate-responses">
+<h3>Evaluate responses<a class="headerlink" href="#Evaluate-responses" title="Link to this heading">#</a></h3>
+<p>In this section, we define an evaluator which outputs a binary score for whether a given response is sarcastic.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">evaluate_metric</span></code> function defined below illustrates the powerful technique of generating and parsing LLM outputs in JSON format, which currently works well with OpenAI LLMs:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">evaluate_metric</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">eval_llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+
+    <span class="n">INSTRUCTIONS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Your job is to evaluate a chatbot&#39;s responses according to whether &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;they display </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">. If the response displays &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">, return 1, otherwise return 0. You also provide &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;reasoning for your evaluation in 10 words or less. &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Please evaluate the following response:</span><span class="se">\n\n</span><span class="s2">- </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Provide your evaluation in the following JSON format:</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;{{</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;    </span><span class="se">\&quot;</span><span class="s2">Reasoning</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">&lt;Your Reasoning Here&gt;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;    </span><span class="se">\&quot;</span><span class="s2">Score</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">&lt;0 or 1&gt;</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;}}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">eval_llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">INSTRUCTIONS</span><span class="p">):</span>
+        <span class="n">parsed_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="n">reasoning</span> <span class="o">=</span> <span class="n">parsed_data</span><span class="p">[</span><span class="s2">&quot;Reasoning&quot;</span><span class="p">]</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">parsed_data</span><span class="p">[</span><span class="s2">&quot;Score&quot;</span><span class="p">]</span>
+
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;specified_metric&quot;</span><span class="p">:</span> <span class="n">metric</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">score</span><span class="p">,</span> <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="n">reasoning</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>To test this evaluator, we must format the tone-augmented responses from the previous step to enable passing them directly to the evaluator. This requires responses to be in a list of dictionaries with a <code class="docutils literal notranslate"><span class="pre">response</span></code> key, which will automatically be picked up as an input to <code class="docutils literal notranslate"><span class="pre">evaluate_metric</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">askchad_responses</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()[</span><span class="s1">&#39;ask_chad&#39;</span><span class="p">][</span><span class="s1">&#39;response&#39;</span><span class="p">]</span>
+<span class="n">input_askchad_responses</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;response&#39;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span> <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">askchad_responses</span><span class="p">]</span>
+<span class="n">input_askchad_responses</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[{&#39;response&#39;: &#39;Sweetie, aim for a minimum of three to five sassy workouts a week. #keepslaying 🏋️\u200d♀️🔥💃🏼&#39;},
+ {&#39;response&#39;: &#39;Hey darling, try the Freedom Trail walk. #HistoricalAdventure #BostonWalkingTour&#39;},
+ {&#39;response&#39;: &#39;Experts recommend engaging in physical activity for 150 minutes per week, ideally.\n&#39;},
+ {&#39;response&#39;: &#39;One might enjoy the Boston Symphony, historical sights, or even rowing on Charles River.&#39;},
+ {&#39;response&#39;: &#34;Well aren&#39;t you dramatic! Aim for 150 minutes of moderate intensity exercise a week, darling.&#34;},
+ {&#39;response&#39;: &#39;Oh yes, praying to the God of Fun at the Ben Franklin statue. Exciting, right?&#39;}]
+</pre></div></div>
+</div>
+<p>We can now use <code class="docutils literal notranslate"><span class="pre">input_askchad_responses</span></code> as an input for the evaluation step:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+    <span class="s2">&quot;evaluation&quot;</span><span class="p">,</span>  <span class="c1"># Step name</span>
+    <span class="n">evaluate_metric</span><span class="p">,</span>  <span class="c1"># Step function to run</span>
+    <span class="n">eval_llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span>  <span class="c1"># LLM system to use</span>
+    <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;SARCASM&quot;</span>  <span class="c1"># Metric to evaluate</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">evaluation</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">input_askchad_responses</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;evaluation&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th colspan="3" halign="left">evaluation</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>response</th>
+      <th>specified_metric</th>
+      <th>score</th>
+      <th>reasoning</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sweetie, aim for a minimum of three to five sassy workouts a week. #keepslaying 🏋️‍♀️🔥💃🏼</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>No sarcasm detected, just motivational and peppy language used</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Hey darling, try the Freedom Trail walk. #HistoricalAdventure #BostonWalkingTour</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>The response is genuine without any sarcasm.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Experts recommend engaging in physical activity for 150 minutes per week, ideally.</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>The chatbot is providing factual information without sarcasm.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>One might enjoy the Boston Symphony, historical sights, or even rowing on Charles River.</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>The response is neutral without any sarcasm.</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Well aren't you dramatic! Aim for 150 minutes of moderate intensity exercise a week, darling.</td>
+      <td>SARCASM</td>
+      <td>1</td>
+      <td>Uses sarcastic tone calling the user dramatic and darling</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Oh yes, praying to the God of Fun at the Ben Franklin statue. Exciting, right?</td>
+      <td>SARCASM</td>
+      <td>1</td>
+      <td>Underlying tone of ridicule and mockery indicates sarcasm</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>It seems like the evaluator caught sarcastic responses!</p>
+</section>
+<section id="Run-pipeline">
+<h3>Run pipeline<a class="headerlink" href="#Run-pipeline" title="Link to this heading">#</a></h3>
+<p>In the previous sections, we defined all the steps needed to build and end-to-end ARTKIT pipeline: Prompt generation, target system response, and evaluation. Now we can combine these steps into a pipeline.</p>
+<p>For this final pipeline, we introduce one more utility function, passthrough, which is a special step that passes inputs through the pipeline without modification. This is useful when running steps in parallel and one of the steps should simply output the original inputs. In the final results, there will be no data associated with the passthrough step, however the data which was passed through (in the example below, the original input prompt) is passed on to the next step in the pipeline (in the
+example below, the original prompt is passed through to ask_chad step).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+            <span class="n">ak</span><span class="o">.</span><span class="n">passthrough</span><span class="p">(),</span>
+            <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="n">rephrase_tone</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;INSTAGRAM INFLUENCER&quot;</span><span class="p">),</span>
+            <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="n">rephrase_tone</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;SCIENTIFIC&quot;</span><span class="p">),</span>
+            <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="n">rephrase_tone</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;SARCASTIC&quot;</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ask_chad&quot;</span><span class="p">,</span> <span class="n">ask_chad</span><span class="p">,</span> <span class="n">chat_llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">TARGET_SYSTEM_PROMPT</span><span class="p">)),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluation&quot;</span><span class="p">,</span> <span class="n">evaluate_metric</span><span class="p">,</span> <span class="n">eval_llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;SARCASM&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/user_guide_introduction_to_artkit_building_your_first_artkit_pipeline_72_0.svg" src="../../_images/user_guide_introduction_to_artkit_building_your_first_artkit_pipeline_72_0.svg" /></div>
+</div>
+<p>Run the pipeline:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">pipeline</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">prompts</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()[[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="s2">&quot;ask_chad&quot;</span><span class="p">,</span> <span class="s2">&quot;evaluation&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="s2">&quot;tone&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th colspan="2" halign="left">tone_rephraser</th>
+      <th>ask_chad</th>
+      <th colspan="3" halign="left">evaluation</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>prompt</th>
+      <th>prompt</th>
+      <th>tone</th>
+      <th>response</th>
+      <th>specified_metric</th>
+      <th>score</th>
+      <th>reasoning</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>So babes, how many sweat sessions should we be scheduling in our calendars each week? #fitnessgoals 💪🏼👟🏋️‍♀️</td>
+      <td>INSTAGRAM INFLUENCER</td>
+      <td>Sweetie, aim for a minimum of three to five sassy workouts a week. #keepslaying 🏋️‍♀️🔥💃🏼</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>No sarcasm detected, just motivational and peppy language used</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>Hey babes, what's a cool, must-try adventure in the heart of Boston? #BostonFun #AdventureTime</td>
+      <td>INSTAGRAM INFLUENCER</td>
+      <td>Hey darling, try the Freedom Trail walk. #HistoricalAdventure #BostonWalkingTour</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>The response is genuine without any sarcasm.</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>Oh, I'm dying to know, how frequently should I be torturing myself with exercise each week?</td>
+      <td>SARCASTIC</td>
+      <td>Well aren't you dramatic! Aim for 150 minutes of moderate intensity exercise a week, darling.</td>
+      <td>SARCASM</td>
+      <td>1</td>
+      <td>Uses sarcastic tone calling the user dramatic and darling</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>Oh yes, because we all know how Boston is just the epicentre of entertainment. So, what's considered a fun activity in Boston, then?</td>
+      <td>SARCASTIC</td>
+      <td>Oh yes, praying to the God of Fun at the Ben Franklin statue. Exciting, right?</td>
+      <td>SARCASM</td>
+      <td>1</td>
+      <td>Underlying tone of ridicule and mockery indicates sarcasm</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>What is the recommended frequency of physical exertion on a weekly basis?</td>
+      <td>SCIENTIFIC</td>
+      <td>Experts recommend engaging in physical activity for 150 minutes per week, ideally.</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>The chatbot is providing factual information without sarcasm.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>What recreational activities possess favorable entertaining parameters in the geographical locale of Boston?</td>
+      <td>SCIENTIFIC</td>
+      <td>One might enjoy the Boston Symphony, historical sights, or even rowing on Charles River.</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>The response is neutral without any sarcasm.</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>How often should I exercise each week?</td>
+      <td>&lt;NA&gt;</td>
+      <td>&lt;NA&gt;</td>
+      <td>At least 3 times, but for best results, aim for 5 workout sessions weekly.</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>The response is straightforward and informative, no sarcasm detected.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>What is a fun activity to do in Boston?</td>
+      <td>&lt;NA&gt;</td>
+      <td>&lt;NA&gt;</td>
+      <td>Visit Fenway Park, it's an absolute blast, I bet you'd enjoy it!</td>
+      <td>SARCASM</td>
+      <td>0</td>
+      <td>The response is genuine without any sarcasm.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Concluding-remarks">
+<h2>Concluding remarks<a class="headerlink" href="#Concluding-remarks" title="Link to this heading">#</a></h2>
+<p>This notebook demonstrated how to build basic end-to-end testing and evaluation pipelines with ARTKIT. The techniques introduced here enable a wide array of testing and evaluation use cases, but we encourage interested users to further explore our documentation for insights and inspiration on using ARTKIT.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Connect-to-an-LLM">Connect to an LLM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Core-ARTKIT-functions">Core ARTKIT functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run">Run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step">Step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Chain-(&gt;&gt;)">Chain (&gt;&gt;)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Parallel-(&amp;)">Parallel (&amp;)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Putting-it-all-together">Putting it all together</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Demo-E2E-Test-&amp;-Eval-Pipeline">Demo E2E Test &amp; Eval Pipeline</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-challenges">Generate challenges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Get-responses">Get responses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluate-responses">Evaluate responses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-pipeline">Run pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Concluding-remarks">Concluding remarks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

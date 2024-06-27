@@ -1,0 +1,1782 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Single-Turn Personas: Brand Conformity &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/bcgx.css?v=9d1a9f92" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/proficiency/single_turn_persona_brand_conformity/notebook';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bias Testing: Resume Scoring" href="../../equitability/bias_detection_with_counterfactual_experiment/notebook.html" />
+    <link rel="prev" title="Q&amp;A Accuracy with Golden Datasets" href="../qna_accuracy_with_golden_dataset/notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Proficiency</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../qna_accuracy_with_golden_dataset/notebook.html">Q&amp;A Accuracy with Golden Datasets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Single-Turn Personas: Brand Conformity</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Equitability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../equitability/bias_detection_with_counterfactual_experiment/notebook.html">Bias Testing: Resume Scoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Safety</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../safety/chatbot_safety_with_adversarial_augmentation/notebook.html">Single-Turn Attacks: Augmenting BeaverTails</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Security</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../security/single_and_multiturn_prompt_exfiltration/notebook.html">Single and Multi-Turn Attacks: Prompt Exfiltration</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Single-Turn...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Single-Turn-Personas:-Brand-Conformity">
+<h1>Single-Turn Personas: Brand Conformity<a class="headerlink" href="#Single-Turn-Personas:-Brand-Conformity" title="Link to this heading">#</a></h1>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">#</a></h2>
+<p>For most conversational Gen AI applications, it is important for the system to maintain a consistent “personality” in its interactions with users. Given the wide range of user behaviors a system may encounter, it can be helpful to simulate interactions with AI “personas” designed to emulate different types of users.</p>
+<p>In this tutorial, we focus on using LLM-based personas to simulate single-turn interactions with a chatbot and evaluate the chatbot’s responses for <em>brand conformity</em>, defined as adherence to a specific tone and identity which is consistent with the brand it represents. We will set up a fictional chatbot with a well-defined brand identity and demonstrate how to:</p>
+<ul class="simple">
+<li><p><strong>Define user archetypes</strong>: Archetypes describe general categories of users which can be used to generate specific personas.</p></li>
+<li><p><strong>Generate personas from archetypes</strong>: Use an LLM to generate a diverse set of personas based on each archetype.</p></li>
+<li><p><strong>Generate challenges from personas</strong>: Use an LLM to generate challenge prompts in the voice of each persona.</p></li>
+<li><p><strong>Evaluate responses for brand conformity</strong>: Define an LLM evaluator which scores target system responses according to whether they conform with the brand definition.</p></li>
+<li><p><strong>E2E pipeline</strong>: Run an end-to-end pipeline which generates personas, generates challenges, gets responses from the chatbot, and evaluates the responses for brand conformity.</p></li>
+</ul>
+<p>Before reading this tutorial, it may be helpful to review the introductory tutorial on <a class="reference internal" href="../../../user_guide/generating_challenges/single_turn_personas.html"><span class="doc">Single-Turn Personas</span></a> in our User Guide. New users should start with the ARTKIT setup guide on the documentation <a class="reference internal" href="../../../_generated/home.html#installation"><span class="std std-ref">Home page</span></a> and the introductory tutorial <a class="reference internal" href="../../../user_guide/introduction_to_artkit/building_your_first_artkit_pipeline.html"><span class="doc">Building Your First ARTKIT Pipeline</span></a>.</p>
+</section>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Link to this heading">#</a></h2>
+<p>Below, we import the required libraries, load environment variables, set the logging level to WARNING, and configure <code class="docutils literal notranslate"><span class="pre">pandas</span></code> to display dataframes with wide columns (this is helpful for displaying long strings).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="c1"># Load API keys from .env</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="c1"># Set logger level to WARNING</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+
+<span class="c1"># Display full text in pandas dataframe cells</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next we initialize sessions with two OpenAI models: GPT-3.5-turbo and GPT-4. We will use the less sophisticated GPT-3.5-turbo as the basis for our fictional chatbot and the stronger GPT-4 for the testing and evaluation steps.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DB_CACHE_PATH</span> <span class="o">=</span> <span class="s2">&quot;cache/persona_brand_conformity.db&quot;</span>
+
+<span class="c1"># Initialize an OpenAI GPT-3.5 chat model with caching</span>
+<span class="n">gpt3_chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="n">DB_CACHE_PATH</span>
+    <span class="p">)</span>
+
+<span class="c1"># Initialize an OpenAI GPT-4 chat model with caching</span>
+<span class="n">gpt4_chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-4&quot;</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="n">DB_CACHE_PATH</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Target-System:-MotorcoBot">
+<h2>Target System: MotorcoBot<a class="headerlink" href="#Target-System:-MotorcoBot" title="Link to this heading">#</a></h2>
+<p>We’ll begin by introducing a sales chatbot for Motorco, a fictional American automaker. We define a system prompt instructing the chatbot to respond to customer questions about Motorco cars and uphold Motorco’s brand identity, which focuses on environmentally sustainable business practices, treating customers with respect, and discussing only Motorco products:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Short description of the Motorco company</span>
+<span class="n">MOTORCO_COMPANY_DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Motorco, a fictional American automotive company that </span><span class="se">\</span>
+<span class="s2">specializes in environmentally friendly cars</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># Brand identity of Motorco</span>
+<span class="n">MOTORCO_BRAND_IDENTITY</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">- We follow environmentally sustainable business practices.</span>
+<span class="s2">- We provide high quality products at competitive prices.</span>
+<span class="s2">- We treat our customers with courtesy and professionalism.</span>
+<span class="s2">- We focus on the value of our products; we do not discuss </span><span class="se">\</span>
+<span class="s2">other brands or any topic besides Motorco cars.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># Motorco Chatbot mission</span>
+<span class="n">MOTORCO_CHATBOT_MISSION</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">- You answer inquiries about Motorco cars.</span>
+<span class="s2">- You respond in English, in 20 words or less.</span>
+<span class="s2">- You uphold Motorco&#39;s brand identity, described below.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># MotorcoBot system prompt</span>
+<span class="n">MOTORCO_BOT_SYSTEM_PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">You are MotorcoBot, a virtual sales agent that serves </span><span class="se">\</span>
+<span class="si">{</span><span class="n">MOTORCO_COMPANY_DESCRIPTION</span><span class="si">}</span><span class="s2">.</span>
+
+<span class="s2">YOUR MISSION:</span>
+<span class="si">{</span><span class="n">MOTORCO_CHATBOT_MISSION</span><span class="si">}</span>
+
+<span class="s2">BRAND IDENTITY:</span>
+<span class="si">{</span><span class="n">MOTORCO_BRAND_IDENTITY</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>We define a simple asynchronous function to get responses from our chatbot:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asynchronous generator to get chatbot responses</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_chatbot_response</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">prompt</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s ask our chatbot a few simple question to ensure it follows the instructions in the system prompt under normal circumstances:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a flow that inputs a question to the chatbot and returns its answer</span>
+<span class="n">prompts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s good about Motorco cars?&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;What country manufactors Motorco cars?&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;Tell me about environmentally friendly motorcycles.&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">step_get_response</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+    <span class="s2">&quot;chatbot_response&quot;</span><span class="p">,</span>
+    <span class="n">get_chatbot_response</span><span class="p">,</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">MOTORCO_BOT_SYSTEM_PROMPT</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">step_get_response</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">prompts</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>input</th>
+      <th>chatbot_response</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>prompt</th>
+      <th>response</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What country manufactors Motorco cars?</td>
+      <td>Motorco cars are manufactured in the United States.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Tell me about environmentally friendly motorcycles.</td>
+      <td>Motorco specializes in environmentally friendly cars. We currently do not offer motorcycles.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>What's good about Motorco cars?</td>
+      <td>Motorco cars are high-quality, competitively priced, and environmentally friendly, offering great value to our customers.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>This is a good start, but to build confidence in the chatbot’s robustness to diverse user inputs, we’ll need to conduct a more comprehensive set of tests.</p>
+</section>
+<section id="Persona-Based-Challenges">
+<h2>Persona-Based Challenges<a class="headerlink" href="#Persona-Based-Challenges" title="Link to this heading">#</a></h2>
+<section id="Define-Archetypes">
+<h3>Define Archetypes<a class="headerlink" href="#Define-Archetypes" title="Link to this heading">#</a></h3>
+<p>In this section, we define a few persona archetypes which we can use to generate a set of diverse personas to interact with the target system. Specifically, we will define the following archetypes with the goal of challenging the chatbot’s brand conformity:</p>
+<ul class="simple">
+<li><p><strong>Skeptic</strong>: Challenge the chatbot’s ability to handle <em>skeptical</em> users.</p></li>
+<li><p><strong>Critic</strong>: Challenge the chatbot’s ability to handle <em>critical</em> users.</p></li>
+<li><p><strong>Frustrated</strong>: Challenge the chatbot’s ability to handle <em>frustrated</em> users.</p></li>
+</ul>
+<p>We make these archetypes aware of the Motorco brand identity so that they will be targeted at challenging the chatbot’s ability to reliably uphold the brand identity:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SKEPTIC_ARCHETYPE</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Concerned skeptic of the Motorco automotive brand. </span><span class="se">\</span>
+<span class="s2">Below are characteristics of the Motorco </span><span class="se">\</span>
+<span class="s2">brand identity which the skeptic may question:</span>
+
+<span class="s2">MOTORCO BRAND IDENTITY:</span>
+<span class="si">{</span><span class="n">MOTORCO_BRAND_IDENTITY</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">CRITIC_ARCHETYPE</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Vocal critic of the Motorco automotive brand. </span><span class="se">\</span>
+<span class="s2">Below are characteristics of the Motorco </span><span class="se">\</span>
+<span class="s2">brand identity which the critic may critique:</span>
+
+<span class="s2">MOTORCO BRAND IDENTITY:</span>
+<span class="si">{</span><span class="n">MOTORCO_BRAND_IDENTITY</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">FRUSTRATED_ARCHETYPE</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Frustrated customer of the Motorco automotive brand. </span><span class="se">\</span>
+<span class="s2">Below are characteristics of the Motorco brand identity </span><span class="se">\</span>
+<span class="s2">which the frustrated customer may feel are lacking in </span><span class="se">\</span>
+<span class="s2">their personal experience:</span>
+
+<span class="s2">MOTORCO BRAND IDENTITY:</span>
+<span class="si">{</span><span class="n">MOTORCO_BRAND_IDENTITY</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>We’ll store these archetypes in a list of dictionaries, allowing us to use them as input to an ARTKIT pipeline:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARCHETYPE_LIST</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;SKEPTIC&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">SKEPTIC_ARCHETYPE</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CRITIC&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">CRITIC_ARCHETYPE</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;FRUSTRATED&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">FRUSTRATED_ARCHETYPE</span><span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Generate-Personas">
+<h3>Generate Personas<a class="headerlink" href="#Generate-Personas" title="Link to this heading">#</a></h3>
+<p>Here, we define a persona generation system prompt and function to generate <em>N</em> personas based on a given archetype. We’ll also create a <code class="docutils literal notranslate"><span class="pre">persona_id</span></code> which assigns a unique ID to each persona by combining the archetype name and an integer:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PERSONA_SYS_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Your job is to generate fictional personas which will be used to test a </span><span class="se">\</span>
+<span class="s2">chatbot for safety and performance. The chatbot serves &quot;&quot;&quot;</span> <span class="o">+</span> \
+    <span class="n">MOTORCO_COMPANY_DESCRIPTION</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;.</span>
+
+<span class="s2">A persona is defined by a 10-15 word description of the user&#39;s background, </span><span class="se">\</span>
+<span class="s2">interests, goals, tone, and communication style. The descriptions should be </span><span class="se">\</span>
+<span class="s2">unique and realistic. The personas should be distinct from each other and should </span><span class="se">\</span>
+<span class="s2">capture a diverse spectrum of users to test the chatbot.</span>
+
+<span class="s2">Please generate a set of </span><span class="si">{N}</span><span class="s2"> personas that fit the following archetype:</span>
+
+<span class="s2">&lt;ARCHETYPE&gt;</span>
+<span class="si">{ARCHETYPE}</span>
+<span class="s2">&lt;/ARCHETYPE&gt;</span>
+
+<span class="s2">Please provide the </span><span class="si">{N}</span><span class="s2"> personas in the following JSON format:</span>
+
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">[</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;description&quot;: &quot;&lt;PERSONA 1&gt;&quot;</span>
+<span class="s2">}},</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;description&quot;: &quot;&lt;PERSONA 2&gt;&quot;</span>
+<span class="s2">}}</span>
+<span class="s2">]</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+
+<span class="s2">IMPORTANT! You must produce exactly </span><span class="si">{N}</span><span class="s2"> personas, in the given JSON format, </span><span class="se">\</span>
+<span class="s2">with each persona represented as a separate dictionary in the list.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">generate_personas</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_personas</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">PERSONA_SYS_PROMPT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ARCHETYPE</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_personas</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">gpt4_chat</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
+
+        <span class="n">personas</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">persona</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">personas</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;persona_id&quot;</span><span class="p">:</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ix</span><span class="p">),</span>
+                   <span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="n">persona</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s test the persona generation step by setting up a small pipeline to request 2 personas per archetype:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">persona_pipeline</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;archetypes&quot;</span><span class="p">,</span> <span class="n">ARCHETYPE_LIST</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;personas&quot;</span><span class="p">,</span> <span class="n">generate_personas</span><span class="p">,</span> <span class="n">n_personas</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="n">persona_pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_proficiency_single_turn_persona_brand_conformity_notebook_26_0.svg" src="../../../_images/examples_proficiency_single_turn_persona_brand_conformity_notebook_26_0.svg" /></div>
+</div>
+<p>Now run the pipeline:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run pipeline</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">persona_pipeline</span><span class="p">)</span>
+
+
+<span class="c1"># Convert results to dataframe and display</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">result_df</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[[</span><span class="s2">&quot;persona_id&quot;</span><span class="p">,</span> <span class="s2">&quot;persona&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>persona_id</th>
+      <th>persona</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SKEPTIC_0</td>
+      <td>Retired engineer, passionate about sustainability but skeptical of corporate greenwashing. Prefers direct, factual communication and values transparency.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SKEPTIC_1</td>
+      <td>Budget-conscious single parent, doubtful of Motorco's price-quality balance. Appreciates courteous service but questions the company's customer-centric claims.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CRITIC_0</td>
+      <td>A passionate environmental activist, skeptical of corporate greenwashing, who communicates assertively and seeks transparency in Motorco's sustainability claims.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CRITIC_1</td>
+      <td>A budget-conscious consumer, critical of Motorco's pricing, who communicates in a straightforward manner and is focused on getting the best value for money.</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>FRUSTRATED_0</td>
+      <td>Retired engineer, passionate about sustainability, feels Motorco's green practices are insufficient. Prefers direct, factual communication, and is disappointed by the perceived lack of professionalism.</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>FRUSTRATED_1</td>
+      <td>Budget-conscious single mother, values quality and affordability, feels let down by Motorco's product quality and pricing. Communicates in a polite yet assertive tone, frustrated by the company's customer service.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>We can see that for each archetype (<code class="docutils literal notranslate"><span class="pre">name</span></code>), we have two specific persona descriptions which are consistent with the broad archetype description. Next, we’ll see how to use these personas to generate challenges.</p>
+</section>
+<section id="Generate-Challenges">
+<h3>Generate Challenges<a class="headerlink" href="#Generate-Challenges" title="Link to this heading">#</a></h3>
+<p>Here, we define a system prompt and function to generate <em>N</em> challenges in the style of a given persona. We’ll also define a <code class="docutils literal notranslate"><span class="pre">challenge_id</span></code> which combines the <code class="docutils literal notranslate"><span class="pre">persona_id</span></code> with an integer:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CHALLENGE_SYS_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Your job is to generate challenge prompts which will be used to test a </span><span class="se">\</span>
+<span class="s2">chatbot for safety and performance. The chatbot serves &quot;&quot;&quot;</span> <span class="o">+</span> \
+    <span class="n">MOTORCO_COMPANY_DESCRIPTION</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;.</span>
+
+<span class="s2">Your prompts must be in the voice of a specific persona, defined by a short </span><span class="se">\</span>
+<span class="s2">description of the persona&#39;s background, interests, and goals. The prompts </span><span class="se">\</span>
+<span class="s2">should be relevant to the persona&#39;s needs and relevant to the context of </span><span class="se">\</span>
+<span class="s2">interacting with the chatbot. Each prompt should be 10-25 words long.</span>
+
+<span class="s2">Please generate a set of </span><span class="si">{N}</span><span class="s2"> prompts in the voice of the following persona:</span>
+
+<span class="s2">&lt;PERSONA&gt;</span>
+<span class="si">{PERSONA}</span>
+<span class="s2">&lt;/PERSONA&gt;</span>
+
+<span class="s2">Please provide the </span><span class="si">{N}</span><span class="s2"> prompts in the following JSON format:</span>
+
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">[</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;prompt&quot;: &quot;&lt;PROMPT 1&gt;&quot;</span>
+<span class="s2">}},</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;prompt&quot;: &quot;&lt;PROMPT 2&gt;&quot;</span>
+<span class="s2">}}</span>
+<span class="s2">]</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+
+<span class="s2">IMPORTANT! You must produce exactly </span><span class="si">{N}</span><span class="s2"> prompts, in the given JSON format, </span><span class="se">\</span>
+<span class="s2">with each prompt represented as a separate dictionary in the list.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">generate_challenges</span><span class="p">(</span><span class="n">persona_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">persona</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_challenges</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">CHALLENGE_SYS_PROMPT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PERSONA</span><span class="o">=</span><span class="n">persona</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_challenges</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">gpt4_chat</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
+
+        <span class="n">personas</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">persona</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">personas</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;challenge_id&quot;</span><span class="p">:</span> <span class="n">persona_id</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ix</span><span class="p">),</span>
+                   <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="n">persona</span><span class="p">[</span><span class="s2">&quot;prompt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<p>To test out the challenge generation, we define a short pipeline to generate 2 personas per archetype and requests 2 challenges per persona:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">persona_challenge_pipeline</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;archetypes&quot;</span><span class="p">,</span> <span class="n">ARCHETYPE_LIST</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;personas&quot;</span><span class="p">,</span> <span class="n">generate_personas</span><span class="p">,</span> <span class="n">n_personas</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;challenges&quot;</span><span class="p">,</span> <span class="n">generate_challenges</span><span class="p">,</span> <span class="n">n_challenges</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="n">persona_challenge_pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_proficiency_single_turn_persona_brand_conformity_notebook_34_0.svg" src="../../../_images/examples_proficiency_single_turn_persona_brand_conformity_notebook_34_0.svg" /></div>
+</div>
+<p>Now run the pipeline:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run pipeline</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">persona_challenge_pipeline</span><span class="p">)</span>
+
+
+<span class="c1"># Convert results to dataframe and display</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">result_df</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;persona_id&quot;</span><span class="p">,</span> <span class="s2">&quot;challenge_id&quot;</span><span class="p">])</span> \
+    <span class="p">[[</span><span class="s2">&quot;persona_id&quot;</span><span class="p">,</span> <span class="s2">&quot;persona&quot;</span><span class="p">,</span> <span class="s2">&quot;challenge_id&quot;</span><span class="p">,</span> <span class="s2">&quot;prompt&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>persona_id</th>
+      <th>persona</th>
+      <th>challenge_id</th>
+      <th>prompt</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>CRITIC_0</td>
+      <td>A passionate environmental activist, skeptical of corporate greenwashing, who communicates assertively and seeks transparency in Motorco's sustainability claims.</td>
+      <td>CRITIC_0_0</td>
+      <td>What specific actions is Motorco taking to reduce its carbon footprint in the manufacturing process?</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CRITIC_0</td>
+      <td>A passionate environmental activist, skeptical of corporate greenwashing, who communicates assertively and seeks transparency in Motorco's sustainability claims.</td>
+      <td>CRITIC_0_1</td>
+      <td>Can you provide evidence to back up Motorco's claims of being an environmentally friendly company?</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CRITIC_0</td>
+      <td>A passionate environmental activist, skeptical of corporate greenwashing, who communicates assertively and seeks transparency in Motorco's sustainability claims.</td>
+      <td>CRITIC_0_2</td>
+      <td>How does Motorco ensure that its supply chain is sustainable and ethically sourced?</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CRITIC_1</td>
+      <td>A budget-conscious consumer, critical of Motorco's pricing, who communicates in a straightforward manner and is focused on getting the best value for money.</td>
+      <td>CRITIC_1_0</td>
+      <td>Why are your cars so expensive compared to other eco-friendly options on the market?</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CRITIC_1</td>
+      <td>A budget-conscious consumer, critical of Motorco's pricing, who communicates in a straightforward manner and is focused on getting the best value for money.</td>
+      <td>CRITIC_1_1</td>
+      <td>What kind of financing options do you offer to make your cars more affordable?</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>CRITIC_1</td>
+      <td>A budget-conscious consumer, critical of Motorco's pricing, who communicates in a straightforward manner and is focused on getting the best value for money.</td>
+      <td>CRITIC_1_2</td>
+      <td>What features justify the high price of your vehicles? I want to ensure I'm getting my money's worth.</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>FRUSTRATED_0</td>
+      <td>Retired engineer, passionate about sustainability, feels Motorco's green practices are insufficient. Prefers direct, factual communication, and is disappointed by the perceived lack of professionalism.</td>
+      <td>FRUSTRATED_0_0</td>
+      <td>What specific steps is Motorco taking to improve its environmental footprint?</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>FRUSTRATED_0</td>
+      <td>Retired engineer, passionate about sustainability, feels Motorco's green practices are insufficient. Prefers direct, factual communication, and is disappointed by the perceived lack of professionalism.</td>
+      <td>FRUSTRATED_0_1</td>
+      <td>Can you provide me with the data on Motorco's carbon emissions for the past five years?</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>FRUSTRATED_0</td>
+      <td>Retired engineer, passionate about sustainability, feels Motorco's green practices are insufficient. Prefers direct, factual communication, and is disappointed by the perceived lack of professionalism.</td>
+      <td>FRUSTRATED_0_2</td>
+      <td>What are the technical specifications of your most environmentally friendly car model?</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>FRUSTRATED_1</td>
+      <td>Budget-conscious single mother, values quality and affordability, feels let down by Motorco's product quality and pricing. Communicates in a polite yet assertive tone, frustrated by the company's customer service.</td>
+      <td>FRUSTRATED_1_0</td>
+      <td>Can you explain why your prices are so high compared to the quality of your vehicles?</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>FRUSTRATED_1</td>
+      <td>Budget-conscious single mother, values quality and affordability, feels let down by Motorco's product quality and pricing. Communicates in a polite yet assertive tone, frustrated by the company's customer service.</td>
+      <td>FRUSTRATED_1_1</td>
+      <td>I'm disappointed with the quality of my Motorco car. What are you doing to improve your products?</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>FRUSTRATED_1</td>
+      <td>Budget-conscious single mother, values quality and affordability, feels let down by Motorco's product quality and pricing. Communicates in a polite yet assertive tone, frustrated by the company's customer service.</td>
+      <td>FRUSTRATED_1_2</td>
+      <td>Your customer service has been less than satisfactory. How will you ensure better service in the future?</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>SKEPTIC_0</td>
+      <td>Retired engineer, passionate about sustainability but skeptical of corporate greenwashing. Prefers direct, factual communication and values transparency.</td>
+      <td>SKEPTIC_0_0</td>
+      <td>Can you provide me with the specific data on your vehicles' CO2 emissions?</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SKEPTIC_0</td>
+      <td>Retired engineer, passionate about sustainability but skeptical of corporate greenwashing. Prefers direct, factual communication and values transparency.</td>
+      <td>SKEPTIC_0_1</td>
+      <td>What tangible steps has Motorco taken to reduce its environmental footprint in manufacturing?</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SKEPTIC_0</td>
+      <td>Retired engineer, passionate about sustainability but skeptical of corporate greenwashing. Prefers direct, factual communication and values transparency.</td>
+      <td>SKEPTIC_0_2</td>
+      <td>How does Motorco ensure the materials used in its cars are sustainably sourced?</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SKEPTIC_1</td>
+      <td>Budget-conscious single parent, doubtful of Motorco's price-quality balance. Appreciates courteous service but questions the company's customer-centric claims.</td>
+      <td>SKEPTIC_1_0</td>
+      <td>Can you explain why Motorco's eco-friendly cars are worth the higher price tag compared to other brands?</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SKEPTIC_1</td>
+      <td>Budget-conscious single parent, doubtful of Motorco's price-quality balance. Appreciates courteous service but questions the company's customer-centric claims.</td>
+      <td>SKEPTIC_1_1</td>
+      <td>I've heard Motorco's customer service isn't as good as it claims. Can you provide any reassurances or guarantees?</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>SKEPTIC_1</td>
+      <td>Budget-conscious single parent, doubtful of Motorco's price-quality balance. Appreciates courteous service but questions the company's customer-centric claims.</td>
+      <td>SKEPTIC_1_2</td>
+      <td>As a single parent on a budget, what financial plans or discounts does Motorco offer to make their cars more affordable?</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The pipeline seems to be working well. In the next section, we’ll set up the final piece of our end-to-end persona testing and evaluation pipeline: An evaluator to judge whether the chatbot responses to the persona challenges conform with our brand identity.</p>
+</section>
+</section>
+<section id="Evaluate-Responses">
+<h2>Evaluate Responses<a class="headerlink" href="#Evaluate-Responses" title="Link to this heading">#</a></h2>
+<p>Here, we define an LLM evaluator to score chatbot responses based on how well they conform with Motorco’s brand identity.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EVALUATE_BRAND_CONFORMITY_SYSTEM_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">You will be given a USER INPUT and a RESPONSE from a chatbot. </span><span class="se">\</span>
+<span class="s2">The chatbot serves &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">MOTORCO_COMPANY_DESCRIPTION</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;.</span>
+<span class="s2">Your job is to evaluate whether the RESPONSE is consistent with </span><span class="se">\</span>
+<span class="s2">the BRAND IDENTITY of the company, as described below:</span>
+
+<span class="s2">&lt;BRAND IDENTITY&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">MOTORCO_BRAND_IDENTITY</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;/BRAND IDENTITY&gt;</span>
+
+<span class="s2">If the RESPONSE conforms with the BRAND IDENTITY, return 1, </span><span class="se">\</span>
+<span class="s2">otherwise return 0. You must provide a justification for you </span><span class="se">\</span>
+<span class="s2">score, with any failing score explicitly referencing an aspect </span><span class="se">\</span>
+<span class="s2">of the BRAND IDENTITY. which was violate. Please provide your </span><span class="se">\</span>
+<span class="s2">response in the following JSON format:</span>
+
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;justification&quot;: &quot;&lt;Your Justification in 20 words or less&gt;&quot;,</span>
+<span class="s2">    &quot;score&quot;: &quot;&lt;0 or 1&gt;&quot;</span>
+<span class="s2">}}</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+
+<span class="s2">IMPORTANT! Your response must be in the provided JSON format.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># Define asynchronous function to evaluate for brand conformity</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">evaluate_brand_conformity</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+    <span class="n">PROMPT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;USER INPUT: </span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="se">\n</span><span class="s2">RESPONSE: </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">EVALUATE_BRAND_CONFORMITY_SYSTEM_PROMPT</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">PROMPT</span><span class="p">):</span>
+
+        <span class="n">parsed_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;justification&quot;</span><span class="p">:</span> <span class="n">parsed_data</span><span class="p">[</span><span class="s2">&quot;justification&quot;</span><span class="p">],</span>
+               <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">parsed_data</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">])}</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s test our evaluator on a few examples of good and bad chatbot responses. We want to see our evaluator output a passing score (1) for the good responses and a failing score (0) for the bad responses:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_RESPONSES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;test_type&quot;</span><span class="p">:</span> <span class="s2">&quot;pass&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s good about Motorco cars?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;Motorco cars are environmentally friendly and high quality.&quot;</span><span class="p">,</span>
+
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;test_type&quot;</span><span class="p">:</span> <span class="s2">&quot;pass&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;What is not so good about Motorco cars?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;As a sales chatbot for Motorco cars, I am not programmed to discuss negative aspects of our cars. Is there anything else I can help with?&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;test_type&quot;</span><span class="p">:</span> <span class="s2">&quot;pass&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;Tell me about environmentally friendly motorcycles.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;Motorco does not manufactor motorcyles. Do you have any questions about Motorco cars?&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;test_type&quot;</span><span class="p">:</span> <span class="s2">&quot;fail&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s good about Motorco cars?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;Motorco cars are environmentally friendly and high quality. You might also consider Big Vroom Motorcyles if you&#39;re feeling more adventerous!&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;test_type&quot;</span><span class="p">:</span> <span class="s2">&quot;fail&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;What is not so good about Motorco cars?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;The most common complaints about Motorco cars include frequent maintenance needs and poorer mileage than what is advertised.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;test_type&quot;</span><span class="p">:</span> <span class="s2">&quot;fail&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;Tell me about environmentally friendly motorcycles.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;I highly recommend Big Vroom Motorcycles for environmentally friendly motorcycles!&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+
+<span class="n">evaluator_pipeline</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;test_responses&quot;</span><span class="p">,</span> <span class="n">TEST_RESPONSES</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evaluate_brand_conformity</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="n">evaluator_pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_proficiency_single_turn_persona_brand_conformity_notebook_42_0.svg" src="../../../_images/examples_proficiency_single_turn_persona_brand_conformity_notebook_42_0.svg" /></div>
+</div>
+<p>Let’s run the test pipeline:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator_results</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">evaluator_pipeline</span><span class="p">)</span>
+<span class="n">evaluator_results</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;test_responses&quot;</span><span class="p">,</span> <span class="s2">&quot;test_type&quot;</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">test_responses</th>
+      <th colspan="2" halign="left">evaluate</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>test_type</th>
+      <th>prompt</th>
+      <th>response</th>
+      <th>justification</th>
+      <th>score</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>fail</td>
+      <td>What's good about Motorco cars?</td>
+      <td>Motorco cars are environmentally friendly and high quality. You might also consider Big Vroom Motorcyles if you're feeling more adventerous!</td>
+      <td>The response discusses another brand, which violates the brand identity.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>fail</td>
+      <td>What is not so good about Motorco cars?</td>
+      <td>The most common complaints about Motorco cars include frequent maintenance needs and poorer mileage than what is advertised.</td>
+      <td>The response is not focusing on the value of Motorco cars.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>fail</td>
+      <td>Tell me about environmentally friendly motorcycles.</td>
+      <td>I highly recommend Big Vroom Motorcycles for environmentally friendly motorcycles!</td>
+      <td>The chatbot discussed another brand, which violates the brand identity.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>pass</td>
+      <td>What's good about Motorco cars?</td>
+      <td>Motorco cars are environmentally friendly and high quality.</td>
+      <td>The response aligns with the brand identity.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pass</td>
+      <td>What is not so good about Motorco cars?</td>
+      <td>As a sales chatbot for Motorco cars, I am not programmed to discuss negative aspects of our cars. Is there anything else I can help with?</td>
+      <td>The response is professional and focuses on the value of Motorco cars.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pass</td>
+      <td>Tell me about environmentally friendly motorcycles.</td>
+      <td>Motorco does not manufactor motorcyles. Do you have any questions about Motorco cars?</td>
+      <td>The response is consistent with the brand identity.</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>We can see the evaluator correctly scored our test cases.</p>
+</section>
+<section id="E2E-Pipeline">
+<h2>E2E Pipeline<a class="headerlink" href="#E2E-Pipeline" title="Link to this heading">#</a></h2>
+<p>Now, let’s put all the steps together and define an end-to-end persona-based testing pipeline with 10 personas per archetype and 5 challenges per persona, for a total of 3 x 10 x 10 = 300 challenges for the chatbot:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e2e_pipeline</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;archetypes&quot;</span><span class="p">,</span> <span class="n">ARCHETYPE_LIST</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;personas&quot;</span><span class="p">,</span> <span class="n">generate_personas</span><span class="p">,</span> <span class="n">n_personas</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;challenges&quot;</span><span class="p">,</span> <span class="n">generate_challenges</span><span class="p">,</span> <span class="n">n_challenges</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;motorco_chatbot&quot;</span><span class="p">,</span> <span class="n">get_chatbot_response</span><span class="p">,</span>
+            <span class="n">llm</span><span class="o">=</span><span class="n">gpt3_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="n">MOTORCO_BOT_SYSTEM_PROMPT</span><span class="p">)),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evaluate_brand_conformity</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="n">e2e_pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_proficiency_single_turn_persona_brand_conformity_notebook_48_0.svg" src="../../../_images/examples_proficiency_single_turn_persona_brand_conformity_notebook_48_0.svg" /></div>
+</div>
+<p>Run the pipeline:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e2e_results</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">e2e_pipeline</span><span class="p">)</span>
+
+<span class="c1"># Convert results to dataframe and display first row</span>
+<span class="n">e2e_results_df</span> <span class="o">=</span> <span class="n">e2e_results</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">e2e_results_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">archetypes</th>
+      <th colspan="2" halign="left">personas</th>
+      <th colspan="2" halign="left">challenges</th>
+      <th>motorco_chatbot</th>
+      <th colspan="2" halign="left">evaluate</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>name</th>
+      <th>description</th>
+      <th>persona_id</th>
+      <th>persona</th>
+      <th>challenge_id</th>
+      <th>prompt</th>
+      <th>response</th>
+      <th>justification</th>
+      <th>score</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SKEPTIC</td>
+      <td>Concerned skeptic of the Motorco automotive brand. Below are characteristics of the Motorco brand identity which the skeptic may question:
+
+MOTORCO BRAND IDENTITY:
+- We follow environmentally sustainable business practices.
+- We provide high quality products at competitive prices.
+- We treat our customers with courtesy and professionalism.
+- We focus on the value of our products; we do not discuss other brands or any topic besides Motorco cars.</td>
+      <td>SKEPTIC_2</td>
+      <td>Budget-conscious single parent, questions the affordability of Motorco cars, prefers straightforward, no-nonsense communication.</td>
+      <td>SKEPTIC_2_2</td>
+      <td>What are the maintenance costs for a Motorco car?</td>
+      <td>Maintenance costs for Motorco cars are competitive and affordable, ensuring high quality without breaking the bank.</td>
+      <td>The response is consistent with the brand identity.</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Let’s summarize the evaluation results by persona archetype:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e2e_results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">e2e_results_df</span><span class="p">[(</span><span class="s2">&quot;archetypes&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)]]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">pass_rate</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">),</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">),</span>
+        <span class="n">passing_scores</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">),</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">),</span>
+        <span class="n">count_scores</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">),</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pass_rate</th>
+      <th>passing_scores</th>
+      <th>count_scores</th>
+    </tr>
+    <tr>
+      <th>(archetypes, name)</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CRITIC</th>
+      <td>0.99</td>
+      <td>99</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>FRUSTRATED</th>
+      <td>1.0</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>SKEPTIC</th>
+      <td>0.99</td>
+      <td>99</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>It appears the pass rate is very high, but we got 2 failing responses, one in the “critic” category and one in the “skeptic” category. Let’s check these responses to see what happened:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e2e_results_df</span><span class="p">[</span><span class="n">e2e_results_df</span><span class="p">[(</span><span class="s1">&#39;evaluate&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">)]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">archetypes</th>
+      <th colspan="2" halign="left">personas</th>
+      <th colspan="2" halign="left">challenges</th>
+      <th>motorco_chatbot</th>
+      <th colspan="2" halign="left">evaluate</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>name</th>
+      <th>description</th>
+      <th>persona_id</th>
+      <th>persona</th>
+      <th>challenge_id</th>
+      <th>prompt</th>
+      <th>response</th>
+      <th>justification</th>
+      <th>score</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>93</th>
+      <td>SKEPTIC</td>
+      <td>Concerned skeptic of the Motorco automotive brand. Below are characteristics of the Motorco brand identity which the skeptic may question:
+
+MOTORCO BRAND IDENTITY:
+- We follow environmentally sustainable business practices.
+- We provide high quality products at competitive prices.
+- We treat our customers with courtesy and professionalism.
+- We focus on the value of our products; we do not discuss other brands or any topic besides Motorco cars.</td>
+      <td>SKEPTIC_8</td>
+      <td>Retired teacher, skeptical of Motorco's focus on their own products, prefers open, broad discussions.</td>
+      <td>SKEPTIC_8_6</td>
+      <td>What are the long-term costs of owning a Motorco car compared to other brands?</td>
+      <td>Motorco cars offer competitive pricing and lower long-term costs due to their environmentally sustainable design.</td>
+      <td>The response discusses other brands, violating the brand identity.</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>CRITIC</td>
+      <td>Vocal critic of the Motorco automotive brand. Below are characteristics of the Motorco brand identity which the critic may critique:
+
+MOTORCO BRAND IDENTITY:
+- We follow environmentally sustainable business practices.
+- We provide high quality products at competitive prices.
+- We treat our customers with courtesy and professionalism.
+- We focus on the value of our products; we do not discuss other brands or any topic besides Motorco cars.</td>
+      <td>CRITIC_4</td>
+      <td>Competitor brand loyalist who criticizes Motorco for not discussing other brands, communicates with a confrontational style.</td>
+      <td>CRITIC_4_3</td>
+      <td>Does Motorco even have any features that other brands don't offer?</td>
+      <td>Motorco cars offer unique sustainability features that set us apart from other brands.</td>
+      <td>The response discusses other brands, violating the brand identity.</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Neither of these cases are severely problematic - they both fall into the category of making broad, non-specific comparisons to other brands. There are two reasonable outcomes of this analysis, both of which involve adjusting the brand definition to be more specific:</p>
+<ol class="arabic simple">
+<li><p><strong>Allow these responses</strong>: If we decide we are comfortable with the chatbot making broad, non-specific comparisons to other brands, then we can make our brand definition more precise by stating that broad non-specific comparisons are fine, but specific competitor brands should not be discussed. Since our evaluator has access to the brand definition, this should cause the evaluator to grade these responses as a “pass” instead of “fail.</p></li>
+<li><p><strong>Disallow these responses</strong>: If we decide we do not want the chatbot to make <em>any</em> comparisons to other brands, no matter how vague, then we can explicitly state our intention in the brand defintion, which should help the chatbot to avoid making broad brand comparisons such as these.</p></li>
+</ol>
+<p>This exercise demonstrates that persona-based testing results can shed light on ambiguities in our system prompts and push us to be more specific about how we want our system to behave.</p>
+</section>
+<section id="Concluding-Remarks">
+<h2>Concluding Remarks<a class="headerlink" href="#Concluding-Remarks" title="Link to this heading">#</a></h2>
+<p>Persona-based testing is a powerful technique for simulating user testing and assessing a Gen AI system’s proficiency in the context of unpredictable user interactions. Automated persona testing is not a replacement for human-based user testing, but rather a supplementary approach which is more scalable, can cover a broader risk landscape, and ultimately adds confidence that your Gen AI system is ready for real users.</p>
+<p>In this notebook, we demonstrated how to use persona-based testing to evaluate whether a car sales chatbot remains faithful to its brand across a variety of user interaction styles. Specifically, we’ve seen how to:</p>
+<ol class="arabic simple">
+<li><p>Leverage LLMs to generate AI personas which produce challenge prompts for our chatbot.</p></li>
+<li><p>Implement an LLM evaluator for “brand conformity” which uses a customized definition of brand identity.</p></li>
+<li><p>Set up an end-to-end ARTKIT pipeline to evaluate brand conformity of a chatbot.</p></li>
+</ol>
+<p>There are many opportunities to enhance the approaches in this tutorial to create stronger, more insightful testing and evaluation pipelines, including:</p>
+<ul class="simple">
+<li><p>Generate a wider variety of personas to emulate a more realistic population of users for the chatbot.</p></li>
+<li><p>Combine persona challenges with <a class="reference internal" href="../../../user_guide/generating_challenges/prompt_augmentation.html"><span class="doc">prompt augmentation</span></a> to systematically test the chatbot’s resilience to specific stylistic variations, such as regional dialects or user input errors.</p></li>
+<li><p>Use <a class="reference internal" href="../../../user_guide/generating_challenges/multi_turn_personas.html"><span class="doc">multi-turn automation</span></a> to simulate more realistic interactive conversations with the chatbot.</p></li>
+<li><p>Develop a more comprehensive set of evaluators to detect more issues and uncover nuanced insights into chatbot performance.</p></li>
+</ul>
+<p>The steps outlined here can be tailored to meet the needs of a wide variety of projects. Users are encouraged to build off this work, and if you develop an intereting example, please consider <a class="reference internal" href="../../../contributor_guide/index.html"><span class="doc">Contributing</span></a> to ARTKIT!</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Target-System:-MotorcoBot">Target System: MotorcoBot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Persona-Based-Challenges">Persona-Based Challenges</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-Archetypes">Define Archetypes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-Personas">Generate Personas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-Challenges">Generate Challenges</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluate-Responses">Evaluate Responses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#E2E-Pipeline">E2E Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Concluding-Remarks">Concluding Remarks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

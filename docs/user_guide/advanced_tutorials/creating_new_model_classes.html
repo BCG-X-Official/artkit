@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Creating New Model Classes &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/bcgx.css?v=9d1a9f92" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/advanced_tutorials/creating_new_model_classes';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Prompt Formatting" href="prompt_formatting.html" />
+    <link rel="prev" title="Interpreting Run Results" href="../evaluation_and_analysis/interpreting_run_results.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to ARTKIT</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/genai_testing_and_evaluation.html">Gen AI Testing and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/building_your_first_artkit_pipeline.html">Building Your First ARTKIT Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/connecting_to_genai_models.html">Connecting to Gen AI Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Challenges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/prompt_augmentation.html">Prompt Augmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/single_turn_personas.html">Single-Turn Personas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_challenges/multi_turn_personas.html">Multi-Turn Personas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multimodal Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multimodal/image_generation_and_evaluation.html">Image Generation and Evaluation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/evaluator_design.html">Evaluator Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/interpreting_run_results.html">Interpreting Run Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Creating New Model Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt_formatting.html">Prompt Formatting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache_management.html">Cache Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json_output_validation.html">JSON Output Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_design_patterns.html">Advanced Design Patterns</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Creating...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Creating-New-Model-Classes">
+<h1>Creating New Model Classes<a class="headerlink" href="#Creating-New-Model-Classes" title="Link to this heading">#</a></h1>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">#</a></h2>
+<p>This notebook serves as a primer for developing ARTKIT model classes. This is most likely your first entrypoint to contributing to ARTKIT. So, to get you started we will cover:</p>
+<ul class="simple">
+<li><p><strong>Object-oriented programming motivations:</strong> The advantages of using class hierarchies and how this enables us to distribute features across client implementations</p></li>
+<li><p><strong>ARTKIT’s model class hierarchy:</strong> How are classes structured across ARTKIT and what levels of abstraction exist</p></li>
+<li><p><strong>Model implementation example:</strong> A deep-dive of the initialization and <code class="docutils literal notranslate"><span class="pre">get_response</span></code> implementation of the <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> class</p></li>
+<li><p><strong>Your implementation - a checklist:</strong> Steps to complete to code up your own client implementation</p></li>
+</ul>
+<p>This is a technical guide for users who are looking to implement new functionalities within the ARTKIT library. While a basic understanding of python classes is assumed, this guide should be accessible for anyone with a data science background.</p>
+<p>To get more information on the classes mentioned here go to the <a class="reference internal" href="../../apidoc/artkit.html"><span class="doc">API reference</span></a>.</p>
+</section>
+<section id="Object-oriented-programming-motivations">
+<h2>Object-oriented programming motivations<a class="headerlink" href="#Object-oriented-programming-motivations" title="Link to this heading">#</a></h2>
+<p>ARTKIT makes heavy use of class inheritance to implement connectors to Gen AI model providers. This allows us to take advantage of features specific to certain model providers while standardizing common utility methods such as asynchronous execution, managing chat history, and caching. It also means you can quickly implement classes to connect to new providers and immediately re-use these standard features without any additional coding.</p>
+<p><strong>When should I create a new model class?</strong> Currently ARTKIT provides interfaces for connecting to OpenAI, Anthropic, Hugging Face, Groq, and Google’s Gemini LLMs. It also supports OpenAI’s multi-modal models, specifically DALL-E models and vision endpoints. If there are additional model providers you’d like to use in your testing and evaluation pipeline, creating a new class is the best way to do so – and also improves the usefulness of ARTKIT for everyone! To get to know more about
+contributing to ARTKIT see our <a class="reference internal" href="../../contributor_guide/index.html"><span class="doc">Contributor Guide</span></a>.</p>
+<p><strong>What if I want to change core class functionality?</strong> Reviewing the model class hierarchy in this guide is a good starting point to developing new core features to the library, though implementing and testing these features will more take careful considerations and scrutiny, as introducing changes on higher levels of abstraction can have implications for other client implementations.</p>
+</section>
+<section id="ARTKIT's-model-class-hierarchy">
+<h2>ARTKIT’s model class hierarchy<a class="headerlink" href="#ARTKIT's-model-class-hierarchy" title="Link to this heading">#</a></h2>
+<p>Here’s a summary of the model class hierarchy, starting from the abstract <code class="docutils literal notranslate"><span class="pre">GenAIModel</span></code> to the <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> class:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GenAIModel</span></code> is an abstract representation of a generic Gen AI model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ConnectorMixin</span></code> is a mixin class that adds a common interface for client connections to a <code class="docutils literal notranslate"><span class="pre">GenAIModel</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ChatModel</span></code> is a an abstract class to have a common interface for generating responses for text prompts, emulating a chat - its a subclass of a <code class="docutils literal notranslate"><span class="pre">GenAIModel</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ChatModelConnector</span></code> combines the <code class="docutils literal notranslate"><span class="pre">ConnectorMixin</span></code> with the <code class="docutils literal notranslate"><span class="pre">ChatModel</span></code> interface to create chat model that connects to a client</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> is a subclass of <code class="docutils literal notranslate"><span class="pre">ChatModelConnector</span></code> to connect to OpenAI’s model and utilize them for chats</p></li>
+</ol>
+<p>Here’s a tree of the relevant repo structure, so you can take a look at the implementation of these classes:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model/
+  base/
+    _model.py     --&gt; GenAIModel, ConnectorMixin
+  llm/
+    base/
+      _llm.py     --&gt; ChatModel, ChatModelConnector
+    openai/
+      _openai.py  --&gt; OpenAIChat
+</pre></div>
+</div>
+<p>A similar hierarchy is shared for other model providers and modalities. For example, levels 1. - 4. are identical for the <code class="docutils literal notranslate"><span class="pre">AnthropicChat</span></code> class. This means that <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> and <code class="docutils literal notranslate"><span class="pre">AnthropicChat</span></code> share all attributes and method signatures of <code class="docutils literal notranslate"><span class="pre">ChatModelConnector</span></code>, such as <code class="docutils literal notranslate"><span class="pre">get_client()</span></code> but not the actual implementation of those methods. This enables model-specific parameters and response processing.</p>
+<p><strong>If you’re adding a new model class, you will most likely only need to make changes on hierarchy level 5.</strong></p>
+<p>It is similar for other modalities; for example, the <code class="docutils literal notranslate"><span class="pre">OpenAIDiffusion</span></code> class inherits from a <code class="docutils literal notranslate"><span class="pre">DiffusionModelConnector</span></code>, which is again a subclass of a <code class="docutils literal notranslate"><span class="pre">DiffusionModel</span></code> and a <code class="docutils literal notranslate"><span class="pre">ConnectorMixin</span></code>. Unlike a <code class="docutils literal notranslate"><span class="pre">ChatModel</span></code>, a <code class="docutils literal notranslate"><span class="pre">DiffusionModel</span></code> does not have a <code class="docutils literal notranslate"><span class="pre">get_response()</span></code> method. However, because it also inherits from <code class="docutils literal notranslate"><span class="pre">ConnectorMixin</span></code>, it will have the same <code class="docutils literal notranslate"><span class="pre">get_client()</span></code> method signature.</p>
+</section>
+<section id="Model-implementation-example">
+<h2>Model implementation example<a class="headerlink" href="#Model-implementation-example" title="Link to this heading">#</a></h2>
+<p>Next, we will demonstrate how the model class hierarchy is used through an example of the <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> class.</p>
+<p>The goal is to illustrate both (i) what methods you need to implement to create a new model class and (ii) why those methods are set up the way that they are.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">ChatModelConnector</span></code> has two required parameters: <code class="docutils literal notranslate"><span class="pre">model_id</span></code> and <code class="docutils literal notranslate"><span class="pre">api_env_key</span></code>. The <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> has additional model-specific parameters such as <code class="docutils literal notranslate"><span class="pre">temperature</span></code>. So when we initialize an <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> object as below, we’re also initializing the superclass to handle client connections:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import ARTKIT</span>
+<span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="c1"># Load API keys</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">gpt4_chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span><span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-4&quot;</span><span class="p">,</span> <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<p>To implement a chat model connector the following methods need to be implemented:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#####################################</span>
+<span class="c1">### model/llm/openai/_openai.py   ###</span>
+<span class="c1">#####################################</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">AsyncOpenAI</span>
+
+<span class="kn">from</span> <span class="nn">artkit.model.llm.base</span> <span class="kn">import</span> <span class="n">ChatModelConnector</span>
+<span class="kn">from</span> <span class="nn">artkit.model.llm.history</span> <span class="kn">import</span> <span class="n">ChatHistory</span>
+
+
+<span class="k">class</span> <span class="nc">OpenAIChat</span><span class="p">(</span><span class="n">ChatModelConnector</span><span class="p">[</span><span class="n">AsyncOpenAI</span><span class="p">]):</span>
+
+    <span class="c1"># required by ConnectorMixin to establish a client connection</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_default_api_key_env</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># required by ConnectorMixin to establish a client connection</span>
+    <span class="k">def</span> <span class="nf">_make_client</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncOpenAI</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># required by ChatModel to send a message to the model</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_response</span><span class="p">(</span>  <span class="c1"># pragma: no cover</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">history</span><span class="p">:</span> <span class="n">ChatHistory</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">model_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<p>By unifying the interfaces for chat models we are enabled to follow a delegation pattern through which we can add external behaviors to all <code class="docutils literal notranslate"><span class="pre">ChatModelConnectors</span></code> by wrapping them in a separate class. <code class="docutils literal notranslate"><span class="pre">CachedChatModel</span></code> is a great example of this that enables us to cache requests to a model provider without caring about the actual implementation details. You can see us make use of this below.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Wrap the model in a CachedChatModel</span>
+<span class="n">gpt4_chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">gpt4_chat</span><span class="p">,</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/creating_new_model_classes.db&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, let’s take a deeper dive into the <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> implementation of <code class="docutils literal notranslate"><span class="pre">get_response()</span></code> to highlight how we’re taking advantage of the full class hierarchy:</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">with_system_prompt()</span></code> method, that you will see later, is inherited from the <code class="docutils literal notranslate"><span class="pre">ChatModelConnector</span></code> superclass to set the <code class="docutils literal notranslate"><span class="pre">system_prompt</span></code> property of the model</p></li>
+<li><p>Upon calling <code class="docutils literal notranslate"><span class="pre">get_response()</span></code>, we first use AsyncExitStack() to enter the model’s context manager</p></li>
+<li><p>Then we call the <code class="docutils literal notranslate"><span class="pre">get_client()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">ConnectorMixin</span></code> superclass to fetch a cached OpenAI client instance.</p></li>
+<li><p>If no previous client instance exists, it is created via the model’s <code class="docutils literal notranslate"><span class="pre">_make_client()</span></code> implementation. This logic rests in the <code class="docutils literal notranslate"><span class="pre">ConnectorMixin</span></code> as well.</p></li>
+<li><p>Next, we format an input message for OpenAI’s chat endpoint based on the model’s history, system prompt, and input message</p></li>
+<li><p>The message is sent to OpenAI’s chat endpoint, along with other parameters set during model initialization (such as temperature and max tokens)</p></li>
+<li><p>Finally, we parse return a list of responses from OpenAI’s chat endpoint</p></li>
+</ol>
+<p>While there are quite a few steps here, note that the only ones specific to the <code class="docutils literal notranslate"><span class="pre">OpenAIChat</span></code> class are 5-8.</p>
+<p><strong>That means if you’re creating a new custom class, all you need to worry about is getting a client instance, passing a message to the client, and returning its response.</strong></p>
+<p>Everything else can be abstracted away via the model superclasses.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">####################################</span>
+<span class="c1">### model/llm/openai/_openai.py  ###</span>
+<span class="c1">####################################</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">AsyncExitStack</span>
+
+<span class="kn">from</span> <span class="nn">artkit.model.util</span> <span class="kn">import</span> <span class="n">RateLimitException</span>
+<span class="kn">from</span> <span class="nn">artkit.model.llm.history</span> <span class="kn">import</span> <span class="n">ChatHistory</span>
+
+<span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">RateLimitError</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_response</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">history</span><span class="p">:</span> <span class="n">ChatHistory</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">model_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+    <span class="c1"># ARTKIT model implementations are designed to be fully asynchronous -</span>
+    <span class="c1">#   AsyncExitStack is used to handle multiple context managers dynamically.</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncExitStack</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># We access the client instance via the get_client method of the &quot;ConnectorMixin&quot; superclass -</span>
+            <span class="c1">#   this will fetch a cached client instance if it exists or make a new one if it does not</span>
+            <span class="c1"># This is very helpful, as it means you can share the same client instance across model objects</span>
+            <span class="n">completion</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_client</span><span class="p">()</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+
+                <span class="c1"># Here is the only OpenAI specific bit of code - we&#39;re formatting the message</span>
+                <span class="c1">#  to pass to the chat endpoint</span>
+                <span class="n">messages</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_messages_to_openai_format</span><span class="p">(</span>  <span class="c1"># type: ignore[arg-type]</span>
+                        <span class="n">message</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">history</span>
+                    <span class="p">)</span>
+                <span class="p">),</span>
+                <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_id</span><span class="p">,</span>
+
+                <span class="c1"># We merge the model parameters passed to the get_response method with the defaults set</span>
+                <span class="c1"># during instantiation, by overwriting the defaults with the passed parameters</span>
+                <span class="o">**</span><span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get_model_params</span><span class="p">(),</span> <span class="o">**</span><span class="n">model_params</span><span class="p">},</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="n">RateLimitError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># If the rate limit is exceeded, we raise a custom RateLimitException</span>
+                <span class="c1"># This is caught for all ChatModelConnectors and handled via exponential backoff</span>
+                <span class="k">raise</span> <span class="n">RateLimitException</span><span class="p">(</span>
+                    <span class="s2">&quot;Rate limit exceeded. Please try again later.&quot;</span>
+                <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_responses_from_completion</span><span class="p">(</span><span class="n">completion</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Now we can see the actual output of our <code class="docutils literal notranslate"><span class="pre">.get_response()</span></code> function :</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">((</span><span class="k">await</span> <span class="n">gpt4_chat</span><span class="o">.</span><span class="n">with_system_prompt</span><span class="p">(</span><span class="s2">&quot;You respond only in haiku&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;What color is the sky?&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Blue as the endless sea,
+Reflecting the sun&#39;s bright glow,
+Infinite and free.
+</pre></div></div>
+</div>
+</section>
+<section id="Your-implementation---a-checklist:">
+<h2>Your implementation - a checklist:<a class="headerlink" href="#Your-implementation---a-checklist:" title="Link to this heading">#</a></h2>
+<p>Here are the basic steps you’ll need to take to create a new model class:</p>
+<ol class="arabic simple">
+<li><p>Depending on which kind of model you want to implement the right abstract class e.g., <code class="docutils literal notranslate"><span class="pre">ChatModelConnect</span></code>. Ideally, your IDE assists you here. Otherwise, you can try starting with an existing implementation, but make sure to check your parent classes and method signatures.</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">__init__</span></code> to only include the parameters relevant for your model</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">_make_client</span></code> to return an instance of your model’s client. To do so, review the model provider’s API documentation; refer to <a class="reference internal" href="../introduction_to_artkit/connecting_to_genai_models.html"><span class="doc">Connecting to Gen AI Models</span></a> for some examples of what you’re looking for</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">get_response</span></code> to pass a message to the client endpoint and return its response</p></li>
+<li><p>Add unit tests for your new model implementation</p></li>
+</ol>
+<p>If you’re working with a diffusion or vision model, you will have to implement a different abstract model class but the necessary steps are very similar.</p>
+<p>Here are a few other best-practices that will save you time during development:</p>
+<ul class="simple">
+<li><p>Run pre-commit hooks frequently; they will help you catch any missing implementation, type errors, or general formatting inconsistencies</p></li>
+<li><p>Write unit tests as you go, and run <code class="docutils literal notranslate"><span class="pre">pytest</span></code> intermittently to make sure you haven’t accidentally broken anything</p></li>
+<li><p>Import your model class in `api.py``; this will allow it to be called via the ARTKIT API</p></li>
+<li><p>Add a try / expect <code class="docutils literal notranslate"><span class="pre">ImportError</span></code> at the top of your class; ARTKIT does not require every supported model to be installed on setup</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Object-oriented-programming-motivations">Object-oriented programming motivations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ARTKIT's-model-class-hierarchy">ARTKIT’s model class hierarchy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-implementation-example">Model implementation example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Your-implementation---a-checklist:">Your implementation - a checklist:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

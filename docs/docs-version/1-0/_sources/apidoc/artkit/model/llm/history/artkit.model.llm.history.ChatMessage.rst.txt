@@ -1,0 +1,34 @@
+artkit.model.llm.history.ChatMessage
+====================================
+
+.. currentmodule:: artkit.model.llm.history
+
+.. autoclass:: ChatMessage
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~ChatMessage.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~ChatMessage.role
+      ~ChatMessage.text
+   
+   
+
+   .. rubric:: Definitions

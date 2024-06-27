@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Package Builds &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/bcgx.css?v=9d1a9f92" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contributor_guide/package_builds';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FAQ" href="../faq.html" />
+    <link rel="prev" title="Documentation" href="documentation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributor Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_contribute.html">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Package Builds</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Contributing</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Package Builds</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="package-builds">
+<span id="contributor-guide-builds"></span><h1>Package Builds<a class="headerlink" href="#package-builds" title="Link to this heading">#</a></h1>
+<p>The build process for the PyPI and conda distributions uses the following key
+files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make.py</span></code>: generic Python script for package builds. Most configuration is imported
+from <a class="reference external" href="https://github.com/bcgx-pi-PID-XGF-08/llmcheck/blob/develop/make.py">make.py</a>
+which is a build script that wraps the package build, as well as exposing the matrix
+dependency definitions specified in the <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> as environment variables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>: metadata for PyPI, build settings and package dependencies</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tox.ini</span></code>: contains configurations for tox, testenv, flake8, isort, coverage report,
+and pytest</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condabuild/meta.yml</span></code>: metadata for conda, build settings and package dependencies</p></li>
+</ul>
+<section id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">artkit</span></code> version numbering follows the <a class="reference external" href="https://semver.org/">semantic versioning</a>
+approach, with the pattern <code class="docutils literal notranslate"><span class="pre">MAJOR.MINOR.PATCH</span></code>.
+The version can be bumped in the <code class="docutils literal notranslate"><span class="pre">src/__init__.py</span></code> by updating the
+<code class="docutils literal notranslate"><span class="pre">__version__</span></code> string accordingly.</p>
+</section>
+<section id="pypi">
+<h2>PyPI<a class="headerlink" href="#pypi" title="Link to this heading">#</a></h2>
+<p>PyPI project metadata, build settings and package dependencies
+are obtained from <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>. To build and then publish the package to PyPI,
+use the following commands:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>make.py<span class="w"> </span>artkit<span class="w"> </span>tox<span class="w"> </span>default
+flit<span class="w"> </span>publish
+</pre></div>
+</div>
+<p>Please note the following:</p>
+<ul>
+<li><p>Because the PyPI package index is immutable, it is recommended to do a test
+upload to <a class="reference external" href="https://test.pypi.org/">PyPI test</a> first. Ensure all metadata presents
+correctly before proceeding to proper publishing. The command to publish to test is</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>flit<span class="w"> </span>publish<span class="w"> </span>--repository<span class="w"> </span>testpypi
+</pre></div>
+</div>
+<p>which requires the specification of testpypi in a special <code class="docutils literal notranslate"><span class="pre">.pypirc</span></code> file
+with specifications as demonstrated <a class="reference external" href="https://flit.readthedocs.io/en/latest/upload.html">here</a>.</p>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> does not provide specification for a short description
+(displayed in the top gray band on the PyPI page for the package). This description
+comes from the <code class="docutils literal notranslate"><span class="pre">src/__init__.py</span></code> script.</p></li>
+<li><p><a class="reference external" href="https://flit.readthedocs.io/en/latest/">flit</a> which is used here to publish to
+PyPI, also has the flexibility to support package building (wheel/sdist) via
+<code class="docutils literal notranslate"><span class="pre">flit</span> <span class="pre">build</span></code> and installing the package by copy or symlink via <code class="docutils literal notranslate"><span class="pre">flit</span> <span class="pre">install</span></code>.</p></li>
+<li><p>Build output will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> directory.</p></li>
+</ul>
+</section>
+<section id="conda">
+<h2>Conda<a class="headerlink" href="#conda" title="Link to this heading">#</a></h2>
+<p>conda build metadata, build settings and package dependencies
+are obtained from <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code>. To build and then publish the package to conda,
+use the following commands:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>make.py<span class="w"> </span>artkit<span class="w"> </span>conda<span class="w"> </span>default
+anaconda<span class="w"> </span>upload<span class="w"> </span>--user<span class="w"> </span>BCG_Gamma<span class="w"> </span>dist/conda/noarch/&lt;*package.tar.gz*&gt;
+</pre></div>
+</div>
+<p>Please note the following:</p>
+<ul class="simple">
+<li><p>Build output will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> directory.</p></li>
+<li><p>Some useful references for conda builds:</p>
+<ul>
+<li><p><a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/tutorials/building-conda-packages.html">Conda build tutorial</a></p></li>
+<li><p><a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html">Conda build metadata reference</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="azure-devops-ci-cd">
+<h2>Azure DevOps CI/CD<a class="headerlink" href="#azure-devops-ci-cd" title="Link to this heading">#</a></h2>
+<p>This project uses <a class="reference external" href="https://dev.azure.com/">Azure DevOps</a> for CI/CD pipelines.
+The pipelines are defined in the <code class="docutils literal notranslate"><span class="pre">azure-pipelines.yml</span></code> file and are divided into
+the following stages:</p>
+<ul class="simple">
+<li><p><strong>code_quality_checks</strong>: perform code quality checks for isort, black and flake8.</p></li>
+<li><p><strong>detect_build_config_changes</strong>: detect whether the build configuration as specified
+in the <code class="docutils literal notranslate"><span class="pre">pyproject.yml</span></code> has been modified. If it has, then a build test is run.</p></li>
+<li><p><strong>Unit tests</strong>: runs all unit tests and then publishes test results and coverage.</p></li>
+<li><p><strong>conda_tox_build</strong>: build the PyPI and conda distribution artifacts.</p></li>
+<li><p><strong>Release</strong>: see release process below for more detail.</p></li>
+<li><p><strong>Docs</strong>: build and publish documentation to GitHub Pages.</p></li>
+</ul>
+</section>
+<section id="release-process">
+<h2>Release process<a class="headerlink" href="#release-process" title="Link to this heading">#</a></h2>
+<p>Before initiating the release process, please ensure the version number
+in <code class="docutils literal notranslate"><span class="pre">src/__init__.py</span></code> is correct and the format conforms to semantic
+versioning. If the version needs to be corrected/bumped then open a PR for the
+change and merge into develop before going any further.</p>
+<p>The release process has the following key steps:</p>
+<ul class="simple">
+<li><p>Create a new release branch from the tag of the latest release named
+<code class="docutils literal notranslate"><span class="pre">release/&lt;version&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> is the version number of the new release</p></li>
+<li><p>Create a new branch from the baseline branch (e.g., <code class="docutils literal notranslate"><span class="pre">2.0.x</span></code>) named
+<code class="docutils literal notranslate"><span class="pre">dev/&lt;version&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> is the version number of the new release</p></li>
+<li><p>Opening a PR to merge <code class="docutils literal notranslate"><span class="pre">dev/&lt;version&gt;</span></code> onto <code class="docutils literal notranslate"><span class="pre">release/&lt;version&gt;</span></code>.
+This will automatically run all conda/pip build tests via
+Azure Pipelines prior to allowing to merge the PR.
+This will trigger automatic upload of artifacts (conda and pip
+packages) from Azure DevOps. At this stage, it is recommended that the pip package
+build is checked using <a class="reference external" href="https://test.pypi.org/">PyPI test</a> to ensure all
+metadata presents correctly. This is important as package versions in
+PyPI proper are immutable.</p></li>
+<li><p>If everything passes and looks okay, merge the PR using a <em>merge commit</em>
+(not squashing).
+This will trigger the release pipeline which will:</p>
+<ul>
+<li><p>Tag the release commit with version number as specified in <code class="docutils literal notranslate"><span class="pre">src/__init__.py</span></code></p></li>
+<li><p>Create a release on GitHub for the new version, please check the <a class="reference external" href="https://docs.github.com/en/free-pro-team&#64;latest/github/administering-a-repository/releasing-projects-on-github">documentation</a>
+for details</p></li>
+<li><p>Pre-fill the GitHub release title and description, including the changelog based on
+commits since the last release. Please note this can be manually edited to be more
+succinct afterwards</p></li>
+<li><p>Attach build artifacts (conda and pip packages) to GitHub release</p></li>
+<li><p>Upload build artifacts to conda/PyPI using <code class="docutils literal notranslate"><span class="pre">anaconda</span> <span class="pre">upload</span></code> and
+<code class="docutils literal notranslate"><span class="pre">flit</span> <span class="pre">publish</span></code>, respectively</p></li>
+</ul>
+</li>
+<li><p>Remove any test versions for pip from PyPI test</p></li>
+<li><p>Merge <code class="docutils literal notranslate"><span class="pre">release/&lt;version&gt;</span></code> back onto the baseline branch from which
+<code class="docutils literal notranslate"><span class="pre">dev/&lt;version&gt;</span></code> was branched</p></li>
+<li><p>Bump up version in <code class="docutils literal notranslate"><span class="pre">src/__init__.py</span></code> on the baseline branch to start work towards
+the next release</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning">Versioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypi">PyPI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda">Conda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#azure-devops-ci-cd">Azure DevOps CI/CD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#release-process">Release process</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

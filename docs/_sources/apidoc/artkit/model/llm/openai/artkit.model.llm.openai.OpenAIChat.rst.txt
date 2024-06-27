@@ -1,0 +1,46 @@
+artkit.model.llm.openai.OpenAIChat
+==================================
+
+.. currentmodule:: artkit.model.llm.openai
+
+.. autoclass:: OpenAIChat
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~OpenAIChat.get_api_key
+      ~OpenAIChat.get_client
+      ~OpenAIChat.get_default_api_key_env
+      ~OpenAIChat.get_model_params
+      ~OpenAIChat.get_response
+      ~OpenAIChat.to_expression
+      ~OpenAIChat.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~OpenAIChat.model_id
+      ~OpenAIChat.system_prompt
+      ~OpenAIChat.api_key_env
+      ~OpenAIChat.initial_delay
+      ~OpenAIChat.exponential_base
+      ~OpenAIChat.jitter
+      ~OpenAIChat.max_retries
+      ~OpenAIChat.model_params
+   
+   
+
+   .. rubric:: Definitions

@@ -1,0 +1,44 @@
+artkit.model.llm.base.CompletionModelConnector
+==============================================
+
+.. currentmodule:: artkit.model.llm.base
+
+.. autoclass:: CompletionModelConnector
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CompletionModelConnector.get_api_key
+      ~CompletionModelConnector.get_client
+      ~CompletionModelConnector.get_completion
+      ~CompletionModelConnector.get_default_api_key_env
+      ~CompletionModelConnector.get_model_params
+      ~CompletionModelConnector.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CompletionModelConnector.model_id
+      ~CompletionModelConnector.api_key_env
+      ~CompletionModelConnector.initial_delay
+      ~CompletionModelConnector.exponential_base
+      ~CompletionModelConnector.jitter
+      ~CompletionModelConnector.max_retries
+      ~CompletionModelConnector.model_params
+   
+   
+
+   .. rubric:: Definitions

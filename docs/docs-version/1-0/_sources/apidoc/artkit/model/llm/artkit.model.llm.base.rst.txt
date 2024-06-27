@@ -1,0 +1,48 @@
+artkit.model.llm.base
+=====================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.llm.base
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: base
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      ChatModel
+      ChatModelAdapter
+      ChatModelConnector
+      CompletionModel
+      CompletionModelAdapter
+      CompletionModelConnector
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

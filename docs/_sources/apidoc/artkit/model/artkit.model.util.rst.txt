@@ -1,0 +1,51 @@
+artkit.model.util
+=================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.util
+   :no-imported-members:
+
+   
+
+   
+   
+   
+
+   
+   
+   =========
+   Functions
+   =========
+
+   .. autosummary::
+      :toctree: util
+      :nosignatures:
+   
+      retry_with_exponential_backoff
+   
+   
+
+   
+   
+   
+
+   
+   
+   ==========
+   Exceptions
+   ==========
+
+   .. autosummary::
+      :toctree: util
+   
+      RateLimitException
+   
+   
+
+
+

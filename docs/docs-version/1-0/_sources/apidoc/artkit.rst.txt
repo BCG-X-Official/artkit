@@ -1,0 +1,50 @@
+.. _api:
+
+API Reference
+=============
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit
+   :no-imported-members:
+
+   
+   .. include:: ../api_landing.rst
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+==========
+Submodules
+==========
+.. autosummary::
+   :toctree: artkit
+   :template: custom-module-template.rst
+   :recursive:
+
+   artkit.api
+   artkit.flow
+   artkit.model
+   artkit.util
+

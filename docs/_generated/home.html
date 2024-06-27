@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Home &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/bcgx.css?v=9d1a9f92" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/home';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="User Guide" href="../user_guide/index.html" />
+    <link rel="prev" title="Table of Contents" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="home">
+<span id="id1"></span><h1>Home<a class="headerlink" href="#home" title="Link to this heading">#</a></h1>
+<p><strong>ARTKIT</strong> is a Python framework developed by <a class="reference external" href="https://www.bcg.com/x">BCG X</a> for automating prompt-based
+testing and evaluation of Gen AI applications.</p>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>See the <a class="reference external" href="https://bcg-x-official.github.io/artkit/_generated/home.html">ARTKIT Documentation</a> for our User Guide, Examples, API reference, and more.</p></li>
+<li><p>See <a class="reference external" href="https://github.com/BCG-X-Official/artkit/blob/HEAD/CONTRIBUTING.md">Contributing</a> or visit our <a class="reference external" href="https://bcg-x-official.github.io/artkit/contributor_guide/index.html">Contributor Guide</a> for information on contributing.</p></li>
+<li><p>We have an <a class="reference external" href="https://bcg-x-official.github.io/artkit/faq.html">FAQ</a> for common questions. For anything else, please reach out to <a class="reference external" href="mailto:ARTKIT&#37;&#52;&#48;bcg&#46;com">ARTKIT<span>&#64;</span>bcg<span>&#46;</span>com</a>.</p></li>
+</ul>
+</section>
+<section id="introduction">
+<span id="id2"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>ARTKIT is a Python framework for developing automated end-to-end testing and evaluation pipelines for Gen AI applications.
+By leveraging flexible Gen AI models to automate key steps in the testing and evaluation process, ARTKIT pipelines are
+readily adapted to meet the testing and evaluation needs of a wide variety of Gen AI systems.</p>
+<img alt="ARTKIT pipeline schematic" src="../_images/artkit_pipeline_schematic.png" />
+<p>ARTKIT also supports automated <a class="reference external" href="https://bcg-x-official.github.io/artkit/user_guide/generating_challenges/multi_turn_personas.html">multi-turn conversations</a>
+between a challenger bot and a target system. Issues and vulnerabilities are more likely to arise after extended
+interactions with Gen AI systems, so multi-turn testing is critical for interactive applications.</p>
+<p>We recommend starting with our <a class="reference external" href="https://bcg-x-official.github.io/artkit/user_guide/index.html">User Guide</a>
+to learn the core concepts and functionality of ARTKIT.
+Visit our <a class="reference external" href="https://bcg-x-official.github.io/artkit/examples/index.html">Examples</a> to see how
+ARTKIT can be used to test and evaluate Gen AI systems for:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Q&amp;A Accuracy:</dt><dd><ul class="simple">
+<li><p>Generate a <em>Q&amp;A golden dataset</em> from ground truth documents, augment questions to simulate variation in user inputs,
+and evaluate system responses for <a class="reference external" href="https://bcg-x-official.github.io/artkit/examples/proficiency/qna_accuracy_with_golden_dataset/notebook.html">faithfulness, completeness, and relevancy</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Upholding Brand Values:</dt><dd><ul class="simple">
+<li><p>Implement <em>persona-based testing</em> to simulate diverse users interacting with your system and evaluate system responses for
+<a class="reference external" href="https://bcg-x-official.github.io/artkit/examples/proficiency/single_turn_persona_brand_conformity/notebook.html">brand conformity</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Equitability:</dt><dd><ul class="simple">
+<li><p>Run a <em>counterfactual experiment</em> by systematically modifying demographic indicators across a set of documents and statistically
+evaluate system responses for <a class="reference external" href="https://bcg-x-official.github.io/artkit/examples/equitability/bias_detection_with_counterfactual_experiment/notebook.html">undesired demographic bias</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Safety:</dt><dd><ul class="simple">
+<li><p>Use <em>adversarial prompt augmentation</em> to strengthen adversarial prompts drawn from a prompt library and evaluate system responses for
+<a class="reference external" href="https://bcg-x-official.github.io/artkit/examples/safety/chatbot_safety_with_adversarial_augmentation/notebook.html">refusal to engage with adversarial inputs</a> .</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Security:</dt><dd><ul class="simple">
+<li><p>Use <em>multi-turn attackers</em> to execute multi-turn strategies for extracting the system prompt from a chatbot, challenging the system’s
+<a class="reference external" href="https://bcg-x-official.github.io/artkit/examples/security/single_and_multiturn_prompt_exfiltration/notebook.html#Multi-Turn-Attacks">defenses against prompt exfiltration</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>These are just a few examples of the many ways ARTKIT can be used to test and evaluate Gen AI systems for proficiency, equitability, safety, and security.</p>
+</section>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h2>
+<p>The beauty of ARTKIT is that it allows you to do a lot with a little: A few simple functions and classes support the development of fast, flexible, fit-for-purpose
+pipelines for testing and evaluating your Gen AI system. Key features include:</p>
+<ul class="simple">
+<li><p><strong>Simple API:</strong> ARTKIT provides a small set of simple but powerful functions that support customized pipelines to test and evaluate virtually any Gen AI system.</p></li>
+<li><p><strong>Asynchronous:</strong> Leverage asynchronous processing to speed up processes that depend heavily on API calls.</p></li>
+<li><p><strong>Caching:</strong> Manage development costs by caching API responses to reduce the number of calls to external services.</p></li>
+<li><p><strong>Model Agnostic:</strong> ARTKIT supports connecting to major Gen AI model providers and allows users to develop new model classes to connect to any Gen AI service.</p></li>
+<li><p><strong>End-to-End Pipelines:</strong> Build end-to-end flows to generate test prompts, interact with a target system (i.e., system being tested), perform quantitative evaluations, and structure results for reporting.</p></li>
+<li><p><strong>Multi-Turn Conversations:</strong> Create automated interactive dialogs between a target system and an LLM persona programmed to interact with the target system in pursuit of a specific goal.</p></li>
+<li><p><strong>Robust Data Flows:</strong> Automatically track the flow of data through testing and evaluation pipelines, facilitating full traceability of data lineage in the results.</p></li>
+<li><p><strong>Visualizations:</strong> Generate flow diagrams to visualize pipeline structure and verify the flow of data through the system.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ARTKIT is designed to be customized by data scientists and engineers to enhance human-in-the-loop testing and evaluation.
+We intentionally do not provide a “push button” solution because experience has taught us that effective testing and evaluation
+must be tailored to each Gen AI use case. Automation is a strategy for scaling and accelerating testing and evaluation, not a
+substitute for case-specific risk landscape mapping, domain expertise, and critical thinking.</p>
+</div>
+</section>
+<section id="supported-model-providers">
+<h2>Supported Model Providers<a class="headerlink" href="#supported-model-providers" title="Link to this heading">#</a></h2>
+<p>ARTKIT provides out-of-the-box support for the following model providers:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.anthropic.com/">Anthropic</a></p></li>
+<li><p><a class="reference external" href="https://gemini.google.com/">Google Gemini</a></p></li>
+<li><p><a class="reference external" href="https://groq.com/">Grok</a></p></li>
+<li><p><a class="reference external" href="https://huggingface.co/">Hugging Face</a></p></li>
+<li><p><a class="reference external" href="https://openai.com/">OpenAI</a></p></li>
+</ul>
+<p>To connect to other services, users can develop <a class="reference external" href="https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_new_model_classes.html">new model classes</a>.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>ARTKIT supports both PyPI and Conda installations. We recommend installing ARTKIT in a dedicated virtual environment.</p>
+<section id="pip">
+<h3>Pip<a class="headerlink" href="#pip" title="Link to this heading">#</a></h3>
+<p><strong>MacOS and Linux:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">artkit</span>
+<span class="n">source</span> <span class="n">artkit</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">artkit</span>
+</pre></div>
+</div>
+<p><strong>Windows:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">artkit</span>
+<span class="n">artkit</span>\<span class="n">Scripts</span>\<span class="n">activate</span><span class="o">.</span><span class="n">bat</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">artkit</span>
+</pre></div>
+</div>
+</section>
+<section id="conda">
+<h3>Conda<a class="headerlink" href="#conda" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">artkit</span>
+</pre></div>
+</div>
+</section>
+<section id="optional-dependencies">
+<h3>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Link to this heading">#</a></h3>
+<p>To enable visualizations of pipeline flow diagrams, install <a class="reference external" href="https://graphviz.org/">GraphViz</a> and ensure it is in your system’s PATH variable:</p>
+<ul class="simple">
+<li><p>For MacOS and Linux users, instructions provided on <a class="reference external" href="https://www.graphviz.org/download/">GraphViz Downloads</a> automatically add GraphViz to your path.</p></li>
+<li><p>Windows users may need to manually add GraphViz to your PATH (see <a class="reference external" href="https://forum.graphviz.org/t/new-simplified-installation-procedure-on-windows/224">Simplified Windows installation procedure</a>).</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">dot</span> <span class="pre">-V</span></code> in Terminal or Command Prompt to verify installation.</p></li>
+</ul>
+</section>
+<section id="environment-variables">
+<h3>Environment variables<a class="headerlink" href="#environment-variables" title="Link to this heading">#</a></h3>
+<p>Most ARTKIT users will need to access services from external model providers such as OpenAI or Hugging Face.</p>
+<p>Our recommended approach is:</p>
+<ol class="arabic simple">
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">python-dotenv</span></code> using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">dotenv</span>
+</pre></div>
+</div>
+<p>or <code class="docutils literal notranslate"><span class="pre">conda</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">python</span><span class="o">-</span><span class="n">dotenv</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Create a file named <code class="docutils literal notranslate"><span class="pre">.env</span></code> in your project root.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">.env</span></code> to your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to ensure it is not committed to your Git repo.</p></li>
+<li><p>Define environment variables inside <code class="docutils literal notranslate"><span class="pre">.env</span></code>, for example, <code class="docutils literal notranslate"><span class="pre">API_KEY=your_api_key</span></code></p></li>
+<li><p>In your Python scripts or notebooks, load the environmental variables with:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="c1"># Verify that the environment variable is loaded</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;YOUR_API_KEY&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The ARTKIT repository includes an example file called <code class="docutils literal notranslate"><span class="pre">.env_example</span></code> in the project root which provides a template for defining environment variables,
+including placeholder credentials for supported APIs.</p>
+<p>To encourage secure storage of credentials, ARTKIT model classes do not accept API credentials directly, but instead require environmental variables to be defined.
+For example, if your OpenAI API key is stored in an environment variable called <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code>, you can initialize an OpenAI model class like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span>
+    <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+    <span class="n">api_key_env</span><span class="o">=</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">api_key_env</span></code> variable accepts the name of the environment variable as a string instead of directly accepting an API key as a parameter,
+which reduces risk of accidental exposure of API keys in code repositories since the key is not stored as a Python object which can be printed.</p>
+</section>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
+<p>The core ARTKIT functions are:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>: Execute one or more pipeline steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code>: A single pipeline step which produces a dictionary or an iterable of dictionaries</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chain</span></code>: A set of steps that run in sequence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parallel</span></code>: A set of steps that run in parallel</p></li>
+</ol>
+<p>Below, we develop a simple example pipeline with the following steps:</p>
+<ol class="arabic simple">
+<li><p>Rephrase input prompts to have a specified tone, either “polite” or “sarcastic”</p></li>
+<li><p>Send rephrased prompts to a chatbot named AskChad which is programmed to mirror the user’s tone</p></li>
+<li><p>Evaluate the responses according to a “sarcasm” metric</p></li>
+</ol>
+<p>To begin, import <code class="docutils literal notranslate"><span class="pre">artkit.api</span></code> and set up a session with the OpenAI GPT-4o model. The code
+below assumes you have an OpenAI API key stored in an environment variable called <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code>
+and that you wish to cache the responses in a database called <code class="docutils literal notranslate"><span class="pre">cache/chat_llm.db</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="c1"># Set up a chat system with the OpenAI GPT-4o model</span>
+<span class="n">chat_llm</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span><span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/chat_llm.db&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, define a few functions that will be used as pipeline steps.
+ARTKIT is designed to work with <a class="reference external" href="https://realpython.com/lessons/asynchronous-generators-python/">asynchronous generators</a>
+to allow for asynchronous processing, so the functions below are defined with <code class="docutils literal notranslate"><span class="pre">async</span></code>, <code class="docutils literal notranslate"><span class="pre">await</span></code>, and <code class="docutils literal notranslate"><span class="pre">yield</span></code> keywords.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A function that rephrases input prompts to have a specified tone</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">rephrase_tone</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tone</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Your job is to rephrase in input question to have a </span><span class="si">{</span><span class="n">tone</span><span class="si">}</span><span class="s2"> tone.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;This is the question you must rephrase:</span><span class="se">\n</span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;tone&quot;</span><span class="p">:</span> <span class="n">tone</span><span class="p">}</span>
+
+
+<span class="c1"># A function that behaves as a chatbot named AskChad who mirrors the user&#39;s tone</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">ask_chad</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;You are AskChad, a chatbot that mirrors the user&#39;s tone. &quot;</span>
+            <span class="s2">&quot;For example, if the user is rude, you are rude. &quot;</span>
+            <span class="s2">&quot;Your responses contain no more than 10 words.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Respond to this user input:</span><span class="se">\n</span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+
+
+<span class="c1"># A function that evaluates responses according to a specified metric</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">evaluate_metric</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">ak</span><span class="o">.</span><span class="n">ChatModel</span><span class="p">):</span>
+
+    <span class="n">score</span> <span class="o">=</span> <span class="k">await</span> <span class="n">llm</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Your job is to evaluate prompts according to whether they are </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;If the input prompt is </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">, return 1, otherwise return 0.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Please evaluate the following prompt:</span><span class="se">\n</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;evaluation_metric&quot;</span><span class="p">:</span> <span class="n">metric</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">])}</span>
+</pre></div>
+</div>
+<p>Next, define a pipeline which rephrases an input prompt according to two different tones (polite and sarcastic),
+sends the rephrased prompts to AskChad, and finally evaluates the responses for sarcasm.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+            <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="n">rephrase_tone</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;POLITE&quot;</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">),</span>
+            <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;tone_rephraser&quot;</span><span class="p">,</span> <span class="n">rephrase_tone</span><span class="p">,</span> <span class="n">tone</span><span class="o">=</span><span class="s2">&quot;SARCASTIC&quot;</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;ask_chad&quot;</span><span class="p">,</span> <span class="n">ask_chad</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">),</span>
+        <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;evaluation&quot;</span><span class="p">,</span> <span class="n">evaluate_metric</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;SARCASTIC&quot;</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">chat_llm</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/quick_start_flow_diagram.png" src="../_images/quick_start_flow_diagram.png" />
+<p>Finally, run the pipeline with an input prompt and display the results in a table.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input to run through the pipeline</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;What is a fun activity to do in Boston?&quot;</span><span class="p">}</span>
+
+<span class="c1"># Run pipeline</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">pipeline</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="c1"># Convert results dictionary into a multi-column dataframe</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/quick_start_results.png" src="../_images/quick_start_results.png" />
+<p>From left to right, the results table shows:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code>: The original input prompt</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tone_rephraser</span></code>: The rephrased prompts, which rephrase the original prompt to have the specified tone</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ask_chad</span></code>: The response from AskChad, which mirrors the tone of the user</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluation</span></code>: The evaluation score for the SARCASTIC metric, which flags the sarcastic response with a 1</p></li>
+</ol>
+<p>For a complete introduction to ARTKIT, please visit our <a class="reference external" href="https://bcg-x-official.github.io/artkit/user_guide/index.html">User Guide</a>
+and <a class="reference external" href="https://bcg-x-official.github.io/artkit/examples/index.html">Examples</a>.</p>
+</section>
+<section id="id5">
+<h2>Contributing<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>Contributions to ARTKIT are welcome and appreciated! Please see the <a class="reference external" href="https://bcg-x-official.github.io/artkit/contributor_guide/index.html">Contributor Guide</a> section for information.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<p>This project is licensed under Apache 2.0, allowing free use, modification, and distribution with added protections against patent litigation.
+See the <a class="reference external" href="https://github.com/BCG-X-Official/artkit/blob/HEAD/LICENSE">LICENSE</a> file for more details or visit <a class="reference external" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>.</p>
+</section>
+<section id="id8">
+<h2>BCG X<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.bcg.com/x">BCG X</a> is the tech build and design unit of Boston Consulting Group.</p>
+<p>We are always on the lookout for talented data scientists and software engineers to join our team!
+Visit <a class="reference external" href="https://careers.bcg.com/x">BCG X Careers</a> to learn more.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-model-providers">Supported Model Providers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pip">Pip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda">Conda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-dependencies">Optional dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables">Environment variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Contributing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">BCG X</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

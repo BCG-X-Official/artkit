@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>artkit.util.LogThrottlingHandler &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/bcgx.css?v=9d1a9f92" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'apidoc/artkit/util/artkit.util.LogThrottlingHandler';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Contributing" href="../../../contributor_guide/index.html" />
+    <link rel="prev" title="artkit.util.Image" href="artkit.util.Image.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../artkit.html">API Reference</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../artkit.api.html">artkit.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../artkit.flow.html">artkit.flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../artkit.model.html">artkit.model</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../artkit.util.html">artkit.util</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../artkit.util.html">artkit.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="artkit.util.Image.html">artkit.util.Image</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">artkit.util.LogThrottlingHandler</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../artkit.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../artkit.util.html" class="nav-link">artkit.util</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">artkit.util....</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="artkit-util-logthrottlinghandler">
+<h1>artkit.util.LogThrottlingHandler<a class="headerlink" href="#artkit-util-logthrottlinghandler" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">artkit.util.</span></span><span class="sig-name descname"><span class="pre">LogThrottlingHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_messages</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/artkit/util/_log_throttling.html#LogThrottlingHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artkit.util.LogThrottlingHandler" title="Link to this definition">#</a></dt>
+<dd><p>A logging handler that limits the number of messages during a given time interval.</p>
+<p>This handler can be used with Python’s native <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#module-logging" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a> module to throttle
+the maximum number of messages sent during a given time interval.
+This is useful for preventing log spamming in high-throughput applications.</p>
+<p>To follow the native logging flow
+(<a class="reference external" href="https://docs.python.org/3/howto/logging.html#logging-flow">https://docs.python.org/3/howto/logging.html#logging-flow</a>),
+functionality is implemented across the <a class="reference internal" href="#artkit.util.LogThrottlingHandler.filter" title="artkit.util.LogThrottlingHandler.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a> and <a class="reference internal" href="#artkit.util.LogThrottlingHandler.emit" title="artkit.util.LogThrottlingHandler.emit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">emit()</span></code></a> methods.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">artkit.util</span> <span class="kn">import</span> <span class="n">LogThrottlingHandler</span>
+
+<span class="n">console_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">throttling_handler</span> <span class="o">=</span> <span class="n">LogThrottlingHandler</span><span class="p">(</span>
+    <span class="n">console_handler</span><span class="p">,</span>
+    <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">max_messages</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">throttling_handler</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Bases<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>handler</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a></span>) – the handler to wrap</p></li>
+<li><p><strong>interval</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – the minimum interval in seconds between log messages
+with the same message</p></li>
+<li><p><strong>max_messages</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – the maximum number of messages to log within the interval</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Method summary</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.acquire" title="artkit.util.LogThrottlingHandler.acquire"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acquire</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.acquire" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.acquire()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.addFilter" title="artkit.util.LogThrottlingHandler.addFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addFilter</span></code></a></p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Filterer.addFilter()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.close" title="artkit.util.LogThrottlingHandler.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.close" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.close()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.createLock" title="artkit.util.LogThrottlingHandler.createLock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createLock</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.createLock" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.createLock()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.emit" title="artkit.util.LogThrottlingHandler.emit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">emit</span></code></a></p></td>
+<td><p>Emit a record if the max messages are not exceeded within the time interval.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.filter" title="artkit.util.LogThrottlingHandler.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a></p></td>
+<td><p>Filter a log record based on the throttling settings.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.flush" title="artkit.util.LogThrottlingHandler.flush"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flush</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.flush" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.flush()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.format" title="artkit.util.LogThrottlingHandler.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.format" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.format()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.get_name()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.handle" title="artkit.util.LogThrottlingHandler.handle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.handle" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.handle()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.handleError" title="artkit.util.LogThrottlingHandler.handleError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handleError</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.handleError" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.handleError()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.release" title="artkit.util.LogThrottlingHandler.release"><code class="xref py py-obj docutils literal notranslate"><span class="pre">release</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.release" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.release()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.removeFilter" title="artkit.util.LogThrottlingHandler.removeFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeFilter</span></code></a></p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Filterer.removeFilter()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.setFormatter" title="artkit.util.LogThrottlingHandler.setFormatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFormatter</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.setFormatter" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.setFormatter()</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#artkit.util.LogThrottlingHandler.setLevel" title="artkit.util.LogThrottlingHandler.setLevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setLevel</span></code></a></p></td>
+<td><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.setLevel" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.setLevel()</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_name</span></code></p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.set_name()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Attribute summary</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">logging.Handler.get_name</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Definitions</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.acquire">
+<span class="sig-name descname"><span class="pre">acquire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.acquire" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.acquire" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.acquire()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.addFilter">
+<span class="sig-name descname"><span class="pre">addFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.addFilter" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Filterer.addFilter()</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.close" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.close" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.close()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.createLock">
+<span class="sig-name descname"><span class="pre">createLock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.createLock" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.createLock" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.createLock()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.emit">
+<span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/artkit/util/_log_throttling.html#LogThrottlingHandler.emit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artkit.util.LogThrottlingHandler.emit" title="Link to this definition">#</a></dt>
+<dd><p>Emit a record if the max messages are not exceeded within the time interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>record</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.LogRecord" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a></span>) – the log record to emit</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/artkit/util/_log_throttling.html#LogThrottlingHandler.filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#artkit.util.LogThrottlingHandler.filter" title="Link to this definition">#</a></dt>
+<dd><p>Filter a log record based on the throttling settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>record</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.LogRecord" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a></span>) – the log record to filter</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the max messages are not exceeded
+within the time interval, otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.flush">
+<span class="sig-name descname"><span class="pre">flush</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.flush" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.flush" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.flush()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.format" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.format" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.format()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.handle" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.handle" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.handle()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.handleError">
+<span class="sig-name descname"><span class="pre">handleError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.handleError" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.handleError" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.handleError()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.release">
+<span class="sig-name descname"><span class="pre">release</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.release" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.release" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.release()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.removeFilter">
+<span class="sig-name descname"><span class="pre">removeFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.removeFilter" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Filterer.removeFilter()</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.setFormatter">
+<span class="sig-name descname"><span class="pre">setFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.setFormatter" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.setFormatter" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.setFormatter()</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="artkit.util.LogThrottlingHandler.setLevel">
+<span class="sig-name descname"><span class="pre">setLevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#artkit.util.LogThrottlingHandler.setLevel" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference external" href="https://docs.python.org/3.7/library/logging.html#logging.Handler.setLevel" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">logging.Handler.setLevel()</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.acquire"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.acquire()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.addFilter"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.addFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.close"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.close()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.createLock"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.createLock()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.emit"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.emit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.filter"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.filter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.flush"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.flush()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.format"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.format()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.handle"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.handle()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.handleError"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.handleError()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.release"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.release()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.removeFilter"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.removeFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.setFormatter"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.setFormatter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artkit.util.LogThrottlingHandler.setLevel"><code class="docutils literal notranslate"><span class="pre">LogThrottlingHandler.setLevel()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+artkit.model.llm.history
+========================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.llm.history
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: history
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      AssistantMessage
+      ChatHistory
+      ChatMessage
+      CustomMessage
+      SystemPrompt
+      UserMessage
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

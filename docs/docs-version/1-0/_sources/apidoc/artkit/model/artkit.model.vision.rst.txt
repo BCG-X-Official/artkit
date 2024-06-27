@@ -1,0 +1,55 @@
+artkit.model.vision
+===================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.vision
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: vision
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      CachedVisionModel
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+==========
+Submodules
+==========
+.. autosummary::
+   :toctree: vision
+   :template: custom-module-template.rst
+   :recursive:
+
+   artkit.model.vision.base
+   artkit.model.vision.openai
+

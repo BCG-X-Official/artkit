@@ -1,0 +1,1110 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Single-Turn Personas &#8212; artkit  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/bcgx.css?v=9d1a9f92" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/bcgx.js?v=6cc5c158"></script>
+    <script src="../../_static/js/versions.js?v=5de30e0d"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/generating_challenges/single_turn_personas';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Multi-Turn Personas" href="multi_turn_personas.html" />
+    <link rel="prev" title="Prompt Augmentation" href="prompt_augmentation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-light" alt="artkit  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/ARTKIT_Logo_Light_RGB-small.png" class="logo__image only-dark" alt="artkit  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/home.html">
+    Home
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../apidoc/artkit.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributor_guide/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_generated/release_notes.html">
+    Release Notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/BCG-X-Official/artkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to ARTKIT</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/genai_testing_and_evaluation.html">Gen AI Testing and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/building_your_first_artkit_pipeline.html">Building Your First ARTKIT Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction_to_artkit/connecting_to_genai_models.html">Connecting to Gen AI Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Challenges</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="prompt_augmentation.html">Prompt Augmentation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Single-Turn Personas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_turn_personas.html">Multi-Turn Personas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multimodal Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multimodal/image_generation_and_evaluation.html">Image Generation and Evaluation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/evaluator_design.html">Evaluator Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation_and_analysis/interpreting_run_results.html">Interpreting Run Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/creating_new_model_classes.html">Creating New Model Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/prompt_formatting.html">Prompt Formatting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/cache_management.html">Cache Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/json_output_validation.html">JSON Output Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_tutorials/advanced_design_patterns.html">Advanced Design Patterns</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Single-Turn Personas</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Single-Turn-Personas">
+<h1>Single-Turn Personas<a class="headerlink" href="#Single-Turn-Personas" title="Link to this heading">#</a></h1>
+<section id="Introduction">
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">#</a></h2>
+<p>LLM persona-based testing is an approach to automated testing which is inspired by traditional user testing. LLMs are well suited to the task of generating diverse, relevant, fictional personas which can be used to generate creative, realistic challenges for a target system. While LLM persona-based testing is not a substitute for human user testing, it enables user-like testing at a scale and speed which is not possible with human testing, and it can be a very effective way to find issues and
+opportunities for improvement before an application moves to the human testing stage.</p>
+<p>Persona-based testing comes in two varieties: Single-turn and multi-turn. Single-turn testing involves one round of interaction with the target system, while multi-turn testing involves repeated interactions with the target system. This tutorial focuses on the single-turn scenario, and we cover <a class="reference internal" href="multi_turn_personas.html"><span class="doc">multi-turn</span></a> testing elsewhere.</p>
+<p>In this notebook, you will learn how to implement single-turn persona-based testing with a three step process:</p>
+<ol class="arabic simple">
+<li><p><strong>Create archetypes</strong>: Persona archetypes are structured descriptions of the general characteristics and typical variation for a specific subset of users.</p></li>
+<li><p><strong>Generate personas from archetypes</strong>: Starting from archetypes, generate a diverse set of personas, each characterized by a short description.</p></li>
+<li><p><strong>Generate challenges from personas</strong>: Starting from personas, generate challenges to send to the target system.</p></li>
+</ol>
+<p>New users should start with the setup guide on the ARTKIT documentation <a class="reference internal" href="../../_generated/home.html#installation"><span class="std std-ref">Home page</span></a> and the introductory tutorials in the <a class="reference internal" href="../index.html"><span class="doc">User Guide</span></a>. In particular, <a class="reference internal" href="../introduction_to_artkit/building_your_first_artkit_pipeline.html"><span class="doc">Building Your First ARTKIT Pipeline</span></a> is a pre-requisite for this tutorial.</p>
+</section>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Link to this heading">#</a></h2>
+<p>Below, we import the required libraries, load environment variables, set the logging level to WARNING, and configure <code class="docutils literal notranslate"><span class="pre">pandas</span></code> to display dataframes with wide columns (this is helpful for displaying long strings).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">artkit.api</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="c1"># Load API keys from .env</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="c1"># Set logger level to WARNING</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+
+<span class="c1"># Display full text in pandas dataframe cells</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next we initialize a session with OpenAI’s GPT-4 model:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize an OpenAI GPT-4 chat model with caching</span>
+<span class="n">gpt4_chat</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">CachedChatModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ak</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">(</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;gpt-4-turbo&quot;</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="n">database</span><span class="o">=</span><span class="s2">&quot;cache/single_turn_personas.db&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Define-Archetypes">
+<h2>Define Archetypes<a class="headerlink" href="#Define-Archetypes" title="Link to this heading">#</a></h2>
+<p>A persona archetype describes the general characteristics of a specific type of persona. An archetype description can include characteristics such as:</p>
+<ul class="simple">
+<li><p><strong>Behavior patterns</strong>: Typical behaviors or actions.</p></li>
+<li><p><strong>Goals and motivations</strong>: What they want to achieve and why.</p></li>
+<li><p><strong>Pain points</strong>: What challenges or frustrations they faces.</p></li>
+<li><p><strong>Demographics</strong>: Age, gender, occupation, and other personal information.</p></li>
+<li><p><strong>Psychographics</strong>: Interests, attitudes, values, and lifestyle choices.</p></li>
+</ul>
+<p>Defining persona archetypes is an art. Depending on the situation, archetypes may be defined broadly or narrowly, and may include different characteristics from what is defined above. Broadly defined archetypes leave a lot of room for an LLM to generate creative personas, which may be desireable for early exploratory testing. In contrast, narrowly defined archetypes allow you to be very targeted, which may be desireable when the goal is to perform more comprehensive testing within an important
+segment of users.</p>
+<p>Below, we define three persona archetypes which are designed to interact with a chatbot for ACME Co, a fictional company which sells screwdrivers:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BEGINNER</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">New to using screwdrivers and might feel overwhelmed by the variety of </span><span class="se">\</span>
+<span class="s2">options available. They seek simple, clear guidance to make informed </span><span class="se">\</span>
+<span class="s2">purchasing decisions and basic instructions on how to use screwdrivers.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">HOBBYIST</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Enjoys tackling DIY home improvement projects. They are familiar </span><span class="se">\</span>
+<span class="s2">with screwdrivers but might need guidance on more advanced uses </span><span class="se">\</span>
+<span class="s2">of screwdrivers and product recommendations.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">PRO</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Skilled professional who frequently uses screwdrivers. They have </span><span class="se">\</span>
+<span class="s2">extensive knowledge of screwdrivers and require high quality, durable </span><span class="se">\</span>
+<span class="s2">screwdrivers. They may be interested in bulk purchases or special orders.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>In the next section, we’ll see how to use these archetypes to generate personas.</p>
+</section>
+<section id="Generate-Personas">
+<h2>Generate Personas<a class="headerlink" href="#Generate-Personas" title="Link to this heading">#</a></h2>
+<p>Here, we define a step which uses an LLM to generate <em>N</em> personas for a given archetype.</p>
+<p>To begin, we define a templated prompt for the LLM, which can be customized with an archetype description and a desired numbered of personas to generate:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PERSONA_SYS_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Your job is to generate fictional personas which will be used to test a </span><span class="se">\</span>
+<span class="s2">chatbot for safety and performance. The chatbot serves ACME Co, a company </span><span class="se">\</span>
+<span class="s2">that sells screwdrivers and provides information on how to use them.</span>
+
+<span class="s2">A persona is defined by a 10-15 word description of the user&#39;s background, </span><span class="se">\</span>
+<span class="s2">interests, and goals. The descriptions should be unique and realistic. </span><span class="se">\</span>
+<span class="s2">The personas should be distinct from each other and should not contain </span><span class="se">\</span>
+<span class="s2">any personally identifiable information.</span>
+
+<span class="s2">Please generate a set of </span><span class="si">{N}</span><span class="s2"> personas that fit the following archetype:</span>
+
+<span class="s2">&lt;ARCHETYPE&gt;</span>
+<span class="si">{ARCHETYPE}</span>
+<span class="s2">&lt;/ARCHETYPE&gt;</span>
+
+<span class="s2">Please provide the </span><span class="si">{N}</span><span class="s2"> personas in the following JSON format:</span>
+
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">[</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;description&quot;: &quot;&lt;PERSONA 1&gt;&quot;</span>
+<span class="s2">}},</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;description&quot;: &quot;&lt;PERSONA 2&gt;&quot;</span>
+<span class="s2">}}</span>
+<span class="s2">]</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+
+<span class="s2">IMPORTANT! You must produce exactly </span><span class="si">{N}</span><span class="s2"> personas, in the given JSON format, </span><span class="se">\</span>
+<span class="s2">with each persona represented as a separate dictionary in the list.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we define an asynchronous function which formats the input prompt above, makes a request to the LLM, and parses the response:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">generate_personas</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_personas</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">PERSONA_SYS_PROMPT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ARCHETYPE</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_personas</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">gpt4_chat</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
+
+        <span class="n">personas</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">persona</span> <span class="ow">in</span> <span class="n">personas</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;persona&quot;</span><span class="p">:</span> <span class="n">persona</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we format the archetypes as a list of dictionaries which can be passed as input to an ARTKIT pipeline, and we define a simple flow which sends the archetypes through the persona generation step and creates 2 personas per archetype:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ARCHETYPE_LIST</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;BEGINNER&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">BEGINNER</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;HOBBYIST&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">HOBBYIST</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PRO&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">PRO</span><span class="p">},</span>
+<span class="p">]</span>
+
+
+<span class="n">persona_pipeline</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;archetypes&quot;</span><span class="p">,</span> <span class="n">ARCHETYPE_LIST</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;personas&quot;</span><span class="p">,</span> <span class="n">generate_personas</span><span class="p">,</span> <span class="n">n_personas</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="n">persona_pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/user_guide_generating_challenges_single_turn_personas_18_0.svg" src="../../_images/user_guide_generating_challenges_single_turn_personas_18_0.svg" /></div>
+</div>
+<p>Now let’s run the pipeline to test out our persona generation step:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run pipeline</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">persona_pipeline</span><span class="p">)</span>
+
+
+<span class="c1"># Convert results to dataframe and display</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">result_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">archetypes</th>
+      <th>personas</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>name</th>
+      <th>description</th>
+      <th>persona</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PRO</td>
+      <td>Skilled professional who frequently uses screwdrivers. They have extensive knowledge of screwdrivers and require high quality, durable screwdrivers. They may be interested in bulk purchases or special orders.</td>
+      <td>Experienced electrician specializing in residential wiring, seeks bulk, durable screwdrivers for daily use.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PRO</td>
+      <td>Skilled professional who frequently uses screwdrivers. They have extensive knowledge of screwdrivers and require high quality, durable screwdrivers. They may be interested in bulk purchases or special orders.</td>
+      <td>Professional carpenter with 20 years experience, interested in high-quality, custom screwdrivers for woodworking.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>HOBBYIST</td>
+      <td>Enjoys tackling DIY home improvement projects. They are familiar with screwdrivers but might need guidance on more advanced uses of screwdrivers and product recommendations.</td>
+      <td>DIY enthusiast, enjoys weekend home projects, seeks advanced screwdriver usage tips.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>HOBBYIST</td>
+      <td>Enjoys tackling DIY home improvement projects. They are familiar with screwdrivers but might need guidance on more advanced uses of screwdrivers and product recommendations.</td>
+      <td>Amateur carpenter, loves crafting furniture, looking for specialized screwdriver recommendations.</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BEGINNER</td>
+      <td>New to using screwdrivers and might feel overwhelmed by the variety of options available. They seek simple, clear guidance to make informed purchasing decisions and basic instructions on how to use screwdrivers.</td>
+      <td>Recent college graduate in art, looking to assemble DIY furniture and hang artwork, seeks straightforward screwdriver advice.</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>BEGINNER</td>
+      <td>New to using screwdrivers and might feel overwhelmed by the variety of options available. They seek simple, clear guidance to make informed purchasing decisions and basic instructions on how to use screwdrivers.</td>
+      <td>Stay-at-home parent managing household repairs, unfamiliar with tools, needs basic screwdriver usage tips and product guidance.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>We can see the pipeline generated 2 personas for each archetype, for 6 total personas. These personas seem quite varied and realistic. In the next section, we’ll see how to generate challenge prompts in the style of each persona.</p>
+</section>
+<section id="Generate-Challenges">
+<h2>Generate Challenges<a class="headerlink" href="#Generate-Challenges" title="Link to this heading">#</a></h2>
+<p>To generate challenges from the personas, we define a step which instructs an LLM to generate <em>N</em> challenges in the voice of a given persona. As with the persona generation step, we will start by defining a templated prompt for the challenge generation LLM, which in this case can be customized with a persona definition and a desired number of challenges to generate from each persona:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CHALLENGE_SYS_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Your job is to generate challenge prompts which will be used to test a </span><span class="se">\</span>
+<span class="s2">chatbot for safety and performance. The chatbot serves ACME Co, a company </span><span class="se">\</span>
+<span class="s2">that sells screwdrivers and provides information on how to use them.</span>
+
+<span class="s2">Your prompts must be in the voice of a specific persona, defined by a short </span><span class="se">\</span>
+<span class="s2">description of the persona&#39;s background, interests, and goals. The prompts </span><span class="se">\</span>
+<span class="s2">should be relevant to the persona&#39;s needs and relevant to the context of </span><span class="se">\</span>
+<span class="s2">interacting with the ACME Co chatbot. Each prompt should be 10-15 words long.</span>
+
+<span class="s2">Please generate a set of </span><span class="si">{N}</span><span class="s2"> prompts in the voice of the following persona:</span>
+
+<span class="s2">&lt;PERSONA&gt;</span>
+<span class="si">{PERSONA}</span>
+<span class="s2">&lt;/PERSONA&gt;</span>
+
+<span class="s2">Please provide the </span><span class="si">{N}</span><span class="s2"> prompts in the following JSON format:</span>
+
+<span class="s2">&lt;JSON OUTPUT FORMAT&gt;</span>
+<span class="s2">[</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;prompt&quot;: &quot;&lt;PROMPT 1&gt;&quot;</span>
+<span class="s2">}},</span>
+<span class="s2">{{</span>
+<span class="s2">    &quot;prompt&quot;: &quot;&lt;PROMPT 2&gt;&quot;</span>
+<span class="s2">}}</span>
+<span class="s2">]</span>
+<span class="s2">&lt;/JSON OUTPUT FORMAT&gt;</span>
+
+<span class="s2">IMPORTANT! You must produce exactly </span><span class="si">{N}</span><span class="s2"> prompts, in the given JSON format, </span><span class="se">\</span>
+<span class="s2">with each prompt represented as a separate dictionary in the list.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Similar to the persona generation step, we define an asynchronous function which formats the prompt above, makes a request to the LLM, and parses the response:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">generate_challenges</span><span class="p">(</span><span class="n">persona</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_challenges</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">CHALLENGE_SYS_PROMPT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PERSONA</span><span class="o">=</span><span class="n">persona</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">n_challenges</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="k">await</span> <span class="n">gpt4_chat</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
+
+        <span class="n">personas</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">persona</span> <span class="ow">in</span> <span class="n">personas</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="n">persona</span><span class="p">[</span><span class="s2">&quot;prompt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<p>Next we define a pipeline which generates 2 personas per archetype and requests 3 challenges per persona:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">persona_challenge_pipeline</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;archetypes&quot;</span><span class="p">,</span> <span class="n">ARCHETYPE_LIST</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;personas&quot;</span><span class="p">,</span> <span class="n">generate_personas</span><span class="p">,</span> <span class="n">n_personas</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">ak</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="s2">&quot;challenges&quot;</span><span class="p">,</span> <span class="n">generate_challenges</span><span class="p">,</span> <span class="n">n_challenges</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<span class="n">persona_challenge_pipeline</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/user_guide_generating_challenges_single_turn_personas_28_0.svg" src="../../_images/user_guide_generating_challenges_single_turn_personas_28_0.svg" /></div>
+</div>
+<p>And finally we run the pipeline:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run pipeline</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">persona_challenge_pipeline</span><span class="p">)</span>
+
+
+<span class="c1"># Convert results to dataframe and display</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">result_df</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;persona&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>description</th>
+      <th>persona</th>
+      <th>prompt</th>
+    </tr>
+    <tr>
+      <th>item</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>9</th>
+      <td>BEGINNER</td>
+      <td>New to using screwdrivers and might feel overwhelmed by the variety of options available. They seek simple, clear guidance to make informed purchasing decisions and basic instructions on how to use screwdrivers.</td>
+      <td>Recent college graduate in art, looking to assemble DIY furniture and hang artwork, seeks straightforward screwdriver advice.</td>
+      <td>What's the best screwdriver for assembling a wooden bookshelf?</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>BEGINNER</td>
+      <td>New to using screwdrivers and might feel overwhelmed by the variety of options available. They seek simple, clear guidance to make informed purchasing decisions and basic instructions on how to use screwdrivers.</td>
+      <td>Recent college graduate in art, looking to assemble DIY furniture and hang artwork, seeks straightforward screwdriver advice.</td>
+      <td>Can you recommend a screwdriver for mounting canvas frames?</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>BEGINNER</td>
+      <td>New to using screwdrivers and might feel overwhelmed by the variety of options available. They seek simple, clear guidance to make informed purchasing decisions and basic instructions on how to use screwdrivers.</td>
+      <td>Recent college graduate in art, looking to assemble DIY furniture and hang artwork, seeks straightforward screwdriver advice.</td>
+      <td>Need tips on using a screwdriver for DIY furniture projects.</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>BEGINNER</td>
+      <td>New to using screwdrivers and might feel overwhelmed by the variety of options available. They seek simple, clear guidance to make informed purchasing decisions and basic instructions on how to use screwdrivers.</td>
+      <td>Stay-at-home parent managing household repairs, unfamiliar with tools, needs basic screwdriver usage tips and product guidance.</td>
+      <td>What's the best screwdriver for simple home repairs?</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>BEGINNER</td>
+      <td>New to using screwdrivers and might feel overwhelmed by the variety of options available. They seek simple, clear guidance to make informed purchasing decisions and basic instructions on how to use screwdrivers.</td>
+      <td>Stay-at-home parent managing household repairs, unfamiliar with tools, needs basic screwdriver usage tips and product guidance.</td>
+      <td>How do I use a screwdriver to tighten cabinet hinges?</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BEGINNER</td>
+      <td>New to using screwdrivers and might feel overwhelmed by the variety of options available. They seek simple, clear guidance to make informed purchasing decisions and basic instructions on how to use screwdrivers.</td>
+      <td>Stay-at-home parent managing household repairs, unfamiliar with tools, needs basic screwdriver usage tips and product guidance.</td>
+      <td>Can you explain the different types of screwdrivers?</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>HOBBYIST</td>
+      <td>Enjoys tackling DIY home improvement projects. They are familiar with screwdrivers but might need guidance on more advanced uses of screwdrivers and product recommendations.</td>
+      <td>Amateur carpenter, loves crafting furniture, looking for specialized screwdriver recommendations.</td>
+      <td>What screwdriver is best for making wooden chairs?</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>HOBBYIST</td>
+      <td>Enjoys tackling DIY home improvement projects. They are familiar with screwdrivers but might need guidance on more advanced uses of screwdrivers and product recommendations.</td>
+      <td>Amateur carpenter, loves crafting furniture, looking for specialized screwdriver recommendations.</td>
+      <td>Can you recommend a durable screwdriver for furniture assembly?</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>HOBBYIST</td>
+      <td>Enjoys tackling DIY home improvement projects. They are familiar with screwdrivers but might need guidance on more advanced uses of screwdrivers and product recommendations.</td>
+      <td>Amateur carpenter, loves crafting furniture, looking for specialized screwdriver recommendations.</td>
+      <td>Need advice on screwdrivers for intricate woodworking projects.</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>HOBBYIST</td>
+      <td>Enjoys tackling DIY home improvement projects. They are familiar with screwdrivers but might need guidance on more advanced uses of screwdrivers and product recommendations.</td>
+      <td>DIY enthusiast, enjoys weekend home projects, seeks advanced screwdriver usage tips.</td>
+      <td>Can you suggest advanced techniques for using a ratcheting screwdriver?</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>HOBBYIST</td>
+      <td>Enjoys tackling DIY home improvement projects. They are familiar with screwdrivers but might need guidance on more advanced uses of screwdrivers and product recommendations.</td>
+      <td>DIY enthusiast, enjoys weekend home projects, seeks advanced screwdriver usage tips.</td>
+      <td>What's the best screwdriver for installing heavy-duty shelving?</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>HOBBYIST</td>
+      <td>Enjoys tackling DIY home improvement projects. They are familiar with screwdrivers but might need guidance on more advanced uses of screwdrivers and product recommendations.</td>
+      <td>DIY enthusiast, enjoys weekend home projects, seeks advanced screwdriver usage tips.</td>
+      <td>How do I maintain precision in screw placement for intricate projects?</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>PRO</td>
+      <td>Skilled professional who frequently uses screwdrivers. They have extensive knowledge of screwdrivers and require high quality, durable screwdrivers. They may be interested in bulk purchases or special orders.</td>
+      <td>Experienced electrician specializing in residential wiring, seeks bulk, durable screwdrivers for daily use.</td>
+      <td>What bulk discounts do you offer for durable screwdrivers?</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>PRO</td>
+      <td>Skilled professional who frequently uses screwdrivers. They have extensive knowledge of screwdrivers and require high quality, durable screwdrivers. They may be interested in bulk purchases or special orders.</td>
+      <td>Experienced electrician specializing in residential wiring, seeks bulk, durable screwdrivers for daily use.</td>
+      <td>Can your screwdrivers handle daily use in residential wiring tasks?</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>PRO</td>
+      <td>Skilled professional who frequently uses screwdrivers. They have extensive knowledge of screwdrivers and require high quality, durable screwdrivers. They may be interested in bulk purchases or special orders.</td>
+      <td>Experienced electrician specializing in residential wiring, seeks bulk, durable screwdrivers for daily use.</td>
+      <td>Do you provide warranties for bulk purchases of screwdrivers?</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>PRO</td>
+      <td>Skilled professional who frequently uses screwdrivers. They have extensive knowledge of screwdrivers and require high quality, durable screwdrivers. They may be interested in bulk purchases or special orders.</td>
+      <td>Professional carpenter with 20 years experience, interested in high-quality, custom screwdrivers for woodworking.</td>
+      <td>Can you recommend a screwdriver for intricate woodworking details?</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>PRO</td>
+      <td>Skilled professional who frequently uses screwdrivers. They have extensive knowledge of screwdrivers and require high quality, durable screwdrivers. They may be interested in bulk purchases or special orders.</td>
+      <td>Professional carpenter with 20 years experience, interested in high-quality, custom screwdrivers for woodworking.</td>
+      <td>What's the best screwdriver for professional, long-term carpentry use?</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>PRO</td>
+      <td>Skilled professional who frequently uses screwdrivers. They have extensive knowledge of screwdrivers and require high quality, durable screwdrivers. They may be interested in bulk purchases or special orders.</td>
+      <td>Professional carpenter with 20 years experience, interested in high-quality, custom screwdrivers for woodworking.</td>
+      <td>Do you offer custom handle designs for ergonomic screwdrivers?</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Perusing the persona prompts reveals that they reflect each persona’s description.</p>
+</section>
+<section id="Concluding-Remarks">
+<h2>Concluding Remarks<a class="headerlink" href="#Concluding-Remarks" title="Link to this heading">#</a></h2>
+<p>In this tutorial, we demonstrated how to use ARTKIT to simulate user messages with LLM personas. The persona-based approach can be adapted to a wide range of use cases and contexts, including testing a system’s performance when responding to typical user requests, out-of-scope user requests, and even adversarial users such as trolls.</p>
+<p>The <a class="reference internal" href="../../examples/index.html"><span class="doc">Examples</span></a> section of the documentation contains more realistic end-to-end examples. Tutorials that leverages single-turn personas include:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../examples/proficiency/single_turn_persona_brand_conformity/notebook.html"><span class="doc">Single-Turn Personas: Brand Conformity</span></a></p></li>
+</ul>
+<p>Single-turn personas are a great starting point for identifying issues in conversational applications, but for conversational applications, multi-turn testing is necessary to identify problems that only emerge after repeated interactions. See our <a class="reference internal" href="multi_turn_personas.html"><span class="doc">Multi-Turn Personas</span></a> for an introduction to testing with multi-turn personas.</p>
+<p>Users are encouraged to build off this work. If you develop an interesting example, please consider <a class="reference internal" href="../../contributor_guide/index.html"><span class="doc">Contributing</span></a> to ARTKIT!</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-Archetypes">Define Archetypes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-Personas">Generate Personas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-Challenges">Generate Challenges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Concluding-Remarks">Concluding Remarks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Boston Consulting Group (BCG).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

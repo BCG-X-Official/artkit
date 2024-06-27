@@ -1,0 +1,44 @@
+artkit.model.vision.base
+========================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.vision.base
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: base
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      VisionModel
+      VisionModelConnector
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

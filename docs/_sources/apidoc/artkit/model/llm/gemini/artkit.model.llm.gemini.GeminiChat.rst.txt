@@ -1,0 +1,47 @@
+artkit.model.llm.gemini.GeminiChat
+==================================
+
+.. currentmodule:: artkit.model.llm.gemini
+
+.. autoclass:: GeminiChat
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~GeminiChat.get_api_key
+      ~GeminiChat.get_client
+      ~GeminiChat.get_default_api_key_env
+      ~GeminiChat.get_model_params
+      ~GeminiChat.get_response
+      ~GeminiChat.to_expression
+      ~GeminiChat.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~GeminiChat.model_id
+      ~GeminiChat.system_prompt
+      ~GeminiChat.safety
+      ~GeminiChat.api_key_env
+      ~GeminiChat.initial_delay
+      ~GeminiChat.exponential_base
+      ~GeminiChat.jitter
+      ~GeminiChat.max_retries
+      ~GeminiChat.model_params
+   
+   
+
+   .. rubric:: Definitions

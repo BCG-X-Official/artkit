@@ -1,0 +1,6 @@
+artkit.model.llm.util.parse\_json\_autofix
+==========================================
+
+.. currentmodule:: artkit.model.llm.util
+
+.. autofunction:: parse_json_autofix
