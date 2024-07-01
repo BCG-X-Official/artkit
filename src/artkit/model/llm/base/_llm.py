@@ -36,7 +36,6 @@ log = logging.getLogger(__name__)
 
 __all__ = [
     "ChatModel",
-    "ChatModel",
     "ChatModelConnector",
     "CompletionModel",
     "CompletionModelConnector",
