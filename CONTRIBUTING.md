@@ -94,7 +94,7 @@ and activate it on MacOS or Unix with:
 source artkit-env/bin/activate
 ```
 
-or on Windows with: 
+or on Windows with:
 
 ```
 .\artkit\scripts\Activate
@@ -122,17 +122,17 @@ Note: The LLM providers are optional to run and use ARTKIT, but the unit tests w
 As an alternative approach, you can add the folder `artkit/src` to your `PYTHONPATH`, and this will
 enable importing local ARTKIT modules into scripts or notebooks.
 
-### Install dependencies
-
-The following installations are required for full functionality.
+### Install run dependencies
 
 #### GraphViz
 
-[GraphViz](https://graphviz.org/) is required for generating pipeline flow diagrams. Install the library and ensure it is in your system's PATH variable:
+[GraphViz](https://graphviz.org/) is required for generating pipeline flow diagrams, it is necessary to enable ARTKIT's full functionality. Install the library and ensure it is in your system's PATH variable:
 
 - For MacOS and Linux users, simple instructions provided on [GraphViz Downloads](https://www.graphviz.org/download/) should automatically add GraphViz to your path
 - Windows users may need to manually add GraphViz to your PATH (see [Simplified Windows installation procedure](https://forum.graphviz.org/t/new-simplified-installation-procedure-on-windows/224))
 - Run `dot -V` in Terminal or Command Prompt to verify installation
+
+### Install development dependencies
 
 #### Pandoc
 
