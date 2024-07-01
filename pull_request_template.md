@@ -10,8 +10,4 @@ Please include a summary of the changes and the related issue, including the rel
 - [ ] Have you checked to ensure there aren't other open [Pull Requests](https://github.com/BCG-X-Official/artkit/pulls) for the same update/change?
 - [ ] Have you set these PR fields: Reviewers, Assignees, Labels, Milestones
 - [ ] Have you updated `RELEASE_NOTES.rst`, if applicable?
-
-## Core Feature Changes / New Features:
-
-- [ ] Have you added an explanation of what your changes do and why you'd like us to include them?
-- [ ] Have you written new tests for your changes, as applicable?
+- [ ] Have you updated existing and/or created new unit tests for your changes?
