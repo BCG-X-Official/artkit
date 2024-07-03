@@ -132,7 +132,7 @@ enable importing local ARTKIT modules into scripts or notebooks.
 - Windows users may need to manually add GraphViz to your PATH (see [Simplified Windows installation procedure](https://forum.graphviz.org/t/new-simplified-installation-procedure-on-windows/224))
 - Run `dot -V` in Terminal or Command Prompt to verify installation
 
-### Install development dependencies
+### Set up local development environment
 
 #### Pandoc
 
@@ -143,8 +143,14 @@ Pandoc is required to render Jupyter Notebooks for building the sphinx documenta
 
 #### Pre-commit hooks
 
-[Pre-commit hooks](https://pre-commit.com/) are required to automatically enforce uniform coding standards in commits :
+[Pre-commit hooks](https://pre-commit.com/) are strongly encouraged to enforce uniform coding standards across all contributors:
 
+First, install pre-commit within your virtual environment
+```
+pip install pre-commit
+```
+
+Next, run pre-commit's install command to create a Git hook script configured by `.pre-commit-config.yaml`.
 ```
 pre-commit install
 ```
