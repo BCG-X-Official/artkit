@@ -15,7 +15,7 @@
 # -----------------------------------------------------------------------------
 
 """
-AWS Bedrock systems.
+Base classes for Bedrock LLMs.
 """
 
-from ._titan import *
+from ._base import *

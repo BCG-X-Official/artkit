@@ -58,6 +58,9 @@ repos:
           - types-PyYAML
           - aiohttp
           - types-aiofiles
+          - boto3
+          - moto
+          - boto3-stubs
 
   - repo: https://github.com/kynan/nbstripout
     rev: 0.6.1

@@ -15,7 +15,39 @@
 # -----------------------------------------------------------------------------
 
 """
-AWS Bedrock systems.
+Implementation of Titan Bedrock module.
 """
 
-from ._titan import *
+from __future__ import annotations
+
+import logging
+from typing import Any, TypeVar
+
+from pytools.api import inheritdoc
+
+from .base import BaseBedrockChat
+
+log = logging.getLogger(__name__)
+
+__all__ = ["TitanBedrockChat"]
+
+#
+# Type variables
+#
+
+T_TitanBedrockChat = TypeVar("T_TitanBedrockChat", bound="TitanBedrockChat")
+
+#
+# Class declarations
+#
+
+
+@inheritdoc(match="""[see superclass]""")
+class TitanBedrockChat(BaseBedrockChat):
+    """
+    Implementation of a BaseBedrockChat with Titan LLM as the Foundational Model.
+    """
+
+    def _responses_from_body(self, response_body: dict[str, Any]) -> list[str]:
+        """[see superclass]"""
+        return [result["outputText"] for result in response_body["results"]]
