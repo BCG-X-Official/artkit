@@ -10,6 +10,8 @@ Release Notes
   change makes it easier to import them without having to know the exact module
   they are defined in.
 
+- API: Added integration for Titan LLM text generation via AWS Bedrock `invoke_model` endpoints on AWS.
+
 
 *artkit* 1.0.2
 --------------
