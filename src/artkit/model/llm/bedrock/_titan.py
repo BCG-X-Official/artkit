@@ -50,4 +50,15 @@ class TitanBedrockChat(BaseBedrockChat):
 
     def _responses_from_body(self, response_body: dict[str, Any]) -> list[str]:
         """[see superclass]"""
-        return [result["outputText"] for result in response_body["results"]]
+        formatted_responses = []
+        for result in response_body["results"]:
+            output_text = result["outputText"]
+            # Example: stripping unnecessary whitespace and adding a line break
+            formatted_text = output_text.strip()
+            formatted_text = formatted_text.replace(
+                "\n", "\n\n"
+            )  # Add extra line breaks for readability
+
+            formatted_responses.append(formatted_text)
+
+        return formatted_responses
