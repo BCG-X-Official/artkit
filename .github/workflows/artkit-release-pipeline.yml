@@ -93,6 +93,9 @@ jobs:
             pandas-stubs
             pytest
             types-PyYAML
+            boto3
+            moto
+            boto3-stubs
           )
           pip install "${dependencies[@]}"
           python -m mypy src --config-file pyproject.toml
