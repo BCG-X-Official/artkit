@@ -12,6 +12,7 @@
    testing
    documentation
    package_builds
+   release_process
 
 
 Contributing
