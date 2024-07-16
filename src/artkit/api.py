@@ -38,6 +38,7 @@ __globals_original = set(globals().keys())
 from .flow import *
 from .model.diffusion import *
 from .model.diffusion.base import DiffusionModel
+from .model.diffusion.bedrock import *
 from .model.diffusion.openai import *
 from .model.llm import *
 from .model.llm.anthropic import *
