@@ -15,8 +15,7 @@
 # -----------------------------------------------------------------------------
 
 """
-LLM specific utilities
+Diffusion model specific utilities
 """
 
 from ._custom_endpoint_connector import *
-from ._json import *
