@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+*artkit* 1.0.5
+--------------
+- API: Added Abstract Base Classes for generic HTTP connectors.
+
 *artkit* 1.0.3
 --------------
 
