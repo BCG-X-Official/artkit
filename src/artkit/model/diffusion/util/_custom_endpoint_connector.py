@@ -17,17 +17,45 @@
 """
 Abstract base class to represent connecting to a custom diffusion endpoint.
 """
+from __future__ import annotations
+
+import logging
 from abc import ABCMeta, abstractmethod
 from contextlib import AsyncExitStack
-from typing import Any
+from typing import Any, TypeVar
 
-from aiohttp import ClientResponse, ClientResponseError, ClientSession
-
-from pytools.api import appenddoc, inheritdoc, subsdoc
+from pytools.api import MissingClassMeta, appenddoc, inheritdoc, subsdoc
 
 from ....util import Image
 from ...util import RateLimitException
 from ..base import DiffusionModelConnector
+
+try:
+    from aiohttp import ClientResponse, ClientResponseError, ClientSession
+
+except ImportError:
+
+    class ClientResponseError(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
+        """Placeholder class for missing ``ClientResponseError`` class."""
+
+    class ClientSession(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
+        """Placeholder class for missing ``ClientSession`` class."""
+
+    class ClientResponse(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
+        """Placeholder class for missing ``ClientResponse`` class."""
+
+
+log = logging.getLogger(__name__)
+
+__all__ = ["CustomDiffusionEndpointConnector"]
+
+#
+# Type variables
+#
+
+T_CustomDiffusionEndpointConnector = TypeVar(
+    "T_CustomDiffusionEndpointConnector", bound="CustomDiffusionEndpointConnector"
+)
 
 
 @inheritdoc(match="""[see superclass]""")
@@ -70,10 +98,7 @@ class CustomDiffusionEndpointConnector(
         **model_params: Any,
     ) -> None:
         """
-        Initialize the BaseBedrockDiffusionModel.
-
-        :param region: The AWS region.
-        :raises CredentialsNotFoundError: if unable to find AWS Credentials.
+        :param url: the endpoint where the URL is.
         """
         super().__init__(
             model_id=model_id,
@@ -90,23 +115,33 @@ class CustomDiffusionEndpointConnector(
     def format_message(self, message: str) -> str:
         """
         This method is responsible for formatting the input to the LLM diffusion system.
+
+        :param message: The input message to format.
+        :return: The formatted message.
         """
 
     @abstractmethod
     def format_headers(self) -> dict[str, Any]:
         """
         This method is responsible for formatting the headers to the request.
+
+        :return: A dictionary of headers.
         """
 
     @abstractmethod
-    def format_response(self, response: ClientResponse) -> list[Image]:
+    async def format_response(self, response: ClientResponse) -> list[Image]:
         """
         This method is responsible for formatting the response to list of Images.
+
+        :param response: The response from the endpoint.
+        :return: A list of Images.
         """
 
     async def text_to_image(
         self, text: str, **model_params: dict[str, Any]
     ) -> list[Image]:
+        """[see superclass]"""
+
         async with AsyncExitStack():
             async with ClientSession(headers=self.format_headers()) as aio_session:
                 if self.url is None:
@@ -128,4 +163,4 @@ class CustomDiffusionEndpointConnector(
                             f"Invalid request. Please check the request parameters. {response_text}"
                         ) from e
                     raise
-        return self.format_response(response=response)
+        return await self.format_response(response=response)

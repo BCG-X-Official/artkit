@@ -17,22 +17,49 @@
 """
 Abstract base class to represent connecting to a custom endpoint.
 """
+from __future__ import annotations
 
+import logging
 from abc import ABCMeta, abstractmethod
 from contextlib import AsyncExitStack
-from typing import Any
+from typing import Any, TypeVar
 
-from aiohttp import ClientResponse, ClientResponseError, ClientSession
-
-from pytools.api import appenddoc, inheritdoc, subsdoc
+from pytools.api import MissingClassMeta, appenddoc, inheritdoc, subsdoc
 
 from ...util import RateLimitException
 from ..base import ChatModelConnector
 from ..history import ChatHistory
 
+try:
+    from aiohttp import ClientResponse, ClientResponseError, ClientSession
+
+except ImportError:
+
+    class ClientResponseError(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
+        """Placeholder class for missing ``ClientResponseError`` class."""
+
+    class ClientSession(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
+        """Placeholder class for missing ``ClientSession`` class."""
+
+    class ClientResponse(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
+        """Placeholder class for missing ``ClientResponse`` class."""
+
+
+log = logging.getLogger(__name__)
+
+__all__ = ["CustomChatEndpointConnector"]
+
+#
+# Type variables
+#
+
+T_CustomChatEndpointConnector = TypeVar(
+    "T_CustomChatEndpointConnector", bound="CustomChatEndpointConnector"
+)
+
 
 @inheritdoc(match="""[see superclass]""")
-class CustomEndpointConnector(ChatModelConnector[None], metaclass=ABCMeta):
+class CustomChatEndpointConnector(ChatModelConnector[None], metaclass=ABCMeta):
     """
     Abstract base class to represent connecting to a custom endpoint.
     """
@@ -69,8 +96,7 @@ class CustomEndpointConnector(ChatModelConnector[None], metaclass=ABCMeta):
         **model_params: Any,
     ) -> None:
         """
-        :param region: The specific AWS region to connect to.
-        :raises CredentialsNotFoundError: if unable to find AWS Credentials.
+        :param url: the endpoint where the URL is.
         """
         super().__init__(
             model_id=model_id,
@@ -88,20 +114,30 @@ class CustomEndpointConnector(ChatModelConnector[None], metaclass=ABCMeta):
     def format_message(self, message: str) -> str:
         """
         This method is responsible for formatting the input to the LLM chat system.
+
+        :param message: The input message to format.
+        :return: The formatted message.
         """
+
         pass
 
     @abstractmethod
     def format_headers(self) -> dict[str, Any]:
         """
         This method is responsible for formatting the headers to the request.
+
+        :return: A dictionary of headers.
         """
+
         pass
 
     @abstractmethod
-    def format_response(self, response: ClientResponse) -> list[str]:
+    async def format_response(self, response: ClientResponse) -> list[str]:
         """
         This method is responsible for formatting the response from the LLM chat.
+
+        :param response: The response from the endpoint.
+        :return: A list of formatted response strings.
         """
         pass
 
@@ -134,4 +170,4 @@ class CustomEndpointConnector(ChatModelConnector[None], metaclass=ABCMeta):
                             f"Invalid request. Please check the request parameters. {response_text}"
                         ) from e
                     raise
-        return self.format_response(response=response)
+        return await self.format_response(response=response)
