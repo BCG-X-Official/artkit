@@ -133,7 +133,9 @@ def mock_bedrock_chat(aws_credentials: Any) -> Generator[TitanBedrockChat, None,
         yield TitanBedrockChat(
             model_id=MODEL_ID,
             region=REGION,
-            max_retries=3,
+            initial_delay=0.1,
+            exponential_base=1.5,
+            max_retries=2,
         )
 
 

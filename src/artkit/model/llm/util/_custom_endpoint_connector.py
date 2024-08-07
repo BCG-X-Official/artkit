@@ -21,13 +21,14 @@ from __future__ import annotations
 
 import logging
 from abc import ABCMeta, abstractmethod
+from collections.abc import Mapping
 from contextlib import AsyncExitStack
-from typing import Any, TypeVar
+from typing import Any, List, Optional, TypeVar
 
-from pytools.api import MissingClassMeta, appenddoc, inheritdoc, subsdoc
+from pytools.api import MissingClassMeta, inheritdoc
 
-from ...util import RateLimitException
-from ..base import ChatModelConnector
+from ...util import RateLimitException, retry_with_exponential_backoff
+from ..base import ChatModel
 from ..history import ChatHistory
 
 try:
@@ -59,56 +60,23 @@ T_CustomChatEndpointConnector = TypeVar(
 
 
 @inheritdoc(match="""[see superclass]""")
-class CustomChatEndpointConnector(ChatModelConnector[None], metaclass=ABCMeta):
+class CustomChatEndpointConnector(ChatModel, metaclass=ABCMeta):
     """
-    Abstract base class to represent connecting to a custom endpoint.
+    ABC that represents connecting to a custom endpoint.
     """
 
-    url: str | None
-
-    @classmethod
-    def get_default_api_key_env(cls) -> str:
-        """[see superclass]"""
-        return ""
-
-    @classmethod
-    def _make_client(self) -> None:
-        return None
-
-    @subsdoc(
-        # The pattern matches the row defining model_params, and move it to the end
-        # of the docstring.
-        pattern=r"(:param model_params: .*\n)((:?.|\n)*\S)(\n|\s)*",
-        replacement=r"\2\1",
-    )
-    @appenddoc(to=ChatModelConnector.__init__)
-    def __init__(
-        self,
-        *,
-        model_id: str,
-        api_key_env: str | None = None,
-        initial_delay: float = 1,
-        exponential_base: float = 2,
-        jitter: bool = True,
-        max_retries: int = 10,
-        system_prompt: str | None = None,
-        url: str | None = None,
-        **model_params: Any,
-    ) -> None:
+    def __init__(self, model_id: str, **kwargs: Any) -> None:
         """
-        :param url: the endpoint where the URL is.
+        :param model_id: the model_id or URL endpoint for the model to connect to.
+        :param kwargs: additional keyword arguments passed to the constructor.
         """
-        super().__init__(
-            model_id=model_id,
-            api_key_env=api_key_env,
-            initial_delay=initial_delay,
-            exponential_base=exponential_base,
-            jitter=jitter,
-            max_retries=max_retries,
-            system_prompt=system_prompt,
-            **model_params,
-        )
-        self.url = url
+        self._model_id = model_id
+        self.initial_delay = kwargs.get("initial_delay", 1.0)
+        self.exponential_base = kwargs.get("exponential_base", 2.0)
+        self.jitter = kwargs.get("jitter", True)
+        self.max_retries = kwargs.get("max_retries", 5)
+        self.model_params = {k: v for k, v in kwargs.items() if v is not None}
+        self._system_prompt = kwargs.get("system_prompt", None)
 
     @abstractmethod
     def format_message(self, message: str) -> str:
@@ -141,6 +109,26 @@ class CustomChatEndpointConnector(ChatModelConnector[None], metaclass=ABCMeta):
         """
         pass
 
+    @property
+    def model_id(self) -> str:
+        """[see superclass]"""
+        return self._model_id
+
+    @property
+    def system_prompt(self) -> str | None:
+        """[see superclass]"""
+        return self._system_prompt
+
+    def with_system_prompt(self, system_prompt: str) -> CustomChatEndpointConnector:
+        """[see superclass]"""
+        self._system_prompt = system_prompt
+        return self
+
+    def get_model_params(self) -> Mapping[str, Any]:
+        """[see superclass]"""
+        return self.model_params
+
+    @retry_with_exponential_backoff
     async def get_response(
         self,
         message: str,
@@ -150,15 +138,14 @@ class CustomChatEndpointConnector(ChatModelConnector[None], metaclass=ABCMeta):
     ) -> list[str]:
         """[see superclass]"""
         async with AsyncExitStack():
-            async with ClientSession(headers=self.format_headers()) as aio_session:
-                if self.url is None:
-                    raise ValueError("URL must be provided")
-                response = await aio_session.post(
-                    url=self.url, data=self.format_message(message=message)
+            async with ClientSession() as session:
+                response = await session.post(
+                    self.model_id,
+                    data=self.format_message(message),
+                    headers=self.format_headers(),
                 )
                 response_text = await response.text()
                 try:
-                    # Raises exception if response status is not 200
                     response.raise_for_status()
                 except ClientResponseError as e:
                     if e.status == 429:
