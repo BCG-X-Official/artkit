@@ -1,6 +1,6 @@
 package:
   name: artkit
-  version: {{ environ.get('ARTKIT_BUILD_ARTKIT_VERSION') }}
+  version: { { environ.get('ARTKIT_BUILD_ARTKIT_VERSION') } }
 
 source:
   path: ../
@@ -40,6 +40,7 @@ test:
     - transformers {{ environ.get('ARTKIT_V_TRANSFORMERS', '') }}
     - boto3 {{ environ.get('ARTKIT_V_BOTO3', '') }}
     - moto {{ environ.get('ARTKIT_V_MOTO', '') }}
+    - vertexai {{ environ.get('ARTKIT_V_VERTEXAI', '') }}
   commands:
     - conda list
     - python -c "import artkit; import os; assert artkit.__version__ == os.environ['ARTKIT_BUILD_ARTKIT_VERSION']"
