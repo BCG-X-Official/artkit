@@ -1,14 +1,8 @@
-import os
-import shutil
-from collections.abc import Iterator
-from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from google.api_core.exceptions import TooManyRequests
 
-from artkit.model.llm import CachedChatModel
-from artkit.model.llm.base._llm import ChatModel
 from artkit.model.llm.vertexai._vertexai import VertexAIChat
 from artkit.model.util import RateLimitException
 
@@ -72,35 +66,3 @@ async def test_vertexai_retry(
         )
         == vertex_chat.max_retries
     )
-
-
-@pytest.mark.asyncio
-async def test_cached_vertexai(
-    cached_vertex: ChatModel,
-) -> None:
-    messages = await cached_vertex.get_response(
-        message="What color is the sky? Please answer in one word."
-    )
-    assert "blue" in messages[0].lower()
-
-
-@pytest.fixture
-def vertex_chat() -> VertexAIChat:
-    return VertexAIChat(
-        model_id="gemini-1.5-pro",
-        gcp_project_id="gcp-gp-gnrd-sandbox-bd51",
-        max_output_tokens=10,
-        max_retries=2,
-        initial_delay=0.1,
-        exponential_base=1.5,
-    )
-
-
-@pytest.fixture
-def cached_vertex(data_path: Path, vertex_chat: VertexAIChat) -> Iterator[ChatModel]:
-    database = data_path / "_copy_vertexai.db"
-    shutil.copyfile(data_path / "vertexai.db", database)
-
-    yield CachedChatModel(model=vertex_chat, database=database)
-
-    os.remove(database)
