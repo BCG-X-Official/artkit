@@ -1,6 +1,6 @@
 package:
   name: artkit
-  version: { { environ.get('ARTKIT_BUILD_ARTKIT_VERSION') } }
+  version: {{ environ.get('ARTKIT_BUILD_ARTKIT_VERSION') }}
 
 source:
   path: ../
