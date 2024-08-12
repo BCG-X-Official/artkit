@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+*artkit* 1.0.4
+--------------
+- DOC: Added badges that represent the repository to readme
+
 *artkit* 1.0.3
 --------------
 
