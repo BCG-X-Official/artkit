@@ -4,6 +4,7 @@ Release Notes
 *artkit* 1.0.4
 --------------
 - DOC: Added badges that represent the repository to readme
+- API: Add Vertex AI API integration
 
 *artkit* 1.0.3
 --------------
