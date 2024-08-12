@@ -5,9 +5,9 @@ from typing import Any
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
-from aiohttp import ClientResponse, ClientResponseError
+from httpx import AsyncClient, HTTPStatusError, Response
 
-from artkit.model.diffusion.util import CustomDiffusionEndpointConnector
+from artkit.model.diffusion.base import HTTPXDiffusionConnector
 from artkit.model.util import RateLimitException
 from artkit.util import Image
 
@@ -24,16 +24,16 @@ IMAGE = Image(data=IMAGE_DATA)
 
 @pytest.mark.asyncio
 async def test_text_to_image(
-    mock_custom_connector: CustomDiffusionEndpointConnector,
+    mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
-    with patch("aiohttp.ClientSession.__aenter__") as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         mock_post = Mock()
-        mock_post.json = AsyncMock(return_value={"images": [IMAGE_DATA.decode()]})
-        mock_post.text = AsyncMock()
+        mock_post.json = Mock(return_value={"images": [IMAGE_DATA.decode()]})
+        mock_post.text = Mock()
         mock_post.return_value.status_code = 200
 
-        mock_connection = AsyncMock()
-        mock_connection.post.return_value = mock_post
+        mock_connection = AsyncMock(spec=AsyncClient)
+        mock_connection.request.return_value = mock_post
         MockClientSession.return_value = mock_connection
 
         response = await mock_custom_connector.text_to_image(text=MESSAGE)
@@ -42,22 +42,21 @@ async def test_text_to_image(
 
 @pytest.mark.asyncio
 async def test_rate_limit_error(
-    mock_custom_connector: CustomDiffusionEndpointConnector,
+    mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
-    with patch("aiohttp.ClientSession.__aenter__") as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
         def raise_rate_limit_error() -> None:
-            err = ClientResponseError(
-                request_info=AsyncMock(),
-                history=AsyncMock(),
-                status=429,
+            err = HTTPStatusError(
+                request=Mock(),
+                response=Mock(spec=Response, status_code=429),
                 message="Rate limit exceeded",
             )
             raise err
 
-        mock_connection.post.return_value.raise_for_status = raise_rate_limit_error
+        mock_connection.request.return_value.raise_for_status = raise_rate_limit_error
         MockClientSession.return_value = mock_connection
 
         with pytest.raises(RateLimitException):
@@ -66,22 +65,23 @@ async def test_rate_limit_error(
 
 @pytest.mark.asyncio
 async def test_invalid_request_error(
-    mock_custom_connector: CustomDiffusionEndpointConnector,
+    mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
-    with patch("aiohttp.ClientSession.__aenter__") as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
         def raise_invalid_request_error() -> None:
-            err = ClientResponseError(
-                request_info=AsyncMock(),
-                history=AsyncMock(),
-                status=422,
+            err = HTTPStatusError(
+                request=Mock(),
+                response=Mock(spec=Response, status_code=422),
                 message="Invalid request",
             )
             raise err
 
-        mock_connection.post.return_value.raise_for_status = raise_invalid_request_error
+        mock_connection.request.return_value.raise_for_status = (
+            raise_invalid_request_error
+        )
         MockClientSession.return_value = mock_connection
 
         with pytest.raises(ValueError):
@@ -90,36 +90,35 @@ async def test_invalid_request_error(
 
 @pytest.mark.asyncio
 async def test_unexpected_error(
-    mock_custom_connector: CustomDiffusionEndpointConnector,
+    mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
-    with patch("aiohttp.ClientSession.__aenter__") as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
         def raise_unexpected_error() -> None:
-            err = ClientResponseError(
-                request_info=AsyncMock(),
-                history=AsyncMock(),
-                status=500,
+            err = HTTPStatusError(
+                request=Mock(),
+                response=Mock(spec=Response, status_code=500),
                 message="Internal server error",
             )
             raise err
 
-        mock_connection.post.return_value.raise_for_status = raise_unexpected_error
+        mock_connection.request.return_value.raise_for_status = raise_unexpected_error
         MockClientSession.return_value = mock_connection
 
-        with pytest.raises(ClientResponseError):
+        with pytest.raises(HTTPStatusError):
             await mock_custom_connector.text_to_image(text=MESSAGE)
 
 
 @pytest.mark.asyncio
 async def test_response_parsing(
-    mock_custom_connector: CustomDiffusionEndpointConnector,
+    mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
     mock_response = AsyncMock()
-    mock_response.json = AsyncMock(return_value={"images": [IMAGE_DATA.decode()]})
+    mock_response.json = Mock(return_value={"images": [IMAGE_DATA.decode()]})
 
-    responses = await mock_custom_connector.format_response(mock_response)
+    responses = mock_custom_connector.parse_httpx_response(mock_response)
     assert responses == [Image(data=base64.b64decode(IMAGE_DATA))]
 
 
@@ -127,16 +126,20 @@ async def test_response_parsing(
 #                                     FIXTURES                                        #
 #######################################################################################
 @pytest.fixture(scope="function")
-def mock_custom_connector() -> Generator[CustomDiffusionEndpointConnector, None, None]:
-    class MockCustomDiffusionEndpointConnector(CustomDiffusionEndpointConnector):
-        def format_message(self, message: str) -> str:
-            return f"Formatted: {message}"
+def mock_custom_connector() -> Generator[HTTPXDiffusionConnector, None, None]:
+    class MockCustomDiffusionEndpointConnector(HTTPXDiffusionConnector):
+        def build_request_arguments(
+            self, text: str, **model_params: dict[str, Any]
+        ) -> dict[str, Any]:
+            return dict(
+                method="POST",
+                url=self.model_id,
+                messsage=f"Formatted: {text}",
+                headers={"Authorization": "Bearer test_token"},
+            )
 
-        def format_headers(self) -> dict[str, Any]:
-            return {"Authorization": "Bearer test_token"}
-
-        async def format_response(self, response: ClientResponse) -> list[Image]:
-            json_response = await response.json()
+        def parse_httpx_response(self, response: Response) -> list[Image]:
+            json_response = response.json()
             return [
                 Image(data=base64.b64decode(image.encode()))
                 for image in json_response["images"]

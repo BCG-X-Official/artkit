@@ -145,7 +145,7 @@ def mock_custom_connector() -> Generator[HTTPXChatConnector, None, None]:
         ) -> dict[str, Any]:
             return dict(
                 method="POST",
-                url=URL,
+                url=self.model_id,
                 data={"message": f"Formatted: {message}"},
                 header={"Authorization": "Bearer test_token"},
             )
@@ -158,7 +158,7 @@ def mock_custom_connector() -> Generator[HTTPXChatConnector, None, None]:
     os.environ[api_key_env] = "test"
 
     yield MockCustomChatEndpointConnector(
-        model_id=MODEL_ID,
+        model_id=URL,
         api_key_env=api_key_env,
         initial_delay=0.1,
         exponential_base=2,

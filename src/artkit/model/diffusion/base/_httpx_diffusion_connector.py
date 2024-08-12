@@ -22,46 +22,36 @@ from __future__ import annotations
 import logging
 from abc import ABCMeta, abstractmethod
 from contextlib import AsyncExitStack
-from typing import Any, TypeVar
+from typing import Any
 
 from pytools.api import MissingClassMeta, appenddoc, inheritdoc, subsdoc
 
 from ....util import Image
 from ...util import RateLimitException
-from ..base import DiffusionModelConnector
+from ._diffusion import DiffusionModelConnector
 
 try:
-    from aiohttp import ClientResponse, ClientResponseError, ClientSession
+    from httpx import AsyncClient, HTTPStatusError, Response
 
 except ImportError:
 
-    class ClientResponseError(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
-        """Placeholder class for missing ``ClientResponseError`` class."""
+    class AsyncClient(metaclass=MissingClassMeta, module="httpx"):  # type: ignore
+        """Placeholder class for missing ``AsyncClient`` class."""
 
-    class ClientSession(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
-        """Placeholder class for missing ``ClientSession`` class."""
+    class HTTPStatusError(metaclass=MissingClassMeta, module="httpx"):  # type: ignore
+        """Placeholder class for missing ``HTTPStatusError`` class."""
 
-    class ClientResponse(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
-        """Placeholder class for missing ``ClientResponse`` class."""
+    class Response(metaclass=MissingClassMeta, module="httpx"):  # type: ignore
+        """Placeholder class for missing ``Response`` class."""
 
 
 log = logging.getLogger(__name__)
 
-__all__ = ["CustomDiffusionEndpointConnector"]
-
-#
-# Type variables
-#
-
-T_CustomDiffusionEndpointConnector = TypeVar(
-    "T_CustomDiffusionEndpointConnector", bound="CustomDiffusionEndpointConnector"
-)
+__all__ = ["HTTPXDiffusionConnector"]
 
 
 @inheritdoc(match="""[see superclass]""")
-class CustomDiffusionEndpointConnector(
-    DiffusionModelConnector[None], metaclass=ABCMeta
-):
+class HTTPXDiffusionConnector(DiffusionModelConnector[AsyncClient], metaclass=ABCMeta):
     """
     Abstract base class to represent connecting to a custom endpoint.
     """
@@ -72,11 +62,6 @@ class CustomDiffusionEndpointConnector(
     def get_default_api_key_env(cls) -> str:
         """[see superclass]"""
         return ""
-
-    @classmethod
-    def _make_client(self) -> None:
-        """[see superclass]"""
-        return None
 
     @subsdoc(
         # The pattern matches the row defining model_params, and move it to the end
@@ -94,11 +79,11 @@ class CustomDiffusionEndpointConnector(
         exponential_base: float | None = None,
         jitter: bool | None = None,
         max_retries: int | None = None,
-        url: str | None = None,
+        httpx_client: AsyncClient | None = None,
         **model_params: Any,
     ) -> None:
         """
-        :param url: the endpoint where the URL is.
+        :param httpx_client: optional HTTPX client to use for making requests
         """
         super().__init__(
             model_id=model_id,
@@ -109,32 +94,36 @@ class CustomDiffusionEndpointConnector(
             max_retries=max_retries,
             model_params=model_params,
         )
-        self.url = url
+        if httpx_client is None:
+            httpx_client = AsyncClient()
+        self.httpx_client = httpx_client
+
+    def _make_client(self) -> AsyncClient:
+        """[see superclass]"""
+        return self.httpx_client
 
     @abstractmethod
-    def format_message(self, message: str) -> str:
+    def build_request_arguments(
+        self, text: str, **model_params: dict[str, Any]
+    ) -> dict[str, Any]:
         """
-        This method is responsible for formatting the input to the LLM diffusion system.
+        This method is responsible for formatting the input to the diffusion model.
+        For argument options see :class:`httpx.AsyncClient.request`.
 
-        :param message: The input message to format.
-        :return: The formatted message.
-        """
+        :param text: The text to be converted to an image.
+        :param model_params: Additional parameters for the chat system.
 
-    @abstractmethod
-    def format_headers(self) -> dict[str, Any]:
-        """
-        This method is responsible for formatting the headers to the request.
-
-        :return: A dictionary of headers.
+        :return: The necessary httpx request arguments.
         """
 
     @abstractmethod
-    async def format_response(self, response: ClientResponse) -> list[Image]:
+    def parse_httpx_response(self, response: Response) -> list[Image]:
         """
-        This method is responsible for formatting the response to list of Images.
+        This method is responsible for formatting the :class:`httpx.Response` after
+        having made the request.
 
         :param response: The response from the endpoint.
-        :return: A list of Images.
+        :return: A list of formatted response strings.
         """
 
     async def text_to_image(
@@ -143,24 +132,21 @@ class CustomDiffusionEndpointConnector(
         """[see superclass]"""
 
         async with AsyncExitStack():
-            async with ClientSession(headers=self.format_headers()) as aio_session:
-                if self.url is None:
-                    raise ValueError("URL must be provided")
-                response = await aio_session.post(
-                    url=self.url, data=self.format_message(message=text)
+            async with self.get_client() as client:
+                response = await client.request(
+                    **self.build_request_arguments(text=text, **model_params)
                 )
-                response_text = await response.text()
                 try:
                     # Raises exception if response status is not 200
                     response.raise_for_status()
-                except ClientResponseError as e:
-                    if e.status == 429:
+                except HTTPStatusError as e:
+                    if e.response.status_code == 429:
                         raise RateLimitException(
                             "Rate limit exceeded. Please try again later."
                         ) from e
-                    elif e.status == 422:
+                    elif e.response.status_code == 422:
                         raise ValueError(
-                            f"Invalid request. Please check the request parameters. {response_text}"
+                            f"Invalid request. Please check the request parameters. {e.response.text}"
                         ) from e
                     raise
-        return await self.format_response(response=response)
+        return self.parse_httpx_response(response=response)
