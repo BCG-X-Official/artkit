@@ -25,7 +25,7 @@ from contextlib import AsyncExitStack
 from typing import Any, TypeVar
 
 from artkit.model.llm.history._history import ChatHistory
-from pytools.api import MissingClassMeta, appenddoc, inheritdoc
+from pytools.api import MissingClassMeta, appenddoc, inheritdoc, subsdoc
 
 from ...util import RateLimitException
 from ..base import ChatModelConnector
@@ -77,11 +77,18 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         vertexai.init(project=self.gcp_project_id, location=self.region)
         return GenerativeModel(self.model_id)
 
+    @subsdoc(
+        # The pattern matches the row defining model_params, and move it to the end
+        # of the docstring.
+        pattern=r"(:param model_params: .*\n)((:?.|\n)*\S)(\n|\s)*",
+        replacement=r"\2\1",
+    )
     @appenddoc(to=ChatModelConnector.__init__)
     def __init__(
         self,
         *,
         model_id: str,
+        api_key_env: str | None = None,
         initial_delay: float = 1,
         exponential_base: float = 2,
         jitter: bool = True,
@@ -93,10 +100,11 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
     ) -> None:
         """
         :param region: The specific GCP region to connect to.
+        :param gcp_project_id: The GCP project ID.
         """
         super().__init__(
             model_id=model_id,
-            api_key_env=None,
+            api_key_env=api_key_env,
             initial_delay=initial_delay,
             exponential_base=exponential_base,
             jitter=jitter,
@@ -138,7 +146,14 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         history: ChatHistory | None = None,
         **model_params: dict[str, Any],
     ) -> list[str]:
-        """Send a message to the Vertex AI model and get a response."""
+        """
+        Send a message to the Vertex AI model and get a response.
+
+        :param message: The input message to send to the model.
+        :param history: The conversation history.
+        :param model_params: Additional parameters to pass to the model.
+        :return: The model's response.
+        """
         async with AsyncExitStack():
             formatted_messages = self._messages_to_vertexai_format(
                 message, history=history

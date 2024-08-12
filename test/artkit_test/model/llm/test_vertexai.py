@@ -19,7 +19,7 @@ _ = pytest.importorskip("vertexai")
 async def test_vertexai(vertex_chat: VertexAIChat) -> None:
     # Mock Vertex AI Client
     with patch(
-        "artkit.model.llm.vertexai.base._base.GenerativeModel"
+        "artkit.model.llm.vertexai._vertexai.GenerativeModel"
     ) as mock_get_client:
         # Mock Vertex AI Client response
         mock_response = AsyncMock(
@@ -46,7 +46,7 @@ async def test_vertexai_retry(
 ) -> None:
     # Mock Vertex AI Client
     with patch(
-        "artkit.model.llm.vertexai.base._base.GenerativeModel"
+        "artkit.model.llm.vertexai._vertexai.GenerativeModel"
     ) as mock_get_client:
         # Set mock response as return value
         mock_get_client.return_value.generate_content_async.side_effect = (
