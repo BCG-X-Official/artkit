@@ -49,6 +49,7 @@ from .model.llm.groq import *
 from .model.llm.huggingface import *
 from .model.llm.multi_turn import *
 from .model.llm.openai import *
+from .model.llm.vertexai import *
 from .model.vision import *
 from .model.vision.base import VisionModel
 from .model.vision.openai import *

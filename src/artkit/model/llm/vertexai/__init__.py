@@ -18,4 +18,4 @@
 Base classes for Vertex AI LLM connection
 """
 
-from ._base import *
+from ._vertexai import *

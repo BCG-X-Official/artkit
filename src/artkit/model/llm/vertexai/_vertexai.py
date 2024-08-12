@@ -27,12 +27,12 @@ from typing import Any, TypeVar
 from artkit.model.llm.history._history import ChatHistory
 from pytools.api import MissingClassMeta, appenddoc, inheritdoc
 
-from ....util import RateLimitException
-from ...base import ChatModelConnector
+from ...util import RateLimitException
+from ..base import ChatModelConnector
 
 logger = logging.getLogger(__name__)
 
-__all__ = ["BaseVertexAIChat"]
+__all__ = ["VertexAIChat"]
 
 try:
     import vertexai
@@ -45,13 +45,13 @@ except ImportError:
         """Placeholder class for missing ``GenerativeModel`` class."""
 
 
-__all__ = ["BaseVertexAIChat"]
+__all__ = ["VertexAIChat"]
 
 #
 # Type variables
 #
 
-T_BaseVertexAIChat = TypeVar("T_BaseVertexAIChat", bound="BaseVertexAIChat")
+T_VertexAIChat = TypeVar("T_VertexAIChat", bound="VertexAIChat")
 
 #
 # Class declarations
@@ -60,7 +60,7 @@ logger = logging.getLogger(__name__)
 
 
 @inheritdoc(match="""[see superclass]""")
-class BaseVertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
+class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
     """
     Base class for Vertex AI LLMs.
     """

@@ -9,14 +9,14 @@ from google.api_core.exceptions import TooManyRequests
 
 from artkit.model.llm import CachedChatModel
 from artkit.model.llm.base._llm import ChatModel
-from artkit.model.llm.vertexai.base import BaseVertexAIChat
+from artkit.model.llm.vertexai._vertexai import VertexAIChat
 from artkit.model.util import RateLimitException
 
 _ = pytest.importorskip("vertexai")
 
 
 @pytest.mark.asyncio
-async def test_vertexai(vertex_chat: BaseVertexAIChat) -> None:
+async def test_vertexai(vertex_chat: VertexAIChat) -> None:
     # Mock Vertex AI Client
     with patch(
         "artkit.model.llm.vertexai.base._base.GenerativeModel"
@@ -42,7 +42,7 @@ async def test_vertexai(vertex_chat: BaseVertexAIChat) -> None:
 
 @pytest.mark.asyncio
 async def test_vertexai_retry(
-    vertex_chat: BaseVertexAIChat, caplog: pytest.LogCaptureFixture
+    vertex_chat: VertexAIChat, caplog: pytest.LogCaptureFixture
 ) -> None:
     # Mock Vertex AI Client
     with patch(
@@ -85,8 +85,8 @@ async def test_cached_vertexai(
 
 
 @pytest.fixture
-def vertex_chat() -> BaseVertexAIChat:
-    return BaseVertexAIChat(
+def vertex_chat() -> VertexAIChat:
+    return VertexAIChat(
         model_id="gemini-1.5-pro",
         gcp_project_id="gcp-gp-gnrd-sandbox-bd51",
         max_output_tokens=10,
@@ -97,9 +97,7 @@ def vertex_chat() -> BaseVertexAIChat:
 
 
 @pytest.fixture
-def cached_vertex(
-    data_path: Path, vertex_chat: BaseVertexAIChat
-) -> Iterator[ChatModel]:
+def cached_vertex(data_path: Path, vertex_chat: VertexAIChat) -> Iterator[ChatModel]:
     database = data_path / "_copy_vertexai.db"
     shutil.copyfile(data_path / "vertexai.db", database)
 
