@@ -66,3 +66,15 @@ async def test_vertexai_retry(
         )
         == vertex_chat.max_retries
     )
+
+
+@pytest.fixture
+def vertex_chat() -> VertexAIChat:
+    return VertexAIChat(
+        model_id="gemini-1.5-pro",
+        gcp_project_id="gcp-project",
+        max_output_tokens=10,
+        max_retries=2,
+        initial_delay=0.1,
+        exponential_base=1.5,
+    )
