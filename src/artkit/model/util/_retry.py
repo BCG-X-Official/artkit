@@ -130,12 +130,10 @@ def retry_with_exponential_backoff(
         :return: the result of the function
         """
         # Initialize variables
-        num_retries = 0
         delay = self.initial_delay
 
         # Loop until a successful response or max_retries is hit
         # or an uncaught exception is raised
-        last_exception = None
         max_retries = self.max_retries
         exponential_base = self.exponential_base
         jitter = self.jitter
