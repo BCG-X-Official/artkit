@@ -148,6 +148,8 @@ def mock_custom_connector() -> Generator[CustomDiffusionEndpointConnector, None,
     yield MockCustomDiffusionEndpointConnector(
         model_id=MODEL_ID,
         api_key_env=api_key_env,
-        max_retries=3,
+        max_retries=2,
+        initial_delay=0.1,
+        exponential_base=1.5,
         url=URL,
     )

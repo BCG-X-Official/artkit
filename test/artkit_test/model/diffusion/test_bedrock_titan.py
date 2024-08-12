@@ -80,7 +80,9 @@ def mock_bedrock_diffusion_chat(
         yield TitanBedrockDiffusionModel(
             model_id=MODEL_ID,
             region=REGION,
-            max_retries=3,
+            max_retries=2,
+            initial_delay=0.1,
+            exponential_base=1.5,
         )
 
 
