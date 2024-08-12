@@ -384,7 +384,7 @@ jobs:
         uses: veracode/veracode-uploadandscan-action@master
         with:
           appname: 'artkit'
-          version: '${{ github.run_number }}'
+          version: '3.1.${{ github.run_number }}'
           filepath: 'static_scan/archive.zip'
           vid: '${{ secrets.VERACODE_API_ID }}'
           vkey: '${{ secrets.VERACODE_API_KEY }}'
