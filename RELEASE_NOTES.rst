@@ -1,9 +1,18 @@
 Release Notes
 =============
 
+*artkit* 1.0.5
+--------------
+- BUILD: Add prefix to veracode scan number
+- DOC: Add links to Jupyer notebooks on top of Sphinx documentation
+- DOC: Added badges that represent the repository to readme
+- DOC: Clarify that pre-commit is already installed via optional dev deps
+- DOC: Various ehancements
+- API: Add Titan diffusion model
+
 *artkit* 1.0.4
 --------------
-- DOC: Added badges that represent the repository to readme
+- API: Add Titan LLM integration
 
 *artkit* 1.0.3
 --------------
