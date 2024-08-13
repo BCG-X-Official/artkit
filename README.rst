@@ -10,6 +10,12 @@ testing and evaluation of Gen AI applications.
 
 `Documentation <https://bcg-x-official.github.io/artkit/_generated/home.html>`_ | `User Guides <https://github.com/BCG-X-Official/artkit/tree/1.0.x/sphinx/source/user_guide>`_ | `Examples <https://github.com/BCG-X-Official/artkit/tree/1.0.x/sphinx/source/examples>`_
 
+.. Begin-Badges
+
+|pypi| |conda| |python_versions| |code_style| |made_with_sphinx_doc| |license_badge| |github_actions_build_status| |Contributor_Convenant|
+
+.. End-Badges
+
 Getting started
 ---------------
 
@@ -344,3 +350,32 @@ BCG X
 
 We are always on the lookout for talented data scientists and software engineers to join our team! 
 Visit `BCG X Careers <https://careers.bcg.com/x>`_ to learn more.
+
+.. Begin-Badges
+
+.. |pypi| image:: https://badge.fury.io/py/artkit.svg
+    :target: https://pypi.org/project/artkit/
+
+.. |conda| image:: https://anaconda.org/bcg_gamma/gamma-facet/badges/version.svg
+    :target: https://anaconda.org/BCG_Gamma/artkit
+
+.. |python_versions| image:: https://img.shields.io/badge/python-3.10|3.11|3.12-blue.svg
+   :target: https://www.python.org/downloads/release/python-3100/
+
+.. |code_style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+
+.. |made_with_sphinx_doc| image:: https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg
+   :target: https://bcg-x-official.github.io/facet/index.html
+
+.. |license_badge| image:: https://img.shields.io/badge/License-Apache%202.0-olivegreen.svg
+   :target: https://opensource.org/licenses/Apache-2.0
+
+.. |github_actions_build_status| image:: https://github.com/BCG-X-Official/artkit/actions/workflows/artkit-release-pipeline.yml/badge.svg
+    :target: https://github.com/BCG-X-Official/artkit/actions/workflows/artkit-release-pipeline.yml
+    :alt: ARTKIT Release Pipeline
+
+.. |Contributor_Convenant| image:: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg 
+   :target: CODE_OF_CONDUCT.md
+
+.. End-Badges

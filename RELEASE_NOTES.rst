@@ -5,6 +5,12 @@ Release Notes
 --------------
 - API: Added Abstract Base Classes for generic HTTP connectors.
 
+
+*artkit* 1.0.4
+--------------
+- DOC: Added badges that represent the repository to readme
+
+
 *artkit* 1.0.3
 --------------
 
