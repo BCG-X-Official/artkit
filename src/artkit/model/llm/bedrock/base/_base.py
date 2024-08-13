@@ -97,7 +97,7 @@ class BaseBedrockChat(HTTPXChatConnector, metaclass=ABCMeta):
         jitter: bool | None = None,
         max_retries: int | None = None,
         system_prompt: str | None = None,
-        httpx_client: AsyncClient | None = None,
+        httpx_client_kwargs: dict[str, Any] | None = None,
         region: str | None = None,
         **model_params: Any,
     ) -> None:
@@ -113,7 +113,7 @@ class BaseBedrockChat(HTTPXChatConnector, metaclass=ABCMeta):
             jitter=jitter,
             max_retries=max_retries,
             system_prompt=system_prompt,
-            httpx_client=httpx_client,
+            httpx_client_kwargs=httpx_client_kwargs,
             **model_params,
         )
 

@@ -24,9 +24,7 @@ EXAMPLE_URL = "http://huggingface.com"
 async def test_huggingface_url_chat(
     hugging_face_url_chat: HuggingfaceURLChat,
 ) -> None:
-    with patch(
-        "artkit.model.llm.huggingface.HuggingfaceURLChat.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
 
         # Mock the response object
         mock_post = Mock()
@@ -52,13 +50,11 @@ async def test_huggingface_url_chat(
 
 
 @pytest.mark.asyncio
-async def test_retry_huggingface_chat_aiohttp(
+async def test_retry_huggingface_url_chat(
     hugging_face_url_chat: HuggingfaceURLChat,
     caplog: pytest.LogCaptureFixture,
 ) -> None:
-    with patch(
-        "artkit.model.llm.huggingface.HuggingfaceURLChat.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
 
         # Set up the mock connection object
         mock_connection = AsyncMock()
@@ -102,9 +98,7 @@ async def test_retry_huggingface_chat_aiohttp(
 async def test_unprocessable_huggingface_chat_aiohttp(
     hugging_face_url_chat: HuggingfaceURLChat,
 ) -> None:
-    with patch(
-        "artkit.model.llm.huggingface.HuggingfaceURLChat.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
 
         # Set up the mock connection object
         mock_connection = AsyncMock()

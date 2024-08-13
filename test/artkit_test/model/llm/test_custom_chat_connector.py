@@ -22,9 +22,7 @@ RESPONSE_TEXT = "The sky is blue."
 
 @pytest.mark.asyncio
 async def test_get_response(mock_custom_connector: HTTPXChatConnector) -> None:
-    with patch(
-        "artkit.model.llm.base.HTTPXChatConnector.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         mock_post = Mock()
         mock_post.json = Mock(return_value={"results": [{"outputText": RESPONSE_TEXT}]})
         mock_post.text = AsyncMock()
@@ -42,9 +40,7 @@ async def test_get_response(mock_custom_connector: HTTPXChatConnector) -> None:
 async def test_rate_limit_error(
     mock_custom_connector: HTTPXChatConnector,
 ) -> None:
-    with patch(
-        "artkit.model.llm.base.HTTPXChatConnector.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -73,9 +69,7 @@ async def test_rate_limit_error(
 async def test_invalid_request_error(
     mock_custom_connector: HTTPXChatConnector,
 ) -> None:
-    with patch(
-        "artkit.model.llm.base.HTTPXChatConnector.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -106,9 +100,7 @@ async def test_invalid_request_error(
 async def test_unexpected_error(
     mock_custom_connector: HTTPXChatConnector,
 ) -> None:
-    with patch(
-        "artkit.model.llm.base.HTTPXChatConnector.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -169,6 +161,6 @@ def mock_custom_connector() -> Generator[HTTPXChatConnector, None, None]:
         model_id=URL,
         api_key_env=api_key_env,
         initial_delay=0.1,
-        exponential_base=2,
+        exponential_base=1.5,
         max_retries=2,
     )

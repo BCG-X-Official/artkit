@@ -24,9 +24,7 @@ PROMPT_COMPLETION = "blue"
 
 @pytest.mark.asyncio
 async def test_get_response(mock_bedrock_chat: TitanBedrockChat) -> None:
-    with patch(
-        "artkit.model.llm.bedrock.TitanBedrockChat.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         mock_request = Mock()
         mock_request.json = Mock(
             return_value={"results": [{"outputText": RESPONSE_TEXT}]}
@@ -44,9 +42,7 @@ async def test_get_response(mock_bedrock_chat: TitanBedrockChat) -> None:
 
 @pytest.mark.asyncio
 async def test_rate_limit_error(mock_bedrock_chat: TitanBedrockChat) -> None:
-    with patch(
-        "artkit.model.llm.bedrock.TitanBedrockChat.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -67,9 +63,7 @@ async def test_rate_limit_error(mock_bedrock_chat: TitanBedrockChat) -> None:
 
 @pytest.mark.asyncio
 async def test_invalid_request_error(mock_bedrock_chat: TitanBedrockChat) -> None:
-    with patch(
-        "artkit.model.llm.bedrock.TitanBedrockChat.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -92,9 +86,7 @@ async def test_invalid_request_error(mock_bedrock_chat: TitanBedrockChat) -> Non
 
 @pytest.mark.asyncio
 async def test_unexpected_error(mock_bedrock_chat: TitanBedrockChat) -> None:
-    with patch(
-        "artkit.model.llm.bedrock.TitanBedrockChat.get_client"
-    ) as MockClientSession:
+    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 

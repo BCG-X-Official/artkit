@@ -21,7 +21,6 @@ from __future__ import annotations
 
 import logging
 from abc import ABCMeta, abstractmethod
-from contextlib import AsyncExitStack
 from typing import Any
 
 from pytools.api import MissingClassMeta, appenddoc, inheritdoc, subsdoc
@@ -50,12 +49,12 @@ log = logging.getLogger(__name__)
 __all__ = ["HTTPXChatConnector"]
 
 #
-# Type variables
+# Class Definitions
 #
 
 
 @inheritdoc(match="""[see superclass]""")
-class HTTPXChatConnector(ChatModelConnector[AsyncClient], metaclass=ABCMeta):
+class HTTPXChatConnector(ChatModelConnector[None], metaclass=ABCMeta):
     """
     ABC that represents connecting to a custom endpoint.
     """
@@ -77,11 +76,12 @@ class HTTPXChatConnector(ChatModelConnector[AsyncClient], metaclass=ABCMeta):
         jitter: bool | None = None,
         max_retries: int | None = None,
         system_prompt: str | None = None,
-        httpx_client: AsyncClient | None = None,
+        httpx_client_kwargs: dict[str, Any] | None = None,
         **model_params: Any,
     ) -> None:
         """
-        :param httpx_client: the HTTPX client to use for making requests
+        :param httpx_client_kwargs: the kwargs to use for making
+         the :class:`httpx.AsyncClient` (optional)
         """
         super().__init__(
             model_id=model_id,
@@ -93,12 +93,13 @@ class HTTPXChatConnector(ChatModelConnector[AsyncClient], metaclass=ABCMeta):
             system_prompt=system_prompt,
             **model_params,
         )
-        if httpx_client is None:
-            httpx_client = AsyncClient()
-        self.httpx_client = httpx_client
 
-    def _make_client(self) -> AsyncClient:
-        return self.httpx_client
+        if httpx_client_kwargs is None:
+            httpx_client_kwargs = {}
+        self.httpx_client_kwargs = httpx_client_kwargs
+
+    def _make_client(self) -> None:
+        return None
 
     @abstractmethod
     def build_request_arguments(
@@ -137,8 +138,8 @@ class HTTPXChatConnector(ChatModelConnector[AsyncClient], metaclass=ABCMeta):
         **model_params: dict[str, Any],
     ) -> list[str]:
         """[see superclass]"""
-        async with AsyncExitStack():
-            response = await self.get_client().request(
+        async with AsyncClient(**self.httpx_client_kwargs) as client:
+            response = await client.request(
                 **self.build_request_arguments(
                     message=message, history=history, **model_params
                 )
