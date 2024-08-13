@@ -145,9 +145,9 @@ Pandoc is required to render Jupyter Notebooks for building the sphinx documenta
 
 [Pre-commit hooks](https://pre-commit.com/) are strongly encouraged to enforce uniform coding standards across all contributors:
 
-First, install pre-commit within your virtual environment
+First, confirm pre-commit is installed within your virtual environment. It should have been installed via the optional dev dependencies `pip install -e ".[dev]"`.
 ```
-pip install pre-commit
+pip freeze | grep pre-commit
 ```
 
 Next, run pre-commit's install command to create a Git hook script configured by `.pre-commit-config.yaml`.
