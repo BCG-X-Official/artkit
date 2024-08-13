@@ -132,21 +132,20 @@ class HTTPXDiffusionConnector(DiffusionModelConnector[AsyncClient], metaclass=AB
         """[see superclass]"""
 
         async with AsyncExitStack():
-            async with self.get_client() as client:
-                response = await client.request(
-                    **self.build_request_arguments(text=text, **model_params)
-                )
-                try:
-                    # Raises exception if response status is not 200
-                    response.raise_for_status()
-                except HTTPStatusError as e:
-                    if e.response.status_code == 429:
-                        raise RateLimitException(
-                            "Rate limit exceeded. Please try again later."
-                        ) from e
-                    elif e.response.status_code == 422:
-                        raise ValueError(
-                            f"Invalid request. Please check the request parameters. {e.response.text}"
-                        ) from e
-                    raise
+            response = await self.get_client().request(
+                **self.build_request_arguments(text=text, **model_params)
+            )
+            try:
+                # Raises exception if response status is not 200
+                response.raise_for_status()
+            except HTTPStatusError as e:
+                if e.response.status_code == 429:
+                    raise RateLimitException(
+                        "Rate limit exceeded. Please try again later."
+                    ) from e
+                elif e.response.status_code == 422:
+                    raise ValueError(
+                        f"Invalid request. Please check the request parameters. {e.response.text}"
+                    ) from e
+                raise
         return self.parse_httpx_response(response=response)

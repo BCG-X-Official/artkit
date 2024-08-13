@@ -26,7 +26,9 @@ IMAGE = Image(data=IMAGE_DATA)
 async def test_text_to_image(
     mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
-    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
+    with patch(
+        "artkit.model.diffusion.base.HTTPXDiffusionConnector.get_client"
+    ) as MockClientSession:
         mock_post = Mock()
         mock_post.json = Mock(return_value={"images": [IMAGE_DATA.decode()]})
         mock_post.text = Mock()
@@ -44,7 +46,9 @@ async def test_text_to_image(
 async def test_rate_limit_error(
     mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
-    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
+    with patch(
+        "artkit.model.diffusion.base.HTTPXDiffusionConnector.get_client"
+    ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -67,7 +71,9 @@ async def test_rate_limit_error(
 async def test_invalid_request_error(
     mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
-    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
+    with patch(
+        "artkit.model.diffusion.base.HTTPXDiffusionConnector.get_client"
+    ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -92,7 +98,9 @@ async def test_invalid_request_error(
 async def test_unexpected_error(
     mock_custom_connector: HTTPXDiffusionConnector,
 ) -> None:
-    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
+    with patch(
+        "artkit.model.diffusion.base.HTTPXDiffusionConnector.get_client"
+    ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 

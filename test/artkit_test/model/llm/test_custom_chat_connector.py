@@ -22,7 +22,9 @@ RESPONSE_TEXT = "The sky is blue."
 
 @pytest.mark.asyncio
 async def test_get_response(mock_custom_connector: HTTPXChatConnector) -> None:
-    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
+    with patch(
+        "artkit.model.llm.base.HTTPXChatConnector.get_client"
+    ) as MockClientSession:
         mock_post = Mock()
         mock_post.json = Mock(return_value={"results": [{"outputText": RESPONSE_TEXT}]})
         mock_post.text = AsyncMock()
@@ -40,7 +42,9 @@ async def test_get_response(mock_custom_connector: HTTPXChatConnector) -> None:
 async def test_rate_limit_error(
     mock_custom_connector: HTTPXChatConnector,
 ) -> None:
-    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
+    with patch(
+        "artkit.model.llm.base.HTTPXChatConnector.get_client"
+    ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -69,7 +73,9 @@ async def test_rate_limit_error(
 async def test_invalid_request_error(
     mock_custom_connector: HTTPXChatConnector,
 ) -> None:
-    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
+    with patch(
+        "artkit.model.llm.base.HTTPXChatConnector.get_client"
+    ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
@@ -100,7 +106,9 @@ async def test_invalid_request_error(
 async def test_unexpected_error(
     mock_custom_connector: HTTPXChatConnector,
 ) -> None:
-    with patch("httpx.AsyncClient.__aenter__") as MockClientSession:
+    with patch(
+        "artkit.model.llm.base.HTTPXChatConnector.get_client"
+    ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
