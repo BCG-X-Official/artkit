@@ -41,6 +41,7 @@ log = logging.getLogger(__name__)
 __all__ = [
     "GenAIModel",
     "ConnectorMixin",
+    "ClientWrapper",
 ]
 
 #
@@ -126,10 +127,10 @@ class ConnectorMixin(GenAIModel, Generic[T_Client], metaclass=ABCMeta):
     #: allow garbage collection.
     #:
     #: This is a class variable, so it is shared across all instances of the class.
-    _clients: MutableMapping[tuple[str, str], _ClientWrapper[T_Client]]
+    _clients: MutableMapping[tuple[str, str], ClientWrapper[T_Client]]
 
     #: The client used by this instance
-    _client: _ClientWrapper[T_Client] | None = None
+    _client: ClientWrapper[T_Client] | None = None
 
     def __init__(
         self,
@@ -210,7 +211,7 @@ class ConnectorMixin(GenAIModel, Generic[T_Client], metaclass=ABCMeta):
             client = self._clients.get(client_key)
             if client is None:
                 # No shared client instance exists yet; create one
-                client = self._clients[client_key] = _ClientWrapper(self._make_client())
+                client = self._clients[client_key] = ClientWrapper(self._make_client())
             # Cache the client instance for this instance
             self._client = client
             return client.client
@@ -254,7 +255,7 @@ class ConnectorMixin(GenAIModel, Generic[T_Client], metaclass=ABCMeta):
         )
 
 
-class _ClientWrapper(Generic[T_Client]):
+class ClientWrapper(Generic[T_Client]):
     """
     A wrapper for a client that rate-limits requests, and takes care of releasing the
     clients' resources when they are no longer needed.

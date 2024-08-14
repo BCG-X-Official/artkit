@@ -19,12 +19,15 @@ Abstract base class to represent connecting to a custom endpoint.
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 from abc import ABCMeta, abstractmethod
 from typing import Any
+from weakref import WeakKeyDictionary
 
 from pytools.api import MissingClassMeta, appenddoc, inheritdoc, subsdoc
 
+from ...base import ClientWrapper
 from ...util import RateLimitException
 from ..history import ChatHistory
 from ._llm import ChatModelConnector
@@ -54,7 +57,7 @@ __all__ = ["HTTPXChatConnector"]
 
 
 @inheritdoc(match="""[see superclass]""")
-class HTTPXChatConnector(ChatModelConnector[None], metaclass=ABCMeta):
+class HTTPXChatConnector(ChatModelConnector[AsyncClient], metaclass=ABCMeta):
     """
     ABC that represents connecting to a custom endpoint.
     """
@@ -98,8 +101,31 @@ class HTTPXChatConnector(ChatModelConnector[None], metaclass=ABCMeta):
             httpx_client_kwargs = {}
         self.httpx_client_kwargs = httpx_client_kwargs
 
-    def _make_client(self) -> None:
-        return None
+        # Set up caching for clients based on event loop
+        # Use weak references to enable garbage collection
+        self._async_clients: WeakKeyDictionary[
+            asyncio.AbstractEventLoop, ClientWrapper[AsyncClient]
+        ] = WeakKeyDictionary()
+
+    def _make_client(self) -> AsyncClient:
+        return AsyncClient(**self.httpx_client_kwargs)
+
+    def get_client(self) -> AsyncClient:
+        """
+        Get the client to use for making requests.
+        Allows us to create a new async client every time we're in a new event loop.
+        Internally, we can cache the client using a weak key dictionary that maps event
+        loop objects to async clients
+
+        :return: The client to use for making requests.
+        """
+        # get event loop from current thread
+        current_loop = asyncio.get_running_loop()
+        if current_loop in self._async_clients:
+            return self._async_clients[current_loop].client
+        else:
+            self._async_clients[current_loop] = ClientWrapper(self._make_client())
+            return self._async_clients[current_loop].client
 
     @abstractmethod
     def build_request_arguments(
@@ -138,22 +164,22 @@ class HTTPXChatConnector(ChatModelConnector[None], metaclass=ABCMeta):
         **model_params: dict[str, Any],
     ) -> list[str]:
         """[see superclass]"""
-        async with AsyncClient(**self.httpx_client_kwargs) as client:
-            response = await client.request(
-                **self.build_request_arguments(
-                    message=message, history=history, **model_params
-                )
+        client = self.get_client()
+        response = await client.request(
+            **self.build_request_arguments(
+                message=message, history=history, **model_params
             )
-            try:
-                response.raise_for_status()
-            except HTTPStatusError as e:
-                if e.response.status_code == 429:
-                    raise RateLimitException(
-                        "Rate limit exceeded. Please try again later."
-                    ) from e
-                elif e.response.status_code == 422:
-                    raise ValueError(
-                        f"Invalid request. Please check the request parameters. {e.response.text}"
-                    ) from e
-                raise
+        )
+        try:
+            response.raise_for_status()
+        except HTTPStatusError as e:
+            if e.response.status_code == 429:
+                raise RateLimitException(
+                    "Rate limit exceeded. Please try again later."
+                ) from e
+            elif e.response.status_code == 422:
+                raise ValueError(
+                    f"Invalid request. Please check the request parameters. {e.response.text}"
+                ) from e
+            raise
         return self.parse_httpx_response(response=response)
