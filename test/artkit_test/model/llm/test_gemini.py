@@ -2,7 +2,7 @@ import os
 import shutil
 from collections.abc import Iterator
 from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from google.api_core.exceptions import TooManyRequests
@@ -21,10 +21,8 @@ async def test_gemini(gemini_chat: GeminiChat) -> None:
     with patch("artkit.model.llm.gemini._gemini.GenerativeModel") as mock_get_client:
         # Mock Gemini Client response
         mock_response = AsyncMock(
-            return_value=AsyncMock(
-                candidates=[
-                    MagicMock(content=MagicMock(parts=[MagicMock(text="blue")]))
-                ]
+            return_value=Mock(
+                candidates=[Mock(content=Mock(parts=[Mock(text="blue")]))]
             )
         )
 

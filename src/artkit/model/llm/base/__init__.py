@@ -19,4 +19,5 @@ Base classes for the LLM module.
 """
 
 from ._adapter import *
+from ._httpx_chat_connector import *
 from ._llm import *

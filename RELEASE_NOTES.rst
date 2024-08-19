@@ -1,10 +1,23 @@
 Release Notes
 =============
 
+*artkit* 1.0.6
+--------------
+- API: Added Abstract Base Classes for generic HTTP connectors.
+
+*artkit* 1.0.5
+--------------
+- BUILD: Add prefix to veracode scan number
+- DOC: Add links to Jupyer notebooks on top of Sphinx documentation
+- DOC: Added badges that represent the repository to readme
+- DOC: Clarify that pre-commit is already installed via optional dev deps
+- DOC: Various ehancements
+- API: Add Titan diffusion model
+
 *artkit* 1.0.4
 --------------
-- DOC: Added badges that represent the repository to readme
-- API: Add Vertex AI API integration
+- API: Added integration for Titan LLM text generation via AWS Bedrock `invoke_model` endpoints on AWS.
+
 
 *artkit* 1.0.3
 --------------
@@ -14,9 +27,6 @@ Release Notes
   :class:`.VisionModel`. These classes are frequently used in type hints, and this
   change makes it easier to import them without having to know the exact module
   they are defined in.
-
-- API: Added integration for Titan LLM text generation via AWS Bedrock `invoke_model` endpoints on AWS.
-
 
 *artkit* 1.0.2
 --------------

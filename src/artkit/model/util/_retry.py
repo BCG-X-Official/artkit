@@ -21,13 +21,12 @@ from collections.abc import Callable, Coroutine
 from functools import wraps
 from typing import Any, Concatenate, ParamSpec, TypeVar
 
+# from ..llm.base import ChatModel
 from ...util import LogThrottlingHandler
 from ..base import ConnectorMixin
 from ._exception import RateLimitException
 
-__all__ = [
-    "retry_with_exponential_backoff",
-]
+__all__ = ["retry_with_exponential_backoff", "retry_function_with_exponential_backoff"]
 
 
 log = logging.getLogger(__name__)
@@ -48,7 +47,61 @@ log.addHandler(_throttling_handler)
 
 T_ret = TypeVar("T_ret", covariant=True)
 T_Connector = TypeVar("T_Connector", bound=ConnectorMixin[Any])
+T_ChatModel = TypeVar("T_ChatModel")
 P = ParamSpec("P")
+
+
+def retry_function_with_exponential_backoff(
+    func: Callable[Concatenate[T_ChatModel, P], Coroutine[Any, Any, T_ret]],
+    max_retries: int,
+    delay: float,
+    exponential_base: float,
+    jitter: bool,
+) -> Callable[Concatenate[T_ChatModel, P], Coroutine[Any, Any, T_ret]]:
+    """
+    Decorator that adds retrying with exponential backoff to a ChatModel method.
+
+    :param func: the function to decorate
+    :param max_retries: the maximum number of retries
+    :param delay: the delay between retries
+    :param exponential_base: the base exponential factor
+    :param jitter: the jittering factor
+
+    :return: the decorated function
+    """
+
+    @wraps(func)
+    async def exponential_delay(
+        self: T_ChatModel, /, *args: P.args, **kwargs: P.kwargs
+    ) -> T_ret:
+        initial_delay = delay
+        for num_retries in range(1, max_retries + 1):
+            try:
+                return await func(self, *args, **kwargs)
+
+            # Retry on rate limit errors
+            except RateLimitException as e:
+                # Increment the delay
+                initial_delay *= exponential_base * (1 + jitter * random.random())
+
+                # Log retry
+                log.warning(
+                    "Rate limit exceeded: Retrying after model I/O error "
+                    "(%s/%s). Wait for %.2f seconds.",
+                    num_retries,
+                    max_retries,
+                    initial_delay,
+                )
+
+                # Sleep for the delay
+                await asyncio.sleep(initial_delay)
+                last_exception = e
+
+        raise RateLimitException(
+            "Rate limit error after max retries."
+        ) from last_exception
+
+    return exponential_delay
 
 
 def retry_with_exponential_backoff(
@@ -56,6 +109,8 @@ def retry_with_exponential_backoff(
 ) -> Callable[Concatenate[T_Connector, P], Coroutine[Any, Any, T_ret]]:
     """
     Decorator that adds retrying with exponential backoff to a connector method.
+
+    It uses the retry_function_with_exponential_backoff decorator to decorate.
 
     :param func: the function to decorate
     :return: the decorated function
@@ -75,41 +130,21 @@ def retry_with_exponential_backoff(
         :return: the result of the function
         """
         # Initialize variables
-        num_retries = 0
         delay = self.initial_delay
 
         # Loop until a successful response or max_retries is hit
         # or an uncaught exception is raised
-        last_exception = None
         max_retries = self.max_retries
         exponential_base = self.exponential_base
         jitter = self.jitter
 
-        for num_retries in range(1, max_retries + 1):
-            try:
-                return await func(self, *args, **kwargs)
-
-            # Retry on rate limit errors
-            except RateLimitException as e:
-                # Increment the delay
-                delay *= exponential_base * (1 + jitter * random.random())
-
-                # Log retry
-                log.warning(
-                    "Rate limit exceeded: Retrying after model I/O error "
-                    "(%s/%s). Wait for %.2f seconds.",
-                    num_retries,
-                    max_retries,
-                    delay,
-                )
-
-                # Sleep for the delay
-                await asyncio.sleep(delay)
-                last_exception = e
-
-        raise RateLimitException(
-            "Rate limit error after max retries."
-        ) from last_exception
+        return await retry_function_with_exponential_backoff(
+            func=func,
+            max_retries=max_retries,
+            delay=delay,
+            exponential_base=exponential_base,
+            jitter=jitter,
+        )(self, *args, **kwargs)
 
     if func.__code__ is _wrapper.__code__:  # type: ignore[attr-defined]
         # If the function is already wrapped with our decorator, return it as is.

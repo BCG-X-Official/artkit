@@ -19,3 +19,4 @@ Base classes for the diffusion model
 """
 
 from ._diffusion import *
+from ._httpx_diffusion_connector import *

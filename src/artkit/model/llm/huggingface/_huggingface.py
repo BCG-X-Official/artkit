@@ -21,14 +21,12 @@ Huggingface LLM systems.
 from __future__ import annotations
 
 import logging
-from collections.abc import Iterator
-from contextlib import AsyncExitStack
 from typing import Any, TypeVar, cast
 
 from pytools.api import MissingClassMeta, inheritdoc
 
 from ...util import RateLimitException
-from ..base import ChatModelConnector
+from ..base import HTTPXChatConnector
 from ..history import ChatHistory, ChatMessage, SystemPrompt, UserMessage
 from .base import (
     HuggingfaceChatConnectorMixin,
@@ -37,7 +35,6 @@ from .base import (
 )
 
 try:  # pragma: no cover
-    from aiohttp import ClientResponseError, ClientSession
     from huggingface_hub import AsyncInferenceClient
 except ImportError:
 
@@ -46,11 +43,24 @@ except ImportError:
     ):
         """Placeholder class for missing ``AsyncInferenceClient`` class."""
 
-    class ClientResponseError(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
+
+try:
+    from aiohttp import ClientResponseError
+except ImportError:
+
+    class ClientResponseError(  # type: ignore
+        metaclass=MissingClassMeta, module="aiohttp"
+    ):
         """Placeholder class for missing ``ClientResponseError`` class."""
 
-    class ClientSession(metaclass=MissingClassMeta, module="aiohttp"):  # type: ignore
-        """Placeholder class for missing ``ClientSession`` class."""
+
+try:
+    from httpx import Response
+
+except ImportError:
+
+    class Response(metaclass=MissingClassMeta, module="httpx"):  # type: ignore
+        """Placeholder class for missing ``Response`` class."""
 
 
 log = logging.getLogger(__name__)
@@ -196,7 +206,7 @@ class HuggingfaceChat(
 
 @inheritdoc(match="""[see superclass]""")
 class HuggingfaceURLChat(
-    ChatModelConnector[None],
+    HTTPXChatConnector,
 ):
     """
     Asynchronous Huggingface API LLM using an URL as model_id.
@@ -231,85 +241,59 @@ class HuggingfaceURLChat(
         """[see superclass]"""
         return "HF_TOKEN"
 
-    def _make_client(self) -> None:
-        return None
-
-    def _get_messages(
-        self, message: str, *, history: ChatHistory | None
-    ) -> Iterator[ChatMessage]:
-        # Format the user prompt and system prompt (if defined)
-        # as a list of chat messages for the Huggingface API.
-
-        if self.system_prompt:
-            yield SystemPrompt(self.system_prompt)
-
-        if history is not None:
-            yield from history.messages
-
-        yield UserMessage(message)
-
-    async def get_response(
+    def build_request_arguments(
         self,
         message: str,
         *,
         history: ChatHistory | None = None,
         **model_params: dict[str, Any],
+    ) -> dict[str, Any]:
+        """[see superclass]"""
+
+        messages: list[ChatMessage] = []
+        # Handle system prompt
+        if self.system_prompt:
+            messages = [SystemPrompt(self.system_prompt)]
+
+        # Handle chat history
+        if history:
+            messages.extend(history.messages)
+
+        # Handle current message
+        messages.append(UserMessage(message))
+
+        # convert messages to the format expected by the API
+        converted_messages = [
+            {"role": message.role, "content": message.text} for message in messages
+        ]
+
+        api_suffix = "/v1/chat/completions"
+        url = (
+            self.model_id
+            if self.model_id.endswith(api_suffix)
+            else (self.model_id + api_suffix)
+        )
+        return dict(
+            method="POST",  # httpx provides no enum for this, consider adding our own
+            url=url,
+            headers={
+                "Authorization": f"Bearer {self.get_api_key()}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": "tgi",
+                "messages": converted_messages,
+                **{**self.model_params, **model_params},
+            },
+        )
+
+    def parse_httpx_response(
+        self,
+        response: Response,
     ) -> list[str]:
         """[see superclass]"""
-        async with AsyncExitStack():
-            async with ClientSession(
-                headers={
-                    "Authorization": f"Bearer {self.get_api_key()}",
-                    "Content-Type": "application/json",
-                },
-            ) as session:
-                api_suffix = "/v1/chat/completions"
-                url = (
-                    self.model_id
-                    if self.model_id.endswith(api_suffix)
-                    else (self.model_id + api_suffix)
-                )
-                messages = [
-                    {"role": message.role, "content": message.text}
-                    for message in self._get_messages(message, history=history)
-                ]
-                response = await session.post(
-                    url=url,
-                    json={
-                        "model": "tgi",
-                        "messages": messages,
-                        **{**self.model_params, **model_params},
-                    },
-                )
-                response_text = await response.text()
-                try:
-                    # Raises exception if response status is not 200
-                    response.raise_for_status()
-                except ClientResponseError as e:
-                    if e.status == 429:
-                        raise RateLimitException(
-                            "Rate limit exceeded. Please try again later."
-                        ) from e
-                    elif e.status == 422:
-                        raise ValueError(
-                            f"Invalid request. Please check the request parameters. {response_text}"
-                        ) from e
-                    raise
-
-        response_body = await response.json()
-        return list(self._responses_from_body(response_body))
-
-    @staticmethod
-    def _responses_from_body(
-        response_body: dict[str, list[dict[str, dict[str, str]]]]
-    ) -> Iterator[str]:
-        """
-        Get the response from the response_body.
-
-        :param response_body: the chat response_body to process
-        :return: the alternate responses from the chat response_body
-        """
-
+        response_body = response.json()
+        result = []
         for choice in response_body["choices"]:
             message = choice["message"]
             if message["role"] != "assistant":
@@ -317,4 +301,5 @@ class HuggingfaceURLChat(
                     "Expected only assistant messages, but got completion choice "
                     f"{choice!r}"
                 )
-            yield str(message["content"])
+            result.append(str(message["content"]))
+        return result

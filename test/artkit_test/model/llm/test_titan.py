@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import boto3
 import pytest
-from aiohttp import ClientResponseError
+from httpx import HTTPStatusError, Response
 from moto import mock_aws
 
 from artkit.model.llm.bedrock import TitanBedrockChat
@@ -25,17 +25,17 @@ PROMPT_COMPLETION = "blue"
 @pytest.mark.asyncio
 async def test_get_response(mock_bedrock_chat: TitanBedrockChat) -> None:
     with patch(
-        "artkit.model.llm.bedrock.base._base.ClientSession.__aenter__"
+        "artkit.model.llm.base.HTTPXChatConnector.get_client"
     ) as MockClientSession:
-        mock_post = Mock()
-        mock_post.json = AsyncMock(
+        mock_request = Mock()
+        mock_request.json = Mock(
             return_value={"results": [{"outputText": RESPONSE_TEXT}]}
         )
-        mock_post.text = AsyncMock()
-        mock_post.return_value.status_code = 200
+        mock_request.text = AsyncMock()
+        mock_request.return_value.status_code = 200
 
         mock_connection = AsyncMock()
-        mock_connection.post.return_value = mock_post
+        mock_connection.request.return_value = mock_request
         MockClientSession.return_value = mock_connection
 
         response = await mock_bedrock_chat.get_response(message=MESSAGE)
@@ -45,21 +45,20 @@ async def test_get_response(mock_bedrock_chat: TitanBedrockChat) -> None:
 @pytest.mark.asyncio
 async def test_rate_limit_error(mock_bedrock_chat: TitanBedrockChat) -> None:
     with patch(
-        "artkit.model.llm.bedrock.base._base.ClientSession.__aenter__"
+        "artkit.model.llm.base.HTTPXChatConnector.get_client"
     ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
         def raise_rate_limit_error() -> None:
-            err = ClientResponseError(
-                request_info=AsyncMock(),
-                history=AsyncMock(),
-                status=429,
+            err = HTTPStatusError(
+                request=Mock(),
+                response=Mock(spec=Response, status_code=429),
                 message="Rate limit exceeded",
             )
             raise err
 
-        mock_connection.post.return_value.raise_for_status = raise_rate_limit_error
+        mock_connection.request.return_value.raise_for_status = raise_rate_limit_error
         MockClientSession.return_value = mock_connection
 
         with pytest.raises(RateLimitException):
@@ -69,21 +68,22 @@ async def test_rate_limit_error(mock_bedrock_chat: TitanBedrockChat) -> None:
 @pytest.mark.asyncio
 async def test_invalid_request_error(mock_bedrock_chat: TitanBedrockChat) -> None:
     with patch(
-        "artkit.model.llm.bedrock.base._base.ClientSession.__aenter__"
+        "artkit.model.llm.base.HTTPXChatConnector.get_client"
     ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
         def raise_invalid_request_error() -> None:
-            err = ClientResponseError(
-                request_info=AsyncMock(),
-                history=AsyncMock(),
-                status=422,
+            err = HTTPStatusError(
+                request=Mock(),
+                response=Mock(spec=Response, status_code=422),
                 message="Invalid request",
             )
             raise err
 
-        mock_connection.post.return_value.raise_for_status = raise_invalid_request_error
+        mock_connection.request.return_value.raise_for_status = (
+            raise_invalid_request_error
+        )
         MockClientSession.return_value = mock_connection
 
         with pytest.raises(ValueError):
@@ -93,31 +93,32 @@ async def test_invalid_request_error(mock_bedrock_chat: TitanBedrockChat) -> Non
 @pytest.mark.asyncio
 async def test_unexpected_error(mock_bedrock_chat: TitanBedrockChat) -> None:
     with patch(
-        "artkit.model.llm.bedrock.base._base.ClientSession.__aenter__"
+        "artkit.model.llm.base.HTTPXChatConnector.get_client"
     ) as MockClientSession:
         # Set up the mock connection object
         mock_connection = AsyncMock()
 
         def raise_unexpected_error() -> None:
-            err = ClientResponseError(
-                request_info=AsyncMock(),
-                history=AsyncMock(),
-                status=500,
+            err = HTTPStatusError(
+                request=Mock(),
+                response=Mock(spec=Response, status_code=500),
                 message="Internal server error",
             )
             raise err
 
-        mock_connection.post.return_value.raise_for_status = raise_unexpected_error
+        mock_connection.request.return_value.raise_for_status = raise_unexpected_error
         MockClientSession.return_value = mock_connection
 
-        with pytest.raises(ClientResponseError):
+        with pytest.raises(HTTPStatusError):
             await mock_bedrock_chat.get_response(message=MESSAGE)
 
 
 @pytest.mark.asyncio
 async def test_response_parsing(mock_bedrock_chat: TitanBedrockChat) -> None:
+    response = Mock(spec=Response)
     response_body = {"results": [{"outputText": RESPONSE_TEXT}]}
-    responses = mock_bedrock_chat._responses_from_body(response_body)
+    response.json = Mock(return_value=response_body)
+    responses = mock_bedrock_chat.parse_httpx_response(response=response)
     assert responses == [RESPONSE_TEXT]
 
 
@@ -133,7 +134,9 @@ def mock_bedrock_chat(aws_credentials: Any) -> Generator[TitanBedrockChat, None,
         yield TitanBedrockChat(
             model_id=MODEL_ID,
             region=REGION,
-            max_retries=3,
+            initial_delay=0.1,
+            exponential_base=1.5,
+            max_retries=2,
         )
 
 
