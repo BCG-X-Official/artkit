@@ -41,7 +41,7 @@ google-generativeai = [
 ]
 
 google-cloud-aiplatform = [
-    "google-cloud-aiplatform      ~= 1.21"
+    "google-cloud-aiplatform      ~= 1.62"
 ]
 
 huggingface = [
@@ -111,7 +111,7 @@ transformers        = "~=4.41.0"
 torch               = "~=2.3.0"
 boto3               = "~=1.34.0"
 moto                = "~=5.0.11"
-google-cloud-aiplatform            = "~=1.12.1"
+google-cloud-aiplatform            = "~=1.62.0"
 
 [build.matrix.max]
 matplotlib          = "~=3.8"
@@ -129,7 +129,7 @@ transformers        = "~=4.41"
 torch               = "~=2.3"
 boto3               = "~=1.34"
 moto                = "~=5.0"
-google-cloud-aiplatform            = "~=1.12.1"
+google-cloud-aiplatform            = "~=1.62.0"
 
 [tool.black]
 required-version = '24.4.2'
