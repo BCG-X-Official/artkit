@@ -111,14 +111,15 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         jitter: bool = True,
         max_retries: int = 10,
         system_prompt: str | None = None,
-        safety: bool = True,
         region: str | None = None,
         gcp_project_id: str,
+        safety: bool = True,
         **model_params: Any,
     ) -> None:
         """
         :param region: The specific GCP region to connect to.
         :param gcp_project_id: The GCP project ID.
+        :param safety: Safety settings for the model.
         """
         super().__init__(
             model_id=model_id,
@@ -133,7 +134,6 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         self.region = region if region else "us-east1"
         self.gcp_project_id = gcp_project_id
         self.safety = safety
-        self.endpoint = f"https://{self.region}-aiplatform.googleapis.com/v1/projects/{self.gcp_project_id}/locations/{self.region}/publishers/google/models/{self.model_id}:generateContent"
 
     def _get_safety_settings(self) -> dict[str, str] | None:
         """
@@ -197,7 +197,8 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
             client = self.get_client()
             try:
                 response = await client.generate_content_async(
-                    contents=formatted_messages
+                    contents=formatted_messages,
+                    safety_settings=self._get_safety_settings(),
                 )
 
             except TooManyRequests as e:
