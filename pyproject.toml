@@ -56,12 +56,8 @@ boto3 = [
     "httpx                    ~= 0.27",
 ]
 
-moto = [
-    "moto                   ~=5.0.11"
-]
-
 dev = [
-    "artkit[openai, groq, anthropic, google-generativeai, huggingface, boto3, moto, google-cloud-aiplatform]",
+    "artkit[openai, groq, anthropic, google-generativeai, huggingface, boto3, google-cloud-aiplatform]",
     # We use dotenv in the tutorial notebooks
     "python-dotenv            ~= 1.0",
 

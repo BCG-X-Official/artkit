@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import logging
 from abc import ABCMeta
+from collections.abc import Mapping
 from contextlib import AsyncExitStack
 from typing import Any, TypeVar
 
@@ -35,14 +36,24 @@ logger = logging.getLogger(__name__)
 __all__ = ["VertexAIChat"]
 
 try:
-    import vertexai
+    # note that vertexai is imported through the google-cloud-aiplatform package
+    import vertexai  # type: ignore
     from google.api_core.exceptions import TooManyRequests
-    from vertexai.generative_models import Content, GenerativeModel, Part
+    from vertexai.generative_models import (  # type: ignore
+        Content,
+        GenerativeModel,
+        Part,
+    )
 
 except ImportError:
 
-    class GenerativeModelError(metaclass=MissingClassMeta, module="GenerativeModel"):
+    class GenerativeModelError(
+        metaclass=MissingClassMeta, module="vertexai.generative_models"
+    ):
         """Placeholder class for missing ``GenerativeModel`` class."""
+
+    class VertexAIError(metaclass=MissingClassMeta, module="vertexai"):
+        """Placeholder class for missing ``VertexAIError`` class."""
 
 
 __all__ = ["VertexAIChat"]
@@ -67,6 +78,8 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
 
     region: str | None
     gcp_project_id: str | None
+    #: If ``False``, disable all accessible safety categories; otherwise, enable them.
+    safety: bool
 
     @classmethod
     def get_default_api_key_env(cls) -> str:
@@ -75,7 +88,11 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
 
     def _make_client(self) -> GenerativeModel:  # pragma: no cover
         vertexai.init(project=self.gcp_project_id, location=self.region)
-        return GenerativeModel(self.model_id)
+        return GenerativeModel(self.model_id, system_instruction=self.system_prompt)
+
+    def get_model_params(self) -> Mapping[str, Any]:
+        """[see superclass]"""
+        return dict(**super().get_model_params(), safety=self.safety)
 
     @subsdoc(
         # The pattern matches the row defining model_params, and move it to the end
@@ -94,6 +111,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         jitter: bool = True,
         max_retries: int = 10,
         system_prompt: str | None = None,
+        safety: bool = True,
         region: str | None = None,
         gcp_project_id: str,
         **model_params: Any,
@@ -114,7 +132,25 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         )
         self.region = region if region else "us-east1"
         self.gcp_project_id = gcp_project_id
+        self.safety = safety
         self.endpoint = f"https://{self.region}-aiplatform.googleapis.com/v1/projects/{self.gcp_project_id}/locations/{self.region}/publishers/google/models/{self.model_id}:generateContent"
+
+    def _get_safety_settings(self) -> dict[str, str] | None:
+        """
+        Get safety settings for Gemini.
+
+        :return: a list of dicts describing safety settings by harm category
+        """
+
+        if self.safety:
+            return None
+        else:
+            return {
+                "HARM_CATEGORY_HARASSMENT": "BLOCK_NONE",
+                "HARM_CATEGORY_HATE_SPEECH": "BLOCK_NONE",
+                "HARM_CATEGORY_SEXUALLY_EXPLICIT": "BLOCK_NONE",
+                "HARM_CATEGORY_DANGEROUS_CONTENT": "BLOCK_NONE",
+            }
 
     @staticmethod
     def _messages_to_vertexai_format(
@@ -158,7 +194,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
             formatted_messages = self._messages_to_vertexai_format(
                 message, history=history
             )
-            client = self._make_client()
+            client = self.get_client()
             try:
                 response = await client.generate_content_async(
                     contents=formatted_messages

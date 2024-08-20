@@ -135,7 +135,7 @@ class GeminiChat(ChatModelConnector[GenerativeModel]):
     def _make_client(self) -> GenerativeModel:  # pragma: no cover
 
         configure(api_key=self.get_api_key())
-        return GenerativeModel(self.model_id)
+        return GenerativeModel(self.model_id, system_instruction=self.system_prompt)
 
     def _get_safety_settings(self) -> dict[str, str] | None:
         """
