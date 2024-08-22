@@ -14,11 +14,11 @@ dist-name = "artkit"
 license = "Apache Software License v2.0"
 
 requires = [
-    "matplotlib        ~=3.6",
-    "pandas            ~=2.1",
-    "gamma-pytools     ~=3.0",
-    "fluxus            ~=1.0",
-    "typing_inspect    ~=0.7",
+    "matplotlib               ~=3.6",
+    "pandas                   ~=2.1",
+    "gamma-pytools            ~=3.0",
+    "fluxus                   ~=1.0",
+    "typing_inspect           ~=0.7",
 ]
 
 requires-python = ">=3.10,<4a"
@@ -41,7 +41,7 @@ google-generativeai = [
 ]
 
 google-cloud-aiplatform = [
-    "google-cloud-aiplatform      ~= 1.62"
+    "google-cloud-aiplatform  ~= 1.62"
 ]
 
 huggingface = [
@@ -52,7 +52,7 @@ huggingface = [
 ]
 
 boto3 = [
-    "boto3                   ~= 1.34",
+    "boto3                    ~= 1.34",
     "httpx                    ~= 0.27",
 ]
 
@@ -96,39 +96,39 @@ Repository = "https://github.com/BCG-X-Official/artkit"
 no-binary.min = []
 
 [build.matrix.min]
-matplotlib          = "~=3.6.3"
-pandas              = "~=2.1"
-python              = ">=3.10.14,<3.11a"
-gamma-pytools       = "~=3.0.0"
-fluxus              = "~=1.0.0"
-typing_inspect      = "~=0.7.1"
-openai              = "~=1.34.0"
-anthropic           = "~=0.28.0"
-groq                = "~=0.9.0"
-google-generativeai = "~=0.6.0"
-aiohttp             = "~=3.9.0"
-transformers        = "~=4.41.0"
-torch               = "~=2.3.0"
-boto3               = "~=1.34.0"
-moto                = "~=5.0.11"
+matplotlib                         = "~=3.6.3"
+pandas                             = "~=2.1"
+python                             = ">=3.10.14,<3.11a"
+gamma-pytools                      = "~=3.0.0"
+fluxus                             = "~=1.0.0"
+typing_inspect                     = "~=0.7.1"
+openai                             = "~=1.34.0"
+anthropic                          = "~=0.28.0"
+groq                               = "~=0.9.0"
+google-generativeai                = "~=0.6.0"
+aiohttp                            = "~=3.9.0"
+transformers                       = "~=4.41.0"
+torch                              = "~=2.3.0"
+boto3                              = "~=1.34.0"
+moto                               = "~=5.0.11"
 google-cloud-aiplatform            = "~=1.62.0"
 
 [build.matrix.max]
-matplotlib          = "~=3.8"
-pandas              = "~=2.2"
-python              = ">=3.12,<4a"
-gamma-pytools       = "~=3.0"
-fluxus              = "~=1.0"
-typing_inspect      = "~=0.9"
-openai              = "~=1.34"
-anthropic           = "~=0.28"
-groq                = "~=0.9"
-google-generativeai = "~=0.6"
-aiohttp             = "~=3.9"
-transformers        = "~=4.41"
-torch               = "~=2.3"
-boto3               = "~=1.34"
-moto                = "~=5.0"
+matplotlib                         = "~=3.8"
+pandas                             = "~=2.2"
+python                             = ">=3.12,<4a"
+gamma-pytools                      = "~=3.0"
+fluxus                             = "~=1.0"
+typing_inspect                     = "~=0.9"
+openai                             = "~=1.34"
+anthropic                          = "~=0.28"
+groq                               = "~=0.9"
+google-generativeai                = "~=0.6"
+aiohttp                            = "~=3.9"
+transformers                       = "~=4.41"
+torch                              = "~=2.3"
+boto3                              = "~=1.34"
+moto                               = "~=5.0"
 google-cloud-aiplatform            = "~=1.62.0"
 
 [tool.black]

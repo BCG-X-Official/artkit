@@ -36,7 +36,11 @@ logger = logging.getLogger(__name__)
 __all__ = ["VertexAIChat"]
 
 try:
-    # note that vertexai is imported through the google-cloud-aiplatform package
+    # vertexai is installed as part of pip installing google-cloud-aiplatform.
+    # We recommend this instead of installing vertexai individually because the
+    # standalone vertexai package is not available in conda and our repo utilizes
+    # conda builds/tests
+
     import vertexai  # type: ignore
     from google.api_core.exceptions import TooManyRequests
     from vertexai.generative_models import (  # type: ignore
@@ -45,18 +49,23 @@ try:
         Part,
     )
 
-except ImportError:
+except ImportError:  # pragma: no cover
 
-    class GenerativeModelError(
-        metaclass=MissingClassMeta, module="vertexai.generative_models"
-    ):
+    class vertexai(metaclass=MissingClassMeta, module="vertexai"):  # type: ignore
+        """Placeholder class for missing ``vertexai`` module."""
+
+    class TooManyRequests(metaclass=MissingClassMeta, module="google.api_core.exceptions"):  # type: ignore
+        """Placeholder class for missing ``TooManyRequests`` class."""
+
+    class Content(metaclass=MissingClassMeta, module="vertexai.generative_models"):  # type: ignore
+        """Placeholder class for missing ``Content`` class."""
+
+    class GenerativeModel(metaclass=MissingClassMeta, module="vertexai.generative_models"):  # type: ignore
         """Placeholder class for missing ``GenerativeModel`` class."""
 
-    class VertexAIError(metaclass=MissingClassMeta, module="vertexai"):
-        """Placeholder class for missing ``VertexAIError`` class."""
+    class Part(metaclass=MissingClassMeta, module="vertexai.generative_models"):  # type: ignore
+        """Placeholder class for missing ``Part`` class."""
 
-
-__all__ = ["VertexAIChat"]
 
 #
 # Type variables
@@ -67,7 +76,6 @@ T_VertexAIChat = TypeVar("T_VertexAIChat", bound="VertexAIChat")
 #
 # Class declarations
 #
-logger = logging.getLogger(__name__)
 
 
 @inheritdoc(match="""[see superclass]""")
@@ -87,6 +95,12 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         return ""
 
     def _make_client(self) -> GenerativeModel:  # pragma: no cover
+        """
+        This method handles the authentication and connection to the Vertex AI. It
+        assumes you have followed the instructions in
+        sphinx/source/user_guide/introduction_to_artkit/connecting_to_genai_models.ipynb
+        to setup Application Default Credentials(ADC) to access GCP.
+        """
         vertexai.init(project=self.gcp_project_id, location=self.region)
         return GenerativeModel(self.model_id, system_instruction=self.system_prompt)
 
@@ -194,7 +208,13 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
             formatted_messages = self._messages_to_vertexai_format(
                 message, history=history
             )
-            client = self.get_client()
+
+            # _make_client creates a new instance of the client connection,
+            # while get_client uses a cached instance of the client connection.
+            # We use _make_client for Vertex and Gemini because we can only
+            # initialize the system prompt when the client is created.
+
+            client = self._make_client()
             try:
                 response = await client.generate_content_async(
                     contents=formatted_messages,

@@ -1,6 +1,6 @@
 package:
   name: artkit
-  version: {{ environ.get('ARTKIT_BUILD_ARTKIT_VERSION') }}
+  version: { { environ.get('ARTKIT_BUILD_ARTKIT_VERSION') } }
 
 source:
   path: ../
@@ -56,4 +56,4 @@ about:
     libraries.
   dev_url: https://github.com/BCG-X-Official/artkit
   doc_url: https://bcg-x-official.github.io/artkit/
-  doc_source_url: https://github.com/BCG-X-Official/artkit/blob/develop/README.rst
+  doc_source_url: https://github.com/BCG-X-Official/artkit/tree/1.0.x/sphinx/source
