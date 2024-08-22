@@ -82,18 +82,10 @@ async def test_vertexai_different_system_prompts() -> None:
     first_chat = VertexAIChat(
         model_id="gemini-1.5-pro",
         gcp_project_id="gcp-project",
-        max_output_tokens=10,
-        max_retries=2,
-        initial_delay=0.1,
-        exponential_base=1.5,
     ).with_system_prompt(FIRST_SYSTEM_PROMPT)
     second_chat = VertexAIChat(
         model_id="gemini-1.5-pro",
         gcp_project_id="gcp-project",
-        max_output_tokens=10,
-        max_retries=2,
-        initial_delay=0.1,
-        exponential_base=1.5,
     ).with_system_prompt(SECOND_SYSTEM_PROMPT)
 
     # Mock Vertex AI Client
