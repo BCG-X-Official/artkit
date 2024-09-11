@@ -8,7 +8,7 @@ Automated Red Teaming (ART) and testing toolkit
 **ARTKIT** is a Python framework developed by `BCG X <https://www.bcg.com/x>`_ for automating prompt-based
 testing and evaluation of Gen AI applications.
 
-`Documentation <https://bcg-x-official.github.io/artkit/_generated/home.html>`_ | `User Guides <https://github.com/BCG-X-Official/artkit/tree/1.0.x/sphinx/source/user_guide>`_ | `Examples <https://github.com/BCG-X-Official/artkit/tree/1.0.x/sphinx/source/examples>`_
+`Documentation <https://bcg-x-official.github.io/artkit/_generated/home.html>`_ | `User Guides <https://bcg-x-official.github.io/artkit/user_guide/index.html>`_ | `Examples <https://bcg-x-official.github.io/artkit/examples/index.html>`_
 
 .. Begin-Badges
 
