@@ -1,6 +1,12 @@
 Release Notes
 =============
 
+*artkit* 1.0.8
+--------------
+
+- TEST: Fix hugging face retry logic in tests where the session was not mocked correctly
+- DOC: Add key takeaways for each release in the release notes 
+
 *artkit* 1.0.7
 --------------
 
