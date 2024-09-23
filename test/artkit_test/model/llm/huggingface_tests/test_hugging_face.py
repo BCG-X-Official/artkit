@@ -156,6 +156,10 @@ async def test_huggingface_retry(
         mock_connection.post.return_value = mock_post
         MockClientSession.return_value = mock_connection
 
+        # Mock session close to prevent recursive close calls
+        mock_close = AsyncMock()
+        mock_connection.close = mock_close  # Avoid recursion on session close
+
         # Get number of awaited retries
         n_retries = hugging_face_chat.max_retries
 
