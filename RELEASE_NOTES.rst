@@ -6,7 +6,7 @@ Release Notes
 
 This is a bugfix release containing updates for a failing unit test and enhancements to historical release notes.
 
-- TEST: Fix `test_huggingface_retry() <https://github.com/BCG-X-Official/artkit/blob/1.0.x/test/artkit_test/model/llm/huggingface_tests/test_hugging_face.py>` where the session was not mocked correctly
+- TEST: Fix `test_huggingface_retry() <https://github.com/BCG-X-Official/artkit/blob/1.0.x/test/artkit_test/model/llm/huggingface_tests/test_hugging_face.py>`_ where the session was not mocked correctly
 - DOC: Retroactively updated release notes for more consistent quality and detail e.g. hyperlinking class definitions 
 
 *artkit* 1.0.7
@@ -14,7 +14,7 @@ This is a bugfix release containing updates for a failing unit test and enhancem
 
 This release adds access to Google's Vertex AI model and fixes the links in the documentation.
 
-- API: Added `VertexAIChat <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/vertexai/_vertexai.py>` to grant users access to Gemini models deployed on Google Vertex AI.
+- API: Added `VertexAIChat <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/vertexai/_vertexai.py>`_ to grant users access to Gemini models deployed on Google Vertex AI.
 - DOC: Fix broken links on the sphinx homepage
 
 *artkit* 1.0.6
@@ -22,8 +22,8 @@ This release adds access to Google's Vertex AI model and fixes the links in the 
 
 This release expands ARTKIT's connectivity to include any GenAI application with an exposed HTTP endpoint enabling evaluations of virtually any custom target system.
 
-- API: Added the `HTTPXChatConnector <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/base/_httpx_chat_connector.py>` class which requires further customization by a user for implementation but considerably expands ARTKIT's connectivity with custom target systems.
-- DOC: Added section `Calling custom endpoints via HTTP <https://github.com/BCG-X-Official/artkit/blob/1.0.x/sphinx/source/user_guide/advanced_tutorials/creating_new_model_classes.ipynb>` to guide implementation of the HTTPX connector
+- API: Added the `HTTPXChatConnector <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/base/_httpx_chat_connector.py>`_ class which requires further customization by a user for implementation but considerably expands ARTKIT's connectivity with custom target systems.
+- DOC: Added section `Calling custom endpoints via HTTP <https://github.com/BCG-X-Official/artkit/blob/1.0.x/sphinx/source/user_guide/advanced_tutorials/creating_new_model_classes.ipynb>`_ to guide implementation of the HTTPX connector
 
 *artkit* 1.0.5
 --------------
@@ -32,14 +32,14 @@ This release adds access to the Titan diffusion model in AWS bedrock and improve
 
 - BUILD: Add prefix to veracode scan number
 - DOC: Add clarifying documentation including links, badges, and extra details on dev dependencies 
-- API: Add `TitanDiffusion <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/diffusion/bedrock/_titan.py>` to enable users to access Titan diffusion models.
+- API: Add `TitanDiffusion <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/diffusion/bedrock/_titan.py>`_ to enable users to access Titan diffusion models.
 
 *artkit* 1.0.4
 --------------
 
 This release provides direct ARTKIT access to AWS Bedrock models.
 
-- API: Added `TitanBedrockChat <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/bedrock/_titan.py>` to enable users to access models deployed on AWS Bedrock.
+- API: Added `TitanBedrockChat <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/bedrock/_titan.py>`_ to enable users to access models deployed on AWS Bedrock.
 
 *artkit* 1.0.3
 --------------
