@@ -4,26 +4,26 @@ Release Notes
 *artkit* 1.0.8
 --------------
 
-This release fixes a breaking unit test and adds key takeaways for each release in the release notes.
+This is a bugfix release containing updates for a failing unit test and enhancements to historical release notes.
 
-- TEST: Fix hugging face retry logic in tests where the session was not mocked correctly
-- DOC: Add key takeaways for each release in the release notes 
+- TEST: Fix `test_huggingface_retry() <https://github.com/BCG-X-Official/artkit/blob/1.0.x/test/artkit_test/model/llm/huggingface_tests/test_hugging_face.py>` where the session was not mocked correctly
+- DOC: Retroactively updated release notes for more consistent quality and detail e.g. hyperlinking class definitions 
 
 *artkit* 1.0.7
 --------------
 
 This release adds access to Google's Vertex AI model and fixes the links in the documentation.
 
-- API: Added `VertexAIChat <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/vertexai/_vertexai.py>`_ to enable users to access Gemini models deployed on Google Vertex AI.
-- DOC: Fix links on the sphinx homepage
+- API: Added `VertexAIChat <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/vertexai/_vertexai.py>` to grant users access to Gemini models deployed on Google Vertex AI.
+- DOC: Fix broken links on the sphinx homepage
 
 *artkit* 1.0.6
 --------------
 
 This release expands ARTKIT's connectivity to include any GenAI application with an exposed HTTP endpoint enabling evaluations of virtually any custom target system.
 
-- API: Added the `HTTPXChatConnector <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/base/_httpx_chat_connector.py>` which requires further customization by a user for implementation.
-- DOC: Added section `Calling custom endpoints via HTTP <https://github.com/BCG-X-Official/artkit/blob/1.0.x/sphinx/source/user_guide/advanced_tutorials/creating_new_model_classes.ipynb>` to guide implementation of the connector
+- API: Added the `HTTPXChatConnector <https://github.com/BCG-X-Official/artkit/blob/1.0.x/src/artkit/model/llm/base/_httpx_chat_connector.py>` class which requires further customization by a user for implementation but considerably expands ARTKIT's connectivity with custom target systems.
+- DOC: Added section `Calling custom endpoints via HTTP <https://github.com/BCG-X-Official/artkit/blob/1.0.x/sphinx/source/user_guide/advanced_tutorials/creating_new_model_classes.ipynb>` to guide implementation of the HTTPX connector
 
 *artkit* 1.0.5
 --------------
