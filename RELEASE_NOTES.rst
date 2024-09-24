@@ -4,6 +4,8 @@ Release Notes
 *artkit* 1.0.8
 --------------
 
+This release fixes a breaking unit test and adds key takeaways for each release in the release notes.
+
 - TEST: Fix hugging face retry logic in tests where the session was not mocked correctly
 - DOC: Add key takeaways for each release in the release notes 
 
