@@ -10,7 +10,7 @@ Release Notes
 
 This is a bugfix release containing updates for a failing unit test and enhancements to historical release notes.
 
-- TEST: Fix :func:`test_huggingface_retry` where the session was not mocked correctly
+- TEST: Fix `test_huggingface_retry <https://github.com/BCG-X-Official/artkit/blob/1.0.x/test/artkit_test/model/llm/huggingface_tests/test_hugging_face.py>`_ where the session was not mocked correctly
 - DOC: Retroactively updated release notes for more consistent quality and detail e.g. hyperlinking class definitions 
 
 *artkit* 1.0.7
