@@ -95,6 +95,7 @@ Supported Model Providers
 ARTKIT provides out-of-the-box support for the following model providers:
 
 - `Anthropic <https://www.anthropic.com/>`_
+- `AWS Bedrock <https://aws.amazon.com/bedrock/>`_
 - Google's `Gemini <https://gemini.google.com/>`_ and `Vertex AI <https://cloud.google.com/vertex-ai?hl=en>`_
 - `Grok <https://groq.com/>`_
 - `Hugging Face <https://huggingface.co/>`_
