@@ -10,6 +10,7 @@ import pytest
 from artkit.model.llm import CachedChatModel
 from artkit.model.llm.base import ChatModel
 from artkit.model.llm.openai import OpenAIChat
+from artkit.model.llm.vllm import VLLMChat
 from artkit.util import Image
 
 log = logging.getLogger(__name__)
@@ -95,3 +96,24 @@ def image() -> Image:
     binary_png = base64.b64decode(base64_png)
 
     return Image(data=binary_png)
+
+
+@pytest.fixture(scope="session")
+def vllm_url() -> str:
+    return "http://localhost:8000"
+
+
+@pytest.fixture
+def vllm_model_id() -> str:
+    return "meta-llama/Meta-Llama-3-8B-Instruct"
+
+
+@pytest.fixture
+def vllm_chat(vllm_url: str, vllm_model_id: str) -> VLLMChat:
+    return VLLMChat(
+        model_id=vllm_model_id,
+        max_retries=2,
+        initial_delay=0.1,
+        exponential_base=1.5,
+        vllm_url=vllm_url,
+    )
