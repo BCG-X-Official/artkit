@@ -228,7 +228,7 @@ class ConnectorMixin(GenAIModel, Generic[T_Client], metaclass=ABCMeta):
         try:
             return os.environ[self.api_key_env]
         except KeyError as e:
-            raise ValueError(
+            raise EnvironmentError(
                 f"The environment variable {self.api_key_env} for the API key of model "
                 f"{self.model_id!r} is not set. Please set the environment variable to "
                 f"your API key, or revise arg api_key_env to the correct environment "

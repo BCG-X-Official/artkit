@@ -106,7 +106,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         try:
             return os.environ[self.gcp_project_id_env]
         except KeyError as e:
-            raise ValueError(
+            raise EnvironmentError(
                 f"The environment variable {self.gcp_project_id_env} for the GCP project ID "
                 f"of model {self.model_id!r} is not set. Please set the environment variable to "
                 f"your GCP project ID, or revise the arg gcp_project_id_env to the correct "
