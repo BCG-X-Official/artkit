@@ -86,7 +86,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
     """
 
     region: str | None
-    gcp_project_id_env: str | None
+    gcp_project_id_env: str
     #: If ``False``, disable all accessible safety categories; otherwise, enable them.
     safety: bool
 
@@ -101,7 +101,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         :attr:`gcp_project_id_env`.
 
         :return: the GCP project ID
-        :raises ValueError: if the environment variable is not set
+        :raises EnvironmentError: if the environment variable is not set
         """
         if self.gcp_project_id_env is None:
             raise ValueError("gcp_project_id_env must not be None")
@@ -109,7 +109,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         try:
             return os.environ[self.gcp_project_id_env]
         except KeyError as e:
-            raise EnvironmentError(
+            raise OSError(
                 f"The environment variable {self.gcp_project_id_env} for the GCP project ID "
                 f"of model {self.model_id!r} is not set. Please set the environment variable to "
                 f"your GCP project ID, or revise the arg gcp_project_id_env to the correct "
@@ -154,7 +154,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
     ) -> None:
         """
         :param region: The specific GCP region to connect to.
-        :param gcp_project_id: The GCP project ID.
+        :param gcp_project_id_env: The GCP project ID.
         :param safety: Safety settings for the model.
         """
         super().__init__(

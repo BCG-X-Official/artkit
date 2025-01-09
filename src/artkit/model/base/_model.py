@@ -223,14 +223,12 @@ class ConnectorMixin(GenAIModel, Generic[T_Client], metaclass=ABCMeta):
         Get the API key from the environment variable specified by :attr:`api_key_env`.
 
         :return: the API key
-        :raises ValueError: if the environment variable is not set
+        :raises EnvironmentError: if the environment variable is not set
         """
-        if self.api_key_env is None:
-            raise ValueError("api_key_env must not be None")
         try:
             return os.environ[self.api_key_env]
         except KeyError as e:
-            raise EnvironmentError(
+            raise OSError(
                 f"The environment variable {self.api_key_env} for the API key of model "
                 f"{self.model_id!r} is not set. Please set the environment variable to "
                 f"your API key, or revise arg api_key_env to the correct environment "
