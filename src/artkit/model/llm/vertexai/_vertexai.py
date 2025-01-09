@@ -94,10 +94,10 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
     def get_default_api_key_env(cls) -> str:
         """[see superclass]"""
         return ""
-    
+
     def get_gcp_project_id_env(self) -> str:
         """
-        Get the GCP project ID from the environment variable specified by 
+        Get the GCP project ID from the environment variable specified by
         :attr:`gcp_project_id_env`.
 
         :return: the GCP project ID
@@ -165,7 +165,9 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
             **model_params,
         )
         self.region = region if region else "us-east1"
-        self.gcp_project_id_env = "GCP_PROJECT_ID" if gcp_project_id_env is None else gcp_project_id_env
+        self.gcp_project_id_env = (
+            "GCP_PROJECT_ID" if gcp_project_id_env is None else gcp_project_id_env
+        )
         self.safety = safety
 
     def _get_safety_settings(self) -> dict[str, str] | None:
