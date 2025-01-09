@@ -19,6 +19,7 @@ VertexAI LLM systems.
 """
 from __future__ import annotations
 
+import os
 import logging
 from abc import ABCMeta
 from collections.abc import Mapping
@@ -85,7 +86,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
     """
 
     region: str | None
-    gcp_project_id: str | None
+    gcp_project_id_env: str | None
     #: If ``False``, disable all accessible safety categories; otherwise, enable them.
     safety: bool
 
@@ -93,6 +94,24 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
     def get_default_api_key_env(cls) -> str:
         """[see superclass]"""
         return ""
+    
+    def get_gcp_project_id_env(self) -> str:
+        """
+        Get the GCP project ID from the environment variable specified by 
+        :attr:`gcp_project_id_env`.
+
+        :return: the GCP project ID
+        :raises ValueError: if the environment variable is not set
+        """
+        try:
+            return os.environ[self.gcp_project_id_env]
+        except KeyError as e:
+            raise ValueError(
+                f"The environment variable {self.gcp_project_id_env} for the GCP project ID "
+                f"of model {self.model_id!r} is not set. Please set the environment variable to "
+                f"your GCP project ID, or revise the arg gcp_project_id_env to the correct "
+                f"environment variable name."
+            ) from e
 
     def _make_client(self) -> GenerativeModel:  # pragma: no cover
         """
@@ -101,7 +120,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         sphinx/source/user_guide/introduction_to_artkit/connecting_to_genai_models.ipynb
         to setup Application Default Credentials(ADC) to access GCP.
         """
-        vertexai.init(project=self.gcp_project_id, location=self.region)
+        vertexai.init(project=self.get_gcp_project_id_env(), location=self.region)
         return GenerativeModel(self.model_id, system_instruction=self.system_prompt)
 
     def get_model_params(self) -> Mapping[str, Any]:
@@ -126,7 +145,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         max_retries: int = 10,
         system_prompt: str | None = None,
         region: str | None = None,
-        gcp_project_id: str,
+        gcp_project_id_env: str | None = None,
         safety: bool = True,
         **model_params: Any,
     ) -> None:
@@ -146,7 +165,7 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
             **model_params,
         )
         self.region = region if region else "us-east1"
-        self.gcp_project_id = gcp_project_id
+        self.gcp_project_id_env = "GCP_PROJECT_ID" if gcp_project_id_env is None else gcp_project_id_env
         self.safety = safety
 
     def _get_safety_settings(self) -> dict[str, str] | None:
