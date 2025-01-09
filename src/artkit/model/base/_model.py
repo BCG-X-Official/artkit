@@ -225,6 +225,8 @@ class ConnectorMixin(GenAIModel, Generic[T_Client], metaclass=ABCMeta):
         :return: the API key
         :raises ValueError: if the environment variable is not set
         """
+        if self.api_key_env is None:
+            raise ValueError("api_key_env must not be None")
         try:
             return os.environ[self.api_key_env]
         except KeyError as e:

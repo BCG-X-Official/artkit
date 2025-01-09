@@ -103,6 +103,9 @@ class VertexAIChat(ChatModelConnector[GenerativeModel], metaclass=ABCMeta):
         :return: the GCP project ID
         :raises ValueError: if the environment variable is not set
         """
+        if self.gcp_project_id_env is None:
+            raise ValueError("gcp_project_id_env must not be None")
+        
         try:
             return os.environ[self.gcp_project_id_env]
         except KeyError as e:
