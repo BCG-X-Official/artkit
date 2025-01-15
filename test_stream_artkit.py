@@ -1,8 +1,6 @@
 import asyncio
 import os
 
-from dotenv import load_dotenv
-
 import artkit.api as ak
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
