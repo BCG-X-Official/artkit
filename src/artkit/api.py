@@ -42,6 +42,7 @@ from .model.diffusion.bedrock import *
 from .model.diffusion.openai import *
 from .model.llm import *
 from .model.llm.anthropic import *
+from .model.llm.azure import *
 from .model.llm.base import ChatModel, CompletionModel
 from .model.llm.bedrock import *
 from .model.llm.gemini import *
