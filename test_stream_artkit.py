@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 import artkit.api as ak
 
-
 os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
 
 # Set up a chat system with the OpenAI GPT-4o model
