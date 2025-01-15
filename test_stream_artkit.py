@@ -3,8 +3,7 @@ import os
 from dotenv import load_dotenv
 import asyncio
 
-load_dotenv()
-os.environ['OPENAI_API_KEY'] = {Your_API_Key}
+os.environ['OPENAI_API_KEY'] = ""
 
 # Set up a chat system with the OpenAI GPT-4o model
 chat_llm = ak.CachedChatModel(
