@@ -99,6 +99,7 @@ ARTKIT provides out-of-the-box support for the following model providers:
 - Google's `Gemini <https://gemini.google.com/>`_ and `Vertex AI <https://cloud.google.com/vertex-ai?hl=en>`_
 - `Grok <https://groq.com/>`_
 - `Hugging Face <https://huggingface.co/>`_
+- `Microsoft Azure <https://azure.microsoft.com/en-us/>`_
 - `OpenAI <https://openai.com/>`_
 
 To connect to other services, users can develop `new model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_new_model_classes.html>`_.
