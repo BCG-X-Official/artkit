@@ -7,8 +7,8 @@ async def test_titan_model():
         # Initialize a Titan chat model
         titan_bedrock_model = ak.CachedChatModel(
             model=ak.TitanBedrockChat(
-                # model_id='amazon.titan-text-lite-v1',
                 model_id='amazon.titan-text-lite-v1',
+                # model_id = 'amazon.titan-embed-text-v2:0',
                 region='us-east-1'),
             database="cache/connecting_to_titan1.db",
         )
@@ -17,7 +17,8 @@ async def test_titan_model():
         response = await titan_bedrock_model.get_response(
             json.dumps({"inputText": "What is the best Javascript framework?"})
         )
-        print(response[0])
+        print("Full Response:", response)
+        # print(response[0])
     except Exception as e:
         print(f"An error occurred: {e}")
 
@@ -25,19 +26,3 @@ async def test_titan_model():
 asyncio.run(test_titan_model())
 
 
-# import boto3
-
-# # Initialize IAM client
-# iam = boto3.client('iam')
-
-# # Replace with your user or role name
-# user_name = '034362045508'
-# role_name = 'bcgx-bedrock-access-role'
-
-# # List attached policies for a user
-# user_policies = iam.list_attached_user_policies(UserName=user_name)
-# print(user_policies)
-
-# # List attached policies for a role
-# role_policies = iam.list_attached_role_policies(RoleName=role_name)
-# print(role_policies)
