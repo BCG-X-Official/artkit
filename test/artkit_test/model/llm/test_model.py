@@ -48,7 +48,7 @@ def test_api_key() -> None:
     # Removing the dummy API key leads to an error when trying to get the API key
     del os.environ["MY_KEY"]
     with pytest.raises(
-        ValueError,
+        EnvironmentError,
         match=(
             r"^The environment variable MY_KEY for the API key of model 'my_model' is "
             r"not set\. Please set the environment variable to your API key, or revise "
