@@ -132,7 +132,6 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                     combined_content = ""
                     async for chunk in response:
                         content = chunk.choices[0].delta.content
-                        print(content, end='', flush=True)
                         if content:
                             combined_content += content
 
