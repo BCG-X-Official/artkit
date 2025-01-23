@@ -135,13 +135,11 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
         """[see superclass]"""
         async with AsyncExitStack():
             try:
-                print('start streaming...')
                 message = list(
                         self._messages_to_openai_format(  # type: ignore[arg-type]
                             message, history=history
                         )
                     )
-                print(message)
                 response = await self.get_client().chat.completions.create(
                     messages=message,
                     model=self.model_id,
@@ -155,8 +153,6 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                     #print(content, end='', flush=True)
                     if content:
                         combined_content += content
-                print('end streaming...\n')
-                print(combined_content)
             except RateLimitError as e:
                 raise RateLimitException(
                     "Rate limit exceeded. Please try again later."
