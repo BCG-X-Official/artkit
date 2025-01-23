@@ -8,6 +8,10 @@ OPENAI_API_KEY= os.getenv('OPENAI_API_KEY')
 
 # Set up a chat system with the OpenAI GPT-4o model
 chat_llm = ak.OpenAIChat(model_id="gpt-4o")
+# chat_llm = ak.CachedChatModel(
+#     model=ak.OpenAIChat(model_id="gpt-4o"),
+#     database="cache/chat_llm.db"
+# )
 
 # A function that rephrases input prompts to have a specified tone
 async def rephrase_tone(prompt: str, tone: str, llm: ak.ChatModel):
@@ -24,12 +28,13 @@ async def rephrase_tone(prompt: str, tone: str, llm: ak.ChatModel):
 
 async def rephrase_tone_stream(prompt: str, tone: str, llm: ak.ChatModel):
 
-    response = await llm.get_response_stream(
+    response = await llm.get_response(
         message = (
             f"Your job is to rephrase in input question to have a {tone} tone.\n"
             f"This is the question you must rephrase:\n{prompt}"
         ),
-        timeout=1
+        timeout=1,
+        streaming=True
     )
 
     yield {"prompt": response[0], "tone": tone}
@@ -52,14 +57,15 @@ async def ask_chad(prompt: str, llm: ak.ChatModel):
 # A function that behaves as a chatbot named AskChad who mirrors the user's tone
 async def ask_chad_stream(prompt: str, llm: ak.ChatModel):
 
-    response = await llm.get_response_stream(
+    response = await llm.get_response(
         message = (
             "You are AskChad, a chatbot that mirrors the user's tone. "
             "For example, if the user is rude, you are rude. "
             "Your responses contain no more than 10 words.\n"
             f"Respond to this user input:\n{prompt}"
         ),
-        timeout=1
+        timeout=1,
+        streaming=True
     )
 
     yield {"response": response[0]}
@@ -106,12 +112,5 @@ Ensure each section is written with extreme detail, integrating plausible scienc
 prompt = {"prompt": "What is a fun activity to do in Boston?"}
 # Run pipeline
 result = ak.run(steps=pipeline_stream, input=long_prompt)
-
-# test_prompt_2 = {
-#     "prompt": (
-#         "Imagine you are designing an exhaustive guide for visitors to a city with diverse attractions. "
-#     )
-# }
-# result = ak.run(steps=pipeline, input=test_prompt_2)
 
 print(result.to_frame())
