@@ -118,6 +118,7 @@ class CachedChatModel(
         message: str,
         *,
         history: ChatHistory | None = None,
+        streaming: bool = False,  # streaming argument
         **model_params: dict[str, Any],
     ) -> list[str]:
         """[see superclass]"""
@@ -140,7 +141,7 @@ class CachedChatModel(
             return self._put(
                 prompt=message,
                 responses=await self.model.get_response(
-                    message, history=history, **model_params
+                    message, history=history, streaming=streaming, **model_params
                 ),
                 **model_params_merged,
             )
