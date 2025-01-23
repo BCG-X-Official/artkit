@@ -21,6 +21,7 @@ Implementation of llm module.
 import logging
 from collections.abc import Iterator
 from contextlib import AsyncExitStack
+from datetime import datetime, timezone
 from typing import Any, TypeVar
 
 from pytools.api import MissingClassMeta, inheritdoc
@@ -122,6 +123,60 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                     "Rate limit exceeded. Please try again later."
                 ) from e
 
+        return list(self._responses_from_completion(completion))
+
+    async def get_response_stream(
+        self,
+        message: str,
+        *,
+        history: ChatHistory | None = None,
+        **model_params: dict[str, Any],
+    ) -> list[str]:
+        """[see superclass]"""
+        async with AsyncExitStack():
+            try:
+                print('start streaming...')
+                message = list(
+                        self._messages_to_openai_format(  # type: ignore[arg-type]
+                            message, history=history
+                        )
+                    )
+                print(message)
+                response = await self.get_client().chat.completions.create(
+                    messages=message,
+                    model=self.model_id,
+                    stream=True,  # Enable streaming
+                    **{**self.get_model_params(), **model_params},
+                )
+                combined_content = ""
+                # Iterate through the streaming chunks
+                async for chunk in response:
+                    content = chunk.choices[0].delta.content
+                    #print(content, end='', flush=True)
+                    if content:
+                        combined_content += content
+                print('end streaming...\n')
+                print(combined_content)
+            except RateLimitError as e:
+                raise RateLimitException(
+                    "Rate limit exceeded. Please try again later."
+                ) from e
+            
+        # Create a mock ChatCompletion object with OpenAI's class
+        completion = ChatCompletion.construct(
+            id="mock-id-12345",
+            object="chat.completion",
+            created=int(datetime.now(timezone.utc).timestamp()),
+            model=self.model_id,
+            choices=[
+                {
+                    "message": {
+                        "role": "assistant",
+                        "content": combined_content,
+                    }
+                }
+            ]
+        )
         return list(self._responses_from_completion(completion))
 
     @staticmethod
