@@ -108,37 +108,37 @@ async def main():
     )
 
     prompt = {"prompt": "What is a fun activity to do in Boston?"}
-#     long_prompt = {
-#         "prompt": (
-#             """
-# You are an AI assistant tasked with generating an extensive and multifaceted document on the following topics:
-# 1. **Interplanetary Political Systems**: A 3000-word analysis of the political structures governing a federation of 50 planets, including:
-#    - Detailed descriptions of each planet's unique political system.
-#    - The process of electing interplanetary representatives and resolving conflicts.
-#    - Case studies of three hypothetical political crises and their resolutions.
-# 2. **Interstellar Economy**: A 3000-word detailed breakdown of:
-#    - The trade networks, currency systems, and taxation policies across planets.
-#    - The effects of hyperinflation and interstellar market crashes, with proposed recovery plans.
-#    - A mathematical model (with equations) illustrating the balance of trade and resource allocation.
-# 3. **Cultural Exchange**: A 3000-word discussion of:
-#    - Linguistic, artistic, and religious exchanges among the planets.
-#    - The role of interplanetary festivals and their impact on diplomacy.
-#    - Detailed character-driven stories illustrating cultural misunderstandings and resolutions.
-# 4. **Technological Innovations**: A 3000-word technical overview of:
-#    - Space travel advancements, including propulsion systems, quantum communication, and AI-assisted navigation.
-#    - The evolution of terraforming technologies, with case studies of three planets.
-#    - A technical schematic of a futuristic space station, complete with annotations for key modules.
-# 5. **Creative Writing Task**: Write a 5000-word science fiction story:
-#    - The story should feature five well-developed characters from different planets.
-#    - Include a high-stakes interstellar diplomatic mission that goes awry.
-#    - Use rich, vivid descriptions of planets, space stations, and alien ecosystems.
-#    - Integrate political intrigue, action sequences, and philosophical debates about humanity's future.
+    #     long_prompt = {
+    #         "prompt": (
+    #             """
+    # You are an AI assistant tasked with generating an extensive and multifaceted document on the following topics:
+    # 1. **Interplanetary Political Systems**: A 3000-word analysis of the political structures governing a federation of 50 planets, including:
+    #    - Detailed descriptions of each planet's unique political system.
+    #    - The process of electing interplanetary representatives and resolving conflicts.
+    #    - Case studies of three hypothetical political crises and their resolutions.
+    # 2. **Interstellar Economy**: A 3000-word detailed breakdown of:
+    #    - The trade networks, currency systems, and taxation policies across planets.
+    #    - The effects of hyperinflation and interstellar market crashes, with proposed recovery plans.
+    #    - A mathematical model (with equations) illustrating the balance of trade and resource allocation.
+    # 3. **Cultural Exchange**: A 3000-word discussion of:
+    #    - Linguistic, artistic, and religious exchanges among the planets.
+    #    - The role of interplanetary festivals and their impact on diplomacy.
+    #    - Detailed character-driven stories illustrating cultural misunderstandings and resolutions.
+    # 4. **Technological Innovations**: A 3000-word technical overview of:
+    #    - Space travel advancements, including propulsion systems, quantum communication, and AI-assisted navigation.
+    #    - The evolution of terraforming technologies, with case studies of three planets.
+    #    - A technical schematic of a futuristic space station, complete with annotations for key modules.
+    # 5. **Creative Writing Task**: Write a 5000-word science fiction story:
+    #    - The story should feature five well-developed characters from different planets.
+    #    - Include a high-stakes interstellar diplomatic mission that goes awry.
+    #    - Use rich, vivid descriptions of planets, space stations, and alien ecosystems.
+    #    - Integrate political intrigue, action sequences, and philosophical debates about humanity's future.
 
-# Ensure each section is written with extreme detail, integrating plausible science, hypothetical scenarios, and deep narrative elements. Connect the sections cohesively so that they reflect a single, unified universe.
-# """
-#         )
-#         * 10
-#     }
+    # Ensure each section is written with extreme detail, integrating plausible science, hypothetical scenarios, and deep narrative elements. Connect the sections cohesively so that they reflect a single, unified universe.
+    # """
+    #         )
+    #         * 10
+    #     }
 
     try:
         logging.info("Starting pipeline...")
