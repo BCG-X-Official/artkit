@@ -1,7 +1,8 @@
-import openai
-import os
-from dotenv import load_dotenv
 import asyncio
+import os
+
+import openai
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
