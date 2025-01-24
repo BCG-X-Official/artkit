@@ -148,7 +148,7 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                                     "content": combined_content,
                                 }
                             }
-                        ]
+                        ],
                     )
                     return list(self._responses_from_completion(completion))
                 else:
@@ -159,7 +159,7 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                 raise RateLimitException(
                     "Rate limit exceeded. Please try again later."
                 ) from e
-        
+
     @staticmethod
     def _responses_from_completion(completion: ChatCompletion) -> Iterator[str]:
         """
