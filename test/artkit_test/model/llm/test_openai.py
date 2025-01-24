@@ -79,3 +79,59 @@ async def test_cached_openai(
         message="What color is the sky? Please answer in one word."
     )
     assert "blue" in messages[0].lower()
+
+
+@pytest.mark.asyncio
+async def test_get_response_non_streaming(openai_chat: OpenAIChat):
+    """
+    Test get_response function with streaming=False
+    """
+    # Mock get_client() and its behavior
+    with patch.object(openai_chat, "get_client", autospec=True) as mock_get_client:
+        # Mock the API response for non-streaming
+        mock_response = MagicMock(
+            choices=[MagicMock(message=MagicMock(content="alice", role="assistant"))]
+        )
+        mock_get_client.return_value.chat.completions.create = AsyncMock(
+            return_value=mock_response
+        )
+
+        # Call the function being tested
+        messages = await openai_chat.get_response(
+            message="What is your name?",
+            streaming=False,
+        )
+
+        # Assertions
+        assert "alice" in messages[0].lower()
+
+
+@pytest.mark.asyncio
+async def test_get_response_streaming(openai_chat: OpenAIChat):
+    """
+    Test get_response function with streaming=True
+    """
+    # Mock get_client() and its behavior
+    with patch.object(openai_chat, "get_client", autospec=True) as mock_get_client:
+        # Mock streaming response chunks
+        async def mock_streaming_response(*args, **kwargs):
+            chunks = [
+                MagicMock(choices=[MagicMock(delta=MagicMock(content="al"))]),
+                MagicMock(choices=[MagicMock(delta=MagicMock(content="ice"))]),
+            ]
+            for chunk in chunks:
+                yield chunk
+
+        # Set up the mock for the streaming response
+        mock_get_client.return_value.chat.completions.create = AsyncMock(
+            side_effect=mock_streaming_response
+        )
+
+        # Call the function being tested
+        messages = await openai_chat.get_response(
+            message="What is your name?",
+            streaming=True,
+        )
+
+        # Assertions
+        assert "alice" in messages[0].lower()
