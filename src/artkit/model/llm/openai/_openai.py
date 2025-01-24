@@ -108,7 +108,8 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
         **model_params: dict[str, Any],
     ) -> list[str]:
         """
-        Handles both streaming and non-streaming responses based on the `streaming` flag.
+        Handles both streaming and non-streaming responses
+        based on the `streaming` flag.
         """
         async with AsyncExitStack():
             try:
