@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Set up OpenAI API key
 openai.api_key = OPENAI_API_KEY
@@ -44,15 +44,15 @@ async def get_response_without_streaming():
     try:
         async_client = openai.AsyncOpenAI(api_key=OPENAI_API_KEY)
         response = await async_client.chat.completions.create(
-                model="gpt-4",
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": (long_prompt)*10}
-                ],
-                timeout=1
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": (long_prompt) * 10},
+            ],
+            timeout=1,
         )
         print("Response received (non-streaming):")
-        print(response['choices'][0]['message']['content'])
+        print(response["choices"][0]["message"]["content"])
     except Exception as e:
         print(f"Error without streaming: {e}")
 
@@ -65,10 +65,10 @@ async def get_response_with_streaming():
             model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": (long_prompt)*10}
+                {"role": "user", "content": (long_prompt) * 10},
             ],
             stream=True,  # Enable streaming
-            timeout=1
+            timeout=1,
         )
         combined_content = ""
         print("Streaming response:")
@@ -77,7 +77,7 @@ async def get_response_with_streaming():
             content = chunk.choices[0].delta.content
             if content:
                 combined_content += content
-            print(content, end='', flush=True)
+            print(content, end="", flush=True)
     except Exception as e:
         print(f"Error with streaming: {e}")
 
