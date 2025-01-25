@@ -20,6 +20,7 @@ Implementation of CachedLLM.
 
 from __future__ import annotations
 
+import inspect
 import logging
 from typing import Any, Generic, TypeVar
 
@@ -118,10 +119,16 @@ class CachedChatModel(
         message: str,
         *,
         history: ChatHistory | None = None,
-        streaming: bool = False,  # streaming argument
         **model_params: dict[str, Any],
     ) -> list[str]:
         """[see superclass]"""
+
+        # Check if the model supports a 'stream' argument and if so
+        # add 'stream' to the model_params, using the user-defined
+        # value if it exists and defaulting to false otherwise
+        model_signature = inspect.signature(self.model.get_response)
+        if "stream" in model_signature.parameters:
+            model_params["stream"] = model_params.get("stream", False)
 
         model_params_merged = {**self.get_model_params(), **model_params}
         # Add the chat flag to the model params to avoid collisions
@@ -141,7 +148,7 @@ class CachedChatModel(
             return self._put(
                 prompt=message,
                 responses=await self.model.get_response(
-                    message, history=history, streaming=streaming, **model_params
+                    message, history=history, **model_params
                 ),
                 **model_params_merged,
             )
