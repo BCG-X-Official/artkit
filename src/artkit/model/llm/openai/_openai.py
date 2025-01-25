@@ -26,14 +26,14 @@ from typing import Any, TypeVar
 
 from pytools.api import MissingClassMeta, inheritdoc
 
-from ...util import RateLimitException, APITimeOutException
+from ...util import APITimeOutException, RateLimitException
 from ..base import ChatModelConnector
 from ..history import ChatHistory
 
 log = logging.getLogger(__name__)
 
 try:
-    from openai import AsyncOpenAI, RateLimitError, APITimeoutError
+    from openai import APITimeoutError, AsyncOpenAI, RateLimitError
     from openai.types.chat import ChatCompletion
 except ImportError:  # pragma: no cover
 

@@ -19,8 +19,8 @@ This file contains custom exception classes for the models.
 """
 
 __all__ = [
-    "RateLimitException",
     "APITimeOutException",
+    "RateLimitException",
 ]
 
 
