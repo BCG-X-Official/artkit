@@ -116,14 +116,14 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
             try:
                 # Format the message and (optional) history for the OpenAI API
                 messages = list(
-                    self._messages_to_openai_format(  # type: ignore[arg-type]
+                    self._messages_to_openai_format(
                         message, history=history
                     )
                 )
 
                 # Call the OpenAI API with or without streaming
                 response = await self.get_client().chat.completions.create(
-                    messages=messages,
+                    messages=messages,  # type: ignore[arg-type]
                     model=self.model_id,
                     **{**self.get_model_params(), **model_params},
                 )
@@ -169,12 +169,10 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                     type(e).__name__,
                 )
                 raise APITimeOutException from e
-
+            
             except Exception as e:
                 logging.exception(
-                    "An error of type %s occurred: %s\n",
-                    type(e).__name__,
-                    e,
+                    "An error of type %s occurred: %s\n", type(e).__name__, e,
                 )
                 raise RuntimeError("Request failed due to the above error.") from e
 
