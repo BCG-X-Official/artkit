@@ -109,7 +109,7 @@ async def test_get_response_non_streaming(openai_chat: OpenAIChat):
 @pytest.mark.asyncio
 async def test_get_response_streaming(openai_chat: OpenAIChat):
     """
-    Test get_response function with streaming=True
+    Test get_response function with stream=True
     """
     # Mock get_client() and its behavior
     with patch.object(openai_chat, "get_client", autospec=True) as mock_get_client:
@@ -130,7 +130,7 @@ async def test_get_response_streaming(openai_chat: OpenAIChat):
         # Call the function being tested
         messages = await openai_chat.get_response(
             message="What is your name?",
-            streaming=True,
+            stream=True,
         )
 
         # Assertions

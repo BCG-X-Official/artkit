@@ -106,10 +106,7 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
         history: ChatHistory | None = None,
         **model_params: dict[str, Any],
     ) -> list[str]:
-        """
-        Handles streaming if stream=True is passed as an optional
-        argument. By default, makes non-streaming requests.
-        """
+        """[see superclass]"""
         stream = model_params.get("stream", False)
 
         async with AsyncExitStack():
