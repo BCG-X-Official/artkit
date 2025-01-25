@@ -62,7 +62,7 @@ async def rephrase_tone_stream(prompt: str, tone: str, llm: ak.ChatModel):
             f"This is the question you must rephrase:\n{prompt}"
         ),
         timeout=1,
-        streaming=True,
+        stream=True,
     )
     yield {"prompt": response[0], "tone": tone}
 
@@ -91,7 +91,7 @@ async def ask_chad_stream(prompt: str, llm: ak.ChatModel):
             f"Respond to this user input:\n{prompt}"
         ),
         timeout=1,
-        streaming=True,
+        stream=True,
     )
     yield {"response": response[0]}
 
@@ -140,7 +140,7 @@ async def main():
 
     logging.info("Testing a long prompt WITH streaming...")
     try:
-        response_stream = await chat_llm.get_response(long_prompt, streaming=True)
+        response_stream = await chat_llm.get_response(long_prompt, stream=True)
         logging.info(response_stream[0])
     except Exception as e:
         logging.error("Long prompt failed: %s", e)
