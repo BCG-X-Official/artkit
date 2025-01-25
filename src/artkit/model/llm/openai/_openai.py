@@ -104,13 +104,14 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
         message: str,
         *,
         history: ChatHistory | None = None,
-        streaming: bool = False,  # streaming argument
         **model_params: dict[str, Any],
     ) -> list[str]:
         """
-        Handles both streaming and non-streaming responses
-        based on the `streaming` flag.
+        Handles streaming if stream=True is passed as an optional
+        argument. By default, makes non-streaming requests.
         """
+        stream = model_params.get("stream", False)
+
         async with AsyncExitStack():
             try:
                 # Format the message for the OpenAI API
@@ -124,11 +125,10 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                 response = await self.get_client().chat.completions.create(
                     messages=messages,
                     model=self.model_id,
-                    stream=streaming,  # Dynamically set streaming mode
                     **{**self.get_model_params(), **model_params},
                 )
 
-                if streaming:
+                if stream:
                     # For streaming, yield chunks as they are received
                     combined_content = ""
                     async for chunk in response:
@@ -165,7 +165,7 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                 logging.error("An error occurred: %s", e)
                 logging.error("If your request timed out and you are "
                               "processing long inputs or generating large "
-                              "outputs, try setting `streaming=True` "
+                              "outputs, try setting `stream=True` "
                               "to reduce latency.")
 
     @staticmethod
