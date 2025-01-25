@@ -25,7 +25,6 @@ from datetime import datetime, timezone
 from typing import Any, TypeVar
 
 from pytools.api import MissingClassMeta, inheritdoc
-from openai import APITimeoutError
 
 from ...util import RateLimitException, APITimeOutException
 from ..base import ChatModelConnector
@@ -34,7 +33,7 @@ from ..history import ChatHistory
 log = logging.getLogger(__name__)
 
 try:
-    from openai import AsyncOpenAI, RateLimitError
+    from openai import AsyncOpenAI, RateLimitError, APITimeoutError
     from openai.types.chat import ChatCompletion
 except ImportError:  # pragma: no cover
 
@@ -116,9 +115,7 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
             try:
                 # Format the message and (optional) history for the OpenAI API
                 messages = list(
-                    self._messages_to_openai_format(
-                        message, history=history
-                    )
+                    self._messages_to_openai_format(message, history=history)
                 )
 
                 # Call the OpenAI API with or without streaming
@@ -129,6 +126,9 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                 )
 
                 if stream:
+                    if not hasattr(response, "__aiter__"):
+                        raise TypeError("Response is not an async iterable")
+
                     # Yield chunks as they are received
                     combined_content = ""
                     async for chunk in response:
@@ -169,10 +169,12 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                     type(e).__name__,
                 )
                 raise APITimeOutException from e
-            
+
             except Exception as e:
                 logging.exception(
-                    "An error of type %s occurred: %s\n", type(e).__name__, e,
+                    "An error of type %s occurred: %s\n",
+                    type(e).__name__,
+                    e,
                 )
                 raise RuntimeError("Request failed due to the above error.") from e
 
