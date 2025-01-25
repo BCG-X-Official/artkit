@@ -25,8 +25,9 @@ from datetime import datetime, timezone
 from typing import Any, TypeVar
 
 from pytools.api import MissingClassMeta, inheritdoc
+from openai import APITimeoutError
 
-from ...util import RateLimitException
+from ...util import RateLimitException, APITimeOutException
 from ..base import ChatModelConnector
 from ..history import ChatHistory
 
@@ -107,11 +108,13 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
         **model_params: dict[str, Any],
     ) -> list[str]:
         """[see superclass]"""
+
+        # Check if 'stream' is given as an optional argument
         stream = model_params.get("stream", False)
 
         async with AsyncExitStack():
             try:
-                # Format the message for the OpenAI API
+                # Format the message and (optional) history for the OpenAI API
                 messages = list(
                     self._messages_to_openai_format(  # type: ignore[arg-type]
                         message, history=history
@@ -126,7 +129,7 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                 )
 
                 if stream:
-                    # For streaming, yield chunks as they are received
+                    # Yield chunks as they are received
                     combined_content = ""
                     async for chunk in response:
                         content = chunk.choices[0].delta.content
@@ -150,7 +153,7 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                     )
                     return list(self._responses_from_completion(completion))
                 else:
-                    # For non-streaming, process the entire response
+                    # If response was not streamed
                     return list(self._responses_from_completion(response))
 
             except RateLimitError as e:
@@ -158,14 +161,24 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                     "Rate limit exceeded. Please try again later."
                 ) from e
 
-            except Exception as e:
-                logging.error("An error occurred: %s", e)
+            except APITimeoutError as e:
                 logging.error(
-                    "If your request timed out and you are "
-                    "processing long inputs or generating large "
-                    "outputs, try setting `stream=True` "
-                    "to reduce latency."
+                    "An error of type %s occurred: If your request timed out and "
+                    "you are processing long inputs or outputs, try setting "
+                    "stream=True in the get_response call to reduce latency.",
+                    type(e).__name__,
                 )
+                raise APITimeOutException from e
+
+            except Exception as e:
+                logging.exception(
+                    "An error of type %s occurred: %s\n",
+                    type(e).__name__,
+                    e,
+                )
+                raise RuntimeError("Request failed due to the above error.") from e
+
+        return []  # Theoretical fallback
 
     @staticmethod
     def _responses_from_completion(completion: ChatCompletion) -> Iterator[str]:
