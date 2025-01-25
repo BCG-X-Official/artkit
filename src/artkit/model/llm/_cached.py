@@ -128,7 +128,8 @@ class CachedChatModel(
         # value if it exists and defaulting to false otherwise
         model_signature = inspect.signature(self.model.get_response)
         if "stream" in model_signature.parameters:
-            model_params["stream"] = model_params.get("stream", False)
+            # fmt: off
+            model_params["stream"] = model_params.get("stream", False)  # type: ignore[arg-type]
 
         model_params_merged = {**self.get_model_params(), **model_params}
         # Add the chat flag to the model params to avoid collisions

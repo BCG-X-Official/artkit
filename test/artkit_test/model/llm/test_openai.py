@@ -1,3 +1,5 @@
+from collections.abc import AsyncGenerator
+from typing import Any
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -82,7 +84,7 @@ async def test_cached_openai(
 
 
 @pytest.mark.asyncio
-async def test_get_response_non_streaming(openai_chat: OpenAIChat):
+async def test_get_response_non_streaming(openai_chat: OpenAIChat) -> None:
     """
     Test get_response function with streaming=False
     """
@@ -99,7 +101,7 @@ async def test_get_response_non_streaming(openai_chat: OpenAIChat):
         # Call the function being tested
         messages = await openai_chat.get_response(
             message="What is your name?",
-            streaming=False,
+            stream=False,  # type: ignore[arg-type]
         )
 
         # Assertions
@@ -107,14 +109,16 @@ async def test_get_response_non_streaming(openai_chat: OpenAIChat):
 
 
 @pytest.mark.asyncio
-async def test_get_response_streaming(openai_chat: OpenAIChat):
+async def test_get_response_streaming(openai_chat: OpenAIChat) -> None:
     """
     Test get_response function with stream=True
     """
     # Mock get_client() and its behavior
     with patch.object(openai_chat, "get_client", autospec=True) as mock_get_client:
         # Mock streaming response chunks
-        async def mock_streaming_response(*args, **kwargs):
+        async def mock_streaming_response(
+            *args: tuple[Any, ...], **kwargs: dict[str, Any]
+        ) -> AsyncGenerator[MagicMock, None]:
             chunks = [
                 MagicMock(choices=[MagicMock(delta=MagicMock(content="al"))]),
                 MagicMock(choices=[MagicMock(delta=MagicMock(content="ice"))]),
@@ -130,7 +134,7 @@ async def test_get_response_streaming(openai_chat: OpenAIChat):
         # Call the function being tested
         messages = await openai_chat.get_response(
             message="What is your name?",
-            stream=True,
+            stream=True,  # type: ignore[arg-type]
         )
 
         # Assertions

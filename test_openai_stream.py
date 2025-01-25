@@ -96,8 +96,6 @@ async def ask_chad_stream(prompt: str, llm: ak.ChatModel):
     yield {"response": response[0]}
 
 
-
-
 async def main():
 
     # chat_llm = ak.CachedChatModel(
@@ -118,7 +116,6 @@ async def main():
     result = ak.run(steps=pipeline_non_stream, input=prompt)
     logging.info("Pipeline executed successfully.")
     logging.info(result.to_frame())
-
 
     logging.info("Testing a quick streaming pipeline...")
     pipeline_stream = ak.chain(
@@ -143,7 +140,7 @@ async def main():
         logging.info(response_stream[0])
     except Exception as e:
         logging.error("Long prompt failed: %s", e)
-    
+
 
 if __name__ == "__main__":
     asyncio.run(main())
