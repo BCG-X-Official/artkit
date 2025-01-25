@@ -100,12 +100,12 @@ async def ask_chad_stream(prompt: str, llm: ak.ChatModel):
 
 async def main():
 
-    # chat_llm = ak.CachedChatModel(
-    #     model=ak.OpenAIChat(model_id="gpt-4o", api_key_env="OPENAI_API_KEY"),
-    #     database="cache/chat_llm.db",
-    # )
+    chat_llm = ak.CachedChatModel(
+        model=ak.OpenAIChat(model_id="gpt-4o", api_key_env="OPENAI_API_KEY"),
+        database="cache/chat_llm.db",
+    )
 
-    chat_llm = ak.OpenAIChat(model_id="gpt-4o", api_key_env="OPENAI_API_KEY")
+    #chat_llm = ak.OpenAIChat(model_id="gpt-4o", api_key_env="OPENAI_API_KEY")
 
     prompt = {"prompt": "What is a fun activity to do in Boston?"}
 
