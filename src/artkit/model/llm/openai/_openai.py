@@ -160,6 +160,13 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
                 raise RateLimitException(
                     "Rate limit exceeded. Please try again later."
                 ) from e
+            
+            except Exception as e:
+                logging.error("An error occurred: %s", e)
+                logging.error("If your request timed out and you are "
+                              "processing long inputs or generating large "
+                              "outputs, try setting `streaming=True` "
+                              "to reduce latency.")
 
     @staticmethod
     def _responses_from_completion(completion: ChatCompletion) -> Iterator[str]:
