@@ -55,7 +55,7 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
     @classmethod
     def get_default_api_key_env(cls) -> str:
         """vLLM requires no API key since it's a self-managed server."""
-        return ""
+        return "EMPTY"
 
     def _make_client(self) -> AsyncOpenAI:  # pragma: no cover
         """
@@ -81,6 +81,7 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
         max_retries: int = 10,
         system_prompt: str | None = None,
         vllm_url: str,
+        api_key: str = "EMPTY",
         **model_params: Any,
     ) -> None:
         """
@@ -169,20 +170,11 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
             yield str(message.content)
             
     def _validate_chat_endpoint_and_payload(self) -> None:
-        """Validate the /chat/completions endpoint and payload structure."""
+        """Validate the /v1/chat/completions endpoint and payload structure."""
         chat_endpoint = f"{self.vllm_url}/chat/completions"
         try:
-            # Step 1: Validate that the endpoint exists
-            response = requests.options(chat_endpoint, timeout=10)
-            if response.status_code != 200:
-                raise ValueError(
-                    f"The /chat/completions endpoint at {chat_endpoint} is not accessible. "
-                    f"Please ensure that your vLLM server supports chat models and is running the OpenAI-compatible API. "
-                    f"See https://docs.vllm.ai/en/latest/models/supported_models.html for details."
-                )
-            logger.info(f"Validated chat endpoint: {chat_endpoint}")
-
-            # Step 2: Validate the endpoint's ability to handle a sample payload
+            # NOTE: The vLLM /v1/chat/completions API doesn't support OPTIONS, so use
+            # POST with error handling to confirm the endpoint's existance
             sample_payload = {
                 "model": self.model_id,
                 "messages": [
@@ -200,24 +192,29 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
             )
 
             # Handle errors when the payload fails
-            if payload_response.status_code == 400:
+            if payload_response.status_code == 404:
                 raise ValueError(
-                    f"The /chat/completions endpoint rejected the payload. This may be because the model '{self.model_id}' "
+                    f"The /v1/chat/completions endpoint at {chat_endpoint} does not exist. "
+                    f"Please ensure that your vLLM server is running the OpenAI-compatible API."
+                )
+            elif payload_response.status_code == 400:
+                raise ValueError(
+                    f"The /v1/chat/completions endpoint rejected the payload. This may be because the model '{self.model_id}' "
                     f"is not supported or the payload structure is invalid. Please verify your model compatibility at "
                     f"https://docs.vllm.ai/en/latest/models/supported_models.html. Response: {payload_response.text}"
                 )
             elif payload_response.status_code != 200:
                 raise ValueError(
-                    f"The /chat/completions endpoint at {chat_endpoint} returned an unexpected error: "
+                    f"The /v1/chat/completions endpoint at {chat_endpoint} returned an unexpected error: "
                     f"{payload_response.status_code}, {payload_response.text}. "
                     f"Ensure the vLLM server is running properly."
                 )
 
-            # Step 3: Validate the response structure
+            # Validate the response structure
             result = payload_response.json()
             if not isinstance(result, dict) or "choices" not in result:
                 raise ValueError(
-                    f"The /chat/completions endpoint returned an unexpected response structure: {result}. "
+                    f"The /v1/chat/completions endpoint returned an unexpected response structure: {result}. "
                     f"Ensure the server supports the OpenAI API spec."
                 )
 
