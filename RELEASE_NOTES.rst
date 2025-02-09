@@ -1,6 +1,12 @@
 Release Notes
 =============
 
+*artkit* 1.0.11
+--------------
+This release adds a connector for the [vLLM](https://github.com/vllm-project/vllm) LLM server.
+
+- API: Added :class:`.VLLMChat` to allow ARTKIT to interface with vLLM-compatible LLM servers.
+
 *artkit* 1.0.10
 --------------
 This release adds access to Azure OpenAI models and adds missing caches for documentation notebooks.
@@ -8,12 +14,6 @@ This release adds access to Azure OpenAI models and adds missing caches for docu
 - API: Added :class:`.AzureOpenAIChat` to grant users access to models deployed on Azure OpenAI.
 - DOC: Added missing caches in the Connecting to GenAI Models documentation notebook.
 - DOC: Fixed some outdated and unclear instructions in the documentation.
-
-*artkit* 1.0.10
---------------
-This release adds a connector for the [vLLM](https://github.com/vllm-project/vllm) LLM server.
-
-- API: Added :class:`.VLLMChat` to allow ARTKIT to interface with vLLM-compatible LLM servers.
 
 *artkit* 1.0.9
 --------------
