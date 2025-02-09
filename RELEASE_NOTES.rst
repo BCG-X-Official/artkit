@@ -12,14 +12,6 @@ This release adds a connector for the [vLLM](https://github.com/vllm-project/vll
 This release adds access to Azure OpenAI models and adds missing caches for documentation notebooks.
 
 - API: Added :class:`.AzureOpenAIChat` to grant users access to models deployed on Azure OpenAI.
-- DOC: Added missing caches in the Connecting to GenAI Models documentation notebook.
-- DOC: Fixed some outdated and unclear instructions in the documentation.
-
-*artkit* 1.0.9
---------------
-This release adds access to Azure OpenAI models and adds missing caches for documentation notebooks.
-
-- API: Added :class:`.AzureOpenAIChat` to grant users access to models deployed on Azure OpenAI.
 - API: Update :class:`.TitanBedrockChat().get_response` to accept a plain message string instead of a JSON string.
 - DOC: Added missing caches in the Connecting to GenAI Models documentation notebook.
 - DOC: Fixed some outdated and unclear instructions in the documentation.
