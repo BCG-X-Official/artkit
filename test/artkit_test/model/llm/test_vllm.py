@@ -10,18 +10,21 @@ _ = pytest.importorskip("google.generativeai")
 
 
 @pytest.mark.asyncio
-async def test_vllm(vllm_chat: VLLMChat) -> None:
+async def test_vllm() -> None:
     # Mock openai Client
     with patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client:
-        # Mock openai Client response
+        # Mock OpenAI Client response
         mock_response = AsyncMock(
             return_value=AsyncMock(
                 choices=[MagicMock(message=MagicMock(content="blue", role="assistant"))]
             )
         )
 
-        # Set mock response as return value
+        # Apply the mock response
         mock_get_client.return_value.chat.completions.create = mock_response
+
+        # Instantiate VLLMChat AFTER applying the mock
+        vllm_chat = VLLMChat(model_id="gpt-3.5-turbo", vllm_url="http://localhost:8000")
 
         # Call mocked model
         messages = await vllm_chat.get_response(
@@ -31,16 +34,13 @@ async def test_vllm(vllm_chat: VLLMChat) -> None:
 
 
 @pytest.mark.asyncio
-async def test_vllm_retry(
-    vllm_chat: VLLMChat, caplog: pytest.LogCaptureFixture
-) -> None:
+async def test_vllm_retry(caplog: pytest.LogCaptureFixture) -> None:
     # Mock openai Client
     with patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client:
-        # Set mock response as return value
+        # Set up a mock response that triggers a rate limit error
         response = MagicMock()
         response.status_code = 429
 
-        # Mock exception on method call
         mock_get_client.return_value.chat.completions.create.side_effect = (
             RateLimitError(
                 message="Rate Limit exceeded",
@@ -49,15 +49,20 @@ async def test_vllm_retry(
             )
         )
 
+        # Instantiate VLLMChat AFTER applying the mock
+        vllm_chat = VLLMChat(model_id="gpt-3.5-turbo", vllm_url="http://localhost:8000")
+
         with pytest.raises(RateLimitException):
             # Call mocked model
             await vllm_chat.get_response(
                 message="What color is the sky? Please answer in one word."
             )
+
         assert (
             mock_get_client.return_value.chat.completions.create.call_count
             == vllm_chat.max_retries
         )
+
     assert (
         len(
             [
