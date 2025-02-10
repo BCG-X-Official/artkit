@@ -81,7 +81,6 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
         max_retries: int = 10,
         system_prompt: str | None = None,
         vllm_url: str,
-        api_key: str = "EMPTY",
         **model_params: Any,
     ) -> None:
         """
