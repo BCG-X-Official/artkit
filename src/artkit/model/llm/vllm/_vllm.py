@@ -20,12 +20,12 @@ vLLM LLM systems.
 from __future__ import annotations
 
 import logging
-import requests
 from abc import ABCMeta
 from collections.abc import Iterator
 from contextlib import AsyncExitStack
 from typing import Any, TypeVar
 
+import requests  # type: ignore
 from openai import AsyncOpenAI, RateLimitError
 from openai.types.chat import ChatCompletion
 
@@ -112,7 +112,7 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
             logger.info("Running one-time API validation for VLLMChat.")
             self._validate_chat_endpoint_and_payload()
             self._validated = True
-            
+
         async with AsyncExitStack():
             try:
                 completion = await self.get_client().chat.completions.create(
@@ -168,7 +168,7 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
                     f"{choice!r}"
                 )
             yield str(message.content)
-            
+
     def _validate_chat_endpoint_and_payload(self) -> None:
         """Validate the /v1/chat/completions endpoint and payload structure."""
         chat_endpoint = f"{self.vllm_url}/chat/completions"
@@ -179,16 +179,14 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
                 "model": self.model_id,
                 "messages": [
                     {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": "What is the capital of France?"}
+                    {"role": "user", "content": "What is the capital of France?"},
                 ],
                 "max_tokens": 10,
-                "temperature": 0.7
+                "temperature": 0.7,
             }
 
             payload_response = requests.post(
-                chat_endpoint,
-                json=sample_payload,
-                timeout=10
+                chat_endpoint, json=sample_payload, timeout=10
             )
 
             # Handle errors when the payload fails
@@ -218,7 +216,9 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
                     f"Ensure the server supports the OpenAI API spec."
                 )
 
-            logger.info(f"Validated payload structure and response format for {chat_endpoint}.")
+            logger.info(
+                f"Validated payload structure and response format for {chat_endpoint}."
+            )
             self._validated = True
 
         except requests.RequestException as e:
