@@ -1,5 +1,5 @@
 from collections.abc import Generator
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 from openai import RateLimitError
@@ -13,13 +13,13 @@ _ = pytest.importorskip("google.generativeai")
 @pytest.fixture
 def mock_vllm_api() -> Generator[None, None, None]:
     """Mock the vLLM API call in CI/CD."""
-    with patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client:
-        mock_response = AsyncMock(
-            return_value=AsyncMock(
-                choices=[MagicMock(message=MagicMock(content="blue", role="assistant"))]
-            )
-        )
-        mock_get_client.return_value.chat.completions.create = mock_response
+    with patch("requests.post") as mock_post:
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "choices": [{"message": {"role": "assistant", "content": "blue"}}]
+        }
+        mock_post.return_value = mock_response
         yield
 
 

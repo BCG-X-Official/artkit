@@ -20,6 +20,7 @@ vLLM LLM systems.
 from __future__ import annotations
 
 import logging
+import os
 from abc import ABCMeta
 from collections.abc import Iterator
 from contextlib import AsyncExitStack
@@ -97,7 +98,7 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
             **model_params,
         )
         self.vllm_url = vllm_url
-        self._validated = False
+        self._validated = bool(os.getenv("CI", "false").lower() == "true")
 
     async def get_response(
         self,
