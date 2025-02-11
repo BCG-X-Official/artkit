@@ -12,29 +12,41 @@ _ = pytest.importorskip("google.generativeai")
 
 @pytest.fixture
 def mock_vllm_api() -> Generator[None, None, None]:
-    """Mock both the vLLM API validation call and response generation."""
+    """Mock vLLM API validation and request handling."""
 
-    # Mock `_validate_chat_endpoint_and_payload` so it does NOT make API requests
-    with patch("requests.post") as mock_post:
-        mock_response = MagicMock()
-        mock_response.status_code = 200
-        mock_response.json.return_value = {
-            "choices": [{"message": {"role": "assistant", "content": "blue"}}]
-        }
-        mock_post.return_value = mock_response
+    with (
+        patch(
+            "artkit.model.llm.vllm._vllm.VLLMChat._validate_chat_endpoint_and_payload",
+            autospec=True,
+        ) as _mock_validate,
+        patch(
+            "requests.post",
+            autospec=True,
+            return_value=MagicMock(
+                status_code=200,
+                json=lambda: {
+                    "choices": [{"message": {"role": "assistant", "content": "blue"}}]
+                },
+            ),
+        ) as _mock_requests,
+        patch(
+            "artkit.model.llm.vllm._vllm.AsyncOpenAI", autospec=True
+        ) as mock_get_client,
+    ):
 
-        # Mock OpenAI client response inside VLLMChat
-        with patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client:
-            mock_openai_response = AsyncMock(
-                return_value=AsyncMock(
-                    choices=[
-                        MagicMock(message=MagicMock(content="blue", role="assistant"))
-                    ]
-                )
-            )
-            mock_get_client.return_value.chat.completions.create = mock_openai_response
+        # Mock OpenAI completion response
+        mock_response = AsyncMock()
+        mock_response.choices = [
+            MagicMock(message=MagicMock(content="blue", role="assistant"))
+        ]
+        mock_get_client.return_value.chat.completions.create.return_value = (
+            mock_response
+        )
 
-            yield  # Allows the test to use this fixture
+        # Suppress Pylance warnings by explicitly referencing the mocks
+        _ = _mock_validate, _mock_requests
+
+        yield  # Ensures the mocks remain active for the test
 
 
 @pytest.mark.asyncio
@@ -43,20 +55,11 @@ async def test_vllm_retry(
 ) -> None:
     """Test VLLMChat handles rate limit retries correctly."""
 
-    # 🚀 Ensure the mock is explicitly triggered
+    # Ensure the mock is explicitly triggered
     _ = mock_vllm_api
 
     # Mock OpenAI client BEFORE instantiating VLLMChat
-    with (
-        patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client,
-        patch("requests.post") as mock_post,
-    ):
-
-        # Mock API validation to always succeed
-        mock_post.return_value.status_code = 200
-        mock_post.return_value.json.return_value = {
-            "choices": [{"message": {"role": "assistant", "content": "blue"}}]
-        }
+    with patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client:
 
         # Mock OpenAI rate limit response
         response = MagicMock()

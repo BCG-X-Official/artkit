@@ -108,7 +108,9 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
         **model_params: dict[str, Any],
     ) -> list[str]:
         """[see superclass]"""
+        logger.info("🚨 Inside get_response() - Checking if Mock Works!")
         if not self._validated:
+            logger.info("🚨 Running API validation - SHOULD BE SKIPPED IF MOCKED!")
             logger.info("Running one-time API validation for VLLMChat.")
             self._validate_chat_endpoint_and_payload()
             self._validated = True
@@ -171,6 +173,9 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
 
     def _validate_chat_endpoint_and_payload(self) -> None:
         """Validate the /v1/chat/completions endpoint and payload structure."""
+        logger.info(
+            "🚨 Inside _validate_chat_endpoint_and_payload() - Should Be Mocked!"
+        )
         chat_endpoint = f"{self.vllm_url}/chat/completions"
         try:
             # NOTE: The vLLM /v1/chat/completions API doesn't support OPTIONS, so use
@@ -187,6 +192,9 @@ class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
 
             payload_response = requests.post(
                 chat_endpoint, json=sample_payload, timeout=10
+            )
+            logger.info(
+                f"🚨 API Call Attempted: {chat_endpoint}, Response: {payload_response.status_code}"
             )
 
             # Handle errors when the payload fails
