@@ -287,5 +287,7 @@ class ClientWrapper(Generic[T_Client]):
                 try:
                     arun(close_awaitable)
                 except RuntimeError as e:
-                    if str(e) == "Event loop is closed": pass
-                    else: raise(e)
+                    if str(e) == "Event loop is closed":
+                        pass
+                    else:
+                        raise (e)
