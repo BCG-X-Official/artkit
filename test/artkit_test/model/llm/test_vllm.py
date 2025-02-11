@@ -1,3 +1,4 @@
+from collections.abc import Generator
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -9,28 +10,28 @@ from artkit.model.util import RateLimitException
 _ = pytest.importorskip("google.generativeai")
 
 
-@pytest.mark.asyncio
-async def test_vllm() -> None:
-    # Mock openai Client
+@pytest.fixture
+def mock_vllm_api() -> Generator[None, None, None]:
+    """Mock the vLLM API call in CI/CD."""
     with patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client:
-        # Mock OpenAI Client response
         mock_response = AsyncMock(
             return_value=AsyncMock(
                 choices=[MagicMock(message=MagicMock(content="blue", role="assistant"))]
             )
         )
-
-        # Apply the mock response
         mock_get_client.return_value.chat.completions.create = mock_response
+        yield
 
-        # Instantiate VLLMChat AFTER applying the mock
-        vllm_chat = VLLMChat(model_id="gpt-3.5-turbo", vllm_url="http://localhost:8000")
 
-        # Call mocked model
-        messages = await vllm_chat.get_response(
-            message="What color is the sky? Please answer in one word."
-        )
-        assert "blue" in messages[0].lower()
+@pytest.mark.asyncio
+async def test_vllm(mock_vllm_api: None) -> None:
+    """Test VLLMChat with a mocked API call."""
+    vllm_chat = VLLMChat(model_id="gpt-3.5-turbo", vllm_url="http://localhost:8000")
+
+    messages = await vllm_chat.get_response(
+        "What color is the sky? Please answer in one word."
+    )
+    assert "blue" in messages[0].lower()
 
 
 @pytest.mark.asyncio
