@@ -52,6 +52,7 @@ from .model.llm.multi_turn import *
 from .model.llm.openai import *
 from .model.llm.util import *
 from .model.llm.vertexai import *
+from .model.llm.vllm import *
 from .model.vision import *
 from .model.vision.base import VisionModel
 from .model.vision.openai import *

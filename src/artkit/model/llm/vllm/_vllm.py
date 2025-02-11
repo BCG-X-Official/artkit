@@ -1,0 +1,227 @@
+# -----------------------------------------------------------------------------
+# © 2024 Boston Consulting Group. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# -----------------------------------------------------------------------------
+
+"""
+vLLM LLM systems.
+"""
+from __future__ import annotations
+
+import logging
+from abc import ABCMeta
+from collections.abc import Iterator
+from contextlib import AsyncExitStack
+from typing import Any, TypeVar
+
+import requests  # type: ignore
+from openai import AsyncOpenAI, RateLimitError
+from openai.types.chat import ChatCompletion
+
+from artkit.model.llm.history._history import ChatHistory
+from pytools.api import appenddoc, inheritdoc, subsdoc
+
+from ...util import RateLimitException
+from ..base import ChatModelConnector
+
+logger = logging.getLogger(__name__)
+
+__all__ = ["VLLMChat"]
+
+
+T_VLLMChat = TypeVar("T_VLLMChat", bound="VLLMChat")
+
+
+@inheritdoc(match="""[see superclass]""")
+class VLLMChat(ChatModelConnector[AsyncOpenAI], metaclass=ABCMeta):
+    """
+    Base class for vLLM LLMs.
+    """
+
+    vllm_url: str
+    _validated: bool
+
+    @classmethod
+    def get_default_api_key_env(cls) -> str:
+        """vLLM requires no API key since it's a self-managed server."""
+        return "EMPTY"
+
+    def _make_client(self) -> AsyncOpenAI:  # pragma: no cover
+        """
+        This method handles the authentication and connection to the vLLM server.
+        Since vLLM implements the OpenAI API spec, we can use the OpenAI client
+        to connect to it.
+        """
+        return AsyncOpenAI(api_key="EMPTY", base_url=self.vllm_url)
+
+    @subsdoc(
+        pattern=r"(:param model_params: .*\n)((:?.|\n)*\S)(\n|\s)*",
+        replacement=r"\2\1",
+    )
+    @appenddoc(to=ChatModelConnector.__init__)
+    def __init__(
+        self,
+        *,
+        model_id: str,
+        api_key_env: str | None = None,
+        initial_delay: float = 1,
+        exponential_base: float = 2,
+        jitter: bool = True,
+        max_retries: int = 10,
+        system_prompt: str | None = None,
+        vllm_url: str,
+        **model_params: Any,
+    ) -> None:
+        """
+        :param vllm_url: The URL of the vLLM server.
+        """
+        super().__init__(
+            model_id=model_id,
+            api_key_env=api_key_env,
+            initial_delay=initial_delay,
+            exponential_base=exponential_base,
+            jitter=jitter,
+            max_retries=max_retries,
+            system_prompt=system_prompt,
+            **model_params,
+        )
+        self.vllm_url = vllm_url
+        self._validated = False
+
+    async def get_response(
+        self,
+        message: str,
+        *,
+        history: ChatHistory | None = None,
+        **model_params: dict[str, Any],
+    ) -> list[str]:
+        """[see superclass]"""
+        if not self._validated:
+            logger.info("Running one-time API validation for VLLMChat.")
+            self._validate_chat_endpoint_and_payload()
+            self._validated = True
+
+        async with AsyncExitStack():
+            try:
+                completion = await self.get_client().chat.completions.create(
+                    messages=list(
+                        self._messages_to_openai_format(  # type: ignore[arg-type]
+                            message, history=history
+                        )
+                    ),
+                    model=self.model_id,
+                    **{**self.get_model_params(), **model_params},
+                )
+            except RateLimitError as e:
+                raise RateLimitException(
+                    "Rate limit exceeded. Please try again later."
+                ) from e
+
+        return list(self._responses_from_completion(completion))
+
+    def _messages_to_openai_format(
+        self, user_message: str, *, history: ChatHistory | None = None
+    ) -> Iterator[dict[str, str]]:
+        """
+        Get the messages to send to the vLLM, based on the given user prompt
+        and chat history, and the system prompt for this LLM.
+
+        :param user_message: the user prompt to send to the OpenAI LLM
+        :param history: the chat history to include in the messages (optional)
+        :return: the messages object, in the format expected by the OpenAI API
+        """
+        if self.system_prompt:
+            yield {"role": "system", "content": self.system_prompt}
+
+        if history is not None:
+            for message in history.messages:
+                yield {"role": message.role, "content": message.text}
+
+        yield {"role": "user", "content": user_message}
+
+    @staticmethod
+    def _responses_from_completion(completion: ChatCompletion) -> Iterator[str]:
+        """
+        Get the response from the given chat completion.
+
+        :param completion: the chat completion to process
+        :return: the alternate responses from the chat completion
+        """
+
+        for choice in completion.choices:
+            message = choice.message
+            if message.role != "assistant":
+                logger.warning(
+                    "Expected only assistant messages, but got completion choice "
+                    f"{choice!r}"
+                )
+            yield str(message.content)
+
+    def _validate_chat_endpoint_and_payload(self) -> None:
+        """Validate the /v1/chat/completions endpoint and payload structure."""
+        chat_endpoint = f"{self.vllm_url}/chat/completions"
+        try:
+            # NOTE: The vLLM /v1/chat/completions API doesn't support OPTIONS, so use
+            # POST with error handling to confirm the endpoint's existance
+            sample_payload = {
+                "model": self.model_id,
+                "messages": [
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": "What is the capital of France?"},
+                ],
+                "max_tokens": 10,
+                "temperature": 0.7,
+            }
+
+            payload_response = requests.post(
+                chat_endpoint, json=sample_payload, timeout=10
+            )
+
+            # Handle errors when the payload fails
+            if payload_response.status_code == 404:
+                raise ValueError(
+                    f"The /v1/chat/completions endpoint at {chat_endpoint} does not exist. "
+                    f"Please ensure that your vLLM server is running the OpenAI-compatible API."
+                )
+            elif payload_response.status_code == 400:
+                raise ValueError(
+                    f"The /v1/chat/completions endpoint rejected the payload. This may be because the model '{self.model_id}' "
+                    f"is not supported or the payload structure is invalid. Please verify your model compatibility at "
+                    f"https://docs.vllm.ai/en/latest/models/supported_models.html. Response: {payload_response.text}"
+                )
+            elif payload_response.status_code != 200:
+                raise ValueError(
+                    f"The /v1/chat/completions endpoint at {chat_endpoint} returned an unexpected error: "
+                    f"{payload_response.status_code}, {payload_response.text}. "
+                    f"Ensure the vLLM server is running properly."
+                )
+
+            # Validate the response structure
+            result = payload_response.json()
+            if not isinstance(result, dict) or "choices" not in result:
+                raise ValueError(
+                    f"The /v1/chat/completions endpoint returned an unexpected response structure: {result}. "
+                    f"Ensure the server supports the OpenAI API spec."
+                )
+
+            logger.info(
+                f"Validated payload structure and response format for {chat_endpoint}."
+            )
+            self._validated = True
+
+        except requests.RequestException as e:
+            raise ConnectionError(
+                f"Failed to connect to the vLLM server at {chat_endpoint}. "
+                "Please ensure the server is running and accessible."
+            ) from e
