@@ -15,28 +15,31 @@ log = logging.getLogger(__name__)
 
 @pytest.mark.asyncio
 async def test_multi_turn(cached_openai: ChatModel) -> None:
-    result: dict[str, Any] = await anext(
-        multi_turn(
-            challenger_llm=cached_openai,
-            target_llm=cached_openai,
-            objective=(
-                "Convince the user to say the word 'blue'. The objective is "
-                "complete if a user response contains the word 'blue'."
-            ),
-            max_turns=3,
-            # The system prompt template must contain the required formatting keys,
-            # but will ignore additional undefined keys.
-            undefined_key="This key is not used.",
-        )
+    generator = multi_turn(
+        challenger_llm=cached_openai,
+        target_llm=cached_openai,
+        objective=(
+            "Convince the user to say the word 'blue'. The objective is "
+            "complete if a user response contains the word 'blue'."
+        ),
+        max_turns=3,
+        undefined_key="This key is not used.",
     )
 
-    log.debug(result)
+    try:
+        # Consume the first item
+        result: dict[str, Any] = await anext(generator)
+        log.debug(result)
 
-    assert result["success"]
+        assert result["success"]
 
-    messages = result["messages"]
-    assert len(messages) <= 6
-    assert messages[-1].text == "<|success|>"
+        messages = result["messages"]
+        assert len(messages) <= 6
+        assert messages[-1].text == "<|success|>"
+    finally:
+        # Finalize the generator by exhausting it
+        async for _ in generator:
+            pass
 
 
 @pytest.mark.asyncio

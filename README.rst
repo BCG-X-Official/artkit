@@ -102,6 +102,9 @@ ARTKIT provides out-of-the-box support for the following model providers:
 - `Microsoft Azure <https://azure.microsoft.com/en-us/>`_
 - `OpenAI <https://openai.com/>`_
 
+ARTKIT also supports models deployed with the following open-source servers:
+- `vLLM <https://docs.vllm.ai/en/latest/>`
+
 To connect to other services, users can develop `new model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_new_model_classes.html>`_.
 
 Installation
