@@ -1,15 +1,10 @@
 Release Notes
 =============
 
-*artkit* 1.0.10
---------------
-This release adds a connector for the [vLLM](https://github.com/vllm-project/vllm) LLM server.
-
-- API: Added :class:`.VLLMChat` to allow ARTKIT to interface with vLLM-compatible LLM servers.
-
 *artkit* 1.0.9
 --------------
-This release adds access to Azure OpenAI models and adds missing caches for documentation notebooks.
+This release adds access to Azure OpenAI models, adds a connector for [vLLM](https://github.com/vllm-project/vllm) servers,
+updates `TitanBedrockChat` to accept string inputs, and adds missing caches for documentation notebooks.
 
 - API: Added :class:`.AzureOpenAIChat` to grant users access to models deployed on Azure OpenAI.
 - API: Update :class:`.TitanBedrockChat().get_response` to accept a plain message string instead of a JSON string.
