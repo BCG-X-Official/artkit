@@ -43,14 +43,24 @@ async def test_vllm_retry(
 ) -> None:
     """Test VLLMChat handles rate limit retries correctly."""
 
-    # Explicitly trigger the mock to avoid the "not accessed" warning
+    # 🚀 Ensure the mock is explicitly triggered
     _ = mock_vllm_api
 
-    # Mock OpenAI client directly
-    with patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client:
+    # Mock OpenAI client BEFORE instantiating VLLMChat
+    with (
+        patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client,
+        patch("requests.post") as mock_post,
+    ):
+
+        # Mock API validation to always succeed
+        mock_post.return_value.status_code = 200
+        mock_post.return_value.json.return_value = {
+            "choices": [{"message": {"role": "assistant", "content": "blue"}}]
+        }
+
+        # Mock OpenAI rate limit response
         response = MagicMock()
         response.status_code = 429
-
         mock_get_client.return_value.chat.completions.create.side_effect = (
             RateLimitError(
                 message="Rate Limit exceeded",
@@ -59,11 +69,13 @@ async def test_vllm_retry(
             )
         )
 
-        # Instantiate VLLMChat AFTER applying the mocks
+        # Instantiate AFTER all mocks are applied
         vllm_chat = VLLMChat(model_id="gpt-3.5-turbo", vllm_url="http://localhost:8000")
 
         with pytest.raises(RateLimitException):
-            await vllm_chat.get_response("What color is the sky?")
+            await vllm_chat.get_response(
+                "What color is the sky? Please answer in one word."
+            )
 
         assert (
             mock_get_client.return_value.chat.completions.create.call_count
