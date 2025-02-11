@@ -284,4 +284,8 @@ class ClientWrapper(Generic[T_Client]):
             close_awaitable = self.client.close()
             if isinstance(close_awaitable, Coroutine):
                 # The close method is a coroutine; run it in an event loop
-                arun(close_awaitable)
+                try:
+                    arun(close_awaitable)
+                except RuntimeError as e:
+                    if str(e) == "Event loop is closed": pass
+                    else: raise(e)
