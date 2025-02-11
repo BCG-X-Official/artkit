@@ -34,13 +34,14 @@ def mock_vllm_api() -> Generator[None, None, None]:
         ) as mock_get_client,
     ):
 
-        # Mock OpenAI completion response
-        mock_response = AsyncMock()
-        mock_response.choices = [
-            MagicMock(message=MagicMock(content="blue", role="assistant"))
-        ]
-        mock_get_client.return_value.chat.completions.create.return_value = (
-            mock_response
+        # Ensure mock has `.chat.completions.create`
+        mock_openai_instance = mock_get_client.return_value
+        mock_openai_instance.chat = AsyncMock()
+        mock_openai_instance.chat.completions = AsyncMock()
+        mock_openai_instance.chat.completions.create = AsyncMock(
+            return_value=AsyncMock(
+                choices=[MagicMock(message=MagicMock(content="blue", role="assistant"))]
+            )
         )
 
         # Suppress Pylance warnings by explicitly referencing the mocks
