@@ -1,5 +1,5 @@
 from collections.abc import Generator
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from openai import RateLimitError
@@ -12,7 +12,9 @@ _ = pytest.importorskip("google.generativeai")
 
 @pytest.fixture
 def mock_vllm_api() -> Generator[None, None, None]:
-    """Mock the vLLM API call in CI/CD."""
+    """Mock both the vLLM API validation call and response generation."""
+
+    # Mock `_validate_chat_endpoint_and_payload` so it does NOT make API requests
     with patch("requests.post") as mock_post:
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -20,7 +22,19 @@ def mock_vllm_api() -> Generator[None, None, None]:
             "choices": [{"message": {"role": "assistant", "content": "blue"}}]
         }
         mock_post.return_value = mock_response
-        yield
+
+        # Mock OpenAI client response inside VLLMChat
+        with patch("artkit.model.llm.vllm._vllm.AsyncOpenAI") as mock_get_client:
+            mock_openai_response = AsyncMock(
+                return_value=AsyncMock(
+                    choices=[
+                        MagicMock(message=MagicMock(content="blue", role="assistant"))
+                    ]
+                )
+            )
+            mock_get_client.return_value.chat.completions.create = mock_openai_response
+
+            yield  # Allows the test to use this fixture
 
 
 @pytest.mark.asyncio
