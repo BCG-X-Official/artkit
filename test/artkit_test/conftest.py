@@ -9,6 +9,7 @@ import pytest
 
 from artkit.model.llm import CachedChatModel
 from artkit.model.llm.base import ChatModel
+from artkit.model.llm.ollama import OllamaChat
 from artkit.model.llm.openai import OpenAIChat
 from artkit.model.llm.vllm import VLLMChat
 from artkit.util import Image
@@ -116,4 +117,25 @@ def vllm_chat(vllm_url: str, vllm_model_id: str) -> VLLMChat:
         initial_delay=0.1,
         exponential_base=1.5,
         vllm_url=vllm_url,
+    )
+
+
+@pytest.fixture(scope="session")
+def ollama_url() -> str:
+    return "http://localhost:11434"
+
+
+@pytest.fixture
+def ollama_model_id() -> str:
+    return "llama3.1:latest"
+
+
+@pytest.fixture
+def ollama_chat(ollama_url: str, ollama_model_id: str) -> OllamaChat:
+    return OllamaChat(
+        model_id=ollama_model_id,
+        max_retries=2,
+        initial_delay=0.1,
+        exponential_base=1.5,
+        ollama_url=ollama_url,
     )
