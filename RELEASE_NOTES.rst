@@ -1,6 +1,15 @@
 Release Notes
 =============
 
+*artkit* 1.0.10
+--------------
+This release adds access to [Ollama](https://ollama.com/) models running on a self-hosted Ollama inference server
+with [OpenAI API compatibility](https://ollama.com/blog/openai-compatibility).
+Adds the `OllamaChat` class to connect ARTKIT to ollama servers running either remotely or locally on your own hardware.
+
+- API: Added :class:`OllamaChat` that allows users to connect to Ollama servers with vLLM
+- DOC: Added a section in :doc:`user_guide/introduction_to_artkit/connecting_to_genai_models.ipynb` with instructions for connecting to Ollama
+
 *artkit* 1.0.9
 --------------
 This release adds access to Azure OpenAI models, adds a connector for [vLLM](https://github.com/vllm-project/vllm) servers,
