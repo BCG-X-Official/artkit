@@ -3,10 +3,14 @@ Release Notes
 
 *artkit* 1.0.9
 --------------
-This release adds access to Azure OpenAI models, adds a connector for [vLLM](https://github.com/vllm-project/vllm) servers,
-updates `TitanBedrockChat` to accept string inputs, and adds missing caches for documentation notebooks.
 
-- API: Added :class:`.AzureOpenAIChat` to grant users access to models deployed on Azure OpenAI.
+This release adds connectors for Azure OpenAI models, vLLM servers, and Ollama servers.
+It also updates `TitanBedrockChat` to accept string inputs (this aligns with the pattern used by other connectors), 
+adds missing caches for documentation notebooks, and makes other minor documentation improvements.
+
+- API: Added :class:`.OllamaChat` for connecting to `Ollama <https://ollama.com/>`_ servers with `OpenAI API compatibility <https://ollama.com/blog/openai-compatibility>`_
+- API: Added :class:`.VLLMChat` for connecting to `vLLM <https://github.com/vllm-project/vllm>`_ servers
+- API: Added :class:`.AzureOpenAIChat` for connecting to models deployed on Azure OpenAI.
 - API: Update :class:`.TitanBedrockChat().get_response` to accept a plain message string instead of a JSON string.
 - DOC: Added missing caches in the Connecting to GenAI Models documentation notebook.
 - DOC: Fixed some outdated and unclear instructions in the documentation.
