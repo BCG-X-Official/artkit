@@ -1,7 +1,7 @@
 Release Notes
 =============
 
-*artkit* 1.0.9
+*artkit* 1.1.0
 --------------
 
 This release adds connectors for Azure OpenAI models, vLLM servers, and Ollama servers. It also adds streaming support
