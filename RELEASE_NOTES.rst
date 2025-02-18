@@ -4,13 +4,15 @@ Release Notes
 *artkit* 1.0.9
 --------------
 
-This release adds connectors for Azure OpenAI models, vLLM servers, and Ollama servers.
-It also updates `TitanBedrockChat` to accept string inputs (this aligns with the pattern used by other connectors), 
+This release adds connectors for Azure OpenAI models, vLLM servers, and Ollama servers. It also adds streaming support
+to :class:`.OpenAIChat` and lays the groundwork for streaming support in other connectors. The release also updates
+:class:`.TitanBedrockChat` to accept string inputs (this aligns with the pattern used by other connectors), 
 adds missing caches for documentation notebooks, and makes other minor documentation improvements.
 
 - API: Added :class:`.OllamaChat` for connecting to `Ollama <https://ollama.com/>`_ servers with `OpenAI API compatibility <https://ollama.com/blog/openai-compatibility>`_
 - API: Added :class:`.VLLMChat` for connecting to `vLLM <https://github.com/vllm-project/vllm>`_ servers
 - API: Added :class:`.AzureOpenAIChat` for connecting to models deployed on Azure OpenAI.
+- API: Update :class:`.OpenAIChat().get_response` to enable streaming responses by setting `stream=True`.
 - API: Update :class:`.TitanBedrockChat().get_response` to accept a plain message string instead of a JSON string.
 - DOC: Added missing caches in the Connecting to GenAI Models documentation notebook.
 - DOC: Fixed some outdated and unclear instructions in the documentation.
