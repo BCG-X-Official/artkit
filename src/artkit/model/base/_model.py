@@ -223,12 +223,12 @@ class ConnectorMixin(GenAIModel, Generic[T_Client], metaclass=ABCMeta):
         Get the API key from the environment variable specified by :attr:`api_key_env`.
 
         :return: the API key
-        :raises ValueError: if the environment variable is not set
+        :raises EnvironmentError: if the environment variable is not set
         """
         try:
             return os.environ[self.api_key_env]
         except KeyError as e:
-            raise ValueError(
+            raise OSError(
                 f"The environment variable {self.api_key_env} for the API key of model "
                 f"{self.model_id!r} is not set. Please set the environment variable to "
                 f"your API key, or revise arg api_key_env to the correct environment "
@@ -284,4 +284,10 @@ class ClientWrapper(Generic[T_Client]):
             close_awaitable = self.client.close()
             if isinstance(close_awaitable, Coroutine):
                 # The close method is a coroutine; run it in an event loop
-                arun(close_awaitable)
+                try:
+                    arun(close_awaitable)
+                except RuntimeError as e:
+                    if str(e) == "Event loop is closed":
+                        pass
+                    else:
+                        raise (e)

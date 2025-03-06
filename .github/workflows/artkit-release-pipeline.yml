@@ -37,6 +37,7 @@ on:
     - cron: "0 2 * * 1-5" # Every weekday at 2 AM
 
 env:
+  CI: true
   project_name: artkit
   package_name: artkit
 

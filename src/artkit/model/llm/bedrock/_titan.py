@@ -20,6 +20,7 @@ Implementation of Titan Bedrock module.
 
 from __future__ import annotations
 
+import json
 import logging
 from typing import Any, TypeVar
 
@@ -100,7 +101,7 @@ class TitanBedrockChat(BaseBedrockChat):
         request = AWSRequest(
             method="POST",
             url=self.endpoint,
-            data=message,
+            data=json.dumps({"inputText": text}),
             headers={"content-type": "application/json"},
         )
         self.auth.add_auth(request)

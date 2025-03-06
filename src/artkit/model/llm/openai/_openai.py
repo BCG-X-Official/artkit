@@ -21,18 +21,19 @@ Implementation of llm module.
 import logging
 from collections.abc import Iterator
 from contextlib import AsyncExitStack
+from datetime import datetime, timezone
 from typing import Any, TypeVar
 
 from pytools.api import MissingClassMeta, inheritdoc
 
-from ...util import RateLimitException
+from ...util import APITimeOutException, RateLimitException
 from ..base import ChatModelConnector
 from ..history import ChatHistory
 
 log = logging.getLogger(__name__)
 
 try:
-    from openai import AsyncOpenAI, RateLimitError
+    from openai import APITimeoutError, AsyncOpenAI, RateLimitError
     from openai.types.chat import ChatCompletion
 except ImportError:  # pragma: no cover
 
@@ -106,23 +107,78 @@ class OpenAIChat(ChatModelConnector[AsyncOpenAI]):
         **model_params: dict[str, Any],
     ) -> list[str]:
         """[see superclass]"""
+
+        # Check if 'stream' is given as an optional argument
+        stream = model_params.get("stream", False)
+
         async with AsyncExitStack():
             try:
-                completion = await self.get_client().chat.completions.create(
-                    messages=list(
-                        self._messages_to_openai_format(  # type: ignore[arg-type]
-                            message, history=history
-                        )
-                    ),
+                # Format the message and (optional) history for the OpenAI API
+                messages = list(
+                    self._messages_to_openai_format(message, history=history)
+                )
+
+                # Call the OpenAI API with or without streaming
+                response = await self.get_client().chat.completions.create(
+                    messages=messages,  # type: ignore[arg-type]
                     model=self.model_id,
                     **{**self.get_model_params(), **model_params},
                 )
+
+                if stream:
+                    if not hasattr(response, "__aiter__"):
+                        raise TypeError("Response is not an async iterable")
+
+                    # Yield chunks as they are received
+                    combined_content = ""
+                    async for chunk in response:
+                        content = chunk.choices[0].delta.content
+                        if content:
+                            combined_content += content
+
+                    # Create a mock ChatCompletion object with OpenAI's class
+                    completion = ChatCompletion.construct(
+                        id="mock-id-12345",
+                        object="chat.completion",
+                        created=int(datetime.now(timezone.utc).timestamp()),
+                        model=self.model_id,
+                        choices=[
+                            {
+                                "message": {
+                                    "role": "assistant",
+                                    "content": combined_content,
+                                }
+                            }
+                        ],
+                    )
+                    return list(self._responses_from_completion(completion))
+                else:
+                    # If response was not streamed
+                    return list(self._responses_from_completion(response))
+
             except RateLimitError as e:
                 raise RateLimitException(
                     "Rate limit exceeded. Please try again later."
                 ) from e
 
-        return list(self._responses_from_completion(completion))
+            except APITimeoutError as e:
+                logging.error(
+                    "An error of type %s occurred: If your request timed out and "
+                    "you are processing long inputs or outputs, try setting "
+                    "stream=True in the get_response call to reduce latency.",
+                    type(e).__name__,
+                )
+                raise APITimeOutException from e
+
+            except Exception as e:
+                logging.exception(
+                    "An error of type %s occurred: %s\n",
+                    type(e).__name__,
+                    e,
+                )
+                raise RuntimeError("Request failed due to the above error.") from e
+
+        return []  # Theoretical fallback
 
     @staticmethod
     def _responses_from_completion(completion: ChatCompletion) -> Iterator[str]:

@@ -8,8 +8,6 @@ Automated Red Teaming (ART) and testing toolkit
 **ARTKIT** is a Python framework developed by `BCG X <https://www.bcg.com/x>`_ for automating prompt-based
 testing and evaluation of Gen AI applications.
 
-`Documentation <https://bcg-x-official.github.io/artkit/_generated/home.html>`_ | `User Guides <https://bcg-x-official.github.io/artkit/user_guide/index.html>`_ | `Examples <https://bcg-x-official.github.io/artkit/examples/index.html>`_
-
 .. Begin-Badges
 
 |pypi| |conda| |python_versions| |code_style| |made_with_sphinx_doc| |license_badge| |github_actions_build_status| |Contributor_Convenant|
@@ -19,7 +17,7 @@ testing and evaluation of Gen AI applications.
 Getting started
 ---------------
 
-- See the `ARTKIT Documentation <https://bcg-x-official.github.io/artkit/_generated/home.html>`_ for our User Guide, Examples, API reference, and more.
+- See the `ARTKIT Documentation <https://bcg-x-official.github.io/artkit/_generated/home.html>`_ for our `User Guides <https://bcg-x-official.github.io/artkit/user_guide/index.html>`_, `Examples <https://bcg-x-official.github.io/artkit/examples/index.html>`_, `API Reference <hhttps://bcg-x-official.github.io/artkit/apidoc/artkit.html>`_, and more.
 - See `Contributing <https://github.com/BCG-X-Official/artkit/blob/HEAD/CONTRIBUTING.md>`_ or visit our `Contributor Guide <https://bcg-x-official.github.io/artkit/contributor_guide/index.html>`_ for information on contributing.
 - We have an `FAQ <https://bcg-x-official.github.io/artkit/faq.html>`_ for common questions. For anything else, please reach out to ARTKIT@bcg.com.
 
@@ -97,10 +95,16 @@ Supported Model Providers
 ARTKIT provides out-of-the-box support for the following model providers:
 
 - `Anthropic <https://www.anthropic.com/>`_
-- `Google Gemini <https://gemini.google.com/>`_
+- `AWS Bedrock <https://aws.amazon.com/bedrock/>`_
+- Google's `Gemini <https://gemini.google.com/>`_ and `Vertex AI <https://cloud.google.com/vertex-ai?hl=en>`_
 - `Grok <https://groq.com/>`_
 - `Hugging Face <https://huggingface.co/>`_
+- `Microsoft Azure <https://azure.microsoft.com/en-us/>`_
 - `OpenAI <https://openai.com/>`_
+
+ARTKIT also supports models deployed with the following open-source servers:
+- `vLLM <https://docs.vllm.ai/en/latest/>`
+- `Ollama <https://ollama.com/>`
 
 To connect to other services, users can develop `new model classes <https://bcg-x-official.github.io/artkit/user_guide/advanced_tutorials/creating_new_model_classes.html>`_.
 
