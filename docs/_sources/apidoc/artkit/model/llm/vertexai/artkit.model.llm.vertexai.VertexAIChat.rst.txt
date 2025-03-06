@@ -1,0 +1,49 @@
+artkit.model.llm.vertexai.VertexAIChat
+======================================
+
+.. currentmodule:: artkit.model.llm.vertexai
+
+.. autoclass:: VertexAIChat
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~VertexAIChat.get_api_key
+      ~VertexAIChat.get_client
+      ~VertexAIChat.get_default_api_key_env
+      ~VertexAIChat.get_model_params
+      ~VertexAIChat.get_response
+      ~VertexAIChat.to_expression
+      ~VertexAIChat.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~VertexAIChat.model_id
+      ~VertexAIChat.system_prompt
+      ~VertexAIChat.region
+      ~VertexAIChat.gcp_project_id
+      ~VertexAIChat.safety
+      ~VertexAIChat.api_key_env
+      ~VertexAIChat.initial_delay
+      ~VertexAIChat.exponential_base
+      ~VertexAIChat.jitter
+      ~VertexAIChat.max_retries
+      ~VertexAIChat.model_params
+   
+   
+
+   .. rubric:: Definitions

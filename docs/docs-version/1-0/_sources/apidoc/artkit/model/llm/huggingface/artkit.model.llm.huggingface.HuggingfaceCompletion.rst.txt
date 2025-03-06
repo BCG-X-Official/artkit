@@ -1,0 +1,45 @@
+artkit.model.llm.huggingface.HuggingfaceCompletion
+==================================================
+
+.. currentmodule:: artkit.model.llm.huggingface
+
+.. autoclass:: HuggingfaceCompletion
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HuggingfaceCompletion.get_api_key
+      ~HuggingfaceCompletion.get_client
+      ~HuggingfaceCompletion.get_completion
+      ~HuggingfaceCompletion.get_default_api_key_env
+      ~HuggingfaceCompletion.get_model_params
+      ~HuggingfaceCompletion.get_tokenizer
+      ~HuggingfaceCompletion.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HuggingfaceCompletion.model_id
+      ~HuggingfaceCompletion.api_key_env
+      ~HuggingfaceCompletion.initial_delay
+      ~HuggingfaceCompletion.exponential_base
+      ~HuggingfaceCompletion.jitter
+      ~HuggingfaceCompletion.max_retries
+      ~HuggingfaceCompletion.model_params
+   
+   
+
+   .. rubric:: Definitions

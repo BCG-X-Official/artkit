@@ -1,0 +1,54 @@
+artkit.model.llm.bedrock
+========================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.llm.bedrock
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: bedrock
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      TitanBedrockChat
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+==========
+Submodules
+==========
+.. autosummary::
+   :toctree: bedrock
+   :template: custom-module-template.rst
+   :recursive:
+
+   base
+

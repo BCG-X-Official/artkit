@@ -1,0 +1,49 @@
+artkit.model.llm.bedrock.base.BaseBedrockChat
+=============================================
+
+.. currentmodule:: artkit.model.llm.bedrock.base
+
+.. autoclass:: BaseBedrockChat
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~BaseBedrockChat.build_request_arguments
+      ~BaseBedrockChat.get_api_key
+      ~BaseBedrockChat.get_client
+      ~BaseBedrockChat.get_default_api_key_env
+      ~BaseBedrockChat.get_model_params
+      ~BaseBedrockChat.get_response
+      ~BaseBedrockChat.parse_httpx_response
+      ~BaseBedrockChat.to_expression
+      ~BaseBedrockChat.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~BaseBedrockChat.model_id
+      ~BaseBedrockChat.system_prompt
+      ~BaseBedrockChat.region
+      ~BaseBedrockChat.api_key_env
+      ~BaseBedrockChat.initial_delay
+      ~BaseBedrockChat.exponential_base
+      ~BaseBedrockChat.jitter
+      ~BaseBedrockChat.max_retries
+      ~BaseBedrockChat.model_params
+   
+   
+
+   .. rubric:: Definitions

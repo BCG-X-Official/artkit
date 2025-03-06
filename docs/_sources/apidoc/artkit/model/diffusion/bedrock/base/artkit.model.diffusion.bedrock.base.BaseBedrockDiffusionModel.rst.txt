@@ -1,0 +1,46 @@
+artkit.model.diffusion.bedrock.base.BaseBedrockDiffusionModel
+=============================================================
+
+.. currentmodule:: artkit.model.diffusion.bedrock.base
+
+.. autoclass:: BaseBedrockDiffusionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~BaseBedrockDiffusionModel.get_api_key
+      ~BaseBedrockDiffusionModel.get_client
+      ~BaseBedrockDiffusionModel.get_default_api_key_env
+      ~BaseBedrockDiffusionModel.get_model_params
+      ~BaseBedrockDiffusionModel.get_response_from_model
+      ~BaseBedrockDiffusionModel.text_to_image
+      ~BaseBedrockDiffusionModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~BaseBedrockDiffusionModel.model_id
+      ~BaseBedrockDiffusionModel.region
+      ~BaseBedrockDiffusionModel.api_key_env
+      ~BaseBedrockDiffusionModel.initial_delay
+      ~BaseBedrockDiffusionModel.exponential_base
+      ~BaseBedrockDiffusionModel.jitter
+      ~BaseBedrockDiffusionModel.max_retries
+      ~BaseBedrockDiffusionModel.model_params
+   
+   
+
+   .. rubric:: Definitions

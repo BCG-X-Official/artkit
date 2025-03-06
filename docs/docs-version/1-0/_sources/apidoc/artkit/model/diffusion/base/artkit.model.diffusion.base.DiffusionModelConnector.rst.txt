@@ -1,0 +1,44 @@
+artkit.model.diffusion.base.DiffusionModelConnector
+===================================================
+
+.. currentmodule:: artkit.model.diffusion.base
+
+.. autoclass:: DiffusionModelConnector
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~DiffusionModelConnector.get_api_key
+      ~DiffusionModelConnector.get_client
+      ~DiffusionModelConnector.get_default_api_key_env
+      ~DiffusionModelConnector.get_model_params
+      ~DiffusionModelConnector.text_to_image
+      ~DiffusionModelConnector.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~DiffusionModelConnector.model_id
+      ~DiffusionModelConnector.api_key_env
+      ~DiffusionModelConnector.initial_delay
+      ~DiffusionModelConnector.exponential_base
+      ~DiffusionModelConnector.jitter
+      ~DiffusionModelConnector.max_retries
+      ~DiffusionModelConnector.model_params
+   
+   
+
+   .. rubric:: Definitions

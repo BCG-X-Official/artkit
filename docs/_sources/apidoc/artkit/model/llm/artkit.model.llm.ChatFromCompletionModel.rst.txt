@@ -1,0 +1,42 @@
+artkit.model.llm.ChatFromCompletionModel
+========================================
+
+.. currentmodule:: artkit.model.llm
+
+.. autoclass:: ChatFromCompletionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~ChatFromCompletionModel.get_model_params
+      ~ChatFromCompletionModel.get_response
+      ~ChatFromCompletionModel.postprocess_response
+      ~ChatFromCompletionModel.preprocess_prompt
+      ~ChatFromCompletionModel.to_expression
+      ~ChatFromCompletionModel.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~ChatFromCompletionModel.DEFAULT_CHAT_TEMPLATE
+      ~ChatFromCompletionModel.chat_template
+      ~ChatFromCompletionModel.model_id
+      ~ChatFromCompletionModel.system_prompt
+      ~ChatFromCompletionModel.model
+   
+   
+
+   .. rubric:: Definitions

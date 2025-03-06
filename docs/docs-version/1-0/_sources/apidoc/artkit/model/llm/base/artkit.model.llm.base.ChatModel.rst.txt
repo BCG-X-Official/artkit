@@ -1,0 +1,37 @@
+artkit.model.llm.base.ChatModel
+===============================
+
+.. currentmodule:: artkit.model.llm.base
+
+.. autoclass:: ChatModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~ChatModel.get_model_params
+      ~ChatModel.get_response
+      ~ChatModel.to_expression
+      ~ChatModel.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~ChatModel.model_id
+      ~ChatModel.system_prompt
+   
+   
+
+   .. rubric:: Definitions

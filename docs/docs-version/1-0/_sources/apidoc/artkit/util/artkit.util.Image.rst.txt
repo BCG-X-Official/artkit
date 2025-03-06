@@ -1,0 +1,37 @@
+artkit.util.Image
+=================
+
+.. currentmodule:: artkit.util
+
+.. autoclass:: Image
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~Image.show
+      ~Image.to_b64
+      ~Image.to_b64_string
+      ~Image.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~Image.data
+      ~Image.url
+   
+   
+
+   .. rubric:: Definitions

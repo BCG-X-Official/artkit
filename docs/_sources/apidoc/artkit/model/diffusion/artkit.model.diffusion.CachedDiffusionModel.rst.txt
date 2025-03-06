@@ -1,0 +1,38 @@
+artkit.model.diffusion.CachedDiffusionModel
+===========================================
+
+.. currentmodule:: artkit.model.diffusion
+
+.. autoclass:: CachedDiffusionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CachedDiffusionModel.clear_cache
+      ~CachedDiffusionModel.get_model_params
+      ~CachedDiffusionModel.text_to_image
+      ~CachedDiffusionModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CachedDiffusionModel.model_id
+      ~CachedDiffusionModel.cache
+      ~CachedDiffusionModel.model
+   
+   
+
+   .. rubric:: Definitions

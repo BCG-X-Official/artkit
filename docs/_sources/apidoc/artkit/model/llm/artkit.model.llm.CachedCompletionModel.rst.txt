@@ -1,0 +1,38 @@
+artkit.model.llm.CachedCompletionModel
+======================================
+
+.. currentmodule:: artkit.model.llm
+
+.. autoclass:: CachedCompletionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CachedCompletionModel.clear_cache
+      ~CachedCompletionModel.get_completion
+      ~CachedCompletionModel.get_model_params
+      ~CachedCompletionModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CachedCompletionModel.model_id
+      ~CachedCompletionModel.cache
+      ~CachedCompletionModel.model
+   
+   
+
+   .. rubric:: Definitions

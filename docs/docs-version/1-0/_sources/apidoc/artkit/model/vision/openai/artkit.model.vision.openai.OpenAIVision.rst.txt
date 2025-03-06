@@ -1,0 +1,45 @@
+artkit.model.vision.openai.OpenAIVision
+=======================================
+
+.. currentmodule:: artkit.model.vision.openai
+
+.. autoclass:: OpenAIVision
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~OpenAIVision.get_api_key
+      ~OpenAIVision.get_client
+      ~OpenAIVision.get_default_api_key_env
+      ~OpenAIVision.get_model_params
+      ~OpenAIVision.image_to_text
+      ~OpenAIVision.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~OpenAIVision.DEFAULT_VISION_PROMPT
+      ~OpenAIVision.model_id
+      ~OpenAIVision.api_key_env
+      ~OpenAIVision.initial_delay
+      ~OpenAIVision.exponential_base
+      ~OpenAIVision.jitter
+      ~OpenAIVision.max_retries
+      ~OpenAIVision.model_params
+   
+   
+
+   .. rubric:: Definitions

@@ -1,0 +1,43 @@
+artkit.model.llm.anthropic
+==========================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.llm.anthropic
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: anthropic
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      AnthropicChat
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,68 @@
+artkit.model.llm
+================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.llm
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: llm
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      CachedChatModel
+      CachedCompletionModel
+      ChatFromCompletionModel
+      HistorizedChatModel
+      TextGenerator
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+==========
+Submodules
+==========
+.. autosummary::
+   :toctree: llm
+   :template: custom-module-template.rst
+   :recursive:
+
+   anthropic
+   base
+   bedrock
+   gemini
+   groq
+   history
+   huggingface
+   multi_turn
+   openai
+   util
+   vertexai
+

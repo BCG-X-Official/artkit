@@ -1,0 +1,36 @@
+artkit.model.llm.history.ChatHistory
+====================================
+
+.. currentmodule:: artkit.model.llm.history
+
+.. autoclass:: ChatHistory
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~ChatHistory.add_message
+      ~ChatHistory.get_messages
+      ~ChatHistory.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~ChatHistory.messages
+      ~ChatHistory.max_length
+   
+   
+
+   .. rubric:: Definitions

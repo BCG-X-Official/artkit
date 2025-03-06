@@ -1,0 +1,46 @@
+artkit.model.llm.anthropic.AnthropicChat
+========================================
+
+.. currentmodule:: artkit.model.llm.anthropic
+
+.. autoclass:: AnthropicChat
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~AnthropicChat.get_api_key
+      ~AnthropicChat.get_client
+      ~AnthropicChat.get_default_api_key_env
+      ~AnthropicChat.get_model_params
+      ~AnthropicChat.get_response
+      ~AnthropicChat.to_expression
+      ~AnthropicChat.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~AnthropicChat.model_id
+      ~AnthropicChat.system_prompt
+      ~AnthropicChat.api_key_env
+      ~AnthropicChat.initial_delay
+      ~AnthropicChat.exponential_base
+      ~AnthropicChat.jitter
+      ~AnthropicChat.max_retries
+      ~AnthropicChat.model_params
+   
+   
+
+   .. rubric:: Definitions

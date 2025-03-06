@@ -1,0 +1,35 @@
+artkit.model.diffusion.base.DiffusionModel
+==========================================
+
+.. currentmodule:: artkit.model.diffusion.base
+
+.. autoclass:: DiffusionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~DiffusionModel.get_model_params
+      ~DiffusionModel.text_to_image
+      ~DiffusionModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~DiffusionModel.model_id
+   
+   
+
+   .. rubric:: Definitions

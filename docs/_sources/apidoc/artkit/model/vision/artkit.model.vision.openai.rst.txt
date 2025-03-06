@@ -1,0 +1,43 @@
+artkit.model.vision.openai
+==========================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.vision.openai
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: openai
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      OpenAIVision
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

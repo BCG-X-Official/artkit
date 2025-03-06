@@ -1,0 +1,49 @@
+artkit.model.llm.bedrock.TitanBedrockChat
+=========================================
+
+.. currentmodule:: artkit.model.llm.bedrock
+
+.. autoclass:: TitanBedrockChat
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~TitanBedrockChat.build_request_arguments
+      ~TitanBedrockChat.get_api_key
+      ~TitanBedrockChat.get_client
+      ~TitanBedrockChat.get_default_api_key_env
+      ~TitanBedrockChat.get_model_params
+      ~TitanBedrockChat.get_response
+      ~TitanBedrockChat.parse_httpx_response
+      ~TitanBedrockChat.to_expression
+      ~TitanBedrockChat.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~TitanBedrockChat.model_id
+      ~TitanBedrockChat.system_prompt
+      ~TitanBedrockChat.region
+      ~TitanBedrockChat.api_key_env
+      ~TitanBedrockChat.initial_delay
+      ~TitanBedrockChat.exponential_base
+      ~TitanBedrockChat.jitter
+      ~TitanBedrockChat.max_retries
+      ~TitanBedrockChat.model_params
+   
+   
+
+   .. rubric:: Definitions

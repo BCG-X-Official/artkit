@@ -1,0 +1,34 @@
+artkit.model.llm.history.CustomMessage
+======================================
+
+.. currentmodule:: artkit.model.llm.history
+
+.. autoclass:: CustomMessage
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CustomMessage.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CustomMessage.role
+      ~CustomMessage.text
+   
+   
+
+   .. rubric:: Definitions

@@ -1,0 +1,49 @@
+artkit.model.llm.huggingface.base.HuggingfaceChatConnectorMixin
+===============================================================
+
+.. currentmodule:: artkit.model.llm.huggingface.base
+
+.. autoclass:: HuggingfaceChatConnectorMixin
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HuggingfaceChatConnectorMixin.get_api_key
+      ~HuggingfaceChatConnectorMixin.get_client
+      ~HuggingfaceChatConnectorMixin.get_default_api_key_env
+      ~HuggingfaceChatConnectorMixin.get_model_params
+      ~HuggingfaceChatConnectorMixin.get_response
+      ~HuggingfaceChatConnectorMixin.get_tokenizer
+      ~HuggingfaceChatConnectorMixin.to_expression
+      ~HuggingfaceChatConnectorMixin.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HuggingfaceChatConnectorMixin.model_id
+      ~HuggingfaceChatConnectorMixin.system_prompt
+      ~HuggingfaceChatConnectorMixin.chat_template
+      ~HuggingfaceChatConnectorMixin.chat_template_params
+      ~HuggingfaceChatConnectorMixin.api_key_env
+      ~HuggingfaceChatConnectorMixin.initial_delay
+      ~HuggingfaceChatConnectorMixin.exponential_base
+      ~HuggingfaceChatConnectorMixin.jitter
+      ~HuggingfaceChatConnectorMixin.max_retries
+      ~HuggingfaceChatConnectorMixin.model_params
+   
+   
+
+   .. rubric:: Definitions

@@ -1,0 +1,6 @@
+artkit.model.util.RateLimitException
+====================================
+
+.. currentmodule:: artkit.model.util
+
+.. autoexception:: RateLimitException

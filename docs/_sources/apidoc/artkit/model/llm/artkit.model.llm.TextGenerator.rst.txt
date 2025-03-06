@@ -1,0 +1,37 @@
+artkit.model.llm.TextGenerator
+==============================
+
+.. currentmodule:: artkit.model.llm
+
+.. autoclass:: TextGenerator
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~TextGenerator.make_text_items
+      ~TextGenerator.parse_llm_response
+      ~TextGenerator.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~TextGenerator.formatting_keys
+      ~TextGenerator.system_prompt
+      ~TextGenerator.llm
+   
+   
+
+   .. rubric:: Definitions

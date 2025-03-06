@@ -1,0 +1,35 @@
+artkit.model.base.GenAIModelAdapter
+===================================
+
+.. currentmodule:: artkit.model.base
+
+.. autoclass:: GenAIModelAdapter
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~GenAIModelAdapter.get_model_params
+      ~GenAIModelAdapter.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~GenAIModelAdapter.model_id
+      ~GenAIModelAdapter.model
+   
+   
+
+   .. rubric:: Definitions

@@ -1,0 +1,6 @@
+artkit.model.util.retry\_with\_exponential\_backoff
+===================================================
+
+.. currentmodule:: artkit.model.util
+
+.. autofunction:: retry_with_exponential_backoff

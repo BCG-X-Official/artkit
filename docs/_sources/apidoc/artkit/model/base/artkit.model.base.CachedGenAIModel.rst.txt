@@ -1,0 +1,37 @@
+artkit.model.base.CachedGenAIModel
+==================================
+
+.. currentmodule:: artkit.model.base
+
+.. autoclass:: CachedGenAIModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CachedGenAIModel.clear_cache
+      ~CachedGenAIModel.get_model_params
+      ~CachedGenAIModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CachedGenAIModel.model_id
+      ~CachedGenAIModel.cache
+      ~CachedGenAIModel.model
+   
+   
+
+   .. rubric:: Definitions

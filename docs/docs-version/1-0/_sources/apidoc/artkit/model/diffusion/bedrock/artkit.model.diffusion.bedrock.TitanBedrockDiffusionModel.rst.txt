@@ -1,0 +1,46 @@
+artkit.model.diffusion.bedrock.TitanBedrockDiffusionModel
+=========================================================
+
+.. currentmodule:: artkit.model.diffusion.bedrock
+
+.. autoclass:: TitanBedrockDiffusionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~TitanBedrockDiffusionModel.get_api_key
+      ~TitanBedrockDiffusionModel.get_client
+      ~TitanBedrockDiffusionModel.get_default_api_key_env
+      ~TitanBedrockDiffusionModel.get_model_params
+      ~TitanBedrockDiffusionModel.get_response_from_model
+      ~TitanBedrockDiffusionModel.text_to_image
+      ~TitanBedrockDiffusionModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~TitanBedrockDiffusionModel.model_id
+      ~TitanBedrockDiffusionModel.region
+      ~TitanBedrockDiffusionModel.api_key_env
+      ~TitanBedrockDiffusionModel.initial_delay
+      ~TitanBedrockDiffusionModel.exponential_base
+      ~TitanBedrockDiffusionModel.jitter
+      ~TitanBedrockDiffusionModel.max_retries
+      ~TitanBedrockDiffusionModel.model_params
+   
+   
+
+   .. rubric:: Definitions

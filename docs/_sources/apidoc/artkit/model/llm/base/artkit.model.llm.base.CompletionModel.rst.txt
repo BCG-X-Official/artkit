@@ -1,0 +1,35 @@
+artkit.model.llm.base.CompletionModel
+=====================================
+
+.. currentmodule:: artkit.model.llm.base
+
+.. autoclass:: CompletionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CompletionModel.get_completion
+      ~CompletionModel.get_model_params
+      ~CompletionModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CompletionModel.model_id
+   
+   
+
+   .. rubric:: Definitions

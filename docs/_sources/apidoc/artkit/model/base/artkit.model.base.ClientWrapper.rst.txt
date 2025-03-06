@@ -1,0 +1,26 @@
+artkit.model.base.ClientWrapper
+===============================
+
+.. currentmodule:: artkit.model.base
+
+.. autoclass:: ClientWrapper
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~ClientWrapper.client
+   
+   
+
+   .. rubric:: Definitions

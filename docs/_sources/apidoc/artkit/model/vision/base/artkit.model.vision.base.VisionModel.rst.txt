@@ -1,0 +1,35 @@
+artkit.model.vision.base.VisionModel
+====================================
+
+.. currentmodule:: artkit.model.vision.base
+
+.. autoclass:: VisionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~VisionModel.get_model_params
+      ~VisionModel.image_to_text
+      ~VisionModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~VisionModel.model_id
+   
+   
+
+   .. rubric:: Definitions

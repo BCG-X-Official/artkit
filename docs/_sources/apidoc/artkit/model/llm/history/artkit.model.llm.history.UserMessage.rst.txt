@@ -1,0 +1,35 @@
+artkit.model.llm.history.UserMessage
+====================================
+
+.. currentmodule:: artkit.model.llm.history
+
+.. autoclass:: UserMessage
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~UserMessage.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~UserMessage.ROLE
+      ~UserMessage.role
+      ~UserMessage.text
+   
+   
+
+   .. rubric:: Definitions

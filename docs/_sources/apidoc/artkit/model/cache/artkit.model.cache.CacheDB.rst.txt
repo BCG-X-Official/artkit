@@ -1,0 +1,42 @@
+artkit.model.cache.CacheDB
+==========================
+
+.. currentmodule:: artkit.model.cache
+
+.. autoclass:: CacheDB
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CacheDB.add_entry
+      ~CacheDB.clear
+      ~CacheDB.count_entries
+      ~CacheDB.get_earliest_access_times
+      ~CacheDB.get_earliest_creation_times
+      ~CacheDB.get_entry
+      ~CacheDB.get_latest_access_times
+      ~CacheDB.get_latest_creation_times
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CacheDB.TBL_MODEL_CACHE
+      ~CacheDB.TBL_MODEL_PARAMS
+      ~CacheDB.TBL_MODEL_RESPONSES
+   
+   
+
+   .. rubric:: Definitions

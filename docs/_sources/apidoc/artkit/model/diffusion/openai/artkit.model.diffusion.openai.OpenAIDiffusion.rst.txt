@@ -1,0 +1,44 @@
+artkit.model.diffusion.openai.OpenAIDiffusion
+=============================================
+
+.. currentmodule:: artkit.model.diffusion.openai
+
+.. autoclass:: OpenAIDiffusion
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~OpenAIDiffusion.get_api_key
+      ~OpenAIDiffusion.get_client
+      ~OpenAIDiffusion.get_default_api_key_env
+      ~OpenAIDiffusion.get_model_params
+      ~OpenAIDiffusion.text_to_image
+      ~OpenAIDiffusion.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~OpenAIDiffusion.model_id
+      ~OpenAIDiffusion.api_key_env
+      ~OpenAIDiffusion.initial_delay
+      ~OpenAIDiffusion.exponential_base
+      ~OpenAIDiffusion.jitter
+      ~OpenAIDiffusion.max_retries
+      ~OpenAIDiffusion.model_params
+   
+   
+
+   .. rubric:: Definitions

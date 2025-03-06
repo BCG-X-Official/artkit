@@ -1,0 +1,47 @@
+artkit.model.diffusion.base.HTTPXDiffusionConnector
+===================================================
+
+.. currentmodule:: artkit.model.diffusion.base
+
+.. autoclass:: HTTPXDiffusionConnector
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HTTPXDiffusionConnector.build_request_arguments
+      ~HTTPXDiffusionConnector.get_api_key
+      ~HTTPXDiffusionConnector.get_client
+      ~HTTPXDiffusionConnector.get_default_api_key_env
+      ~HTTPXDiffusionConnector.get_model_params
+      ~HTTPXDiffusionConnector.parse_httpx_response
+      ~HTTPXDiffusionConnector.text_to_image
+      ~HTTPXDiffusionConnector.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HTTPXDiffusionConnector.model_id
+      ~HTTPXDiffusionConnector.url
+      ~HTTPXDiffusionConnector.api_key_env
+      ~HTTPXDiffusionConnector.initial_delay
+      ~HTTPXDiffusionConnector.exponential_base
+      ~HTTPXDiffusionConnector.jitter
+      ~HTTPXDiffusionConnector.max_retries
+      ~HTTPXDiffusionConnector.model_params
+   
+   
+
+   .. rubric:: Definitions

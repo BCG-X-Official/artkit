@@ -1,0 +1,38 @@
+artkit.model.vision.CachedVisionModel
+=====================================
+
+.. currentmodule:: artkit.model.vision
+
+.. autoclass:: CachedVisionModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~CachedVisionModel.clear_cache
+      ~CachedVisionModel.get_model_params
+      ~CachedVisionModel.image_to_text
+      ~CachedVisionModel.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~CachedVisionModel.model_id
+      ~CachedVisionModel.cache
+      ~CachedVisionModel.model
+   
+   
+
+   .. rubric:: Definitions

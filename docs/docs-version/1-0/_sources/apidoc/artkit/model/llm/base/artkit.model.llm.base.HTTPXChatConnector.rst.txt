@@ -1,0 +1,48 @@
+artkit.model.llm.base.HTTPXChatConnector
+========================================
+
+.. currentmodule:: artkit.model.llm.base
+
+.. autoclass:: HTTPXChatConnector
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HTTPXChatConnector.build_request_arguments
+      ~HTTPXChatConnector.get_api_key
+      ~HTTPXChatConnector.get_client
+      ~HTTPXChatConnector.get_default_api_key_env
+      ~HTTPXChatConnector.get_model_params
+      ~HTTPXChatConnector.get_response
+      ~HTTPXChatConnector.parse_httpx_response
+      ~HTTPXChatConnector.to_expression
+      ~HTTPXChatConnector.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HTTPXChatConnector.model_id
+      ~HTTPXChatConnector.system_prompt
+      ~HTTPXChatConnector.api_key_env
+      ~HTTPXChatConnector.initial_delay
+      ~HTTPXChatConnector.exponential_base
+      ~HTTPXChatConnector.jitter
+      ~HTTPXChatConnector.max_retries
+      ~HTTPXChatConnector.model_params
+   
+   
+
+   .. rubric:: Definitions

@@ -1,0 +1,43 @@
+artkit.model.base.ConnectorMixin
+================================
+
+.. currentmodule:: artkit.model.base
+
+.. autoclass:: ConnectorMixin
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~ConnectorMixin.get_api_key
+      ~ConnectorMixin.get_client
+      ~ConnectorMixin.get_default_api_key_env
+      ~ConnectorMixin.get_model_params
+      ~ConnectorMixin.to_expression
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~ConnectorMixin.model_id
+      ~ConnectorMixin.api_key_env
+      ~ConnectorMixin.initial_delay
+      ~ConnectorMixin.exponential_base
+      ~ConnectorMixin.jitter
+      ~ConnectorMixin.max_retries
+      ~ConnectorMixin.model_params
+   
+   
+
+   .. rubric:: Definitions

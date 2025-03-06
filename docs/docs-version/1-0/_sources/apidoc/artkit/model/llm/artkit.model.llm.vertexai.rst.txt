@@ -1,0 +1,43 @@
+artkit.model.llm.vertexai
+=========================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   self
+   
+.. automodule:: artkit.model.llm.vertexai
+   :no-imported-members:
+
+   
+
+   
+   
+   =======
+   Classes
+   =======
+
+   .. autosummary::
+      :toctree: vertexai
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      VertexAIChat
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

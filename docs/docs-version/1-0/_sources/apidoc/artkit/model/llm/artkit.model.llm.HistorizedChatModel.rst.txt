@@ -1,0 +1,40 @@
+artkit.model.llm.HistorizedChatModel
+====================================
+
+.. currentmodule:: artkit.model.llm
+
+.. autoclass:: HistorizedChatModel
+   :members:
+   :no-show-inheritance:
+   :inherited-members:
+   :special-members: __call__
+
+   
+   
+   .. rubric:: Method summary
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~HistorizedChatModel.get_model_params
+      ~HistorizedChatModel.get_response
+      ~HistorizedChatModel.to_expression
+      ~HistorizedChatModel.with_system_prompt
+   
+   
+
+   
+   
+   .. rubric:: Attribute summary
+
+   .. autosummary::
+   
+      ~HistorizedChatModel.max_history
+      ~HistorizedChatModel.model_id
+      ~HistorizedChatModel.system_prompt
+      ~HistorizedChatModel.history
+      ~HistorizedChatModel.model
+   
+   
+
+   .. rubric:: Definitions
