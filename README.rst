@@ -39,7 +39,7 @@ between a challenger bot and a target system. Issues and vulnerabilities are mor
 interactions with Gen AI systems, so multi-turn testing is critical for interactive applications. 
 
 We recommend starting with our `User Guide <https://bcg-x-official.github.io/artkit/user_guide/index.html>`_
-to learn the core concepts and functionality of ARTKIT.
+to learn the core concepts and functionalities of ARTKIT.
 Visit our `Examples <https://bcg-x-official.github.io/artkit/examples/index.html>`_ to see how
 ARTKIT can be used to test and evaluate Gen AI systems for:
 
